@@ -18,7 +18,7 @@ session_start();
         </li>
         <?php
 require 'db.php';
-    $SORGU = $DB->prepare("SELECT * FROM admins WHERE userid = :idUser");
+    $SORGU = $DB->prepare("SELECT * FROM admins WHERE adminid = :idUser");
     $SORGU->bindParam(':idUser', $_SESSION['id']);
     $SORGU->execute();
     $users = $SORGU->fetchAll(PDO::FETCH_ASSOC);
@@ -39,7 +39,7 @@ require 'db.php';
         <?php }?>
         <?php if ($_SESSION['isLogin'] == 0) {?>
         <li class="nav-item">
-          <a class="nav-link  <?=($activePage == 'login') ? 'active' : '';?>" href="login.php">Login</a>
+          <a class="nav-link  <?=($activePage == 'login') ? 'active' : '';?>" href="admin.login.php">Login</a>
         </li>
           <?php }?>
       </ul>
