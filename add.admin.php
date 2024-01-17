@@ -3,7 +3,7 @@
 $activeTitle = "Add Admin Page";
 require 'up.html.php';
 ?>
-
+<?php require 'navbar.php'?>
 <?php
 //!form submit edilmişse
 if (isset($_POST['submit'])) {
