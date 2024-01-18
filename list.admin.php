@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 $activeTitle = "Admin List";
@@ -18,7 +17,8 @@ require 'up.html.php';
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
-      <th>UserId</th>
+      <th>User Id</th>
+      <th>Admin Image</th>
       <th>User Name</th>
       <th>Email</th>
       <th>Gender</th>
@@ -45,12 +45,13 @@ foreach ($admins as $admin) {
     echo "
     <tr>
       <th>{$admin['userid']}</th>
+      <td><img src='admin_images/{$admin['userimg']}' class='rounded-circle' width='100' height='100'></td>
       <td>{$admin['username']}</td>
       <td>{$admin['useremail']}</td>
       <td>$gender</td>
       <td>{$admin['createdate']}</td>
-      <td><a href='updatePerson.php?id={$admin['userid']}' class='btn btn-success btn-sm'>Update</a></td>
-      <td><a href='deletePerson.php?id={$admin['userid']}' class='btn btn-danger btn-sm'>Delete</a></td>
+      <td><a href='update.admin.php?idAdmin={$admin['userid']}' class='btn btn-success btn-sm'>Update</a></td>
+      <td><a href='update.admin.php?idAdmin={$admin['userid']}' class='btn btn-danger btn-sm'>Delete</a></td>
    </tr>
   ";
 }
