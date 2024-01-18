@@ -39,7 +39,7 @@ require 'db.php';
         <?php }?>
         <?php if ($_SESSION['isLogin'] == 0) {?>
         <li class="nav-item">
-          <a class="nav-link  <?=($activePage == 'login') ? 'active' : '';?>" href="login.php">Login</a>
+          <a class="nav-link  <?=($activePage == 'login') ? 'active' : '';?>" href="">Login</a>
         </li>
           <?php }?>
       </ul>

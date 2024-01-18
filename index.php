@@ -8,11 +8,12 @@ require 'up.html.php';
 <div class="container">
   <div class="row justify-content-center mt-3 ">
  <div class="col-6">
-<a href="login.php" class="btn btn-primary">Admin Login</a>
+<a href="admin.login.php" class="btn btn-danger">Admin Login</a>
+<a href="register.unit.login.php" class="btn btn-primary">Register Unit  Login</a>
 </div>
 </div>
 <!-- Eğer adamin giriş yaparsa aşaığıdaki kısımlar görünür(role=2) -->
-<?php if ($_SESSION['role'] == 1) {?>
+<?php if ($_SESSION['role'] == 1 || $_SESSION['role'] == 2) {?>
       <div class="container my-3 ">
       <div class="row justify-content-center">
           <div class="col-6">
@@ -25,6 +26,9 @@ date_default_timezone_set('Europe/Istanbul'); // Türkiye saat dilimine göre ta
     ?>
 </h5>
        </div>
+        </div>
+       <?php }?>
+       <?php if ($_SESSION['role'] == 1) {?>
         <div class="row justify-content-center g-4">
           <div class="col-sm-6 col-md-4 col-lg-3">
             <div class="card h-100 " style="width: 18rem;">
@@ -38,6 +42,10 @@ date_default_timezone_set('Europe/Istanbul'); // Türkiye saat dilimine göre ta
               </div>
             </div>
         </div>
+        </div>
+        <?php }?>
+        <?php if ($_SESSION['role'] == 2) {?>
+          <div class="row justify-content-center g-4">
         <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="card h-100 " style="width: 18rem;">
             <img src="./public/img/teacher.jpg" class="card-img-top" alt="Writer img">
@@ -67,13 +75,12 @@ date_default_timezone_set('Europe/Istanbul'); // Türkiye saat dilimine göre ta
           <div class="card-body">
             <h5 class="card-title">Add Register Unit</h5>
             <p class="card-text">Admin Adds  Add Register Unit</p>
-            <a href="add.category.php?idUser=<?php echo $users[0]['userid'] ?>" class="btn btn-info mt-5" style="">Add Register Unit
+            <a href="add.register.person.php" class="btn btn-info mt-5">Add Register Unit
             <i class="bi bi-send-fill"></i></a>
           </div>
         </div>
     </div>
-          </div>
-      </div>
+    </div>
       <?php }?>
 </div>
 <?php require 'down.html.php';?>

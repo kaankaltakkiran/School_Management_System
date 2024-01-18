@@ -13,6 +13,10 @@ if (isset($_POST['submit'])) {
     $name = $_POST['form_username'];
     $email = $_POST['form_email'];
     $gender = $_POST['form_gender'];
+    $address = $_POST['form_adress'];
+    $phoneNumber = $_POST['form_phonenumber'];
+    $birthDate = $_POST['form_birthdate'];
+
     $password = $_POST['form_password'];
 /*  Şifrele hashleme */
     $password = password_hash($password, PASSWORD_DEFAULT);
@@ -32,16 +36,19 @@ if (isset($_POST['submit'])) {
 
         //!Eğer kullanıcı yoksa kaydet
     } else {
-        $sql = "INSERT INTO admins (username,useremail,usergender,userpassword) VALUES (:form_username,:form_email,:form_gender,'$password')";
+        $sql = "INSERT INTO registerunits (username,useremail,usergender,useraddress,phonenumber,birthdate,userpassword) VALUES (:form_username,:form_email,:form_gender,:form_adress,:form_phonenumber,:form_birthdate,'$password')";
         $SORGU = $DB->prepare($sql);
         $SORGU->bindParam(':form_username', $name);
         $SORGU->bindParam(':form_email', $email);
         $SORGU->bindParam(':form_gender', $gender);
+        $SORGU->bindParam(':form_adress', $address);
+        $SORGU->bindParam(':form_phonenumber', $phoneNumber);
+        $SORGU->bindParam(':form_birthdate', $birthDate);
 
         $SORGU->execute();
         //!Kayıt başarılıysa login sayfasına yönlendir
         /* header("location: login.php"); */
-        $approves[] = "Admin Added Successfully...";
+        $approves[] = "Register Unit User Added Successfully...";
     }
 }
 ?>
@@ -50,7 +57,7 @@ if (isset($_POST['submit'])) {
   <div class="col-6">
 
 <form method="POST">
-<h1 class="alert alert-info text-center">Add Admin User Form</h1>
+<h1 class="alert alert-info text-center">Add Register Unit User Form </h1>
 <?php
 //! Hata mesajlarını göster
 if (!empty($errors)) {
@@ -93,6 +100,20 @@ if (!empty($approves)) {
   <input type="password"  name="form_password" class="form-control" id="password" placeholder="Password"required>
   <span class="input-group-text bg-transparent"><i id="togglePassword" class="bi bi-eye-slash"></i></span>
 </div>
+<div class="form-floating mb-3">
+  <textarea class="form-control text-break" style="height: 100px" placeholder="Adress" id="floatingTextarea"name="form_adress"  required></textarea>
+  <label for="floatingTextarea">Adress</label>
+</div>
+<div class="form-floating mb-3">
+  <input type="tel"  class="form-control" maxlength="11" name="form_phonenumber" required>
+  <label>Phone Number</label>
+</div>
+<div class="form-floating mb-3">
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Birthdate</label>
+  <input type="date" name="form_birthdate" class="form-control" id="exampleFormControlInput1" required/>
+</div>
+</div>
 <div class="form-check">
   <input class="form-check-input" type="radio" name="form_gender" value="M" required >
   <label class="form-check-label" >
@@ -106,9 +127,10 @@ if (!empty($approves)) {
   </label>
 </div>
 
-                  <button type="submit" name="submit" class="btn btn-primary mt-3 ">Add Admin</button>
+                  <button type="submit" name="submit" class="btn btn-primary mt-3 ">Add Register Unit User</button>
      </form>
      </div>
 </div>
 </div>
+<?php require 'footer.php'?>
 <?php require 'down.html.php';?>
