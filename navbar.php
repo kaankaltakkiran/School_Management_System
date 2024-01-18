@@ -18,7 +18,7 @@ session_start();
         </li>
         <?php
 require 'db.php';
-    $SORGU = $DB->prepare("SELECT * FROM admins WHERE adminid = :idUser");
+    $SORGU = $DB->prepare("SELECT * FROM admins WHERE userid = :idUser");
     $SORGU->bindParam(':idUser', $_SESSION['id']);
     $SORGU->execute();
     $users = $SORGU->fetchAll(PDO::FETCH_ASSOC);

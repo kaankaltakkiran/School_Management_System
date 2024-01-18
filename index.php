@@ -1,4 +1,5 @@
 <?php
+session_start();
 $activeTitle = "School Management System";
 $activePage = "index";
 require 'up.html.php';
@@ -31,7 +32,7 @@ date_default_timezone_set('Europe/Istanbul'); // Türkiye saat dilimine göre ta
               <div class="card-body">
                 <h5 class="card-title">Add Admin User</h5>
                 <p class="card-text">Admin Adds Admin User</p>
-                <a href="add.admin.php?idUser=<?php echo $users[0]['userid'] ?>" class="btn btn-danger mt-3">Add Admin
+                <a href="add.admin.php" class="btn btn-danger mt-3">Add Admin
                 <i class="bi bi-send-fill"></i>
                 </a>
               </div>

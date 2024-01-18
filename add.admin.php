@@ -83,7 +83,7 @@ if (!empty($approves)) {
 </div>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" name="form_username" required>
-  <label>UserName</label>
+  <label>User Name</label>
 </div>
   <div class="form-floating mb-3">
   <input type="email" name="form_email"class="form-control"required>
