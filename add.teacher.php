@@ -1,6 +1,6 @@
 <?php
 @session_start();
-$activeTitle = "Add Admin";
+$activeTitle = "Add Teacher";
 require 'up.html.php';
 ?>
 <?php require 'navbar.php'?>
@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     //?Kullanıcı var mı yok mu kontrol etme
-    $sql = "SELECT * FROM registerunits WHERE useremail = :form_email";
+    $sql = "SELECT * FROM teachers WHERE useremail = :form_email";
     $SORGU = $DB->prepare($sql);
     $SORGU->bindParam(':form_email', $email);
     $SORGU->execute();
@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
 
         //!Eğer kullanıcı yoksa kaydet
     } else {
-        $sql = "INSERT INTO registerunits (username,useremail,usergender,useraddress,phonenumber,birthdate,userpassword) VALUES (:form_username,:form_email,:form_gender,:form_adress,:form_phonenumber,:form_birthdate,'$password')";
+        $sql = "INSERT INTO teachers (username,useremail,usergender,useraddress,phonenumber,birthdate,userpassword) VALUES (:form_username,:form_email,:form_gender,:form_adress,:form_phonenumber,:form_birthdate,'$password')";
         $SORGU = $DB->prepare($sql);
         $SORGU->bindParam(':form_username', $name);
         $SORGU->bindParam(':form_email', $email);
@@ -48,7 +48,7 @@ if (isset($_POST['submit'])) {
         $SORGU->execute();
         //!Kayıt başarılıysa login sayfasına yönlendir
         /* header("location: login.php"); */
-        $approves[] = "Register Unit User Added Successfully...";
+        $approves[] = "Teacher User Added Successfully...";
     }
 }
 ?>
@@ -57,7 +57,7 @@ if (isset($_POST['submit'])) {
   <div class="col-6">
 
 <form method="POST">
-<h1 class="alert alert-info text-center">Add Register Unit User Form </h1>
+<h1 class="alert alert-info text-center">Add Teacher User Form </h1>
 <?php
 //! Hata mesajlarını göster
 if (!empty($errors)) {
@@ -86,7 +86,7 @@ if (!empty($approves)) {
 ?>
   <div class="form-floating mb-3">
   <input type="text"  class="form-control" value="<?php echo $_SESSION['userName'] ?>"disabled readonly>
-  <label>Added By Admin Name</label>
+  <label>Added By Register Unit Name</label>
 </div>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" name="form_username" required>
@@ -127,7 +127,7 @@ if (!empty($approves)) {
   </label>
 </div>
 
-                  <button type="submit" name="submit" class="btn btn-primary mt-3 ">Add Register Unit User</button>
+                  <button type="submit" name="submit" class="btn btn-primary mt-3 ">Add Teacher User</button>
      </form>
      </div>
 </div>
