@@ -8,8 +8,7 @@ require 'up.html.php';
 <div class="container">
   <div class="row justify-content-center mt-3 ">
  <div class="col-6">
-<a href="admin.login.php" class="btn btn-danger">Admin Login</a>
-<a href="register.unit.login.php" class="btn btn-primary">Register Unit  Login</a>
+<a href="login.php" class="btn btn-danger">Login Page</a>
 </div>
 </div>
 <!-- Eğer adamin giriş yaparsa aşaığıdaki kısımlar görünür(role=2) -->
