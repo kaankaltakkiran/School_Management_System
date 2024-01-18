@@ -8,11 +8,11 @@ require 'up.html.php';
 <div class="container">
   <div class="row justify-content-center mt-3 ">
  <div class="col-6">
-<a href="admin.login.php" class="btn btn-primary">Admin Login</a>
+<a href="login.php" class="btn btn-primary">Admin Login</a>
 </div>
 </div>
 <!-- Eğer adamin giriş yaparsa aşaığıdaki kısımlar görünür(role=2) -->
-<?php if ($_SESSION['role'] == 2) {?>
+<?php if ($_SESSION['role'] == 1) {?>
       <div class="container my-3 ">
       <div class="row justify-content-center">
           <div class="col-6">
@@ -44,7 +44,7 @@ date_default_timezone_set('Europe/Istanbul'); // Türkiye saat dilimine göre ta
             <div class="card-body">
               <h5 class="card-title">Add Teacher User</h5>
               <p class="card-text">Admin Adds Teacher User</p>
-              <a href="add.writer.php?idUser=<?php echo $users[0]['userid'] ?>" class="btn btn-primary mt-3">Add Teacher User
+              <a href="add.teacher.php" class="btn btn-primary mt-3">Add Teacher User
               <i class="bi bi-send-fill"></i>
               </a>
             </div>
@@ -67,7 +67,7 @@ date_default_timezone_set('Europe/Istanbul'); // Türkiye saat dilimine göre ta
           <div class="card-body">
             <h5 class="card-title">Add Register Unit</h5>
             <p class="card-text">Admin Adds  Add Register Unit</p>
-            <a href="add.category.php?idUser=<?php echo $users[0]['userid'] ?>" class="btn btn-info mt-5" style="">Add Add Register Unit
+            <a href="add.category.php?idUser=<?php echo $users[0]['userid'] ?>" class="btn btn-info mt-5" style="">Add Register Unit
             <i class="bi bi-send-fill"></i></a>
           </div>
         </div>

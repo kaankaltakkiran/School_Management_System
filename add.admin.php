@@ -1,6 +1,6 @@
 <?php
 @session_start();
-$activeTitle = "Add Admin Page";
+$activeTitle = "Add Admin";
 require 'up.html.php';
 ?>
 <?php require 'navbar.php'?>
@@ -26,13 +26,13 @@ if (isset($_POST['submit'])) {
     /*  echo '<pre>';
     print_r($isUser);
     die(); */
-    //!Eğer kullanıcI üye olmuşsa  hata ver
+    //!Eğer kullanıcı üye olmuşsa  hata ver
     if ($isUser) {
         $errors[] = "This email is already registered";
 
         //!Eğer kullanıcı yoksa kaydet
     } else {
-        $sql = "INSERT INTO admins (username,useremail,usergender,roleuser,userpassword) VALUES (:form_username,:form_email,:form_gender,2,'$password')";
+        $sql = "INSERT INTO admins (username,useremail,usergender,userpassword) VALUES (:form_username,:form_email,:form_gender,'$password')";
         $SORGU = $DB->prepare($sql);
         $SORGU->bindParam(':form_username', $name);
         $SORGU->bindParam(':form_email', $email);
@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
         $SORGU->execute();
         //!Kayıt başarılıysa login sayfasına yönlendir
         /* header("location: login.php"); */
-        $approves[] = "Admin Added..";
+        $approves[] = "Admin Added Successfully...";
     }
 }
 ?>
