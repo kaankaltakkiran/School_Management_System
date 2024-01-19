@@ -79,8 +79,14 @@ date_default_timezone_set('Europe/Istanbul'); // Türkiye saat dilimine göre ta
           <div class="card-body">
             <h5 class="card-title">Add Register Unit</h5>
             <p class="card-text">Admin Adds  Add Register Unit</p>
-            <a href="add.register.person.php" class="btn btn-info mt-5">Add Register Unit
-            <i class="bi bi-send-fill"></i></a>
+            <div class="d-flex justify-content-between">
+          <a href="add.register.unit.php" class="btn me-2  btn-danger mt-3">Add Register Unit
+            <i class="bi bi-send-fill"></i>
+          </a>
+          <a href="list.register.unit.php" class="btn btn-warning  mt-3">List Register Unit
+            <i class="bi bi-send-fill"></i>
+          </a>
+        </div>
           </div>
         </div>
     </div>

@@ -139,7 +139,7 @@ if (!empty($approves)) {
 </div>
 <div class="input-group mb-3">
   <input type="file"  name='form_image' class="form-control" id="inputGroupFile02"required>
-  <label class="input-group-text" for="inputGroupFile02">Upload Blog Image</label>
+  <label class="input-group-text" for="inputGroupFile02">Upload Admin Image</label>
 </div>
                   <button type="submit" name="submit" class="btn btn-primary mb-3">Add Admin User</button>
      </form>
