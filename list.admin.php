@@ -39,6 +39,23 @@ $SORGU->execute();
 $admins = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //echo '<pre>'; print_r($admins);
 
+if (isset($_GET['idAdminRemove'])) {
+    require 'db.php';
+    $remove_id = $_GET['idAdminRemove'];
+    $id = $_SESSION['id'];
+
+    $sql = "DELETE FROM admins WHERE userid = :idAdminRemove";
+    $SORGU = $DB->prepare($sql);
+
+    $SORGU->bindParam(':idAdminRemove', $remove_id);
+
+    $SORGU->execute();
+    echo "<script>
+alert('The Admin User has been deleted. You are redirected to the Admin List page...!');
+window.location.href = 'list.admin.php';
+</script>";
+}
+
 foreach ($admins as $admin) {
     $gender = $admin['usergender'];
     $gender = ($gender == 'M') ? 'Male' : 'Famale';
@@ -51,7 +68,7 @@ foreach ($admins as $admin) {
       <td>$gender</td>
       <td>{$admin['createdate']}</td>
       <td><a href='update.admin.php?idAdmin={$admin['userid']}' class='btn btn-success btn-sm'>Update</a></td>
-      <td><a href='update.admin.php?idAdmin={$admin['userid']}' class='btn btn-danger btn-sm'>Delete</a></td>
+      <td><a href='list.admin.php?idAdminRemove={$admin['userid']}' onclick='return confirm(\"Are you sure you want to delete {$admin['username']}?\")' class='btn btn-danger btn-sm'>Delete</a></td>
    </tr>
   ";
 }
