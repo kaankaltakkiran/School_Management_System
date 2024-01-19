@@ -1,0 +1,96 @@
+<?php
+session_start();
+$activeTitle = "Teacher User List";
+$activePage = "index";
+require 'up.html.php';
+?>
+<?php require 'navbar.php'?>
+
+    <div class="container">
+      <div class="row mt-3">
+      <div class='row justify-content-center text-center'>
+        <div class="col-sm-4 col-md-6 col-lg-8">
+  <h1 class='alert alert-primary mt-2'>Teacher User List</h1>
+  </div>
+  <div class='row text-end'>
+  <p>
+    <a href='add.teacher.php' class="btn btn-warning btn-sm ">
+     Add New Teacher User<i class="bi bi-send"></i> </a>
+  </p>
+</div>
+</div>
+   <!-- tablo ile personel listeleme -->
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>User Id</th>
+      <th>Register Unit Image</th>
+      <th>User Name</th>
+      <th>Email</th>
+      <th>Gender</th>
+      <th>Create Date</th>
+      <th>Address</th>
+      <th>Phone Number</th>
+      <th>BirthDate</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  </div>
+
+    <?php
+
+require_once 'db.php';
+
+$SORGU = $DB->prepare("SELECT * FROM teachers");
+$SORGU->execute();
+$teachers = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+//echo '<pre>'; print_r($teachers);
+
+if (isset($_GET['idRegisterUnit'])) {
+    require 'db.php';
+    $remove_id = $_GET['idRegisterUnit'];
+
+    $sql = "DELETE FROM registerunits WHERE userid = :idRegisterUnit";
+    $SORGU = $DB->prepare($sql);
+
+    $SORGU->bindParam(':idRegisterUnit', $remove_id);
+
+    $SORGU->execute();
+    echo "<script>
+alert('The Register Unit User has been deleted. You are redirected to the Register Unit List page...!');
+window.location.href = 'list.register.unit.php';
+</script>";
+}
+
+foreach ($teachers as $teacher) {
+    $gender = $teacher['usergender'];
+    $gender = ($gender == 'M') ? 'Male' : 'Famale';
+    //! Eğer $_SESSION içerisindeki id, şu anki adminin id'sine eşit değilse silemesin
+    $deleteButton = ($_SESSION['id'] != $teacher['userid']) ?
+    "<a href='list.register.unit.php?idRegisterUnit={$teacher['userid']}' onclick='return confirm(\"Are you sure you want to delete {$teacher['username']}?\")' class='btn btn-danger btn-sm'>Delete</a>" :
+    "<span class='text-danger fw-bold '>You can't Delete yourself!!!</span>";
+
+    echo "
+    <tr>
+      <th>{$teacher['userid']}</th>
+      <td><img src='teacher_images/{$teacher['userimg']}' class='rounded-circle' width='100' height='100'></td>
+      <td>{$teacher['username']}</td>
+      <td>{$teacher['useremail']}</td>
+      <td>$gender</td>
+      <td>{$teacher['createdate']}</td>
+      <td>{$teacher['useraddress']}</td>
+      <td>{$teacher['phonenumber']}</td>
+      <td>{$teacher['birthdate']}</td>
+      <td><a href='update.register.unit.php?idRegisterUnit={$teacher['userid']}' class='btn btn-success btn-sm'>Update</a></td>
+      <td>$deleteButton</td>
+   </tr>
+  ";
+}
+?>
+
+  </tbody>
+</table>
+</div>
+<?php require 'down.html.php';?>

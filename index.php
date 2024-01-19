@@ -56,9 +56,14 @@ date_default_timezone_set('Europe/Istanbul'); // Türkiye saat dilimine göre ta
             <div class="card-body">
               <h5 class="card-title">Add Teacher User</h5>
               <p class="card-text">Admin Adds Teacher User</p>
-              <a href="add.teacher.php" class="btn btn-primary mt-3">Add Teacher User
-              <i class="bi bi-send-fill"></i>
-              </a>
+              <div class="d-flex justify-content-between">
+          <a href="add.teacher.php" class="btn me-2  btn-danger mt-3">Add Teacher User
+            <i class="bi bi-send-fill"></i>
+          </a>
+          <a href="list.teacher.php" class="btn btn-warning  mt-3">List Teacher User
+            <i class="bi bi-send-fill"></i>
+          </a>
+        </div>
             </div>
           </div>
       </div>
