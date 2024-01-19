@@ -83,7 +83,7 @@ foreach ($teachers as $teacher) {
       <td>{$teacher['useraddress']}</td>
       <td>{$teacher['phonenumber']}</td>
       <td>{$teacher['birthdate']}</td>
-      <td><a href='update.register.unit.php?idRegisterUnit={$teacher['userid']}' class='btn btn-success btn-sm'>Update</a></td>
+      <td><a href='update.teacher.php?idTeacher={$teacher['userid']}' class='btn btn-success btn-sm'>Update</a></td>
       <td>$deleteButton</td>
    </tr>
   ";
