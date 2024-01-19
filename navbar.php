@@ -21,14 +21,15 @@ require 'db.php';
     $imageFolder = '';
     if ($_SESSION['role'] == 1) {
         $SORGU = $DB->prepare("SELECT * FROM admins WHERE userid = :idUser");
-        $SORGU->bindParam(':idUser', $_SESSION['id']);
         $imageFolder = 'admin_images';
     } else if ($_SESSION['role'] == 2) {
         $SORGU = $DB->prepare("SELECT * FROM registerunits WHERE userid = :idUser");
-        $SORGU->bindParam(':idUser', $_SESSION['id']);
         $imageFolder = 'register_unit_images';
+    } else if ($_SESSION['role'] == 3) {
+        $SORGU = $DB->prepare("SELECT * FROM teachers WHERE userid = :idUser");
+        $imageFolder = 'teacher_images';
     }
-
+    $SORGU->bindParam(':idUser', $_SESSION['id']);
     $SORGU->execute();
     $users = $SORGU->fetchAll(PDO::FETCH_ASSOC);
     $users = $users[0];

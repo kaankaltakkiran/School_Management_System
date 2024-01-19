@@ -44,25 +44,21 @@ if (isset($_POST['form_email'])) {
         //! user rol 1 ise admin tablosundan sorgula
         if ($rol == 1) {
             $sql = "SELECT * FROM admins  WHERE useremail = :form_email";
-            $SORGU = $DB->prepare($sql);
-
-            $SORGU->bindParam(':form_email', $useremail);
-
-            $SORGU->execute();
-
-            $CEVAP = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-
             //! user rol 2 ise registerunits tablosundan sorgula
         } else if ($rol == 2) {
             $sql = "SELECT * FROM registerunits  WHERE useremail = :form_email";
-            $SORGU = $DB->prepare($sql);
+            //! user rol 3 ise teacher tablosundan sorgula
+        } else if ($rol == 3) {
+            $sql = "SELECT * FROM teachers  WHERE useremail = :form_email";
 
-            $SORGU->bindParam(':form_email', $useremail);
-
-            $SORGU->execute();
-
-            $CEVAP = $SORGU->fetchAll(PDO::FETCH_ASSOC);
         }
+        $SORGU = $DB->prepare($sql);
+
+        $SORGU->bindParam(':form_email', $useremail);
+
+        $SORGU->execute();
+
+        $CEVAP = $SORGU->fetchAll(PDO::FETCH_ASSOC);
         /* var_dump($CEVAP);
         echo "Gelen cevap " .  count($CEVAP) . " adet satırdan oluşuyor";
         die(); */
@@ -127,7 +123,7 @@ if (!empty($errors)) {
     <option selected disabled>Select Login Type</option>
     <option value="1">Admin</option>
     <option value="2">Register Unit</option>
-    <option value="3">Three</option>
+    <option value="3">Teacher</option>
   </select>
   <label for="floatingSelect">Login Type</label>
 </div>
