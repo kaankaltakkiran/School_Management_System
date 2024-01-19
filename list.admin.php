@@ -59,6 +59,11 @@ window.location.href = 'list.admin.php';
 foreach ($admins as $admin) {
     $gender = $admin['usergender'];
     $gender = ($gender == 'M') ? 'Male' : 'Famale';
+    //! Eğer $_SESSION içerisindeki id, şu anki adminin id'sine eşit değilse silemesin
+    $deleteButton = ($_SESSION['id'] != $admin['userid']) ?
+    "<a href='list.admin.php?idAdminRemove={$admin['userid']}' onclick='return confirm(\"Are you sure you want to delete {$admin['username']}?\")' class='btn btn-danger btn-sm'>Delete</a>" :
+    "<span class='text-danger fw-bold '>You can't Delete yourself!!!</span>";
+
     echo "
     <tr>
       <th>{$admin['userid']}</th>
@@ -68,7 +73,7 @@ foreach ($admins as $admin) {
       <td>$gender</td>
       <td>{$admin['createdate']}</td>
       <td><a href='update.admin.php?idAdmin={$admin['userid']}' class='btn btn-success btn-sm'>Update</a></td>
-      <td><a href='list.admin.php?idAdminRemove={$admin['userid']}' onclick='return confirm(\"Are you sure you want to delete {$admin['username']}?\")' class='btn btn-danger btn-sm'>Delete</a></td>
+      <td>$deleteButton</td>
    </tr>
   ";
 }
