@@ -48,29 +48,25 @@ $SORGU->execute();
 $teachers = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //echo '<pre>'; print_r($teachers);
 
-if (isset($_GET['idRegisterUnit'])) {
+if (isset($_GET['removeTeacherid'])) {
     require 'db.php';
-    $remove_id = $_GET['idRegisterUnit'];
+    $remove_id = $_GET['removeTeacherid'];
 
-    $sql = "DELETE FROM registerunits WHERE userid = :idRegisterUnit";
+    $sql = "DELETE FROM teachers WHERE userid = :removeTeacherid";
     $SORGU = $DB->prepare($sql);
 
-    $SORGU->bindParam(':idRegisterUnit', $remove_id);
+    $SORGU->bindParam(':removeTeacherid', $remove_id);
 
     $SORGU->execute();
     echo "<script>
-alert('The Register Unit User has been deleted. You are redirected to the Register Unit List page...!');
-window.location.href = 'list.register.unit.php';
+alert('The Teacher User has been deleted. You are redirected to the Teacher User List page...!');
+window.location.href = 'list.teacher.php';
 </script>";
 }
 
 foreach ($teachers as $teacher) {
     $gender = $teacher['usergender'];
     $gender = ($gender == 'M') ? 'Male' : 'Famale';
-    //! Eğer $_SESSION içerisindeki id, şu anki adminin id'sine eşit değilse silemesin
-    $deleteButton = ($_SESSION['id'] != $teacher['userid']) ?
-    "<a href='list.register.unit.php?idRegisterUnit={$teacher['userid']}' onclick='return confirm(\"Are you sure you want to delete {$teacher['username']}?\")' class='btn btn-danger btn-sm'>Delete</a>" :
-    "<span class='text-danger fw-bold '>You can't Delete yourself!!!</span>";
 
     echo "
     <tr>
@@ -84,7 +80,7 @@ foreach ($teachers as $teacher) {
       <td>{$teacher['phonenumber']}</td>
       <td>{$teacher['birthdate']}</td>
       <td><a href='update.teacher.php?idTeacher={$teacher['userid']}' class='btn btn-success btn-sm'>Update</a></td>
-      <td>$deleteButton</td>
+      <td><a href='list.teacher.php?removeTeacherid={$teacher['userid']}' onclick='return confirm(\"Are you sure you want to delete {$teacher['username']}?\")' class='btn btn-danger btn-sm'>Delete</a></td>
    </tr>
   ";
 }

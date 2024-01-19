@@ -5,3 +5,6 @@ rol kullanıcıların update ve delete işlemleri
 login systemi tam olmalı
 sınıf ekleme ve listleme ,silme güncelleme işlemleri
 navbar menü tasarımı yada başka bir tasarım
+sınıf olayında implode chatgpt
+id silmedeki get istekleri daha anlamlı yap
+
