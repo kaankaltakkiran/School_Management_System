@@ -84,7 +84,7 @@ foreach ($registerunits as $registerunit) {
       <td>{$registerunit['useraddress']}</td>
       <td>{$registerunit['phonenumber']}</td>
       <td>{$registerunit['birthdate']}</td>
-      <td><a href='update.admin.php?idAdmin={$registerunit['userid']}' class='btn btn-success btn-sm'>Update</a></td>
+      <td><a href='update.register.unit.php?idRegisterUnit={$registerunit['userid']}' class='btn btn-success btn-sm'>Update</a></td>
       <td>$deleteButton</td>
    </tr>
   ";
