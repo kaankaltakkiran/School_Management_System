@@ -12,6 +12,12 @@ require 'up.html.php';
         <div class="col-sm-4 col-md-6 col-lg-8">
   <h1 class='alert alert-primary mt-2'>Admin User List</h1>
   </div>
+  <div class='row text-end'>
+  <p>
+    <a href='add.admin.php' class="btn btn-warning btn-sm ">
+     Add New Admin User<i class="bi bi-send"></i> </a>
+  </p>
+</div>
 </div>
    <!-- tablo ile personel listeleme -->
 <table class="table table-bordered table-striped">
