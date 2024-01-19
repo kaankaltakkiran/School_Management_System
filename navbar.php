@@ -18,16 +18,26 @@ session_start();
         </li>
         <?php
 require 'db.php';
-    $SORGU = $DB->prepare("SELECT * FROM admins WHERE userid = :idUser");
-    $SORGU->bindParam(':idUser', $_SESSION['id']);
+    $imageFolder = '';
+    if ($_SESSION['role'] == 1) {
+        $SORGU = $DB->prepare("SELECT * FROM admins WHERE userid = :idUser");
+        $SORGU->bindParam(':idUser', $_SESSION['id']);
+        $imageFolder = 'admin_images';
+    } else if ($_SESSION['role'] == 2) {
+        $SORGU = $DB->prepare("SELECT * FROM registerunits WHERE userid = :idUser");
+        $SORGU->bindParam(':idUser', $_SESSION['id']);
+        $imageFolder = 'register_unit_images';
+    }
+
     $SORGU->execute();
     $users = $SORGU->fetchAll(PDO::FETCH_ASSOC);
     $users = $users[0];
+
     ?>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
-          <img src='<?php echo "Admin Img/{$users['userimg']}"; ?>' class='rounded-circle' height="30" width='30'>
+          <img src='<?php echo "$imageFolder/{$users['userimg']}"; ?>' class='rounded-circle' height="30" width='30'>
           </a>
           <ul class="dropdown-menu  dropdown-menu-end">
             <li><a class="dropdown-item" href="#">Action</a></li>
