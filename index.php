@@ -18,12 +18,8 @@ require 'up.html.php';
           <div class="col-6">
           <h1 class="text-center text-danger mt-3">Welcome</h1>
           <h3 class="text-center text-muted">Admin: <?php echo $_SESSION['userName']; ?></h3>
-          <h5 class="text-center text-danger fw-bold"><?php
-date_default_timezone_set('Europe/Istanbul'); // Türkiye saat dilimine göre tarih ve saat ayarla
-    $date_and_time = date("d-m-Y H:i:s"); // Yıl-Ay-Gün Saat:Dakika:Saniye formatında tarih ve saat
-    echo "Date And Time: " . $date_and_time;
-    ?>
-</h5>
+          <h4 class="text-center text-danger fw-bold" id="clock">
+</h4>
        </div>
         </div>
        <?php }?>
