@@ -50,17 +50,34 @@ date_default_timezone_set('Europe/Istanbul'); // Türkiye saat dilimine göre ta
         <?php }?>
         <?php if ($_SESSION['role'] == 2) {?>
           <div class="row justify-content-center g-4">
+          <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card h-100 " style="width: 18rem;">
+          <img src="./public/img/office.jpg" class="card-img-top" alt="Category img">
+          <div class="card-body">
+            <h5 class="card-title">Add Register Unit</h5>
+            <p class="card-text">Register Unit Adds  Add Register Unit</p>
+            <div class="d-flex justify-content-between">
+          <a href="add.register.unit.php" class="btn me-2  btn-danger mt-5">Add Register Unit
+            <i class="bi bi-send-fill"></i>
+          </a>
+          <a href="list.register.unit.php" class="btn btn-warning  mt-5">List Register Unit
+            <i class="bi bi-send-fill"></i>
+          </a>
+        </div>
+          </div>
+        </div>
+    </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="card h-100 " style="width: 18rem;">
             <img src="./public/img/teacher.jpg" class="card-img-top" alt="Writer img">
             <div class="card-body">
               <h5 class="card-title">Add Teacher User</h5>
-              <p class="card-text">Admin Adds Teacher User</p>
+              <p class="card-text">Register Unit Adds Teacher User</p>
               <div class="d-flex justify-content-between">
-          <a href="add.teacher.php" class="btn me-2  btn-danger mt-3">Add Teacher User
+          <a href="add.teacher.php" class="btn me-2  btn-danger mt-5">Add Teacher User
             <i class="bi bi-send-fill"></i>
           </a>
-          <a href="list.teacher.php" class="btn btn-warning  mt-3">List Teacher User
+          <a href="list.teacher.php" class="btn btn-warning  mt-5">List Teacher User
             <i class="bi bi-send-fill"></i>
           </a>
         </div>
@@ -72,29 +89,29 @@ date_default_timezone_set('Europe/Istanbul'); // Türkiye saat dilimine göre ta
           <img src="./public/img/student.jpg" class="card-img-top" alt="Category img">
           <div class="card-body">
             <h5 class="card-title">Add Student User</h5>
-            <p class="card-text">Admin Adds  Student User</p>
+            <p class="card-text">Register Unit Adds  Student User</p>
             <a href="add.category.php?idUser=<?php echo $users[0]['userid'] ?>" class="btn btn-success mt-3" style="">Add Student User
             <i class="bi bi-send-fill"></i></a>
           </div>
         </div>
     </div>
     <div class="col-sm-6 col-md-4 col-lg-3">
-        <div class="card h-100 " style="width: 18rem;">
-          <img src="./public/img/office.jpg" class="card-img-top" alt="Category img">
-          <div class="card-body">
-            <h5 class="card-title">Add Register Unit</h5>
-            <p class="card-text">Admin Adds  Add Register Unit</p>
-            <div class="d-flex justify-content-between">
-          <a href="add.register.unit.php" class="btn me-2  btn-danger mt-3">Add Register Unit
+          <div class="card h-100 " style="width: 18rem;">
+            <img src="./public/img/teacher.jpg" class="card-img-top" alt="Writer img">
+            <div class="card-body">
+              <h5 class="card-title">Add Class</h5>
+              <p class="card-text">Register Unit Adds Class</p>
+              <div class="d-flex justify-content-between">
+          <a href="" class="btn me-2  btn-danger mt-5 btn-lg">Add Class
             <i class="bi bi-send-fill"></i>
           </a>
-          <a href="list.register.unit.php" class="btn btn-warning  mt-3">List Register Unit
+          <a href="" class="btn btn-warning  mt-5 btn-lg">List Class
             <i class="bi bi-send-fill"></i>
           </a>
         </div>
+            </div>
           </div>
-        </div>
-    </div>
+      </div>
     </div>
       <?php }?>
 </div>
