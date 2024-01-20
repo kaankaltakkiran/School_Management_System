@@ -45,15 +45,15 @@ $SORGU->execute();
 $admins = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //echo '<pre>'; print_r($admins);
 
-if (isset($_GET['idAdminRemove'])) {
+if (isset($_GET['removeAdminid'])) {
     require 'db.php';
-    $remove_id = $_GET['idAdminRemove'];
+    $remove_id = $_GET['removeAdminid'];
     $id = $_SESSION['id'];
 
-    $sql = "DELETE FROM admins WHERE userid = :idAdminRemove";
+    $sql = "DELETE FROM admins WHERE userid = :removeAdminid";
     $SORGU = $DB->prepare($sql);
 
-    $SORGU->bindParam(':idAdminRemove', $remove_id);
+    $SORGU->bindParam(':removeAdminid', $remove_id);
 
     $SORGU->execute();
     echo "<script>
@@ -67,7 +67,7 @@ foreach ($admins as $admin) {
     $gender = ($gender == 'M') ? 'Male' : 'Famale';
     //! Eğer $_SESSION içerisindeki id, şu anki adminin id'sine eşit değilse silemesin
     $deleteButton = ($_SESSION['id'] != $admin['userid']) ?
-    "<a href='list.admin.php?idAdminRemove={$admin['userid']}' onclick='return confirm(\"Are you sure you want to delete {$admin['username']}?\")' class='btn btn-danger btn-sm'>Delete</a>" :
+    "<a href='list.admin.php?removeAdminid={$admin['userid']}' onclick='return confirm(\"Are you sure you want to delete {$admin['username']}?\")' class='btn btn-danger btn-sm'>Delete</a>" :
     "<span class='text-danger fw-bold '>You can't Delete yourself!!!</span>";
 
     echo "
