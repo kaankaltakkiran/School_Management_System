@@ -98,10 +98,10 @@ require 'up.html.php';
               <h5 class="card-title">Add Class</h5>
               <p class="card-text">Register Unit Adds Class</p>
               <div class="d-flex justify-content-between">
-          <a href="" class="btn me-2  btn-danger mt-5 btn-lg">Add Class
+          <a href="add.class.php" class="btn me-2  btn-danger mt-5 btn-lg">Add Class
             <i class="bi bi-send-fill"></i>
           </a>
-          <a href="" class="btn btn-warning  mt-5 btn-lg">List Class
+          <a href="list.class.php" class="btn btn-warning  mt-5 btn-lg">List Class
             <i class="bi bi-send-fill"></i>
           </a>
         </div>
