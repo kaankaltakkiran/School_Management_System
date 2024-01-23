@@ -86,7 +86,7 @@ require 'up.html.php';
           <div class="card-body">
             <h5 class="card-title">Add Student User</h5>
             <p class="card-text">Register Unit Adds  Student User</p>
-            <a href="add.category.php?idUser=<?php echo $users[0]['userid'] ?>" class="btn btn-success mt-3" style="">Add Student User
+            <a href="add.student.php" class="btn btn-success mt-3">Add Student User
             <i class="bi bi-send-fill"></i></a>
           </div>
         </div>
