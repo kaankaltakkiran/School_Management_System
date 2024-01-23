@@ -14,6 +14,12 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
     $address = $_POST['form_adress'];
     $phoneNumber = $_POST['form_phonenumber'];
     $birthDate = $_POST['form_birthdate'];
+    //?Sınıfları forech ile alma
+    $selectClasses = $_POST['class'];
+    $teacherClass = "";
+    foreach ($selectClasses as $selectClass) {
+        $teacherClass .= $selectClass . ",";
+    }
 
     $password = $_POST['form_password'];
 /*  Şifrele hashleme */
@@ -57,7 +63,7 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 move_uploaded_file($tmp_name, $img_upload_path);
 
                 // Insert into Database
-                $sql = "INSERT INTO teachers (username,useremail,usergender,useraddress,phonenumber,birthdate,userpassword,userimg) VALUES (:form_username,:form_email,:form_gender,:form_adress,:form_phonenumber,:form_birthdate,'$password','$new_img_name')";
+                $sql = "INSERT INTO teachers (username,useremail,usergender,useraddress,phonenumber,birthdate,userpassword,userimg,classid) VALUES (:form_username,:form_email,:form_gender,:form_adress,:form_phonenumber,:form_birthdate,'$password','$new_img_name','$teacherClass')";
                 $SORGU = $DB->prepare($sql);
 
                 $SORGU->bindParam(':form_username', $name);
@@ -127,6 +133,31 @@ if (!empty($approves)) {
   <input type="email" name="form_email"class="form-control"required>
   <label>Email</label>
 </div>
+<?php
+require_once 'db.php';
+
+$SORGU = $DB->prepare("SELECT * FROM classes");
+$SORGU->execute();
+$classes = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+//echo '<pre>'; print_r($users);
+
+?>
+<div class="form-floating mb-3">
+  <div class="row">
+  <?php
+//! chatgpt ile sınıfları listeleme
+echo '<label class="mb-1">Select Classes</label>';
+foreach ($classes as $class) {
+    echo '<div class="col-md-3">'; // Dört sütunlu (veya istediğiniz sayıda sütun) bir düzen
+    echo '<div class="form-check form-check-inline">';
+    echo '<input class="form-check-input" type="checkbox" name="class[]" value="' . $class['classid'] . '" id="check-' . $class['classid'] . '">';
+    echo '<label class="form-check-label" for="check-' . $class['classid'] . '">' . $class['classname'] . '</label>';
+    echo '</div>';
+    echo '</div>';
+}
+?>
+</div>
+</div>
 <div class="input-group mb-3  input-group-lg">
   <input type="password"  name="form_password" class="form-control" id="password" placeholder="Password"required>
   <span class="input-group-text bg-transparent"><i id="togglePassword" class="bi bi-eye-slash"></i></span>
@@ -170,3 +201,7 @@ if (!empty($approves)) {
 </div>
 <?php require 'footer.php'?>
 <?php require 'down.html.php';?>
+<!-- Öğretmenin sahip olduğu sınıfları gösterme -->
+<!-- SELECT DISTINCT classes.*
+FROM classes
+JOIN teachers ON teachers.classid LIKE CONCAT('%', classes.classid, '%'); -->
