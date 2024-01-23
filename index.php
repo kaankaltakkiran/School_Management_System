@@ -48,7 +48,7 @@ require 'up.html.php';
           <div class="row justify-content-center g-4">
           <div class="col-sm-6 col-md-4 col-lg-3">
         <div class="card h-100 " style="width: 18rem;">
-          <img src="./public/img/office.jpg" class="card-img-top" alt="Category img">
+          <img src="./public/img/office.jpg" class="card-img-top" alt="Register Unit img">
           <div class="card-body">
             <h5 class="card-title">Add Register Unit</h5>
             <p class="card-text">Register Unit Adds  Add Register Unit</p>
@@ -65,7 +65,7 @@ require 'up.html.php';
     </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="card h-100 " style="width: 18rem;">
-            <img src="./public/img/teacher.jpg" class="card-img-top" alt="Writer img">
+            <img src="./public/img/teacher.jpg" class="card-img-top" alt="Teacher img">
             <div class="card-body">
               <h5 class="card-title">Add Teacher User</h5>
               <p class="card-text">Register Unit Adds Teacher User</p>
@@ -82,26 +82,32 @@ require 'up.html.php';
       </div>
       <div class="col-sm-6 col-md-4 col-lg-3">
         <div class="card h-100 " style="width: 18rem;">
-          <img src="./public/img/student.jpg" class="card-img-top" alt="Category img">
+          <img src="./public/img/student.jpg" class="card-img-top" alt="Student img">
           <div class="card-body">
             <h5 class="card-title">Add Student User</h5>
             <p class="card-text">Register Unit Adds  Student User</p>
-            <a href="add.student.php" class="btn btn-success mt-3">Add Student User
-            <i class="bi bi-send-fill"></i></a>
+            <div class="d-flex justify-content-between">
+          <a href="add.student.php" class="btn me-2  btn-danger mt-5">Add Student User
+            <i class="bi bi-send-fill"></i>
+          </a>
+          <a href="list.student.php" class="btn btn-warning  mt-5">List Student User
+            <i class="bi bi-send-fill"></i>
+          </a>
+        </div>
           </div>
         </div>
     </div>
     <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="card h-100 " style="width: 18rem;">
-            <img src="./public/img/teacher.jpg" class="card-img-top" alt="Writer img">
+            <img src="./public/img/teacher.jpg" class="card-img-top" alt="Class img">
             <div class="card-body">
               <h5 class="card-title">Add Class</h5>
               <p class="card-text">Register Unit Adds Class</p>
               <div class="d-flex justify-content-between">
-          <a href="add.class.php" class="btn me-2  btn-danger mt-5 btn-lg">Add Class
+          <a href="add.class.php" class="btn me-2  btn-danger mt-5">Add Class
             <i class="bi bi-send-fill"></i>
           </a>
-          <a href="list.class.php" class="btn btn-warning  mt-5 btn-lg">List Class
+          <a href="list.class.php" class="btn btn-warning mt-5">List Class
             <i class="bi bi-send-fill"></i>
           </a>
         </div>

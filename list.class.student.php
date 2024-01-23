@@ -1,21 +1,30 @@
 <?php
 session_start();
-$activeTitle = "Class List";
+$activeTitle = "Class Student List";
 $activePage = "index";
 require 'up.html.php';
 ?>
 <?php require 'navbar.php'?>
+<?php
 
+require_once 'db.php';
+$classİd = $_GET['idClass'];
+$SORGU = $DB->prepare("SELECT * FROM students where classid = :idClass");
+$SORGU->bindParam(':idClass', $classİd);
+$SORGU->execute();
+$classes = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+//echo '<pre>'; print_r($classes);
+?>
     <div class="container">
       <div class="row mt-3">
       <div class='row justify-content-center text-center'>
         <div class="col-sm-4 col-md-6 col-lg-8">
-  <h1 class='alert alert-primary mt-2'>Class List</h1>
+  <h1 class='alert alert-primary mt-2'><?php echo $classes[0]['classname'] ?> Class </h1>
   </div>
   <div class='row text-end'>
   <p>
     <a href='add.class.php' class="btn btn-warning btn-sm ">
-     Add New Class<i class="bi bi-send"></i> </a>
+     Add New Student<i class="bi bi-send"></i> </a>
   </p>
 </div>
 </div>
@@ -23,9 +32,8 @@ require 'up.html.php';
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
-      <th>Class Id</th>
-      <th>Class Name</th>
-      <th>Create Date</th>
+      <th>Student Id</th>
+      <th>Student Name</th>
       <th>Update</th>
       <th>Delete</th>
     </tr>
@@ -35,12 +43,6 @@ require 'up.html.php';
 
     <?php
 
-require_once 'db.php';
-
-$SORGU = $DB->prepare("SELECT * FROM classes LIMIT 16");
-$SORGU->execute();
-$classes = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-//echo '<pre>'; print_r($classes);
 if (isset($_GET['removeClassid'])) {
     require 'db.php';
     $remove_id = $_GET['removeClassid'];
@@ -61,8 +63,7 @@ foreach ($classes as $class) {
     echo "
     <tr>
       <th>{$class['classid']}</th>
-      <td>{$class['classname']}</td>
-      <td>{$class['createdate']}</td>
+      <td>{$class['username']}</td>
       <td><a href='' class='btn btn-success btn-sm'>Update</a></td>
       <td><a href='list.class.php?removeClassid={$class['classid']}'onclick='return confirm(\"Are you sure you want to delete {$class['classname']}?\")' class='btn btn-danger btn-sm'>Delete</a></td>
    </tr>

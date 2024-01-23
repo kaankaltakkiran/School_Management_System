@@ -1,6 +1,6 @@
 <?php
 session_start();
-$activeTitle = "Class List";
+$activeTitle = "Student List";
 $activePage = "index";
 require 'up.html.php';
 ?>
@@ -10,12 +10,12 @@ require 'up.html.php';
       <div class="row mt-3">
       <div class='row justify-content-center text-center'>
         <div class="col-sm-4 col-md-6 col-lg-8">
-  <h1 class='alert alert-primary mt-2'>Class List</h1>
+  <h1 class='alert alert-primary mt-2'>Student List</h1>
   </div>
   <div class='row text-end'>
   <p>
-    <a href='add.class.php' class="btn btn-warning btn-sm ">
-     Add New Class<i class="bi bi-send"></i> </a>
+    <a href='add.student.php' class="btn btn-warning btn-sm ">
+     Add New Student<i class="bi bi-send"></i> </a>
   </p>
 </div>
 </div>
@@ -26,8 +26,7 @@ require 'up.html.php';
       <th>Class Id</th>
       <th>Class Name</th>
       <th>Create Date</th>
-      <th>Update</th>
-      <th>Delete</th>
+      <th>List Student</th>
     </tr>
   </thead>
   <tbody>
@@ -63,8 +62,7 @@ foreach ($classes as $class) {
       <th>{$class['classid']}</th>
       <td>{$class['classname']}</td>
       <td>{$class['createdate']}</td>
-      <td><a href='' class='btn btn-success btn-sm'>Update</a></td>
-      <td><a href='list.class.php?removeClassid={$class['classid']}'onclick='return confirm(\"Are you sure you want to delete {$class['classname']}?\")' class='btn btn-danger btn-sm'>Delete</a></td>
+      <td><a href='list.class.student.php?idClass={$class['classid']}' class='btn btn-info btn-sm'>List Student</a></td>
    </tr>
   ";
 }
