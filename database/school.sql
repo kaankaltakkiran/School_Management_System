@@ -90,7 +90,7 @@ CREATE TABLE `teachers` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `roleuser`, `createdate`, `classid`, `useraddress`, `phonenumber`, `birthdate`, `userimg`) VALUES
-(1,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$1ggUZ/04nXCIJhuJu20h/uC1PwrB36imKd5d.L1fUuYOo82Vp7Owy',	'F',	3,	'2024-01-20 19:15:30',	'',	'CUMHURİYET MAH. NECİP FAZIL KISAKÜREK SK. BAHAR APT NO: 18  İÇ KAPI NO: 25',	'31232312132',	'1983-12-10',	'IMG-65abf1a2820575.85303979.png'),
-(2,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$nZzJEBIlSRatkGa/MCSlb.1/KcgnqxRXURNxF5JpjuPTvseB0TtLe',	'M',	3,	'2024-01-20 19:16:58',	'',	'CUMHURİYET MAH. NECİP FAZIL KISAKÜREK SK. BAHAR APT NO: 18  İÇ KAPI NO: 25',	'31232312132',	'1987-10-15',	'IMG-65abf1fa295884.68984613.png');
+(1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$pZ4F5/8a3shC/HxI5nLQDeduSdbFB1Dfsoe/qyHtStYRDhx6dGhae',	'M',	3,	'2024-01-23 15:28:50',	'1,6,11,16,',	'Address 1',	'05076600889',	'1985-10-01',	'IMG-65afb1024f7534.43710997.png'),
+(2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$wqwqmpiwprcN3SaejcbKOOFbbzIK.tjxDWnb/7tb0eGjqny1XLRm.',	'F',	3,	'2024-01-23 15:29:19',	'1,2,5,12,',	'CUMHURİYET MAH. NECİP FAZIL KISAKÜREK SK. BAHAR APT NO: 18  İÇ KAPI NO: 25',	'05076600884',	'1986-12-01',	'IMG-65afb145b073b5.03375533.png');
 
--- 2024-01-23 10:24:05
+-- 2024-01-23 12:44:53
