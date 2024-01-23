@@ -15,8 +15,12 @@ require 'up.html.php';
 require_once 'db.php';
 
 $id = $_GET['idTeacher'];
-
-$sql = "SELECT * FROM teachers WHERE userid = :idTeacher";
+//! Teacherın seçtiği sınıfları çekme
+//! joinle clases tablosundaki classid ile teachers tablosundaki classid'yi içeren classidleri eşleşenleri getir
+$sql = "SELECT DISTINCT classes.*,teachers.*
+FROM classes
+JOIN teachers ON teachers.classid LIKE CONCAT('%', classes.classid, '%')
+WHERE userid = :idTeacher";
 $SORGU = $DB->prepare($sql);
 
 $SORGU->bindParam(':idTeacher', $id);
@@ -25,6 +29,10 @@ $SORGU->execute();
 
 $teachers = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 $selectGender = $teachers[0]['usergender'];
+//! Teacherın seçtiği sınıfları çekme
+$selectClasses = $teachers[0]['classid'];
+//!Virgülle ayrılmış classid'leri diziye çevir
+$selectClassesArray = explode(",", $selectClasses);
 /* echo "<pre>";
 print_r($teachers);
 die(); */
@@ -38,6 +46,12 @@ if (isset($_POST['form_submit'])) {
     $address = $_POST['form_adress'];
     $phoneNumber = $_POST['form_phonenumber'];
     $birthDate = $_POST['form_birthdate'];
+    //?Sınıfları forech ile alma
+    $selectClasses = $_POST['class'];
+    $teacherClass = "";
+    foreach ($selectClasses as $selectClass) {
+        $teacherClass .= $selectClass . ",";
+    }
     //!İmage elemanları
     $img_name = $_FILES['form_image']['name'];
     $img_size = $_FILES['form_image']['size'];
@@ -67,7 +81,7 @@ if (isset($_POST['form_submit'])) {
                 //?unlink dosya silmek için kullanılır
                 unlink('teacher_images/' . $old_img_name);
                 //!Foto güncellediyse veritabanına yeni fotoğraf adını kaydet
-                $sql = "UPDATE teachers SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,userimg = '$new_img_name' WHERE userid = :idTeacher";
+                $sql = "UPDATE teachers SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,userimg = '$new_img_name',classid='$teacherClass' WHERE userid = :idTeacher";
 
             } else {
                 $errors[] = "You can't upload files of this type";
@@ -75,7 +89,7 @@ if (isset($_POST['form_submit'])) {
         }
     } else {
         //!Foto güncellemediysen eski fotoğrafı kullan
-        $sql = "UPDATE teachers SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate WHERE userid = :idTeacher";
+        $sql = "UPDATE teachers SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,classid='$teacherClass' WHERE userid = :idTeacher";
     }
     //! Hata yoksa veritabanına kaydet
     if (empty($errors)) {
@@ -150,6 +164,32 @@ if (!empty($errors)) {
   <label class="form-check-label" >
   Female
   </label>
+</div>
+<div class="form-floating mb-3">
+  <div class="row">
+  <?php
+$SORGU = $DB->prepare("SELECT * FROM classes");
+$SORGU->execute();
+$classes = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* echo '<pre>';
+print_r($classes);
+die(); */
+//! chatgpt ile sınıfları listeleme
+echo '<label class="mb-1">Select Classes</label>';
+foreach ($classes as $class) {
+    //! classes tablosunda yer alan classidler ile seçilen classidleri eşleşenler varsa checked yap
+    $classId = $class['classid'];
+    $isChecked = in_array($classId, $selectClassesArray); // Seçili olup olmadığını kontrol et
+
+    echo '<div class="col-md-3">';
+    echo '<div class="form-check form-check-inline">';
+    echo '<input class="form-check-input" type="checkbox" name="class[]" value="' . $classId . '" id="check-' . $classId . '" ' . ($isChecked ? 'checked' : '') . '>';
+    echo '<label class="form-check-label" for="check-' . $classId . '">' . $class['classname'] . '</label>';
+    echo '</div>';
+    echo '</div>';
+}
+?>
+</div>
 </div>
 
 <label>Teacher User Image</label>
