@@ -28,6 +28,9 @@ require 'db.php';
     } else if ($_SESSION['role'] == 3) {
         $SORGU = $DB->prepare("SELECT * FROM teachers WHERE userid = :idUser");
         $imageFolder = 'teacher_images';
+    } else if ($_SESSION['role'] == 4) {
+        $SORGU = $DB->prepare("SELECT * FROM students WHERE userid = :idUser");
+        $imageFolder = 'student_images';
     }
     $SORGU->bindParam(':idUser', $_SESSION['id']);
     $SORGU->execute();

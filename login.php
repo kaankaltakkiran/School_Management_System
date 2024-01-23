@@ -50,8 +50,11 @@ if (isset($_POST['form_email'])) {
             //! user rol 3 ise teacher tablosundan sorgula
         } else if ($rol == 3) {
             $sql = "SELECT * FROM teachers  WHERE useremail = :form_email";
+        } else if ($rol == 4) {
+            $sql = "SELECT * FROM students  WHERE useremail = :form_email";
 
         }
+
         $SORGU = $DB->prepare($sql);
 
         $SORGU->bindParam(':form_email', $useremail);
@@ -124,6 +127,7 @@ if (!empty($errors)) {
     <option value="1">Admin</option>
     <option value="2">Register Unit</option>
     <option value="3">Teacher</option>
+    <option value="4">Student</option>
   </select>
   <label for="floatingSelect">Login Type</label>
 </div>
