@@ -12,14 +12,14 @@ $classİd = $_GET['idClass'];
 $SORGU = $DB->prepare("SELECT * FROM students where classid = :idClass");
 $SORGU->bindParam(':idClass', $classİd);
 $SORGU->execute();
-$classes = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-//echo '<pre>'; print_r($classes);
+$students = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+//echo '<pre>'; print_r($students);
 ?>
     <div class="container">
       <div class="row mt-3">
       <div class='row justify-content-center text-center'>
         <div class="col-sm-4 col-md-6 col-lg-8">
-  <h1 class='alert alert-primary mt-2'><?php echo $classes[0]['classname'] ?> Class </h1>
+  <h1 class='alert alert-primary mt-2'><?php echo $students[0]['classname'] ?> Class </h1>
   </div>
   <div class='row text-end'>
   <p>
@@ -43,29 +43,29 @@ $classes = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 
     <?php
 
-if (isset($_GET['removeClassid'])) {
+if (isset($_GET['removestudentid'])) {
     require 'db.php';
-    $remove_id = $_GET['removeClassid'];
+    $remove_id = $_GET['removestudentid'];
 
-    $sql = "DELETE FROM classes WHERE classid = :removeClassid";
+    $sql = "DELETE FROM students WHERE userid = :removestudentid";
     $SORGU = $DB->prepare($sql);
 
-    $SORGU->bindParam(':removeClassid', $remove_id);
+    $SORGU->bindParam(':removestudentid', $remove_id);
 
     $SORGU->execute();
     echo "<script>
-alert('Class has been deleted. You are redirected to the Class List page...!');
-window.location.href = 'list.class.php';
+alert('Student has been deleted. You are redirected to the Student List page...!');
+window.location.href = 'list.student.php';
 </script>";
 }
 
-foreach ($classes as $class) {
+foreach ($students as $student) {
     echo "
     <tr>
-      <th>{$class['classid']}</th>
-      <td>{$class['username']}</td>
-      <td><a href='update.student.php?idStudent={$class['userid']}' class='btn btn-success btn-sm'>Update</a></td>
-      <td><a href='list.class.php?removeClassid={$class['classid']}'onclick='return confirm(\"Are you sure you want to delete {$class['classname']}?\")' class='btn btn-danger btn-sm'>Delete</a></td>
+      <th>{$student['classid']}</th>
+      <td>{$student['username']}</td>
+      <td><a href='update.student.php?idStudent={$student['userid']}' class='btn btn-success btn-sm'>Update</a></td>
+      <td><a href='list.class.student.php?removestudentid={$student['userid']}'onclick='return confirm(\"Are you sure you want to delete {$student['username']}?\")' class='btn btn-danger btn-sm'>Delete</a></td>
    </tr>
   ";
 }
