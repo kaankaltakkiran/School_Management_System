@@ -64,7 +64,7 @@ foreach ($classes as $class) {
     <tr>
       <th>{$class['classid']}</th>
       <td>{$class['username']}</td>
-      <td><a href='' class='btn btn-success btn-sm'>Update</a></td>
+      <td><a href='update.student.php?idStudent={$class['userid']}' class='btn btn-success btn-sm'>Update</a></td>
       <td><a href='list.class.php?removeClassid={$class['classid']}'onclick='return confirm(\"Are you sure you want to delete {$class['classname']}?\")' class='btn btn-danger btn-sm'>Delete</a></td>
    </tr>
   ";
