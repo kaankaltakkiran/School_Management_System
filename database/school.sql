@@ -72,6 +72,30 @@ INSERT INTO `registerunits` (`userid`, `username`, `useremail`, `userpassword`, 
 (1,	'Kaan Kaltakkıran',	'kaan_fb_aslan@hotmail.com',	'$2y$10$yQMIEbk4WZVdkB9ja8LiFOdr211UwLn4v9L7mjmwMdPxy.z/LhtN.',	'M',	2,	'2024-01-20 19:14:21',	'Address 1',	'05076600884',	'1999-12-23',	'IMG-65abf15d153db8.41188102.jpg'),
 (2,	'Ahmet Yıldız',	'ahmet@gmail.com',	'$2y$10$g0CiMeLld8MDdKI/9f1/wuj5fADvv24c1975xDNpZdDKKi0Jq9Uvm',	'M',	2,	'2024-01-20 19:14:40',	'CUMHURİYET MAH. NECİP FAZIL KISAKÜREK SK. BAHAR APT NO: 18  İÇ KAPI NO: 25',	'05076600889',	'2000-01-01',	'IMG-65abf170824ad6.64819139.png');
 
+DROP TABLE IF EXISTS `students`;
+CREATE TABLE `students` (
+  `userid` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `useremail` varchar(50) NOT NULL,
+  `userpassword` varchar(255) NOT NULL,
+  `usergender` char(1) NOT NULL,
+  `useraddress` varchar(100) NOT NULL,
+  `phonenumber` varchar(50) NOT NULL,
+  `roleuser` int(11) NOT NULL DEFAULT 4,
+  `createdate` datetime NOT NULL DEFAULT current_timestamp(),
+  `classid` int(11) NOT NULL,
+  `classname` varchar(4) NOT NULL,
+  `birthdate` date NOT NULL,
+  `userimg` varchar(255) NOT NULL,
+  `parentname` varchar(50) NOT NULL,
+  `parentnumber` varchar(50) NOT NULL,
+  PRIMARY KEY (`userid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+
+INSERT INTO `students` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `useraddress`, `phonenumber`, `roleuser`, `createdate`, `classid`, `classname`, `birthdate`, `userimg`, `parentname`, `parentnumber`) VALUES
+(1,	'Ali Yılmaz',	'ali@gmail.com',	'$2y$10$hqp7Uj4o1X7dQsl3/EGVJOjQ92xuKen33gTNWk/pRj2YyDfjI5p9O',	'M',	'Address 1',	'78678742788',	4,	'2024-01-23 17:46:12',	1,	'9/A',	'2000-01-01',	'IMG-65afd13469ae89.24287797.jpg',	'Ali Father',	'78678742788'),
+(2,	'Selin Yıldız',	'selin@gmail.com',	'$2y$10$pLZRezsCikbDVi66xXzD8.rs1O9Sf44DvZ6oCYbq941BdyV9tW22K',	'F',	'Address 2',	'46545867687',	4,	'2024-01-23 17:46:54',	16,	'12/D',	'1997-01-01',	'IMG-65afd15e67c850.43692509.jpg',	'Selin Mother',	'78687876768');
+
 DROP TABLE IF EXISTS `teachers`;
 CREATE TABLE `teachers` (
   `userid` int(11) NOT NULL AUTO_INCREMENT,
@@ -93,4 +117,4 @@ INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `user
 (1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$pZ4F5/8a3shC/HxI5nLQDeduSdbFB1Dfsoe/qyHtStYRDhx6dGhae',	'M',	3,	'2024-01-23 15:28:50',	'1,6,11,16,',	'Address 1',	'05076600889',	'1985-10-01',	'IMG-65afb1024f7534.43710997.png'),
 (2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$wqwqmpiwprcN3SaejcbKOOFbbzIK.tjxDWnb/7tb0eGjqny1XLRm.',	'F',	3,	'2024-01-23 15:29:19',	'1,2,5,12,',	'CUMHURİYET MAH. NECİP FAZIL KISAKÜREK SK. BAHAR APT NO: 18  İÇ KAPI NO: 25',	'05076600884',	'1986-12-01',	'IMG-65afb145b073b5.03375533.png');
 
--- 2024-01-23 12:44:53
+-- 2024-01-23 17:16:28
