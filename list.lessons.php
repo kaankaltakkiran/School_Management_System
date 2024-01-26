@@ -41,19 +41,19 @@ $SORGU = $DB->prepare("SELECT * FROM lessons LIMIT 16");
 $SORGU->execute();
 $lessons = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //echo '<pre>'; print_r($lessons);
-if (isset($_GET['removeClassid'])) {
+if (isset($_GET['removeLessonid'])) {
     require 'db.php';
-    $remove_id = $_GET['removeClassid'];
+    $remove_id = $_GET['removeLessonid'];
 
-    $sql = "DELETE FROM classes WHERE classid = :removeClassid";
+    $sql = "DELETE FROM lessons WHERE lessonid = :removeLessonid";
     $SORGU = $DB->prepare($sql);
 
-    $SORGU->bindParam(':removeClassid', $remove_id);
+    $SORGU->bindParam(':removeLessonid', $remove_id);
 
     $SORGU->execute();
     echo "<script>
-alert('Class has been deleted. You are redirected to the Class List page...!');
-window.location.href = 'list.class.php';
+alert('Lesson has been deleted. You are redirected to the Lesson List page...!');
+window.location.href = 'list.lessons.php';
 </script>";
 }
 
@@ -64,7 +64,7 @@ foreach ($lessons as $lesson) {
       <td>{$lesson['lessonname']}</td>
       <td>{$lesson['createdate']}</td>
       <td><a href='update.lesson.php?lessonid={$lesson['lessonid']}' class='btn btn-success btn-sm'>Update</a></td>
-      <td><a href='list.class.php?removeClassid={$lesson['lessonid']}'onclick='return confirm(\"Are you sure you want to delete {$lesson['lessonname']}?\")' class='btn btn-danger btn-sm'>Delete</a></td>
+      <td><a href='list.lessons.php?removeLessonid={$lesson['lessonid']}'onclick='return confirm(\"Are you sure you want to delete {$lesson['lessonname']}?\")' class='btn btn-danger btn-sm'>Delete</a></td>
    </tr>
   ";
 }
