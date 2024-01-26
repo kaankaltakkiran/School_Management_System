@@ -55,7 +55,7 @@ INSERT INTO `classes` (`classid`, `classnumber`, `classletter`, `classname`, `cr
 DROP TABLE IF EXISTS `lessons`;
 CREATE TABLE `lessons` (
   `lessonid` int(11) NOT NULL AUTO_INCREMENT,
-  `lessonname` varchar(50) NOT NULL,
+  `lessonname` text NOT NULL,
   `createdate` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`lessonid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
@@ -125,11 +125,13 @@ CREATE TABLE `teachers` (
   `phonenumber` char(11) NOT NULL,
   `birthdate` date NOT NULL,
   `userimg` varchar(255) NOT NULL,
+  `lessonid` text NOT NULL,
+  `lessonname` text NOT NULL,
   PRIMARY KEY (`userid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
-INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `roleuser`, `createdate`, `classid`, `useraddress`, `phonenumber`, `birthdate`, `userimg`) VALUES
-(1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$pZ4F5/8a3shC/HxI5nLQDeduSdbFB1Dfsoe/qyHtStYRDhx6dGhae',	'M',	3,	'2024-01-23 15:28:50',	'1,6,11,16,',	'Address 1',	'05076600889',	'1985-10-01',	'IMG-65afb1024f7534.43710997.png'),
-(2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$wqwqmpiwprcN3SaejcbKOOFbbzIK.tjxDWnb/7tb0eGjqny1XLRm.',	'F',	3,	'2024-01-23 15:29:19',	'1,2,5,12,',	'CUMHURİYET MAH. NECİP FAZIL KISAKÜREK SK. BAHAR APT NO: 18  İÇ KAPI NO: 25',	'05076600884',	'1986-12-01',	'IMG-65afb145b073b5.03375533.png');
+INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `roleuser`, `createdate`, `classid`, `useraddress`, `phonenumber`, `birthdate`, `userimg`, `lessonid`, `lessonname`) VALUES
+(1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$H9oiDGjofhKbDoI8cPhtqeMjGs0.T6.9JsOIdRhBHsbPO6/OC5X9W',	'M',	3,	'2024-01-26 15:46:56',	'1,5,9,13,',	'CUMHURİYET MAH. NECİP FAZIL KISAKÜREK SK. BAHAR APT NO: 18  İÇ KAPI NO: 25',	'12312312312',	'1975-05-05',	'IMG-65b3a9c047be31.80940556.png',	'1,3,4',	'Math,Turkish,English'),
+(2,	'Selin Yıldız',	'selin@gmail.com',	'$2y$10$CT8SZWNU21HXFBGld.WCPOWZ5GAsg3cmIJ5JXjaD35eLc9Qq20tDS',	'F',	3,	'2024-01-26 15:47:23',	'1,6,11,16,',	'Address 1',	'12331223123',	'1985-01-01',	'IMG-65b3a9db9d2836.70652098.png',	'5',	'Science');
 
--- 2024-01-26 09:10:26
+-- 2024-01-26 12:48:44
