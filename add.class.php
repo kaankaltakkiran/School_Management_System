@@ -1,6 +1,6 @@
 <?php
 @session_start();
-$activeTitle = "Add Admin";
+$activeTitle = "Add Class";
 require 'up.html.php';
 ?>
 <?php
