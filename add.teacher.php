@@ -20,6 +20,18 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
     foreach ($selectClasses as $selectClass) {
         $teacherClass .= $selectClass . ",";
     }
+    //!Chatgpt çözümü
+    $lessonIds = array(); // lessonid'leri tutacak dizi
+    $lessonNames = array(); // lessonname'leri tutacak dizi
+
+    foreach ($_POST['lessons'] as $selectedLesson) {
+        $selectedValues = explode('-', $selectedLesson);
+        $lessonIds[] = $selectedValues[0];
+        $lessonNames[] = $selectedValues[1];
+    }
+    // Virgülle ayrılmış bir şekilde lessonid ve lessonname'leri oluştur
+    $teacherLessonid = implode(',', $lessonIds);
+    $teacherLessonName = implode(',', $lessonNames);
 
     $password = $_POST['form_password'];
 /*  Şifrele hashleme */
@@ -63,7 +75,7 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 move_uploaded_file($tmp_name, $img_upload_path);
 
                 // Insert into Database
-                $sql = "INSERT INTO teachers (username,useremail,usergender,useraddress,phonenumber,birthdate,userpassword,userimg,classid) VALUES (:form_username,:form_email,:form_gender,:form_adress,:form_phonenumber,:form_birthdate,'$password','$new_img_name','$teacherClass')";
+                $sql = "INSERT INTO teachers (username,useremail,usergender,useraddress,phonenumber,birthdate,userpassword,userimg,classid,lessonid,lessonname) VALUES (:form_username,:form_email,:form_gender,:form_adress,:form_phonenumber,:form_birthdate,'$password','$new_img_name','$teacherClass',:lessonid,:lessonname)";
                 $SORGU = $DB->prepare($sql);
 
                 $SORGU->bindParam(':form_username', $name);
@@ -72,6 +84,8 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 $SORGU->bindParam(':form_adress', $address);
                 $SORGU->bindParam(':form_phonenumber', $phoneNumber);
                 $SORGU->bindParam(':form_birthdate', $birthDate);
+                $SORGU->bindParam(':lessonid', $teacherLessonid);
+                $SORGU->bindParam(':lessonname', $teacherLessonName);
 
                 $SORGU->execute();
                 $approves[] = "Teacher User Added Successfully...";
@@ -152,6 +166,32 @@ foreach ($classes as $class) {
     echo '<div class="form-check form-check-inline">';
     echo '<input class="form-check-input" type="checkbox" name="class[]" value="' . $class['classid'] . '" id="check-' . $class['classid'] . '">';
     echo '<label class="form-check-label" for="check-' . $class['classid'] . '">' . $class['classname'] . '</label>';
+    echo '</div>';
+    echo '</div>';
+}
+?>
+</div>
+</div>
+<?php
+require_once 'db.php';
+
+$SORGU = $DB->prepare("SELECT * FROM lessons");
+$SORGU->execute();
+$lessons = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+//echo '<pre>'; print_r($lessons);
+
+?>
+<div class="form-floating mb-3">
+  <div class="row">
+  <?php
+//! chatgpt ile sınıfları listeleme
+echo '<label class="mb-1">Select Lessons</label>';
+foreach ($lessons as $lesson) {
+    $checkbox_value = $lesson['lessonid'] . '-' . $lesson['lessonname'];
+    echo '<div class="col-md-3">';
+    echo '<div class="form-check form-check-inline">';
+    echo '<input class="form-check-input" type="checkbox" name="lessons[]" value="' . $checkbox_value . '" id="check-' . $lesson['lessonid'] . '">';
+    echo '<label class="form-check-label" for="check-' . $lesson['lessonid'] . '">' . $lesson['lessonname'] . '</label>';
     echo '</div>';
     echo '</div>';
 }
