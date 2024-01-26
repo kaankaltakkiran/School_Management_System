@@ -52,6 +52,21 @@ INSERT INTO `classes` (`classid`, `classnumber`, `classletter`, `classname`, `cr
 (15,	'12',	'C',	'12/C',	'2024-01-22 21:17:17'),
 (16,	'12',	'D',	'12/D',	'2024-01-22 21:17:20');
 
+DROP TABLE IF EXISTS `lessons`;
+CREATE TABLE `lessons` (
+  `lessonid` int(11) NOT NULL AUTO_INCREMENT,
+  `lessonname` varchar(50) NOT NULL,
+  `createdate` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`lessonid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+
+INSERT INTO `lessons` (`lessonid`, `lessonname`, `createdate`) VALUES
+(1,	'Math',	'2024-01-26 12:06:28'),
+(2,	'Spor',	'2024-01-26 12:07:34'),
+(3,	'Turkish',	'2024-01-26 12:08:06'),
+(4,	'English',	'2024-01-26 12:08:08'),
+(5,	'Science',	'2024-01-26 12:08:33');
+
 DROP TABLE IF EXISTS `registerunits`;
 CREATE TABLE `registerunits` (
   `userid` int(11) NOT NULL AUTO_INCREMENT,
@@ -117,4 +132,4 @@ INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `user
 (1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$pZ4F5/8a3shC/HxI5nLQDeduSdbFB1Dfsoe/qyHtStYRDhx6dGhae',	'M',	3,	'2024-01-23 15:28:50',	'1,6,11,16,',	'Address 1',	'05076600889',	'1985-10-01',	'IMG-65afb1024f7534.43710997.png'),
 (2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$wqwqmpiwprcN3SaejcbKOOFbbzIK.tjxDWnb/7tb0eGjqny1XLRm.',	'F',	3,	'2024-01-23 15:29:19',	'1,2,5,12,',	'CUMHURİYET MAH. NECİP FAZIL KISAKÜREK SK. BAHAR APT NO: 18  İÇ KAPI NO: 25',	'05076600884',	'1986-12-01',	'IMG-65afb145b073b5.03375533.png');
 
--- 2024-01-23 17:16:28
+-- 2024-01-26 09:10:26
