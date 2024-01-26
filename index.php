@@ -114,7 +114,28 @@ require 'up.html.php';
             </div>
           </div>
       </div>
-    </div>
+      <div class="container">
+        <div class="row justify-content-start mt-3">
+      <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card h-100 " style="width: 18rem;">
+            <img src="./public/img/books.jpg" class="card-img-top" alt="lesson img">
+            <div class="card-body">
+              <h5 class="card-title">Add lesson</h5>
+              <p class="card-text">Register Unit Adds lesson</p>
+              <div class="d-flex justify-content-between">
+          <a href="add.lesson.php" class="btn me-2  btn-danger mt-5">Add lesson
+            <i class="bi bi-send-fill"></i>
+          </a>
+          <a href="list.lessons.php" class="btn btn-warning mt-5">List lesson
+            <i class="bi bi-send-fill"></i>
+          </a>
+        </div>
+            </div>
+          </div>
+      </div>
+      </div>
+      </div>
+      </div>
       <?php }?>
 </div>
 <?php require 'down.html.php';?>
