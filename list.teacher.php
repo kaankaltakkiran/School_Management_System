@@ -23,10 +23,11 @@ require 'up.html.php';
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
-      <th>User Id</th>
-      <th>Register Unit Image</th>
-      <th>User Name</th>
+      <th>Teacher Id</th>
+      <th>Teacher Image</th>
+      <th>Teacher Name</th>
       <th>Email</th>
+      <th>Lessons</th>
       <th>Gender</th>
       <th>Create Date</th>
       <th>Address</th>
@@ -74,6 +75,7 @@ foreach ($teachers as $teacher) {
       <td><img src='teacher_images/{$teacher['userimg']}' class='rounded-circle' width='100' height='100'></td>
       <td>{$teacher['username']}</td>
       <td>{$teacher['useremail']}</td>
+      <td>{$teacher['lessonname']}</td>
       <td>$gender</td>
       <td>{$teacher['createdate']}</td>
       <td>{$teacher['useraddress']}</td>
