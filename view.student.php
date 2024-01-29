@@ -56,11 +56,11 @@ $gender = ($gender == 'M') ? 'Male' : 'Famale';
       <?php echo $students[0]['classname'] ?>
     </li>
     <li class="list-group-item">
-      <span class="text-danger fw-bolder">Class:</span>
-      <?php echo $students[0]['phonenumber'] ?>
+      <span class="text-danger fw-bolder">Lessons:</span>
+      <?php echo $students[0]['lessonname'] ?>
     </li>
     <li class="list-group-item">
-      <span class="text-danger fw-bolder">Class:</span>
+      <span class="text-danger fw-bolder">Birthdate:</span>
       <?php echo $students[0]['birthdate'] ?>
     </li>
     <li class="list-group-item">
@@ -68,7 +68,7 @@ $gender = ($gender == 'M') ? 'Male' : 'Famale';
       <?php echo $students[0]['parentname'] ?>
     </li>
     <li class="list-group-item">
-      <span class="text-danger fw-bolder">Class:</span>
+      <span class="text-danger fw-bolder">Parent Number:</span>
       <?php echo $students[0]['parentnumber'] ?>
     </li>
   </ul>
