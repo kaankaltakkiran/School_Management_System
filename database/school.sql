@@ -134,4 +134,4 @@ INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `user
 (1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$H9oiDGjofhKbDoI8cPhtqeMjGs0.T6.9JsOIdRhBHsbPO6/OC5X9W',	'M',	3,	'2024-01-26 15:46:56',	'1,5,9,13,',	'CUMHURİYET MAH. NECİP FAZIL KISAKÜREK SK. BAHAR APT NO: 18  İÇ KAPI NO: 25',	'12312312312',	'1975-05-05',	'IMG-65b3a9c047be31.80940556.png',	'1,3,4',	'Math,Turkish,English'),
 (2,	'Selin Yıldız',	'selin@gmail.com',	'$2y$10$CT8SZWNU21HXFBGld.WCPOWZ5GAsg3cmIJ5JXjaD35eLc9Qq20tDS',	'F',	3,	'2024-01-26 15:47:23',	'1,6,11,16,',	'Address 1',	'12331223123',	'1985-01-01',	'IMG-65b3a9db9d2836.70652098.png',	'5',	'Science');
 
--- 2024-01-26 12:48:44
+-- 2024-01-29 11:16:33
