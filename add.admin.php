@@ -13,6 +13,8 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
     $email = $_POST['form_email'];
     $gender = $_POST['form_gender'];
     $password = $_POST['form_password'];
+    $addedAdminid = $_SESSION['id'];
+    $addedAdminName = $_SESSION['userName'];
     /*  Şifrele hashleme */
     $password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -54,12 +56,14 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 move_uploaded_file($tmp_name, $img_upload_path);
 
                 // Insert into Database
-                $sql = "INSERT INTO admins (username,useremail,usergender,userpassword,userimg) VALUES (:form_username,:form_email,:form_gender,'$password','$new_img_name')";
+                $sql = "INSERT INTO admins (username,useremail,usergender,userpassword,userimg,adedadminid,adedadminname) VALUES (:form_username,:form_email,:form_gender,'$password','$new_img_name',:adedid,:adedname)";
                 $SORGU = $DB->prepare($sql);
 
                 $SORGU->bindParam(':form_username', $name);
                 $SORGU->bindParam(':form_email', $email);
                 $SORGU->bindParam(':form_gender', $gender);
+                $SORGU->bindParam(':adedid', $addedAdminid);
+                $SORGU->bindParam(':adedname', $addedAdminName);
 
                 $SORGU->execute();
                 $approves[] = "Admin Added Successfully...";

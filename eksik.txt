@@ -9,3 +9,4 @@ sınıf olayında implode chatgpt
 id silmedeki get istekleri daha anlamlı yap
 update veya ekeleme yaparken aynı emailden kişi varsa ekleme veya update yapaamsın
 işlem yapan id
+dbdeki eklyen id ve name bilgileri ekle
