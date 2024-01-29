@@ -32,6 +32,10 @@ $selectGender = $students[0]['usergender'];
 $selectClasses = $students[0]['classid'];
 //!Virgülle ayrılmış classid'leri diziye çevir
 $selectClassesArray = explode(",", $selectClasses);
+//! Student seçtiği dersleri çekme
+$selectLessons = $students[0]['lessonid'];
+//!Virgülle ayrılmış dersleri diziye çevir
+$selectLesonsArray = explode(",", $selectLessons);
 /* echo "<pre>";
 print_r($students);
 die(); */
@@ -59,6 +63,20 @@ if (isset($_POST['form_submit'])) {
     // Virgülle ayrılmış bir şekilde lessonid ve lessonname'leri oluştur
     $studentClassid = implode(',', $classIds);
     $studentClassName = implode(',', $classNames);
+
+    //!Chatgpt çözümü
+    $lessonIds = array(); // lessonid'leri tutacak dizi
+    $lessonNames = array(); // lessonname'leri tutacak dizi
+
+    foreach ($_POST['lessons'] as $selectedLesson) {
+        $selectedValues = explode('-', $selectedLesson);
+        $lessonIds[] = $selectedValues[0];
+        $lessonNames[] = $selectedValues[1];
+    }
+
+    // Virgülle ayrılmış bir şekilde lessonid ve lessonname'leri oluştur
+    $studentLessonid = implode(',', $lessonIds);
+    $studentLessonName = implode(',', $lessonNames);
 
     //!İmage elemanları
     $img_name = $_FILES['form_image']['name'];
@@ -89,7 +107,7 @@ if (isset($_POST['form_submit'])) {
                 //?unlink dosya silmek için kullanılır
                 unlink('teacher_images/' . $old_img_name);
                 //!Foto güncellediyse veritabanına yeni fotoğraf adını kaydet
-                $sql = "UPDATE students SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,userimg = '$new_img_name',parentname=:form_parentname,parentnumber=:form_parentnumber,classid=:classid,classname=:classname WHERE userid = :idStudent";
+                $sql = "UPDATE students SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,userimg = '$new_img_name',parentname=:form_parentname,parentnumber=:form_parentnumber,classid=:classid,classname=:classname,lessonid = :lessonid, lessonname = :lessonname WHERE userid = :idStudent";
 
             } else {
                 $errors[] = "You can't upload files of this type";
@@ -97,7 +115,7 @@ if (isset($_POST['form_submit'])) {
         }
     } else {
         //!Foto güncellemediysen eski fotoğrafı kullan
-        $sql = "UPDATE students SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,parentname=:form_parentname,parentnumber=:form_parentnumber,classid=:classid,classname=:classname WHERE userid = :idStudent";
+        $sql = "UPDATE students SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,parentname=:form_parentname,parentnumber=:form_parentnumber,classid=:classid,classname=:classname,lessonid = :lessonid, lessonname = :lessonname WHERE userid = :idStudent";
     }
     //! Hata yoksa veritabanına kaydet
     if (empty($errors)) {
@@ -112,6 +130,8 @@ if (isset($_POST['form_submit'])) {
         $SORGU->bindParam(':form_parentnumber', $parentNumber);
         $SORGU->bindParam(':classid', $studentClassid);
         $SORGU->bindParam(':classname', $studentClassName);
+        $SORGU->bindParam(':lessonid', $studentLessonid);
+        $SORGU->bindParam(':lessonname', $studentLessonName);
 
         $SORGU->bindParam(':idStudent', $id);
         $SORGU->execute();
@@ -188,7 +208,7 @@ $classes = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 
 // Seçili sınıfları al
 
-echo '<label class="mb-1">Select Classes</label>';
+echo '<label class="mb-1">Selected Classes</label>';
 
 // Seçili checkbox sayısını say
 $selectedCount = count($selectClassesArray);
@@ -237,10 +257,37 @@ echo '<script>
 // Mesajı göster
 echo '<span id="checkbox-message" class="text-danger mt-3 fw-bold ">' . (($selectedCount === 1) ? "One class can be selected" : "") . '</span>';
 ?>
-
-
 </div>
 </div>
+<div class="form-floating mb-3">
+  <div class="row">
+  <?php
+$SORGU = $DB->prepare("SELECT * FROM lessons");
+$SORGU->execute();
+$lessons = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* echo '<pre>';
+print_r($lessons);
+die(); */
+//! chatgpt ile dersleri listeleme
+echo '<label class="mb-1">Selected Lessons</label>';
+foreach ($lessons as $lesson) {
+    //! lessons tablosunda yer alan lessonidler ile seçilen lessonid eşleşenler varsa checked yap
+    $lessonid = $lesson['lessonid'];
+    $isChecked = in_array($lessonid, $selectLesonsArray); // Seçili olup olmadığını kontrol et
+    //! Checkbox value değerini lessonid ve lessonname değerlerini göndermek için birleştir
+    $checkbox_value = $lesson['lessonid'] . '-' . $lesson['lessonname'];
+
+    echo '<div class="col-md-3">';
+    echo '<div class="form-check form-check-inline">';
+    echo '<input class="form-check-input" type="checkbox" name="lessons[]" value="' . $checkbox_value . '" id="check-' . $lessonid . '" ' . ($isChecked ? 'checked' : '') . '>';
+    echo '<label class="form-check-label" for="check-' . $lessonid . '">' . $lesson['lessonname'] . '</label>';
+    echo '</div>';
+    echo '</div>';
+}
+?>
+</div>
+</div>
+
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" value="<?php echo $students[0]['parentname'] ?>" name="form_parentname" >
   <label>Parent Name</label>
