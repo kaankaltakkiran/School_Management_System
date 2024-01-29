@@ -23,6 +23,20 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
     $phoneNumber = $_POST['form_phonenumber'];
     $birthDate = $_POST['form_birthdate'];
 
+    //!Chatgpt çözümü
+    $lessonIds = array(); // lessonid'leri tutacak dizi
+    $lessonNames = array(); // lessonname'leri tutacak dizi
+
+    foreach ($_POST['lessons'] as $selectedLesson) {
+        $selectedValues = explode('-', $selectedLesson);
+        $lessonIds[] = $selectedValues[0];
+        $lessonNames[] = $selectedValues[1];
+    }
+
+    // Virgülle ayrılmış bir şekilde lessonid ve lessonname'leri oluştur
+    $studentLessonid = implode(',', $lessonIds);
+    $studentLessonName = implode(',', $lessonNames);
+
     $password = $_POST['form_password'];
 /*  Şifrele hashleme */
     $password = password_hash($password, PASSWORD_DEFAULT);
@@ -65,7 +79,7 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 move_uploaded_file($tmp_name, $img_upload_path);
 
                 // Insert into Database
-                $sql = "INSERT INTO students(username,useremail,usergender,useraddress,phonenumber,birthdate,userpassword,userimg,classid,classname,parentname,parentnumber) VALUES (:form_username,:form_email,:form_gender,:form_adress,:form_phonenumber,:form_birthdate,'$password','$new_img_name',:classid,:classname,:form_parentname,:form_parentnumber)";
+                $sql = "INSERT INTO students(username,useremail,usergender,useraddress,phonenumber,birthdate,userpassword,userimg,classid,classname,parentname,parentnumber,lessonid,lessonname) VALUES (:form_username,:form_email,:form_gender,:form_adress,:form_phonenumber,:form_birthdate,'$password','$new_img_name',:classid,:classname,:form_parentname,:form_parentnumber,:lessonid,:lessonname)";
                 $SORGU = $DB->prepare($sql);
                 $SORGU->bindParam(':form_username', $name);
                 $SORGU->bindParam(':form_email', $email);
@@ -77,6 +91,8 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 $SORGU->bindParam(':classname', $selectedClassName);
                 $SORGU->bindParam(':form_parentname', $parentName);
                 $SORGU->bindParam(':form_parentnumber', $parentNumber);
+                $SORGU->bindParam(':lessonid', $studentLessonid);
+                $SORGU->bindParam(':lessonname', $studentLessonName);
 
                 $SORGU->execute();
                 $approves[] = "Student User Added Successfully...";
@@ -138,6 +154,10 @@ if (!empty($approves)) {
   <input type="email" name="form_email"class="form-control"required>
   <label>Email</label>
 </div>
+<div class="input-group mb-3  input-group-lg">
+  <input type="password"  name="form_password" class="form-control" id="password" placeholder="Password"required>
+  <span class="input-group-text bg-transparent"><i id="togglePassword" class="bi bi-eye-slash"></i></span>
+</div>
 <?php
 require_once 'db.php';
 $sql = "SELECT classid,classname FROM classes";
@@ -162,9 +182,31 @@ foreach ($classes as $class) {
       <?php echo $optionClasses; ?>
     </select>
 </div>
-<div class="input-group mb-3  input-group-lg">
-  <input type="password"  name="form_password" class="form-control" id="password" placeholder="Password"required>
-  <span class="input-group-text bg-transparent"><i id="togglePassword" class="bi bi-eye-slash"></i></span>
+<?php
+require_once 'db.php';
+
+$SORGU = $DB->prepare("SELECT * FROM lessons");
+$SORGU->execute();
+$lessons = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+//echo '<pre>'; print_r($lessons);
+
+?>
+<div class="form-floating mb-3">
+  <div class="row">
+  <?php
+//! chatgpt ile sınıfları listeleme
+echo '<label class="mb-1">Select Lessons</label>';
+foreach ($lessons as $lesson) {
+    $checkbox_value = $lesson['lessonid'] . '-' . $lesson['lessonname'];
+    echo '<div class="col-md-3">';
+    echo '<div class="form-check form-check-inline">';
+    echo '<input class="form-check-input" type="checkbox" name="lessons[]" value="' . $checkbox_value . '" id="check-' . $lesson['lessonid'] . '">';
+    echo '<label class="form-check-label" for="check-' . $lesson['lessonid'] . '">' . $lesson['lessonname'] . '</label>';
+    echo '</div>';
+    echo '</div>';
+}
+?>
+</div>
 </div>
 <div class="form-floating mb-3">
   <textarea class="form-control text-break" style="height: 100px" placeholder="Adress" id="floatingTextarea"name="form_adress"  required></textarea>
