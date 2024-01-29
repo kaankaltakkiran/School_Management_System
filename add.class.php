@@ -15,6 +15,8 @@ if (isset($_POST['form_classnumber'])) {
     require_once 'db.php';
     $classNumber = $_POST['form_classnumber'];
     $classLetter = $_POST['form_classletter'];
+    $addedUnitid = $_SESSION['id'];
+    $addedUnitName = $_SESSION['userName'];
 
     //!Sınıf Adı Birleştirme
     $className = strtoupper($classNumber . "/" . $classLetter);
@@ -35,11 +37,13 @@ if (isset($_POST['form_classnumber'])) {
         //!Eğer aynı isimde sınıf yoksa kaydet
     } else {
         // Insert into Database
-        $sql = "INSERT INTO classes (classnumber,classletter,classname) VALUES (:form_classnumber,:form_classletter,:classname)";
+        $sql = "INSERT INTO classes (classnumber,classletter,classname,addedunitid,addedunitname) VALUES (:form_classnumber,:form_classletter,:classname,:unitid,:unitname)";
         $SORGU = $DB->prepare($sql);
         $SORGU->bindParam(':form_classnumber', $classNumber);
         $SORGU->bindParam(':form_classletter', $classLetter);
         $SORGU->bindParam(':classname', $className);
+        $SORGU->bindParam(':unitid', $addedUnitid);
+        $SORGU->bindParam(':unitname', $addedUnitName);
 
         $SORGU->execute();
         $approves[] = "Class Added Successfully...";
