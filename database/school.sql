@@ -104,12 +104,14 @@ CREATE TABLE `students` (
   `userimg` varchar(255) NOT NULL,
   `parentname` varchar(50) NOT NULL,
   `parentnumber` varchar(50) NOT NULL,
+  `lessonid` text NOT NULL,
+  `lessonname` text NOT NULL,
   PRIMARY KEY (`userid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
-INSERT INTO `students` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `useraddress`, `phonenumber`, `roleuser`, `createdate`, `classid`, `classname`, `birthdate`, `userimg`, `parentname`, `parentnumber`) VALUES
-(1,	'Ali Yılmaz',	'ali@gmail.com',	'$2y$10$hqp7Uj4o1X7dQsl3/EGVJOjQ92xuKen33gTNWk/pRj2YyDfjI5p9O',	'M',	'Address 1',	'78678742788',	4,	'2024-01-23 17:46:12',	1,	'9/A',	'2000-01-01',	'IMG-65afd13469ae89.24287797.jpg',	'Ali Father',	'78678742788'),
-(2,	'Selin Yıldız',	'selin@gmail.com',	'$2y$10$pLZRezsCikbDVi66xXzD8.rs1O9Sf44DvZ6oCYbq941BdyV9tW22K',	'F',	'Address 2',	'46545867687',	4,	'2024-01-23 17:46:54',	16,	'12/D',	'1997-01-01',	'IMG-65afd15e67c850.43692509.jpg',	'Selin Mother',	'78687876768');
+INSERT INTO `students` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `useraddress`, `phonenumber`, `roleuser`, `createdate`, `classid`, `classname`, `birthdate`, `userimg`, `parentname`, `parentnumber`, `lessonid`, `lessonname`) VALUES
+(1,	'Ali Yılmaz',	'ali@gmail.com',	'$2y$10$o3SNnBjNH0plMg/fEnNP7uW1OB.0n0KHgr9Jg0HYa7xJUzAM51BZe',	'M',	'Address 1',	'12312312312',	4,	'2024-01-29 14:45:55',	1,	'9/A',	'2000-12-10',	'IMG-65b78ff37a0cb6.96765541.jpg',	'Ali Father',	'56678667867',	'1,2,5',	'Math,Spor,Science'),
+(2,	'Selin Yıldız',	'selin@gmail.com',	'$2y$10$pkW14jp4Rpr/QkUssz2OIeKKQicUnsy3EUKQbD.NQbsdOLjcaZhVG',	'F',	'Address 2',	'23123112323',	4,	'2024-01-29 14:47:43',	16,	'12/D',	'1999-12-23',	'IMG-65b7905f229136.51513945.jpg',	'Selin Mother',	'76546554464',	'1,3,4',	'Math,Turkish,English');
 
 DROP TABLE IF EXISTS `teachers`;
 CREATE TABLE `teachers` (
@@ -134,4 +136,4 @@ INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `user
 (1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$H9oiDGjofhKbDoI8cPhtqeMjGs0.T6.9JsOIdRhBHsbPO6/OC5X9W',	'M',	3,	'2024-01-26 15:46:56',	'1,5,9,13,',	'CUMHURİYET MAH. NECİP FAZIL KISAKÜREK SK. BAHAR APT NO: 18  İÇ KAPI NO: 25',	'12312312312',	'1975-05-05',	'IMG-65b3a9c047be31.80940556.png',	'1,3,4',	'Math,Turkish,English'),
 (2,	'Selin Yıldız',	'selin@gmail.com',	'$2y$10$CT8SZWNU21HXFBGld.WCPOWZ5GAsg3cmIJ5JXjaD35eLc9Qq20tDS',	'F',	3,	'2024-01-26 15:47:23',	'1,6,11,16,',	'Address 1',	'12331223123',	'1985-01-01',	'IMG-65b3a9db9d2836.70652098.png',	'5',	'Science');
 
--- 2024-01-29 11:16:33
+-- 2024-01-29 11:48:38
