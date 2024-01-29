@@ -22,6 +22,8 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
     $address = $_POST['form_adress'];
     $phoneNumber = $_POST['form_phonenumber'];
     $birthDate = $_POST['form_birthdate'];
+    $addedUnitid = $_SESSION['id'];
+    $addedUnitName = $_SESSION['userName'];
 
     //!Chatgpt çözümü
     $lessonIds = array(); // lessonid'leri tutacak dizi
@@ -79,7 +81,7 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 move_uploaded_file($tmp_name, $img_upload_path);
 
                 // Insert into Database
-                $sql = "INSERT INTO students(username,useremail,usergender,useraddress,phonenumber,birthdate,userpassword,userimg,classid,classname,parentname,parentnumber,lessonid,lessonname) VALUES (:form_username,:form_email,:form_gender,:form_adress,:form_phonenumber,:form_birthdate,'$password','$new_img_name',:classid,:classname,:form_parentname,:form_parentnumber,:lessonid,:lessonname)";
+                $sql = "INSERT INTO students(username,useremail,usergender,useraddress,phonenumber,birthdate,userpassword,userimg,classid,classname,parentname,parentnumber,lessonid,lessonname,addedunitid,addedunitname) VALUES (:form_username,:form_email,:form_gender,:form_adress,:form_phonenumber,:form_birthdate,'$password','$new_img_name',:classid,:classname,:form_parentname,:form_parentnumber,:lessonid,:lessonname,:unitid,:unitname)";
                 $SORGU = $DB->prepare($sql);
                 $SORGU->bindParam(':form_username', $name);
                 $SORGU->bindParam(':form_email', $email);
@@ -93,6 +95,8 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 $SORGU->bindParam(':form_parentnumber', $parentNumber);
                 $SORGU->bindParam(':lessonid', $studentLessonid);
                 $SORGU->bindParam(':lessonname', $studentLessonName);
+                $SORGU->bindParam(':unitid', $addedUnitid);
+                $SORGU->bindParam(':unitname', $addedUnitName);
 
                 $SORGU->execute();
                 $approves[] = "Student User Added Successfully...";
