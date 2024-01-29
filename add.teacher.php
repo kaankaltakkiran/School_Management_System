@@ -14,6 +14,8 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
     $address = $_POST['form_adress'];
     $phoneNumber = $_POST['form_phonenumber'];
     $birthDate = $_POST['form_birthdate'];
+    $addedUnitid = $_SESSION['id'];
+    $addedUnitName = $_SESSION['userName'];
     //?Sınıfları forech ile alma
     $selectClasses = $_POST['class'];
     $teacherClass = "";
@@ -75,7 +77,7 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 move_uploaded_file($tmp_name, $img_upload_path);
 
                 // Insert into Database
-                $sql = "INSERT INTO teachers (username,useremail,usergender,useraddress,phonenumber,birthdate,userpassword,userimg,classid,lessonid,lessonname) VALUES (:form_username,:form_email,:form_gender,:form_adress,:form_phonenumber,:form_birthdate,'$password','$new_img_name','$teacherClass',:lessonid,:lessonname)";
+                $sql = "INSERT INTO teachers (username,useremail,usergender,useraddress,phonenumber,birthdate,userpassword,userimg,classid,lessonid,lessonname,addedunitid,addedunitname) VALUES (:form_username,:form_email,:form_gender,:form_adress,:form_phonenumber,:form_birthdate,'$password','$new_img_name','$teacherClass',:lessonid,:lessonname,:unitid,:unitname)";
                 $SORGU = $DB->prepare($sql);
 
                 $SORGU->bindParam(':form_username', $name);
@@ -86,6 +88,8 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 $SORGU->bindParam(':form_birthdate', $birthDate);
                 $SORGU->bindParam(':lessonid', $teacherLessonid);
                 $SORGU->bindParam(':lessonname', $teacherLessonName);
+                $SORGU->bindParam(':unitid', $addedUnitid);
+                $SORGU->bindParam(':unitname', $addedUnitName);
 
                 $SORGU->execute();
                 $approves[] = "Teacher User Added Successfully...";
