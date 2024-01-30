@@ -145,7 +145,7 @@ CREATE TABLE `teachers` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `roleuser`, `createdate`, `classid`, `useraddress`, `phonenumber`, `birthdate`, `userimg`, `lessonid`, `lessonname`, `addedunitid`, `addedunitname`) VALUES
-(1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$hduoWtWzYOBsZkXkYmYU0eF7zA0TheanrjL765jXMLPkVSdOhYG.2',	'M',	3,	'2024-01-30 18:17:08',	'1,',	'Address 1',	'31232312132',	'1975-01-01',	'IMG-65b912f4804c67.48499172.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
-(2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$w3H00uri99J8JoH0hMT.feDwjfRt5nqVq2JFTVm0M8LfTdl.irGCK',	'F',	3,	'2024-01-30 18:17:36',	'2,',	'Address 2',	'23123112323',	'1975-01-01',	'IMG-65b913106c43f4.13168613.png',	'2,3',	'Spor,Turkish',	1,	'Kaan Kaltakkıran');
+(1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$E9ELN20pn/QDGoI26a7Nt.dnAFozCXYlhkxUmjrO8UnKGN5cz4gmK',	'M',	3,	'2024-01-30 20:45:09',	'1,6,11,16,',	'Address 1',	'05076600884',	'1976-01-01',	'IMG-65b935a5d358a2.77186819.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
+(2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$/cnxVraJONa7bqxcHMqwpuDG7eJmVaB.h6FUe4H6oJrZhdcCfkTXO',	'F',	3,	'2024-01-30 20:45:45',	'1,2,15,',	'Adress 2',	'23123112323',	'1974-01-01',	'IMG-65b935c9a1a4f0.28430672.png',	'3',	'Turkish',	1,	'Kaan Kaltakkıran');
 
--- 2024-01-30 17:30:35
+-- 2024-01-30 17:46:30
