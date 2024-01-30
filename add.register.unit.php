@@ -14,8 +14,8 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
     $address = $_POST['form_adress'];
     $phoneNumber = $_POST['form_phonenumber'];
     $birthDate = $_POST['form_birthdate'];
-    $addedUnitid = $_SESSION['id'];
-    $addedUnitName = $_SESSION['userName'];
+    $addedAdminid = $_SESSION['id'];
+    $addedAdminName = $_SESSION['userName'];
 
     $password = $_POST['form_password'];
 /*  Şifrele hashleme */
@@ -59,7 +59,7 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 move_uploaded_file($tmp_name, $img_upload_path);
 
                 // Insert into Database
-                $sql = "INSERT INTO registerunits (username,useremail,usergender,useraddress,phonenumber,birthdate,userpassword,userimg,addedunitid,addedunitname) VALUES (:form_username,:form_email,:form_gender,:form_adress,:form_phonenumber,:form_birthdate,'$password','$new_img_name',:unitid,:unitname)";
+                $sql = "INSERT INTO registerunits (username,useremail,usergender,useraddress,phonenumber,birthdate,userpassword,userimg,adedadminid,adedadminname) VALUES (:form_username,:form_email,:form_gender,:form_adress,:form_phonenumber,:form_birthdate,'$password','$new_img_name',:adedid,:adedname)";
                 $SORGU = $DB->prepare($sql);
 
                 $SORGU->bindParam(':form_username', $name);
@@ -68,8 +68,8 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 $SORGU->bindParam(':form_adress', $address);
                 $SORGU->bindParam(':form_phonenumber', $phoneNumber);
                 $SORGU->bindParam(':form_birthdate', $birthDate);
-                $SORGU->bindParam(':unitid', $addedUnitid);
-                $SORGU->bindParam(':unitname', $addedUnitName);
+                $SORGU->bindParam(':adedid', $addedAdminid);
+                $SORGU->bindParam(':adedname', $addedAdminName);
 
                 $SORGU->execute();
                 $approves[] = "Register Unit User Added Successfully...";

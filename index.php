@@ -42,11 +42,7 @@ require 'up.html.php';
               </div>
             </div>
         </div>
-        </div>
-        <?php }?>
-        <?php if ($_SESSION['role'] == 2) {?>
-          <div class="row justify-content-center g-4">
-          <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="col-sm-6 col-md-4 col-lg-3">
         <div class="card h-100 " style="width: 18rem;">
           <img src="./public/img/office.jpg" class="card-img-top" alt="Register Unit img">
           <div class="card-body">
@@ -63,6 +59,10 @@ require 'up.html.php';
           </div>
         </div>
     </div>
+        </div>
+        <?php }?>
+        <?php if ($_SESSION['role'] == 2) {?>
+          <div class="row justify-content-center g-4">
         <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="card h-100 " style="width: 18rem;">
             <img src="./public/img/teacher.jpg" class="card-img-top" alt="Teacher img">

@@ -14,6 +14,8 @@ if (isset($_POST['form_submit'])) {
 
     require_once 'db.php';
     $lessonName = $_POST['form_lesson'];
+    $addedUnitid = $_SESSION['id'];
+    $addedUnitName = $_SESSION['userName'];
 
     //?Kullanıcı var mı yok mu kontrol etme
     $sql = "SELECT * FROM lessons WHERE lessonname = :form_lesson";
@@ -31,9 +33,11 @@ if (isset($_POST['form_submit'])) {
         //!Eğer aynı isimde ders yoksa kaydet
     } else {
         // Insert into Database
-        $sql = "INSERT INTO lessons (lessonname) VALUES (:form_lesson)";
+        $sql = "INSERT INTO lessons (lessonname,addedunitid,addedunitname) VALUES (:form_lesson,:unitid,:unitname)";
         $SORGU = $DB->prepare($sql);
         $SORGU->bindParam(':form_lesson', $lessonName);
+        $SORGU->bindParam(':unitid', $addedUnitid);
+        $SORGU->bindParam(':unitname', $addedUnitName);
 
         $SORGU->execute();
         $approves[] = "lesson Added Successfully...";
