@@ -31,11 +31,11 @@ require 'up.html.php';
               <div class="card-body">
                 <h5 class="card-title">Add Admin User</h5>
                 <p class="card-text">Admin Adds Admin User</p>
-                <div class="d-flex justify-content-between">
-          <a href="add.admin.php" class="btn btn-sm btn-danger mt-3">Add Admin
+                      <div class="d-flex justify-content-between">
+          <a href="add.admin.php" class="btn me-2  btn-danger mt-5">Add Admin
             <i class="bi bi-send-fill"></i>
           </a>
-          <a href="list.admin.php" class="btn btn-sm btn-warning  mt-3">List Admin User
+          <a href="list.admin.php" class="btn btn-warning  mt-5">List Admin User
             <i class="bi bi-send-fill"></i>
           </a>
         </div>
