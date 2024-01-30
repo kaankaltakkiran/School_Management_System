@@ -8,7 +8,7 @@ require 'navbar.php'?>
 <?php
 
 //!form submit edilmişse
-if (isset($_POST['form_classnumber'])) {
+if (isset($_POST['form_classnumber'], $_POST['form_classletter'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
 

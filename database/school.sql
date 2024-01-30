@@ -39,8 +39,22 @@ CREATE TABLE `classes` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `classes` (`classid`, `classnumber`, `classletter`, `classname`, `createdate`, `addedunitid`, `addedunitname`) VALUES
-(1,	'9',	'A',	'9/A',	'2024-01-30 18:09:14',	1,	'Kaan Kaltakkıran'),
-(2,	'12',	'D',	'12/D',	'2024-01-30 18:09:21',	1,	'Kaan Kaltakkıran');
+(1,	'9',	'A',	'9/A',	'2024-01-30 20:27:52',	1,	'Kaan Kaltakkıran'),
+(2,	'9',	'B',	'9/B',	'2024-01-30 20:27:56',	1,	'Kaan Kaltakkıran'),
+(3,	'9',	'C',	'9/C',	'2024-01-30 20:28:00',	1,	'Kaan Kaltakkıran'),
+(4,	'9',	'D',	'9/D',	'2024-01-30 20:28:03',	1,	'Kaan Kaltakkıran'),
+(5,	'10',	'A',	'10/A',	'2024-01-30 20:28:07',	1,	'Kaan Kaltakkıran'),
+(6,	'10',	'B',	'10/B',	'2024-01-30 20:28:10',	1,	'Kaan Kaltakkıran'),
+(7,	'10',	'C',	'10/C',	'2024-01-30 20:28:14',	1,	'Kaan Kaltakkıran'),
+(8,	'10',	'D',	'10/D',	'2024-01-30 20:28:17',	1,	'Kaan Kaltakkıran'),
+(9,	'11',	'A',	'11/A',	'2024-01-30 20:28:22',	1,	'Kaan Kaltakkıran'),
+(10,	'11',	'B',	'11/B',	'2024-01-30 20:28:25',	1,	'Kaan Kaltakkıran'),
+(11,	'11',	'C',	'11/C',	'2024-01-30 20:28:29',	1,	'Kaan Kaltakkıran'),
+(12,	'11',	'D',	'11/D',	'2024-01-30 20:28:33',	1,	'Kaan Kaltakkıran'),
+(13,	'12',	'A',	'12/A',	'2024-01-30 20:29:17',	1,	'Kaan Kaltakkıran'),
+(14,	'12',	'B',	'12/B',	'2024-01-30 20:29:22',	1,	'Kaan Kaltakkıran'),
+(15,	'12',	'C',	'12/C',	'2024-01-30 20:29:25',	1,	'Kaan Kaltakkıran'),
+(16,	'12',	'D',	'12/D',	'2024-01-30 20:29:35',	1,	'Kaan Kaltakkıran');
 
 DROP TABLE IF EXISTS `lessons`;
 CREATE TABLE `lessons` (
@@ -134,4 +148,4 @@ INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `user
 (1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$hduoWtWzYOBsZkXkYmYU0eF7zA0TheanrjL765jXMLPkVSdOhYG.2',	'M',	3,	'2024-01-30 18:17:08',	'1,',	'Address 1',	'31232312132',	'1975-01-01',	'IMG-65b912f4804c67.48499172.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
 (2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$w3H00uri99J8JoH0hMT.feDwjfRt5nqVq2JFTVm0M8LfTdl.irGCK',	'F',	3,	'2024-01-30 18:17:36',	'2,',	'Address 2',	'23123112323',	'1975-01-01',	'IMG-65b913106c43f4.13168613.png',	'2,3',	'Spor,Turkish',	1,	'Kaan Kaltakkıran');
 
--- 2024-01-30 15:22:23
+-- 2024-01-30 17:30:35
