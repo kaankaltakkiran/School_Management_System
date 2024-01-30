@@ -114,8 +114,6 @@ require 'up.html.php';
             </div>
           </div>
       </div>
-      <div class="container">
-        <div class="row justify-content-start mt-3">
       <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="card h-100 " style="width: 18rem;">
             <img src="./public/img/books.jpg" class="card-img-top" alt="lesson img">
@@ -132,8 +130,6 @@ require 'up.html.php';
         </div>
             </div>
           </div>
-      </div>
-      </div>
       </div>
       </div>
       <?php }?>
