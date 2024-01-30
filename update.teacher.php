@@ -225,20 +225,51 @@ print_r($lessons);
 die(); */
 //! chatgpt ile dersleri listeleme
 echo '<label class="mb-1">Selected Lessons</label>';
+$selectedCount = count($selectLesonsArray);
+
 foreach ($lessons as $lesson) {
-    //! lessons tablosunda yer alan lessonidler ile seçilen lessonid eşleşenler varsa checked yap
-    $lessonid = $lesson['lessonid'];
-    $isChecked = in_array($lessonid, $selectLesonsArray); // Seçili olup olmadığını kontrol et
-    //! Checkbox value değerini lessonid ve lessonname değerlerini göndermek için birleştir
-    $checkbox_value = $lesson['lessonid'] . '-' . $lesson['lessonname'];
+    $lessonId = $lesson['lessonid'];
+    $isChecked = in_array($lessonId, $selectLesonsArray);
+    $lessonValue = $lesson['lessonid'] . '-' . $lesson['lessonname'];
 
     echo '<div class="col-md-3">';
     echo '<div class="form-check form-check-inline">';
-    echo '<input class="form-check-input" type="checkbox" name="lessons[]" value="' . $checkbox_value . '" id="check-' . $lessonid . '" ' . ($isChecked ? 'checked' : '') . '>';
-    echo '<label class="form-check-label" for="check-' . $lessonid . '">' . $lesson['lessonname'] . '</label>';
+
+    // JavaScript kullanarak checkbox kontrolü
+    echo '<input class="form-check-input" type="checkbox" name="lessons[]" value="' . $lessonValue . '" id="check-' . $lessonId . '" onmouseout="checkCheckboxLimit(this)" ' . ($isChecked ? 'checked' : '') . '>';
+
+    echo '<label class="form-check-label" for="check-' . $lessonId . '">' . $lesson['lessonname'] . '</label>';
     echo '</div>';
     echo '</div>';
 }
+
+// JavaScript fonksiyonu
+echo '<script>
+    function checkCheckboxLimit(checkbox) {
+        var checkboxes = document.querySelectorAll(\'input[name="lessons[]"]\');
+        var checkedCount = 0;
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                checkedCount++;
+            }
+        }
+        if (checkedCount === 1) {
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (!checkboxes[i].checked) {
+                    checkboxes[i].disabled = true;
+                }
+            }
+        } else {
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].disabled = false;
+            }
+        }
+        document.getElementById("checkbox-message").innerHTML = (checkedCount === 1) ? "Lesson Selected" : "";
+    }
+</script>';
+
+// Mesajı göster
+echo '<span id="checkbox-message" class="text-danger mt-3 fw-bold ">' . (($selectedCount === 1) ? "One Lesson can be selected" : "") . '</span>';
 ?>
 </div>
 </div>
