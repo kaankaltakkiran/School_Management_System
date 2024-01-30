@@ -182,25 +182,24 @@ require_once 'db.php';
 $SORGU = $DB->prepare("SELECT * FROM lessons");
 $SORGU->execute();
 $lessons = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-//echo '<pre>'; print_r($lessons);
-
 ?>
 <div class="form-floating mb-3">
   <div class="row">
-  <?php
-//! chatgpt ile sınıfları listeleme
+    <?php
+// ChatGPT ile sınıfları listeleme
 echo '<label class="mb-1">Select Lessons</label>';
 foreach ($lessons as $lesson) {
     $checkbox_value = $lesson['lessonid'] . '-' . $lesson['lessonname'];
     echo '<div class="col-md-3">';
     echo '<div class="form-check form-check-inline">';
-    echo '<input class="form-check-input" type="checkbox" name="lessons[]" value="' . $checkbox_value . '" id="check-' . $lesson['lessonid'] . '">';
+    echo '<input class="form-check-input lesson-checkbox" type="checkbox" name="lessons[]" value="' . $checkbox_value . '" id="check-' . $lesson['lessonid'] . '">';
     echo '<label class="form-check-label" for="check-' . $lesson['lessonid'] . '">' . $lesson['lessonname'] . '</label>';
     echo '</div>';
     echo '</div>';
 }
 ?>
-</div>
+  </div>
+  <span id="selection-message" class="text-danger mt-3 fw-bold ">You can choose one lesson!</span>
 </div>
 <div class="input-group mb-3  input-group-lg">
   <input type="password"  name="form_password" class="form-control" id="password" placeholder="Password"required>
@@ -243,6 +242,29 @@ foreach ($lessons as $lesson) {
 </div>
 
 </div>
+<script>
+  //! ChatGPT ile sadece bir tane ders seçme
+  const checkboxes = document.querySelectorAll('.lesson-checkbox');
+  const selectionMessage = document.getElementById('selection-message');
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', function () {
+      if (this.checked) {
+        checkboxes.forEach((otherCheckbox) => {
+          if (otherCheckbox !== this) {
+            otherCheckbox.disabled = true;
+          }
+        });
+        selectionMessage.textContent = "1 lesson selected";
+      } else {
+        checkboxes.forEach((otherCheckbox) => {
+          otherCheckbox.disabled = false;
+        });
+        selectionMessage.textContent = "You can choose one lesson!";
+      }
+    });
+  });
+</script>
 <?php require 'footer.php'?>
 <?php require 'down.html.php';?>
 <!-- Öğretmenin sahip olduğu sınıfları gösterme -->
