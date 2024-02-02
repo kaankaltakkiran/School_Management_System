@@ -114,24 +114,34 @@ if (isset($_POST['form_submit'])) {
     }
     //! Hata yoksa veritabanına kaydet
     if (empty($errors)) {
-        $SORGU = $DB->prepare($sql);
-        $SORGU->bindParam(':form_username', $name);
-        $SORGU->bindParam(':form_email', $email);
-        $SORGU->bindParam(':form_gender', $gender);
-        $SORGU->bindParam(':form_adress', $address);
-        $SORGU->bindParam(':form_phonenumber', $phoneNumber);
-        $SORGU->bindParam(':form_birthdate', $birthDate);
-        $SORGU->bindParam(':lessonid', $teacherLessonid);
-        $SORGU->bindParam(':lessonname', $teacherLessonName);
+        //! Kullanıcı e-posta adresini değiştirdiyse, yeni e-posta adresi için veritabanında mevcut bir kullanıcı olup olmadığını kontrol et
+        //? Eğer post edilen email update yapılan kişinin dışında bir kullanıcıda varsa hata mesajı göster
+        $checkEmailQuery = $DB->prepare("SELECT * FROM teachers WHERE useremail = :email AND userid != :idTeacher");
+        $checkEmailQuery->bindParam(':email', $email);
+        $checkEmailQuery->bindParam(':idTeacher', $id);
+        $checkEmailQuery->execute();
+        $existingUser = $checkEmailQuery->fetch(PDO::FETCH_ASSOC);
+        if ($existingUser) {
+            $errors[] = "This email is already in use.";
+        } else {
+            $SORGU = $DB->prepare($sql);
+            $SORGU->bindParam(':form_username', $name);
+            $SORGU->bindParam(':form_email', $email);
+            $SORGU->bindParam(':form_gender', $gender);
+            $SORGU->bindParam(':form_adress', $address);
+            $SORGU->bindParam(':form_phonenumber', $phoneNumber);
+            $SORGU->bindParam(':form_birthdate', $birthDate);
+            $SORGU->bindParam(':lessonid', $teacherLessonid);
+            $SORGU->bindParam(':lessonname', $teacherLessonName);
 
-        $SORGU->bindParam(':idTeacher', $id);
-        $SORGU->execute();
-        echo '<script>';
-        echo 'alert("Teacher User Update Successful!");';
-        echo 'window.location.href = "update.teacher.php?idTeacher=' . $teachers[0]['userid'] . '";';
-        echo '</script>';
+            $SORGU->bindParam(':idTeacher', $id);
+            $SORGU->execute();
+            echo '<script>';
+            echo 'alert("Teacher User Update Successful!");';
+            echo 'window.location.href = "update.teacher.php?idTeacher=' . $teachers[0]['userid'] . '";';
+            echo '</script>';
+        }
     }
-
 }
 
 ?>
