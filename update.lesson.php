@@ -32,17 +32,29 @@ if (isset($_POST['form_submit'])) {
     $lessonName = $_POST['from_lessonname'];
 
     $sql = "UPDATE lessons SET lessonname = :from_lessonname WHERE lessonid = :lessonid";
-    $SORGU = $DB->prepare($sql);
-
-    $SORGU->bindParam(':from_lessonname', $lessonName);
-    $SORGU->bindParam(':lessonid', $id);
-    $SORGU->execute();
-    echo '<script>';
-    echo 'alert("Lesson  Update Successful!");';
-    echo 'window.location.href = "update.lesson.php?lessonid=' . $lessons[0]['lessonid'] . '";';
-    echo '</script>';
+    //! Kullanıcı e-posta adresini değiştirdiyse, yeni e-posta adresi için veritabanında mevcut bir kullanıcı olup olmadığını kontrol et
+    //? Eğer post edilen email update yapılan kişinin dışında bir kullanıcıda varsa hata mesajı göster
+    $checkLessonQuery = $DB->prepare("SELECT * FROM lessons WHERE lessonname = :from_lessonname AND lessonid != :lessonid");
+    $checkLessonQuery->bindParam(':from_lessonname', $lessonName);
+    $checkLessonQuery->bindParam(':lessonid', $id);
+    $checkLessonQuery->execute();
+    $existingLesson = $checkLessonQuery->fetch(PDO::FETCH_ASSOC);
+    if ($existingLesson) {
+        echo '<script>';
+        echo 'alert("This Lesson Name is already in use.!");';
+        echo 'window.location.href = "update.lesson.php?lessonid=' . $lessons[0]['lessonid'] . '";';
+        echo '</script>';
+    } else {
+        $SORGU = $DB->prepare($sql);
+        $SORGU->bindParam(':from_lessonname', $lessonName);
+        $SORGU->bindParam(':lessonid', $id);
+        $SORGU->execute();
+        echo '<script>';
+        echo 'alert("Lesson  Update Successful!");';
+        echo 'window.location.href = "update.lesson.php?lessonid=' . $lessons[0]['lessonid'] . '";';
+        echo '</script>';
+    }
 }
-
 ?>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" value="<?php echo $_SESSION['userName'] ?>"disabled readonly>
