@@ -75,20 +75,29 @@ if (isset($_POST['form_submit'])) {
     }
     //! Hata yoksa veritabanına kaydet
     if (empty($errors)) {
-        $SORGU = $DB->prepare($sql);
+        //! Kullanıcı e-posta adresini değiştirdiyse, yeni e-posta adresi için veritabanında mevcut bir kullanıcı olup olmadığını kontrol et
+        //? Eğer post edilen email update yapılan kişinin dışında bir kullanıcıda varsa hata mesajı göster
+        $checkEmailQuery = $DB->prepare("SELECT * FROM admins WHERE useremail = :email AND userid != :idAdmin");
+        $checkEmailQuery->bindParam(':email', $email);
+        $checkEmailQuery->bindParam(':idAdmin', $id);
+        $checkEmailQuery->execute();
+        $existingUser = $checkEmailQuery->fetch(PDO::FETCH_ASSOC);
+        if ($existingUser) {
+            $errors[] = "This email is already in use.";
+        } else {
+            $SORGU = $DB->prepare($sql);
+            $SORGU->bindParam(':form_username', $name);
+            $SORGU->bindParam(':form_email', $email);
+            $SORGU->bindParam(':form_gender', $gender);
 
-        $SORGU->bindParam(':form_username', $name);
-        $SORGU->bindParam(':form_email', $email);
-        $SORGU->bindParam(':form_gender', $gender);
-
-        $SORGU->bindParam(':idAdmin', $id);
-        $SORGU->execute();
-        echo '<script>';
-        echo 'alert("Admin User Update Successful!");';
-        echo 'window.location.href = "update.admin.php?idAdmin=' . $admins[0]['userid'] . '";';
-        echo '</script>';
+            $SORGU->bindParam(':idAdmin', $id);
+            $SORGU->execute();
+            echo '<script>';
+            echo 'alert("Admin User Update Successful!");';
+            echo 'window.location.href = "update.admin.php?idAdmin=' . $admins[0]['userid'] . '";';
+            echo '</script>';
+        }
     }
-
 }
 
 ?>
