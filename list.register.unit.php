@@ -74,11 +74,6 @@ window.location.href = 'list.register.unit.php';
 foreach ($registerunits as $registerunit) {
     $gender = $registerunit['usergender'];
     $gender = ($gender == 'M') ? 'Male' : 'Famale';
-    //! Eğer $_SESSION içerisindeki id, şu anki adminin id'sine eşit değilse silemesin
-    $deleteButton = ($_SESSION['id'] != $registerunit['userid']) ?
-    "<a href='list.register.unit.php?removeRegisterUnitid={$registerunit['userid']}' onclick='return confirm(\"Are you sure you want to delete {$registerunit['username']}?\")' class='btn btn-danger btn-sm'>Delete</a>" :
-    "<span class='text-danger fw-bold '>You can't Delete yourself!!!</span>";
-
     echo "
     <tr>
       <th>{$registerunit['userid']}</th>
@@ -91,7 +86,7 @@ foreach ($registerunits as $registerunit) {
       <td>{$registerunit['phonenumber']}</td>
       <td>{$registerunit['birthdate']}</td>
       <td><a href='update.register.unit.php?idRegisterUnit={$registerunit['userid']}' class='btn btn-success btn-sm'>Update</a></td>
-      <td>$deleteButton</td>
+      <td><a href='update.register.unit.php?idRegisterUnit={$registerunit['userid']}' onclick='return confirm(\"Are you sure you want to delete {$registerunit['username']}?\")' class='btn btn-danger btn-sm'>Delete</a></td>
    </tr>
   ";
 }
