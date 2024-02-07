@@ -5,6 +5,12 @@ $activePage = "index";
 require 'up.html.php';
 require 'login.control.php';
 ?>
+<?php
+if ($_SESSION['role'] != 2) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
 <?php require 'navbar.php'?>
 
     <div class="container">
