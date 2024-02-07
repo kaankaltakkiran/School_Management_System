@@ -2,6 +2,7 @@
 @session_start();
 $activeTitle = "Add Class";
 require 'up.html.php';
+require 'login.control.php';
 ?>
 <?php
 require 'navbar.php'?>

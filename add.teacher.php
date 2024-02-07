@@ -2,6 +2,7 @@
 @session_start();
 $activeTitle = "Add Teacher User";
 require 'up.html.php';
+require 'login.control.php';
 ?>
 <?php
 if (isset($_POST['submit']) && isset($_FILES['form_image'])) {

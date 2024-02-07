@@ -3,6 +3,7 @@ session_start();
 $activeTitle = "Teacher User List";
 $activePage = "index";
 require 'up.html.php';
+require 'login.control.php';
 ?>
 <?php require 'navbar.php'?>
 

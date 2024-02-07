@@ -3,6 +3,7 @@ session_start();
 $activeTitle = "School Management System";
 $activePage = "index";
 require 'up.html.php';
+require 'login.control.php';
 ?>
 <?php require 'navbar.php'?>
 <?php

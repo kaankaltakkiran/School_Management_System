@@ -3,6 +3,7 @@ session_start();
 $activeTitle = "Admin Update";
 $activePage = "index";
 require 'up.html.php';
+require 'login.control.php';
 ?>
     <?php include 'navbar.php';?>
   <div class="container">
