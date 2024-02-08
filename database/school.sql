@@ -26,6 +26,21 @@ INSERT INTO `admins` (`userid`, `username`, `useremail`, `userpassword`, `userge
 (1,	'Admin',	'admin@gmail.com',	'$2y$10$KiJGRPAyVQpk5xjkMIXEgO61qgVxRZnNA5qc6hd7vOSMoliu96QqW',	'M',	1,	'2024-01-30 18:00:41',	'IMG-65b90f199e75b6.61068605.jpg',	1,	'Admin'),
 (2,	'Admin 2 ',	'admin2@gmail.com',	'$2y$10$Vl/POjjK9Y5ZVF9b4.jQ5unloIpLDnVg7h77VQkWOkOF/sOA/4GCy',	'F',	1,	'2024-01-30 18:01:43',	'IMG-65b90f57e40c18.69953318.png',	1,	'Admin');
 
+DROP TABLE IF EXISTS `announcements`;
+CREATE TABLE `announcements` (
+  `announcementid` int(11) NOT NULL AUTO_INCREMENT,
+  `senderid` int(11) NOT NULL,
+  `receiverid` int(11) NOT NULL,
+  `createdate` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `announcementtitle` varchar(50) NOT NULL,
+  `announcement` text NOT NULL,
+  PRIMARY KEY (`announcementid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+
+INSERT INTO `announcements` (`announcementid`, `senderid`, `receiverid`, `createdate`, `announcementtitle`, `announcement`) VALUES
+(1,	1,	3,	'2024-02-08 13:40:40',	'For Teacher Announcement Title',	'For Teacher Announcement'),
+(2,	1,	2,	'2024-02-08 13:40:56',	'For Register Unit Announcement Title',	'For Register Unit Announcement');
+
 DROP TABLE IF EXISTS `classes`;
 CREATE TABLE `classes` (
   `classid` int(11) NOT NULL AUTO_INCREMENT,
@@ -120,7 +135,7 @@ CREATE TABLE `students` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `students` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `useraddress`, `phonenumber`, `roleuser`, `createdate`, `classid`, `classname`, `birthdate`, `userimg`, `parentname`, `parentnumber`, `lessonid`, `lessonname`, `addedunitid`, `addedunitname`) VALUES
-(1,	'Ali Yılmaz',	'ali@gmail.com',	'$2y$10$UFHeEWCOJioUY.qdE.71o.egEaETLBqjiYquIYv450X3/PJl7F9fC',	'M',	'Adress 1',	'12331223123',	4,	'2024-01-30 18:13:53',	1,	'9/A',	'2000-01-01',	'IMG-65b9123121ed96.87847858.jpg',	'Ali Father',	'05076600884',	'1,5',	'Math,Science',	1,	'Kaan Kaltakkıran'),
+(1,	'Ali Yılmaz',	'ali@gmail.com',	'$2y$10$UFHeEWCOJioUY.qdE.71o.egEaETLBqjiYquIYv450X3/PJl7F9fC',	'M',	'Adress 1',	'12331223123',	4,	'2024-01-30 18:13:53',	1,	'9/A',	'2000-01-01',	'IMG-65b9123121ed96.87847858.jpg',	'Ali Father',	'12331223123',	'1,5',	'Math,Science',	1,	'Kaan Kaltakkıran'),
 (2,	'Selin Yıldız',	'selin@gmail.com',	'$2y$10$QKjJT6hdDZidt0PE5w0puOJGBpG.AT4HzuXxtnlYIKnLbzsBjHhLO',	'F',	'Address 2',	'31232312132',	4,	'2024-01-30 18:14:25',	2,	'12/D',	'1996-01-01',	'IMG-65b91251666283.15293271.jpg',	'Selin Mother',	'76546554464',	'3,4,5',	'Turkish,English,Science',	1,	'Kaan Kaltakkıran');
 
 DROP TABLE IF EXISTS `teachers`;
@@ -148,4 +163,4 @@ INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `user
 (1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$E9ELN20pn/QDGoI26a7Nt.dnAFozCXYlhkxUmjrO8UnKGN5cz4gmK',	'M',	3,	'2024-01-30 20:45:09',	'1,6,11,16,',	'Address 1',	'05076600884',	'1976-01-01',	'IMG-65b935a5d358a2.77186819.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
 (2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$/cnxVraJONa7bqxcHMqwpuDG7eJmVaB.h6FUe4H6oJrZhdcCfkTXO',	'F',	3,	'2024-01-30 20:45:45',	'1,2,15,',	'Adress 2',	'23123112323',	'1974-01-01',	'IMG-65b935c9a1a4f0.28430672.png',	'3',	'Turkish',	1,	'Kaan Kaltakkıran');
 
--- 2024-01-30 17:46:30
+-- 2024-02-08 10:42:40
