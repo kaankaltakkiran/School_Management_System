@@ -1,16 +1,17 @@
 <?php
-session_start();
+@session_start();
 $activeTitle = "Announcement Update";
 $activePage = "index";
 require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
-if ($_SESSION['role'] != 2) {
+if ($_SESSION['role'] != 1 and $_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
     die();
 }
 ?>
+
     <?php include 'navbar.php';?>
   <div class="container">
   <div class="row justify-content-center mt-3">

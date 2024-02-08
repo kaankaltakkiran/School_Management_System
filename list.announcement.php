@@ -1,5 +1,5 @@
 <?php
-session_start();
+@session_start();
 $activeTitle = "Announcement";
 $activePage = "announcement";
 require 'up.html.php';
@@ -43,6 +43,11 @@ window.location.href = 'list.announcement.php';
 </script>";
 }
 foreach ($announcements as $announcement) {
+    if ($_SESSION['role'] == 1 || $_SESSION['role'] == 2) {
+        $update_button = '<a href="update.announcement.php?idannouncement=' . $announcement['announcementid'] . '" class="btn btn-success me-2">Update</a>';
+
+        $delete_button = '<a href="list.announcement.php?removeannouncementid=' . $announcement['announcementid'] . '" onclick="return confirm(\'Are you sure you want to delete ' . $announcement['announcementtitle'] . '?\')" class="btn btn-danger">Delete</a>';
+    }
     $announcementid = "accordionflush{$announcement['announcementid']}";
     $datetime = new DateTime($announcement["createdate"]);
 
@@ -64,8 +69,8 @@ foreach ($announcements as $announcement) {
                     </div>
                     <div class="ms-auto p-2">Date: <?php echo $formatted_datetime ?></div>
                     <div class="text-end">
-                    <a href="update.announcement.php?idannouncement=<?php echo $announcement['announcementid']; ?>" class="btn btn-success me-2">Update</a>
-                    <a href="list.announcement.php?removeannouncementid=<?php echo $announcement['announcementid']; ?>" onclick="return confirm('Are you sure you want to delete <?php echo $announcement['announcementtitle']; ?>?')" class="btn btn-danger">Delete</a>
+                    <?php echo $update_button; ?>
+                    <?php echo $delete_button; ?>
 
                 </div>
                 </div>
