@@ -14,6 +14,9 @@ session_start();
           <a class="nav-link  <?=($activePage == 'index') ? 'active' : '';?>" href="index.php">Home</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link  <?=($activePage == 'messages') ? 'active' : '';?>" href="list.messages.php">Messages</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="logout.php">Logout</a>
         </li>
         <?php
