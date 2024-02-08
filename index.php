@@ -135,15 +135,15 @@ require 'up.html.php';
       <div class="row mt-3">
       <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="card h-100 " style="width: 18rem;">
-            <img src="./public/img/books.jpg" class="card-img-top" alt="lesson img">
+            <img src="./public/img/announcement.jpg" class="card-img-top" alt="announcement img">
             <div class="card-body">
               <h5 class="card-title">Send Announcement</h5>
               <p class="card-text">Register Unit Send Announcement</p>
               <div class="d-flex justify-content-between">
-          <a href="add.announcement.php" class="btn me-2  btn-danger mt-5">Send Announcement
+          <a href="add.announcement.php" class="btn btn-sm me-2  btn-danger mt-5">Send Announcement
             <i class="bi bi-send-fill"></i>
           </a>
-          <a href="list.announcement.php" class="btn btn-warning mt-5">List Announcement
+          <a href="list.announcement.php" class="btn btn-sm btn-warning mt-5">List Announcement
             <i class="bi bi-send-fill"></i>
           </a>
         </div>
