@@ -27,6 +27,21 @@ $announcements = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* echo '<pre>';
 print_r($announcements);
 die(); */
+if (isset($_GET['removeannouncementid'])) {
+    require 'db.php';
+    $remove_id = $_GET['removeannouncementid'];
+
+    $sql = "DELETE FROM announcements WHERE announcementid = :removeannouncementid";
+    $SORGU = $DB->prepare($sql);
+
+    $SORGU->bindParam(':removeannouncementid', $remove_id);
+
+    $SORGU->execute();
+    echo "<script>
+alert('Announcement has been deleted. You are redirected to the Announcements List page...!');
+window.location.href = 'list.announcement.php';
+</script>";
+}
 foreach ($announcements as $announcement) {
     $announcementid = "accordionflush{$announcement['announcementid']}";
     $datetime = new DateTime($announcement["createdate"]);
@@ -50,7 +65,8 @@ foreach ($announcements as $announcement) {
                     <div class="ms-auto p-2">Date: <?php echo $formatted_datetime ?></div>
                     <div class="text-end">
                     <a href="update.announcement.php?idannouncement=<?php echo $announcement['announcementid']; ?>" class="btn btn-success me-2">Update</a>
-                    <button class="btn btn-danger">Delete</button>
+                    <a href="list.announcement.php?removeannouncementid=<?php echo $announcement['announcementid']; ?>" onclick="return confirm('Are you sure you want to delete <?php echo $announcement['announcementtitle']; ?>?')" class="btn btn-danger">Delete</a>
+
                 </div>
                 </div>
       </div>
