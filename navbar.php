@@ -14,7 +14,7 @@ session_start();
           <a class="nav-link  <?=($activePage == 'index') ? 'active' : '';?>" href="index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  <?=($activePage == 'announcement') ? 'active' : '';?>" href="list.messages.php">Announcement</a>
+          <a class="nav-link  <?=($activePage == 'announcement') ? 'active' : '';?>" href="list.announcement.php">Announcement</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="logout.php">Logout</a>
