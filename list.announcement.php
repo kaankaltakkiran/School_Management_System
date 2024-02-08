@@ -17,7 +17,7 @@ require 'login.control.php';
 require_once 'db.php';
 $roleid = $_SESSION['role'];
 echo $userid;
-$SORGU = $DB->prepare("SELECT * FROM announcements WHERE receiverid=:roleid");
+$SORGU = $DB->prepare("SELECT * FROM announcements WHERE receiverid=:roleid AND ispublish=1 ");
 $SORGU->bindParam(':roleid', $roleid);
 $SORGU->execute();
 $announcements = $SORGU->fetchAll(PDO::FETCH_ASSOC);
