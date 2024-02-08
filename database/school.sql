@@ -33,13 +33,16 @@ CREATE TABLE `announcements` (
   `receiverid` int(11) NOT NULL,
   `createdate` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `announcementtitle` varchar(50) NOT NULL,
+  `startdate` date NOT NULL,
+  `lastdate` date NOT NULL,
+  `ispublish` char(1) NOT NULL,
   `announcement` text NOT NULL,
   PRIMARY KEY (`announcementid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
-INSERT INTO `announcements` (`announcementid`, `senderid`, `receiverid`, `createdate`, `announcementtitle`, `announcement`) VALUES
-(1,	1,	3,	'2024-02-08 13:40:40',	'For Teacher Announcement Title',	'For Teacher Announcement'),
-(2,	1,	2,	'2024-02-08 13:40:56',	'For Register Unit Announcement Title',	'For Register Unit Announcement');
+INSERT INTO `announcements` (`announcementid`, `senderid`, `receiverid`, `createdate`, `announcementtitle`, `startdate`, `lastdate`, `ispublish`, `announcement`) VALUES
+(1,	1,	2,	'2024-02-08 18:03:43',	'Register Unit Annoucement Title',	'2024-02-08',	'2024-02-11',	'1',	'Register Unit Annoucement '),
+(2,	1,	3,	'2024-02-08 15:22:34',	'Teacher Annoucement Title',	'2024-02-08',	'2024-02-12',	'0',	'Teacher Annoucement Title');
 
 DROP TABLE IF EXISTS `classes`;
 CREATE TABLE `classes` (
@@ -163,4 +166,4 @@ INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `user
 (1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$E9ELN20pn/QDGoI26a7Nt.dnAFozCXYlhkxUmjrO8UnKGN5cz4gmK',	'M',	3,	'2024-01-30 20:45:09',	'1,6,11,16,',	'Address 1',	'05076600884',	'1976-01-01',	'IMG-65b935a5d358a2.77186819.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
 (2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$/cnxVraJONa7bqxcHMqwpuDG7eJmVaB.h6FUe4H6oJrZhdcCfkTXO',	'F',	3,	'2024-01-30 20:45:45',	'1,2,15,',	'Adress 2',	'23123112323',	'1974-01-01',	'IMG-65b935c9a1a4f0.28430672.png',	'3',	'Turkish',	1,	'Kaan Kaltakkıran');
 
--- 2024-02-08 10:42:40
+-- 2024-02-08 15:09:45
