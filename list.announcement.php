@@ -26,6 +26,10 @@ print_r($announcements);
 die(); */
 foreach ($announcements as $announcement) {
     $announcementid = "accordionflush{$announcement['announcementid']}";
+    $datetime = new DateTime($announcement["createdate"]);
+
+    // Tarih ve saat formatını ayarlayın
+    $formatted_datetime = date_format($datetime, 'd.m.Y H:i');
     ?>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
@@ -35,7 +39,13 @@ foreach ($announcements as $announcement) {
         </h2>
         <div id="<?php echo $announcementid ?>" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
       <div class="accordion-body">
-      <?php echo $announcement['announcement']; ?>
+
+      <div class="d-flex mb-3">
+                    <div class="p-2">
+                    <?php echo $announcement['announcement']; ?>
+                    </div>
+                    <div class="ms-auto p-2">Date: <?php echo $formatted_datetime ?></div>
+                </div>
       </div>
     </div>
       </div>
@@ -44,6 +54,4 @@ foreach ($announcements as $announcement) {
   </div>
 </div>
 </div>
-
-
 <?php require 'down.html.php';?>
