@@ -48,6 +48,10 @@ foreach ($announcements as $announcement) {
                     <?php echo $announcement['announcement']; ?>
                     </div>
                     <div class="ms-auto p-2">Date: <?php echo $formatted_datetime ?></div>
+                    <div class="text-end">
+                    <a href="update.announcement.php?idannouncement=<?php echo $announcement['announcementid']; ?>" class="btn btn-success me-2">Update</a>
+                    <button class="btn btn-danger">Delete</button>
+                </div>
                 </div>
       </div>
     </div>
