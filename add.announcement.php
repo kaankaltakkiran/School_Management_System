@@ -23,14 +23,22 @@ if (isset($_POST['form_submit'])) {
     $announcementSenderid = $_SESSION['id'];
     $announcementReciverid = $_POST['form_reciverid'];
     $announcementTitle = $_POST['form_title'];
+    $announcementStartDate = $_POST['form_startdate'];
+    $announcementLastDate = $_POST['form_lastdate'];
+//!Checkbox değeri kontrolü
+    //?checkbox işaretli ise 1 değilse 0
+    $isPublish = isset($_POST['form_ispublish']) ? 1 : 0;
     $announcementContent = $_POST['form_announcement'];
 
     // Insert into Database
-    $sql = "INSERT INTO announcements (senderid,receiverid,announcementtitle,announcement) VALUES (:senderid,:receiverid,:announcementtitle,:announcement)";
+    $sql = "INSERT INTO announcements (senderid,receiverid,announcementtitle,startdate,lastdate,ispublish,announcement) VALUES (:senderid,:receiverid,:announcementtitle,:form_startdate,:form_lastdate,:form_ispublish,:announcement)";
     $SORGU = $DB->prepare($sql);
     $SORGU->bindParam(':senderid', $announcementSenderid);
     $SORGU->bindParam(':receiverid', $announcementReciverid);
     $SORGU->bindParam(':announcementtitle', $announcementTitle);
+    $SORGU->bindParam(':form_startdate', $announcementStartDate);
+    $SORGU->bindParam(':form_lastdate', $announcementLastDate);
+    $SORGU->bindParam(':form_ispublish', $isPublish);
     $SORGU->bindParam(':announcement', $announcementContent);
 
     $SORGU->execute();
@@ -84,6 +92,26 @@ if (!empty($approves)) {
     <option value="4">Student</option>
   </select>
   <label for="floatingSelect">Receiver</label>
+</div>
+<div class="form-floating mb-3">
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Start Publish Date</label>
+  <input type="date" name="form_startdate" class="form-control" id="exampleFormControlInput1"  min="<?php echo date('Y-m-d'); ?>" />
+</div>
+</div>
+<div class="form-floating mb-3">
+<div class="mb-3">
+  <label for="exampleFormControlInput2" class="form-label">Last Published Date</label>
+  <input type="date" name="form_lastdate" class="form-control" id="exampleFormControlInput2"  min="<?php echo date('Y-m-d'); ?>" />
+</div>
+</div>
+<div class="mb-3">
+<div class="form-check form-switch">
+  <input class="form-check-input" name='form_ispublish' type="checkbox"  id="flexCheckChecked" checked>
+  <label class="form-check-label" for="flexCheckChecked">
+  Publish Announcement
+  </label>
+</div>
 </div>
 <div class="form-floating">
   <textarea class="form-control" placeholder="Leave a Announcement here" id="floatingTextarea2" name="form_announcement" style="height: 100px"></textarea>
