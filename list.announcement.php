@@ -16,11 +16,8 @@ require 'login.control.php';
       <?php
 require_once 'db.php';
 $roleid = $_SESSION['role'];
-if ($roleid == 1 || $roleid == 2) {
-    $SORGU = $DB->prepare("SELECT * FROM announcements");
-} else {
-    $SORGU = $DB->prepare("SELECT * FROM announcements WHERE receiverid=:roleid AND ispublish=1 AND CURDATE() BETWEEN startdate AND lastdate");
-}
+$userid = $_SESSION['id'];
+$SORGU = $DB->prepare("SELECT * FROM announcements WHERE receiverid=:roleid AND ispublish=1 AND CURDATE() BETWEEN startdate AND lastdate");
 $SORGU->bindParam(':roleid', $roleid);
 $SORGU->execute();
 $announcements = $SORGU->fetchAll(PDO::FETCH_ASSOC);
@@ -42,18 +39,65 @@ alert('Announcement has been deleted. You are redirected to the Announcements Li
 window.location.href = 'list.announcement.php';
 </script>";
 }
-foreach ($announcements as $announcement) {
-    if ($_SESSION['role'] == 1 || $_SESSION['role'] == 2) {
-        $update_button = '<a href="update.announcement.php?idannouncement=' . $announcement['announcementid'] . '" class="btn btn-success me-2">Update</a>';
+require_once 'db.php';
+$SORGU = $DB->prepare("SELECT * FROM announcements WHERE senderid=:userid AND senderrole=:roleid");
+$SORGU->bindParam(':userid', $userid);
+$SORGU->bindParam(':roleid', $roleid);
+$SORGU->execute();
+$fullAnnouncements = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* echo '<pre>';
+print_r($fullAnnouncements);
+die(); */
+/* $fullAnnouncement['ispublish'] == 0 || $kaan == 0 */
+if ($userid == $fullAnnouncements[0]['senderid']) {
+    foreach ($fullAnnouncements as $fullAnnouncement) {
+        $dateControl = strtotime($fullAnnouncement['startdate']) <= time() && strtotime($fullAnnouncement['lastdate']) >= time();
+        $publishAlert = ''; // Her döngü adımında publishAlert sıfırlanıyor.
+        //? Eğer ispublish 0 ise veya tarih kontrolü false ise
+        if ($fullAnnouncement['ispublish'] == 0 || $dateControl == false) {
+            $publishAlert = "<span style='float: right;' class='badge bg-danger fw-bolder fs-6 '>Not Published !!!</span>";
+        }
+        $update_button = '<a href="update.announcement.php?idannouncement=' . $fullAnnouncement['announcementid'] . '" class="btn btn-success me-2">Update</a>';
 
-        $delete_button = '<a href="list.announcement.php?removeannouncementid=' . $announcement['announcementid'] . '" onclick="return confirm(\'Are you sure you want to delete ' . $announcement['announcementtitle'] . '?\')" class="btn btn-danger">Delete</a>';
-    }
-    $announcementid = "accordionflush{$announcement['announcementid']}";
-    $datetime = new DateTime($announcement["createdate"]);
+        $delete_button = '<a href="list.announcement.php?removeannouncementid=' . $fullAnnouncement['announcementid'] . '" onclick="return confirm(\'Are you sure you want to delete ' . $fullAnnouncement['announcementtitle'] . '?\')" class="btn btn-danger">Delete</a>';
 
-    // Tarih ve saat formatını ayarlayın
-    $formatted_datetime = date_format($datetime, 'd.m.Y H:i');
-    ?>
+        $announcementid = "accordionflush{$fullAnnouncement['announcementid']}";
+        $datetime = new DateTime($fullAnnouncement["createdate"]);
+
+        // Tarih ve saat formatını ayarlayın
+        $formatted_datetime = date_format($datetime, 'd.m.Y H:i');
+        ?>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo $announcementid ?>" aria-expanded="false" aria-controls="<?php echo $announcementid ?>">
+          <?php echo $fullAnnouncement['announcementtitle']; ?>
+        </button>
+      </h2>
+      <div id="<?php echo $announcementid ?>" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <div class="d-flex mb-3">
+            <div class="p-2">
+              <?php echo $fullAnnouncement['announcement']; ?>
+            </div>
+            <div class="ms-auto p-2">Date: <?php echo $formatted_datetime ?></div>
+            <div class="text-end">
+              <?php echo $update_button; ?>
+              <?php echo $delete_button; ?>
+            </div>
+          </div>
+          <?php echo $publishAlert; ?>
+        </div>
+      </div>
+    </div>
+<?php }
+} else {
+    foreach ($announcements as $announcement) {
+        $announcementid = "accordionflush{$announcement['announcementid']}";
+        $datetime = new DateTime($announcement["createdate"]);
+
+        // Tarih ve saat formatını ayarlayın
+        $formatted_datetime = date_format($datetime, 'd.m.Y H:i');
+        ?>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo $announcementid ?>" aria-expanded="false" aria-controls="<?php echo $announcementid ?>">
@@ -68,16 +112,14 @@ foreach ($announcements as $announcement) {
                     <?php echo $announcement['announcement']; ?>
                     </div>
                     <div class="ms-auto p-2">Date: <?php echo $formatted_datetime ?></div>
-                    <div class="text-end">
-                    <?php echo $update_button; ?>
-                    <?php echo $delete_button; ?>
-
-                </div>
                 </div>
       </div>
     </div>
       </div>
-      <?php }?>
+      <?php }
+}
+?>
+
     </div>
   </div>
 </div>

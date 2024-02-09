@@ -5,12 +5,6 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
-if ($_SESSION['role'] != 2) {
-    header("location: authorizationcontrol.php");
-    die();
-}
-?>
-<?php
 require 'navbar.php'?>
 <?php
 
@@ -21,6 +15,7 @@ if (isset($_POST['form_submit'])) {
 
     require_once 'db.php';
     $announcementSenderid = $_SESSION['id'];
+    $announcementSenderRole = $_SESSION['role'];
     $announcementReciverid = $_POST['form_reciverid'];
     $announcementTitle = $_POST['form_title'];
     $announcementStartDate = $_POST['form_startdate'];
@@ -31,9 +26,10 @@ if (isset($_POST['form_submit'])) {
     $announcementContent = $_POST['form_announcement'];
 
     // Insert into Database
-    $sql = "INSERT INTO announcements (senderid,receiverid,announcementtitle,startdate,lastdate,ispublish,announcement) VALUES (:senderid,:receiverid,:announcementtitle,:form_startdate,:form_lastdate,:form_ispublish,:announcement)";
+    $sql = "INSERT INTO announcements (senderid,senderrole,receiverid,announcementtitle,startdate,lastdate,ispublish,announcement) VALUES (:senderid,:senderrole,:receiverid,:announcementtitle,:form_startdate,:form_lastdate,:form_ispublish,:announcement)";
     $SORGU = $DB->prepare($sql);
     $SORGU->bindParam(':senderid', $announcementSenderid);
+    $SORGU->bindParam(':senderrole', $announcementSenderRole);
     $SORGU->bindParam(':receiverid', $announcementReciverid);
     $SORGU->bindParam(':announcementtitle', $announcementTitle);
     $SORGU->bindParam(':form_startdate', $announcementStartDate);
