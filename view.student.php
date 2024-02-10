@@ -74,7 +74,7 @@ $gender = ($gender == 'M') ? 'Male' : 'Famale';
     </li>
   </ul>
   <div class="card-body">
-    <a href="list.class.student.php?idClass=<?php echo $students[0]['classid'] ?>" class="card-link">Go To List</a>
+    <a href="list.class.student.php?idClass=<?php echo $students[0]['classid'] ?>" class="btn btn-warning">Go To List</a>
   </div>
 </div>
  </div>
