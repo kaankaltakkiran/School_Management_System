@@ -16,8 +16,10 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
     require_once 'db.php';
-    $name = $_POST['form_username'];
-    $email = $_POST['form_email'];
+    //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
+    //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
+    $name = htmlspecialchars($_POST['form_username']);
+    $email = htmlspecialchars($_POST['form_email']);
     $gender = $_POST['form_gender'];
     $password = $_POST['form_password'];
     $addedAdminid = $_SESSION['id'];
@@ -71,7 +73,6 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 $SORGU->bindParam(':form_gender', $gender);
                 $SORGU->bindParam(':adedid', $addedAdminid);
                 $SORGU->bindParam(':adedname', $addedAdminName);
-
                 $SORGU->execute();
                 $approves[] = "Admin Added Successfully...";
             } else {

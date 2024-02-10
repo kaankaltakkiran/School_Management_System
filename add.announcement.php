@@ -12,18 +12,19 @@ require 'navbar.php'?>
 if (isset($_POST['form_submit'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
-
     require_once 'db.php';
+    //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
+    //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
     $announcementSenderid = $_SESSION['id'];
     $announcementSenderRole = $_SESSION['role'];
     $announcementReciverid = $_POST['form_reciverid'];
-    $announcementTitle = $_POST['form_title'];
+    $announcementTitle = htmlspecialchars($_POST['form_title']);
     $announcementStartDate = $_POST['form_startdate'];
     $announcementLastDate = $_POST['form_lastdate'];
 //!Checkbox değeri kontrolü
     //?checkbox işaretli ise 1 değilse 0
     $isPublish = isset($_POST['form_ispublish']) ? 1 : 0;
-    $announcementContent = $_POST['form_announcement'];
+    $announcementContent = htmlspecialchars($_POST['form_announcement']);
 
     // Insert into Database
     $sql = "INSERT INTO announcements (senderid,senderrole,receiverid,announcementtitle,startdate,lastdate,ispublish,announcement) VALUES (:senderid,:senderrole,:receiverid,:announcementtitle,:form_startdate,:form_lastdate,:form_ispublish,:announcement)";

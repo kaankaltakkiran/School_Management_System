@@ -18,9 +18,10 @@ require 'navbar.php'?>
 if (isset($_POST['form_submit'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
-
+    //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
+    //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
     require_once 'db.php';
-    $lessonName = $_POST['form_lesson'];
+    $lessonName = htmlspecialchars($_POST['form_lesson']);
     $addedUnitid = $_SESSION['id'];
     $addedUnitName = $_SESSION['userName'];
 

@@ -15,11 +15,13 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
     require_once 'db.php';
-    $name = $_POST['form_username'];
-    $email = $_POST['form_email'];
+    //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
+    //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
+    $name = htmlspecialchars($_POST['form_username']);
+    $email = htmlspecialchars($_POST['form_email']);
     $gender = $_POST['form_gender'];
-    $address = $_POST['form_adress'];
-    $phoneNumber = $_POST['form_phonenumber'];
+    $address = htmlspecialchars($_POST['form_adress']);
+    $phoneNumber = htmlspecialchars($_POST['form_phonenumber']);
     $birthDate = $_POST['form_birthdate'];
     $addedUnitid = $_SESSION['id'];
     $addedUnitName = $_SESSION['userName'];
@@ -56,7 +58,7 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
     $studentClassid = implode(',', $classIds);
     $studentClassName = implode(',', $classNames);
 
-    $password = $_POST['form_password'];
+    $password = htmlspecialchars($_POST['form_password']);
 /*  Şifrele hashleme */
     $password = password_hash($password, PASSWORD_DEFAULT);
 
