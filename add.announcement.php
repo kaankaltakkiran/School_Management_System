@@ -1,6 +1,7 @@
 <?php
 @session_start();
 $activeTitle = "Send Announcement";
+$activePage = "send.announcement";
 require 'up.html.php';
 require 'login.control.php';
 ?>

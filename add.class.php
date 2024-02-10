@@ -1,6 +1,7 @@
 <?php
 @session_start();
 $activeTitle = "Add Class";
+$activePage = "add.class";
 require 'up.html.php';
 require 'login.control.php';
 ?>

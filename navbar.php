@@ -11,78 +11,78 @@
     <ul class="navbar-nav">
     <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 1) {?>
     <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'add.admin' || $activePage == 'admin.list') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Admin
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="add.admin.php">Add Admin User</a></li>
+            <li><a class="dropdown-item <?=($activePage == 'add.admin') ? 'active' : '';?>" href="add.admin.php">Add Admin User</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="list.admin.php">List Admin User</a></li>
+            <li><a class="dropdown-item <?=($activePage == 'admin.list') ? 'active' : '';?>" href="list.admin.php">List Admin User</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'register.unit.add' || $activePage == 'register.unit.list') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Register Unit
 
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="add.register.unit.php">Add Register Unit
+            <li><a class="dropdown-item <?=($activePage == 'register.unit.add') ? 'active' : '';?>" href="add.register.unit.php">Add Register Unit
  User</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="list.register.unit.php">List Register Unit
+            <li><a class="dropdown-item <?=($activePage == 'register.unit.list') ? 'active' : '';?>" href="list.register.unit.php">List Register Unit
  User</a></li>
           </ul>
         </li>
         <?php }?>
     <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 2) {?>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'add.teacher' || $activePage == 'teacher.list') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Teacher
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="add.teacher.php">Add Teacher User</a></li>
+            <li><a class="dropdown-item <?=($activePage == 'add.teacher') ? 'active' : '';?>" href="add.teacher.php">Add Teacher User</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="list.teacher.php">List Teacher User</a></li>
+            <li><a class="dropdown-item <?=($activePage == 'teacher.list') ? 'active' : '';?>" href="list.teacher.php">List Teacher User</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'add.student' || $activePage == 'student.list') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Student
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="add.student.php">Add Student User</a></li>
+            <li><a class="dropdown-item <?=($activePage == 'add.student') ? 'active' : '';?>" href="add.student.php">Add Student User</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="list.student.php">List Student User</a></li>
+            <li><a class="dropdown-item <?=($activePage == 'student.list') ? 'active' : '';?>" href="list.student.php">List Student User</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'add.class' || $activePage == 'class.list') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Class
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="add.class.php">Add Class</a></li>
+            <li><a class="dropdown-item <?=($activePage == 'add.class') ? 'active' : '';?>" href="add.class.php">Add Class</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="list.class.php">List Class</a></li>
+            <li><a class="dropdown-item <?=($activePage == 'class.list') ? 'active' : '';?>" href="list.class.php">List Class</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'add.lesson' || $activePage == 'lesson.list') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Lesson
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="add.lesson.php">Add Lesson</a></li>
+            <li><a class="dropdown-item <?=($activePage == 'add.lesson') ? 'active' : '';?>" href="add.lesson.php">Add Lesson</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="list.lessons.php">List Lesson</a></li>
+            <li><a class="dropdown-item <?=($activePage == 'lesson.list') ? 'active' : '';?>" href="list.lessons.php">List Lesson</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'send.announcement' || $activePage == 'list.announcement') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Announcement
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="add.announcement.php">Send  Announcement</a></li>
+            <li><a class="dropdown-item <?=($activePage == 'send.announcement') ? 'active' : '';?>" href="add.announcement.php">Send  Announcement</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="list.announcement.php">List  Announcement</a></li>
+            <li><a class="dropdown-item <?=($activePage == 'list.announcement') ? 'active' : '';?>" href="list.announcement.php">List  Announcement</a></li>
           </ul>
         </li>
         <?php }?>

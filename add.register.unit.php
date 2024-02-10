@@ -1,6 +1,7 @@
 <?php
 @session_start();
 $activeTitle = "Add Register Unit User";
+$activePage = "register.unit.add";
 require 'up.html.php';
 require 'login.control.php';
 ?>

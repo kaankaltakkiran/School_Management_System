@@ -1,7 +1,7 @@
 <?php
 session_start();
 $activeTitle = "Admin List";
-$activePage = "index";
+$activePage = "admin.list";
 require 'up.html.php';
 require 'login.control.php';
 ?>

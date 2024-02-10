@@ -1,7 +1,7 @@
 <?php
 @session_start();
 $activeTitle = "Announcement";
-$activePage = "announcement";
+$activePage = "list.announcement";
 require 'up.html.php';
 require 'login.control.php';
 ?>

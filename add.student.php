@@ -1,6 +1,7 @@
 <?php
 @session_start();
 $activeTitle = "Add Student User";
+$activePage = "add.student";
 require 'up.html.php';
 require 'login.control.php';
 ?>

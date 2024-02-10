@@ -1,6 +1,7 @@
 <?php
 @session_start();
 $activeTitle = "Add Admin";
+$activePage = "add.admin";
 require 'up.html.php';
 require 'login.control.php';
 ?>
