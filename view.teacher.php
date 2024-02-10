@@ -8,14 +8,9 @@ require 'login.control.php';
 <?php require 'navbar.php'?>
 <?php
 require_once 'db.php';
-
 $id = $_GET['idTeacher'];
-
-/* SELECT *FROM teachers JOIN lessons ON teachers.lessonid = lessons.lessonid WHERE userid = :idTeacher */
 $sql = " SELECT *FROM teachers JOIN lessons ON teachers.lessonid = lessons.lessonid WHERE userid = :idTeacher";
-
 $SORGU = $DB->prepare($sql);
-/* SELECT * FROM teachers where userid = :idTeacher */
 $SORGU->bindParam(':idTeacher', $id);
 $SORGU->execute();
 $teachers = $SORGU->fetchAll(PDO::FETCH_ASSOC);
