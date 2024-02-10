@@ -6,10 +6,7 @@ require 'up.html.php';
 ?>
 <?php require 'navbar.php'?>
 <div class="container">
-  <div class="row justify-content-center mt-3 ">
- <div class="col-6">
-<a href="login.php" class="btn btn-danger">Login Page</a>
-</div>
+  <div class="row justify-content-center mt-3">
 </div>
 <!-- Eğer adamin giriş yaparsa aşaığıdaki kısımlar görünür(role=2) -->
 <?php if ($_SESSION['role'] == 1 || $_SESSION['role'] == 2) {?>
