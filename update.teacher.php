@@ -24,10 +24,11 @@ require_once 'db.php';
 $id = $_GET['idTeacher'];
 //! Teacherın seçtiği sınıfları çekme
 //! joinle clases tablosundaki classid ile teachers tablosundaki classid'yi içeren classidleri eşleşenleri getir
-$sql = "SELECT DISTINCT classes.*,teachers.*
+$sql = "SELECT * FROM teachers WHERE userid = :idTeacher";
+/* SELECT DISTINCT classes.*,teachers.*
 FROM classes
 JOIN teachers ON teachers.classid LIKE CONCAT('%', classes.classid, '%')
-WHERE userid = :idTeacher";
+WHERE userid = :idTeacher */
 $SORGU = $DB->prepare($sql);
 
 $SORGU->bindParam(':idTeacher', $id);
@@ -80,6 +81,20 @@ if (isset($_POST['form_submit'])) {
     $teacherLessonid = implode(',', $lessonIds);
     $teacherLessonName = implode(',', $lessonNames);
 
+    //!Chatgpt çözümü
+    $classIds = array(); // classid'leri tutacak dizi
+    $classNames = array(); // classname'leri tutacak dizi
+
+    foreach ($_POST['class'] as $selectedClass) {
+        $selectedValues = explode('-', $selectedClass);
+        $classIds[] = $selectedValues[0];
+        $classNames[] = $selectedValues[1];
+    }
+
+    // Virgülle ayrılmış bir şekilde classid ve classname'leri oluştur
+    $studentClassid = implode(',', $classIds);
+    $studentClassName = implode(',', $classNames);
+
     //!İmage elemanları
     $img_name = $_FILES['form_image']['name'];
     $img_size = $_FILES['form_image']['size'];
@@ -109,7 +124,7 @@ if (isset($_POST['form_submit'])) {
                 //?unlink dosya silmek için kullanılır
                 unlink('teacher_images/' . $old_img_name);
                 //!Foto güncellediyse veritabanına yeni fotoğraf adını kaydet
-                $sql = "UPDATE teachers SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,userimg = '$new_img_name',classid='$teacherClass',lessonid = :lessonid, lessonname = :lessonname WHERE userid = :idTeacher";
+                $sql = "UPDATE teachers SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,userimg = '$new_img_name',classid=:classid,classname=:classname,lessonid = :lessonid, lessonname = :lessonname WHERE userid = :idTeacher";
 
             } else {
                 $errors[] = "You can't upload files of this type";
@@ -117,7 +132,7 @@ if (isset($_POST['form_submit'])) {
         }
     } else {
         //!Foto güncellemediysen eski fotoğrafı kullan
-        $sql = "UPDATE teachers SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,classid='$teacherClass',lessonid = :lessonid, lessonname = :lessonname WHERE userid = :idTeacher";
+        $sql = "UPDATE teachers SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,classid=:classid,classname=:classname,lessonid = :lessonid, lessonname = :lessonname WHERE userid = :idTeacher";
     }
     //! Hata yoksa veritabanına kaydet
     if (empty($errors)) {
@@ -138,6 +153,8 @@ if (isset($_POST['form_submit'])) {
             $SORGU->bindParam(':form_adress', $address);
             $SORGU->bindParam(':form_phonenumber', $phoneNumber);
             $SORGU->bindParam(':form_birthdate', $birthDate);
+            $SORGU->bindParam(':classid', $studentClassid);
+            $SORGU->bindParam(':classname', $studentClassName);
             $SORGU->bindParam(':lessonid', $teacherLessonid);
             $SORGU->bindParam(':lessonname', $teacherLessonName);
 
@@ -220,10 +237,10 @@ foreach ($classes as $class) {
     //! classes tablosunda yer alan classidler ile seçilen classidleri eşleşenler varsa checked yap
     $classId = $class['classid'];
     $isChecked = in_array($classId, $selectClassesArray); // Seçili olup olmadığını kontrol et
-
+    $classValue = $class['classid'] . '-' . $class['classname'];
     echo '<div class="col-md-3">';
     echo '<div class="form-check form-check-inline">';
-    echo '<input class="form-check-input" type="checkbox" name="class[]" value="' . $classId . '" id="check-' . $classId . '" ' . ($isChecked ? 'checked' : '') . '>';
+    echo '<input class="form-check-input" type="checkbox" name="class[]" value="' . $classValue . '" id="check-' . $classId . '" ' . ($isChecked ? 'checked' : '') . '>';
     echo '<label class="form-check-label" for="check-' . $classId . '">' . $class['classname'] . '</label>';
     echo '</div>';
     echo '</div>';

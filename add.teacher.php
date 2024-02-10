@@ -23,12 +23,12 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
     $birthDate = $_POST['form_birthdate'];
     $addedUnitid = $_SESSION['id'];
     $addedUnitName = $_SESSION['userName'];
-    //?Sınıfları forech ile alma
+    /*   //?Sınıfları forech ile alma
     $selectClasses = $_POST['class'];
     $teacherClass = "";
     foreach ($selectClasses as $selectClass) {
-        $teacherClass .= $selectClass . ",";
-    }
+    $teacherClass .= $selectClass . ",";
+    } */
     //!Chatgpt çözümü
     $lessonIds = array(); // lessonid'leri tutacak dizi
     $lessonNames = array(); // lessonname'leri tutacak dizi
@@ -41,6 +41,20 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
     // Virgülle ayrılmış bir şekilde lessonid ve lessonname'leri oluştur
     $teacherLessonid = implode(',', $lessonIds);
     $teacherLessonName = implode(',', $lessonNames);
+
+    //!Chatgpt çözümü
+    $classIds = array(); // classid'leri tutacak dizi
+    $classNames = array(); // classname'leri tutacak dizi
+
+    foreach ($_POST['class'] as $selectedClass) {
+        $selectedValues = explode('-', $selectedClass);
+        $classIds[] = $selectedValues[0];
+        $classNames[] = $selectedValues[1];
+    }
+
+    // Virgülle ayrılmış bir şekilde classid ve classname'leri oluştur
+    $studentClassid = implode(',', $classIds);
+    $studentClassName = implode(',', $classNames);
 
     $password = $_POST['form_password'];
 /*  Şifrele hashleme */
@@ -84,7 +98,7 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 move_uploaded_file($tmp_name, $img_upload_path);
 
                 // Insert into Database
-                $sql = "INSERT INTO teachers (username,useremail,usergender,useraddress,phonenumber,birthdate,userpassword,userimg,classid,lessonid,lessonname,addedunitid,addedunitname) VALUES (:form_username,:form_email,:form_gender,:form_adress,:form_phonenumber,:form_birthdate,'$password','$new_img_name','$teacherClass',:lessonid,:lessonname,:unitid,:unitname)";
+                $sql = "INSERT INTO teachers (username,useremail,usergender,useraddress,phonenumber,birthdate,userpassword,userimg,classid,classname,lessonid,lessonname,addedunitid,addedunitname) VALUES (:form_username,:form_email,:form_gender,:form_adress,:form_phonenumber,:form_birthdate,'$password','$new_img_name',:classid,:classname,:lessonid,:lessonname,:unitid,:unitname)";
                 $SORGU = $DB->prepare($sql);
 
                 $SORGU->bindParam(':form_username', $name);
@@ -93,6 +107,8 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 $SORGU->bindParam(':form_adress', $address);
                 $SORGU->bindParam(':form_phonenumber', $phoneNumber);
                 $SORGU->bindParam(':form_birthdate', $birthDate);
+                $SORGU->bindParam(':classid', $studentClassid);
+                $SORGU->bindParam(':classname', $studentClassName);
                 $SORGU->bindParam(':lessonid', $teacherLessonid);
                 $SORGU->bindParam(':lessonname', $teacherLessonName);
                 $SORGU->bindParam(':unitid', $addedUnitid);
@@ -173,9 +189,10 @@ $classes = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //! chatgpt ile sınıfları listeleme
 echo '<label class="mb-1">Select Classes</label>';
 foreach ($classes as $class) {
+    $classValue = $class['classid'] . '-' . $class['classname'];
     echo '<div class="col-md-3">'; // Dört sütunlu (veya istediğiniz sayıda sütun) bir düzen
     echo '<div class="form-check form-check-inline">';
-    echo '<input class="form-check-input" type="checkbox" name="class[]" value="' . $class['classid'] . '" id="check-' . $class['classid'] . '">';
+    echo '<input class="form-check-input" type="checkbox" name="class[]" value="' . $classValue . '" id="check-' . $class['classid'] . '">';
     echo '<label class="form-check-label" for="check-' . $class['classid'] . '">' . $class['classname'] . '</label>';
     echo '</div>';
     echo '</div>';

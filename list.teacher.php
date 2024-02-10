@@ -34,6 +34,7 @@ if ($_SESSION['role'] != 2) {
       <th>Teacher Image</th>
       <th>Teacher Name</th>
       <th>Email</th>
+      <th>Class</th>
       <th>Lessons</th>
       <th>Gender</th>
       <th>Create Date</th>
@@ -80,8 +81,9 @@ foreach ($teachers as $teacher) {
     <tr>
       <th>{$teacher['userid']}</th>
       <td><img src='teacher_images/{$teacher['userimg']}' class='rounded-circle' width='100' height='100'></td>
-      <td>{$teacher['username']}</td>
+      <td><a href='view.teacher.php?idTeacher={$teacher['userid']}' class=''>{$teacher['username']}</a></td>
       <td>{$teacher['useremail']}</td>
+      <td>{$teacher['classname']}</td>
       <td>{$teacher['lessonname']}</td>
       <td>$gender</td>
       <td>{$teacher['createdate']}</td>

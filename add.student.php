@@ -205,7 +205,7 @@ $lessons = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 <div class="form-floating mb-3">
   <div class="row">
   <?php
-//! chatgpt ile sınıfları listeleme
+//! chatgpt ile Sınıfları listeleme
 echo '<label class="mb-1">Select Lessons</label>';
 foreach ($lessons as $lesson) {
     $checkbox_value = $lesson['lessonid'] . '-' . $lesson['lessonname'];
