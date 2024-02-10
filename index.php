@@ -6,8 +6,56 @@ require 'up.html.php';
 ?>
 <?php require 'navbar.php'?>
 <div class="container">
-  <div class="row justify-content-center mt-3">
-</div>
+  <div class="row justify-content-center">
+<div class="row row-cols-1 row-cols-md-5 g-4 mt-4 ">
+<?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 1) {?>
+<a href="list.admin.php" class="col btn btn-danger  m-2 py-3">
+<img width="48" height="48" src="https://img.icons8.com/color/48/admin-settings-male.png" alt="admin-settings-male"/>
+<br>
+                  Admin
+               </a>
+               <a href="list.register.unit.php" class="col btn btn-primary  m-2 py-3">
+               <img width="48" height="48" src="https://img.icons8.com/doodle/48/conference-call.png" alt="conference-call"/>
+                 <br>
+                 Register Unit
+               </a>
+               <?php }?>
+               <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 2) {?>
+  <a href="list.teacher.php" class="col btn btn-secondary  m-2 py-3">
+  <img width="48" height="48" src="https://img.icons8.com/color/48/teacher.png" alt="teacher"/>
+  <br>
+                Teacher
+               </a>
+               <a href="list.student.php" class="col btn btn-success  m-2 py-3">
+               <img width="48" height="48" src="https://img.icons8.com/emoji/48/man-student.png" alt="man-student"/><br>
+                  Student
+               </a>
+               <a href="list.class.php" class="col btn btn-secondary m-2 py-3">
+               <img width="48" height="48" src="https://img.icons8.com/officel/48/class.png" alt="class"/>
+                 <br>
+                  Class
+               </a>
+               <a href="list.lessons.php" class="col btn btn-info  m-2 py-3">
+               <img width="48" height="48" src="https://img.icons8.com/plasticine/48/book.png" alt="book"/>
+                 <br>
+                  Lesson
+               </a>
+               </div>
+               <div class="row row-cols-1 row-cols-md-5 g-4 mt-4">
+               <a href="list.announcement.php" class="col btn btn-warning m-2 py-3">
+               <img width="48" height="48" src="https://img.icons8.com/color/48/commercial.png" alt="commercial"/>
+                 <br>
+                 Announcement
+               </a>
+               <a href="" class="col btn btn-dark m-2 py-3">
+               <img src="./public/img/icons8-information.gif" alt="icon">
+                 <br>
+                  School İnformation
+               </a>
+
+                       <?php }?>
+                       </div>
+                       </div>
 <!-- Eğer adamin giriş yaparsa aşaığıdaki kısımlar görünür(role=2) -->
 <?php if ($_SESSION['role'] == 1 || $_SESSION['role'] == 2) {?>
       <div class="container my-3 ">
@@ -150,4 +198,20 @@ require 'up.html.php';
       </div>
       <?php }?>
 </div>
+</div>
+<?php if ($_SESSION['isLogin'] == 1) {?>
+<footer class="bg-body-tertiary text-center text-lg-start mt-3  ">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+    <p style="margin-bottom: 0;">© 2023 Copyright: Kaan Kaltakkıran
+    <a href="https://github.com/kaankaltakkiran/School_Management_System" target="_blank" rel="noopener noreferrer"><img width="35" height="35" src="https://img.icons8.com/plasticine/50/github.png" alt="github"/></a>
+  </p>
+
+    <hr style="border-top: 1px solid rgba(0, 0, 0, 0.1);">
+  icon by <a href="https://icons8.com">Icons8</a>
+
+  </div>
+  <!-- Copyright -->
+</footer>
+<?php }?>
 <?php require 'down.html.php';?>
