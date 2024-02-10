@@ -30,6 +30,7 @@ DROP TABLE IF EXISTS `announcements`;
 CREATE TABLE `announcements` (
   `announcementid` int(11) NOT NULL AUTO_INCREMENT,
   `senderid` int(11) NOT NULL,
+  `senderrole` int(11) NOT NULL,
   `receiverid` int(11) NOT NULL,
   `createdate` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `announcementtitle` varchar(50) NOT NULL,
@@ -40,9 +41,10 @@ CREATE TABLE `announcements` (
   PRIMARY KEY (`announcementid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
-INSERT INTO `announcements` (`announcementid`, `senderid`, `receiverid`, `createdate`, `announcementtitle`, `startdate`, `lastdate`, `ispublish`, `announcement`) VALUES
-(1,	1,	2,	'2024-02-08 19:43:36',	'Register Unit Annoucement Title',	'2024-02-09',	'2024-02-12',	'1',	'Register Unit Annoucement       '),
-(2,	1,	3,	'2024-02-08 18:14:13',	'Teacher Annoucement Title',	'2024-02-08',	'2024-02-12',	'0',	'Teacher Annoucement Title');
+INSERT INTO `announcements` (`announcementid`, `senderid`, `senderrole`, `receiverid`, `createdate`, `announcementtitle`, `startdate`, `lastdate`, `ispublish`, `announcement`) VALUES
+(1,	1,	2,	2,	'2024-02-10 11:28:00',	'Title 1',	'2024-02-07',	'2024-02-15',	'1',	'  Title 1  '),
+(2,	1,	2,	3,	'2024-02-09 17:59:51',	'Title 2',	'2024-02-07',	'2024-02-15',	'0',	'Title 2'),
+(3,	1,	3,	4,	'2024-02-09 15:11:29',	'Title 3',	'2024-02-09',	'2024-02-12',	'1',	'Title 3');
 
 DROP TABLE IF EXISTS `classes`;
 CREATE TABLE `classes` (
@@ -150,7 +152,8 @@ CREATE TABLE `teachers` (
   `usergender` char(1) NOT NULL,
   `roleuser` int(11) NOT NULL DEFAULT 3,
   `createdate` datetime NOT NULL DEFAULT current_timestamp(),
-  `classid` varchar(50) NOT NULL,
+  `classid` text NOT NULL,
+  `classname` text NOT NULL,
   `useraddress` varchar(100) NOT NULL,
   `phonenumber` char(11) NOT NULL,
   `birthdate` date NOT NULL,
@@ -162,8 +165,8 @@ CREATE TABLE `teachers` (
   PRIMARY KEY (`userid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
-INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `roleuser`, `createdate`, `classid`, `useraddress`, `phonenumber`, `birthdate`, `userimg`, `lessonid`, `lessonname`, `addedunitid`, `addedunitname`) VALUES
-(1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$E9ELN20pn/QDGoI26a7Nt.dnAFozCXYlhkxUmjrO8UnKGN5cz4gmK',	'M',	3,	'2024-01-30 20:45:09',	'1,6,11,16,',	'Address 1',	'05076600884',	'1976-01-01',	'IMG-65b935a5d358a2.77186819.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
-(2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$/cnxVraJONa7bqxcHMqwpuDG7eJmVaB.h6FUe4H6oJrZhdcCfkTXO',	'F',	3,	'2024-01-30 20:45:45',	'1,2,15,',	'Adress 2',	'23123112323',	'1974-01-01',	'IMG-65b935c9a1a4f0.28430672.png',	'3',	'Turkish',	1,	'Kaan Kaltakkıran');
+INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `roleuser`, `createdate`, `classid`, `classname`, `useraddress`, `phonenumber`, `birthdate`, `userimg`, `lessonid`, `lessonname`, `addedunitid`, `addedunitname`) VALUES
+(1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$F8BOCVniVNOqHhjl7gWf8e5ptBp1wNP.KhGPA3GA9pEJx0hPGEZOm',	'M',	3,	'2024-02-10 12:43:06',	'1,6,11,16',	'9/A,10/B,11/C,12/D',	'Address 1',	'23123112323',	'1975-01-01',	'IMG-65c7452a37d2d7.23094001.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
+(2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$a7xTEd88iyzI43udPEmrSeTmxBBaj9nf.JXtJV8NadXoRV1/GGe7q',	'F',	3,	'2024-02-10 12:43:40',	'1,10',	'9/A,11/B',	'Address 2',	'12331223123',	'1980-01-01',	'IMG-65c7454cee1627.24858158.png',	'3',	'Turkish',	1,	'Kaan Kaltakkıran');
 
--- 2024-02-08 17:07:55
+-- 2024-02-10 09:44:49
