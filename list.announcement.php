@@ -77,7 +77,7 @@ if ($userid == $fullAnnouncements[0]['senderid']) {
         <div class="accordion-body">
           <div class="d-flex mb-3">
             <div class="p-2">
-              <?php echo $fullAnnouncement['announcement']; ?>
+              <?php echo nl2br($fullAnnouncement['announcement']) ?>
             </div>
             <div class="ms-auto p-2">Date: <?php echo $formatted_datetime ?></div>
             <div class="text-end">

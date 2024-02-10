@@ -87,7 +87,7 @@ if (isset($_POST['form_submit'])) {
 <div class="mb-3">
 <label for="exampleFormControlInput2" class="form-label">Announcement</label>
   <textarea id="exampleFormControlInput2"  rows="5" cols="85"  name="form_announcement" id="floatingTextarea"required>
-  <?php echo $announcements[0]['announcement']; ?>
+  <?php echo nl2br($announcements[0]['announcement']) ?>
   </textarea>
 </div>
                   <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Update Announcement</button>
