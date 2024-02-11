@@ -202,7 +202,7 @@ require 'up.html.php';
               <h5 class="card-title">Add School İnformation</h5>
               <p class="card-text">Register Unit Add School İnformation</p>
               <div class="d-flex justify-content-between">
-          <a href="add.information.php" class="btn  me-2  btn-danger mt-5">Send School İnformation
+          <a href="add.information.php" class="btn  me-2  btn-danger mt-5">Add School İnformation
             <i class="bi bi-send-fill"></i>
           </a>
           <a href="list.information.php" class="btn  btn-warning mt-5">List School İnformation
