@@ -72,7 +72,9 @@ if (isset($_POST['form_submit'])) {
   <input type="text"  class="form-control" value="<?php echo $lessons[0]['lessonname'] ?>" name="from_lessonname">
   <label>User Name</label>
 </div>
-                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Update Lesson</button>
+                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Update Lesson
+                  <i class="bi bi-send"></i>
+                  </button>
      </form>
      </div>
 

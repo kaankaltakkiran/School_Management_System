@@ -89,7 +89,9 @@ if (isset($_POST['form_submit'])) {
   <?php echo nl2br($announcements[0]['announcement']) ?>
   </textarea>
 </div>
-                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Update Announcement</button>
+                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Update Announcement
+                  <i class="bi bi-send"></i>
+                  </button>
      </form>
      </div>
 

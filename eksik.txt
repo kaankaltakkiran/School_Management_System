@@ -15,3 +15,8 @@ genel kodlarını elden geçir yorum satırları boşluklar vb
 
 localhosttan yazımları kontrol et başlık butonlar falan
 tüm sayflarda activetitle ve page control et
+ <i class="bi bi-send"></i>
+<i class='bi bi-trash'></i>
+<i class='bi bi-arrow-clockwise'></i>
+&nbsp; <i class="bi bi-upload"></i>
+back ok

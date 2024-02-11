@@ -132,7 +132,10 @@ if (!empty($errors)) {
   <label for="floatingSelect">Login Type</label>
 </div>
 
-                  <button type="submit" name="submit" class="btn btn-primary">Login</button>
+                  <button type="submit" name="submit" class="btn btn-primary">
+                    Login
+                    <i class="bi bi-box-arrow-in-left"></i>
+                  </button>
      </form>
      </div>
 </div>

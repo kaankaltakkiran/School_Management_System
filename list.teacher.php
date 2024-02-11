@@ -22,7 +22,7 @@ if ($_SESSION['role'] != 2) {
   <div class='row text-end'>
   <p>
     <a href='add.teacher.php' class="btn btn-warning btn-sm ">
-     Add New Teacher User<i class="bi bi-send"></i> </a>
+     Add New Teacher User <i class="bi bi-send"></i> </a>
   </p>
 </div>
 </div>
@@ -90,8 +90,8 @@ foreach ($teachers as $teacher) {
       <td>{$teacher['useraddress']}</td>
       <td>{$teacher['phonenumber']}</td>
       <td>{$teacher['birthdate']}</td>
-      <td><a href='update.teacher.php?idTeacher={$teacher['userid']}' class='btn btn-success btn-sm'>Update</a></td>
-      <td><a href='list.teacher.php?removeTeacherid={$teacher['userid']}' onclick='return confirm(\"Are you sure you want to delete {$teacher['username']}?\")' class='btn btn-danger btn-sm'>Delete</a></td>
+      <td><a href='update.teacher.php?idTeacher={$teacher['userid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a></td>
+      <td><a href='list.teacher.php?removeTeacherid={$teacher['userid']}' onclick='return confirm(\"Are you sure you want to delete {$teacher['username']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a></td>
    </tr>
   ";
 }

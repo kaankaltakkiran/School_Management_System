@@ -320,10 +320,12 @@ foreach ($lessons as $lesson) {
                         <img src="student_images/<?php echo $students[0]['userimg']; ?>" alt="User Image" class="img-thumbnail">
 <div class="input-group mb-3">
   <input type="file"  name='form_image' class="form-control" id="inputGroupFile02">
-  <label class="input-group-text" for="inputGroupFile02">Upload Student User Image</label>
+  <label class="input-group-text" for="inputGroupFile02">Upload Student User Image &nbsp; <i class="bi bi-upload"></i></label>
 </div>
 
-                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Update Student User</button>
+                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Update Student User
+                  <i class="bi bi-send"></i>
+                  </button>
      </form>
      </div>
 

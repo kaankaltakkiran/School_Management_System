@@ -96,7 +96,9 @@ if (!empty($approves)) {
   <label>lesson Name</label>
 </div>
 
-                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Add Lesson</button>
+                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Add Lesson
+                  <i class="bi bi-send"></i>
+                  </button>
      </form>
      </div>
 </div>

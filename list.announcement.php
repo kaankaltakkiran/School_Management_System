@@ -57,9 +57,9 @@ if ($userid == $fullAnnouncements[0]['senderid']) {
         if ($fullAnnouncement['ispublish'] == 0 || $dateControl == false) {
             $publishAlert = "<span style='float: right;' class='badge bg-danger fw-bolder fs-6 '>Not Published !!!</span>";
         }
-        $update_button = '<a href="update.announcement.php?idannouncement=' . $fullAnnouncement['announcementid'] . '" class="btn btn-success me-2">Update</a>';
+        $update_button = '<a href="update.announcement.php?idannouncement=' . $fullAnnouncement['announcementid'] . '" class="btn btn-success me-2">Update <i class="bi bi-arrow-clockwise"></i></a>';
 
-        $delete_button = '<a href="list.announcement.php?removeannouncementid=' . $fullAnnouncement['announcementid'] . '" onclick="return confirm(\'Are you sure you want to delete ' . $fullAnnouncement['announcementtitle'] . '?\')" class="btn btn-danger">Delete</a>';
+        $delete_button = '<a href="list.announcement.php?removeannouncementid=' . $fullAnnouncement['announcementid'] . '" onclick="return confirm(\'Are you sure you want to delete ' . $fullAnnouncement['announcementtitle'] . '?\')" class="btn btn-danger">Delete <i class="bi bi-trash"></i></a>';
 
         $announcementid = "accordionflush{$fullAnnouncement['announcementid']}";
         $datetime = new DateTime($fullAnnouncement["createdate"]);

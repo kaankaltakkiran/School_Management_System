@@ -121,7 +121,9 @@ for ($i = ord('A'); $i <= ord('Z'); $i++) {
   </select>
   <label for="floatingSelect2">Class Letter</label>
 </div>
-                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Add Class</button>
+                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Add Class
+                  <i class="bi bi-send"></i>
+                  </button>
      </form>
      </div>
 </div>

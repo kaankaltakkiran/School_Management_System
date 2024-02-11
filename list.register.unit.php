@@ -21,8 +21,8 @@ if ($_SESSION['role'] != 1) {
   </div>
   <div class='row text-end'>
   <p>
-    <a href='add.admin.php' class="btn btn-warning btn-sm ">
-     Add New Register Unit User<i class="bi bi-send"></i> </a>
+    <a href='add.register.unit.php' class="btn btn-warning btn-sm ">
+     Add New Register Unit User <i class="bi bi-send"></i> </a>
   </p>
 </div>
 </div>
@@ -85,8 +85,8 @@ foreach ($registerunits as $registerunit) {
       <td>{$registerunit['useraddress']}</td>
       <td>{$registerunit['phonenumber']}</td>
       <td>{$registerunit['birthdate']}</td>
-      <td><a href='update.register.unit.php?idRegisterUnit={$registerunit['userid']}' class='btn btn-success btn-sm'>Update</a></td>
-      <td><a href='update.register.unit.php?idRegisterUnit={$registerunit['userid']}' onclick='return confirm(\"Are you sure you want to delete {$registerunit['username']}?\")' class='btn btn-danger btn-sm'>Delete</a></td>
+      <td><a href='update.register.unit.php?idRegisterUnit={$registerunit['userid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a></td>
+      <td><a href='update.register.unit.php?idRegisterUnit={$registerunit['userid']}' onclick='return confirm(\"Are you sure you want to delete {$registerunit['username']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a></td>
    </tr>
   ";
 }

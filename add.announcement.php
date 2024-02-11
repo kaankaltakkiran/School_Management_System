@@ -116,7 +116,9 @@ if (!empty($approves)) {
   <label for="floatingTextarea2">Announcement</label>
 </div>
 
-                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Send Announcement</button>
+                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Send Announcement
+                  <i class="bi bi-send"></i>
+                  </button>
      </form>
      </div>
 </div>

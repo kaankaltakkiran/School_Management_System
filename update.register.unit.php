@@ -176,10 +176,12 @@ if (!empty($errors)) {
                         <img src="register_unit_images/<?php echo $registerunits[0]['userimg']; ?>" alt="User Image" class="img-thumbnail">
 <div class="input-group mb-3">
   <input type="file"  name='form_image' class="form-control" id="inputGroupFile02">
-  <label class="input-group-text" for="inputGroupFile02">Upload Register Unit Image</label>
+  <label class="input-group-text" for="inputGroupFile02">Upload Register Unit Image &nbsp; <i class="bi bi-upload"></i></label>
 </div>
 
-                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Add Register Unit User</button>
+                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Add Register Unit User
+                  <i class="bi bi-send"></i>
+                  </button>
      </form>
      </div>
 

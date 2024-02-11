@@ -22,7 +22,7 @@ if ($_SESSION['role'] != 2) {
   <div class='row text-end'>
   <p>
     <a href='add.student.php' class="btn btn-warning btn-sm ">
-     Add New Student<i class="bi bi-send"></i> </a>
+     Add New Student <i class="bi bi-send"></i> </a>
   </p>
 </div>
 </div>
@@ -69,7 +69,7 @@ foreach ($classes as $class) {
       <th>{$class['classid']}</th>
       <td>{$class['classname']}</td>
       <td>{$class['createdate']}</td>
-      <td><a href='list.class.student.php?idClass={$class['classid']}' class='btn btn-info btn-sm'>List Student</a></td>
+      <td><a href='list.class.student.php?idClass={$class['classid']}' class='btn btn-info btn-sm'>List Student <i class='bi bi-person-lines-fill'></i></a></td>
    </tr>
   ";
 }

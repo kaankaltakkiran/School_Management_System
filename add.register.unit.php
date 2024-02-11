@@ -174,10 +174,13 @@ if (!empty($approves)) {
 </div>
 <div class="input-group mb-3">
   <input type="file"  name='form_image' class="form-control" id="inputGroupFile02"required>
-  <label class="input-group-text" for="inputGroupFile02">Upload Register Unit Image</label>
+  <label class="input-group-text" for="inputGroupFile02">Upload Register Unit Image&nbsp; <i class="bi bi-upload"></i></label>
 </div>
 
-                  <button type="submit" name="submit" class="btn btn-primary mt-3 ">Add Register Unit User</button>
+                  <button type="submit" name="submit" class="btn btn-primary mt-3 ">
+                    Add Register Unit User
+                    <i class="bi bi-send"></i>
+                  </button>
      </form>
      </div>
 </div>

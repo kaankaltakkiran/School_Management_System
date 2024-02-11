@@ -22,7 +22,7 @@ if ($_SESSION['role'] != 1) {
   <div class='row text-end'>
   <p>
     <a href='add.admin.php' class="btn btn-warning btn-sm ">
-     Add New Admin User<i class="bi bi-send"></i> </a>
+     Add New Admin User <i class="bi bi-send"></i> </a>
   </p>
 </div>
 </div>
@@ -74,7 +74,7 @@ foreach ($admins as $admin) {
     $gender = ($gender == 'M') ? 'Male' : 'Famale';
     //! Eğer $_SESSION içerisindeki id, şu anki adminin id'sine eşit değilse silemesin
     $deleteButton = ($_SESSION['id'] != $admin['userid']) ?
-    "<a href='list.admin.php?removeAdminid={$admin['userid']}' onclick='return confirm(\"Are you sure you want to delete {$admin['username']}?\")' class='btn btn-danger btn-sm'>Delete</a>" :
+    "<a href='list.admin.php?removeAdminid={$admin['userid']}' onclick='return confirm(\"Are you sure you want to delete {$admin['username']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a>" :
     "<span class='text-danger fw-bold '>You can't Delete yourself!!!</span>";
 
     echo "
@@ -85,7 +85,7 @@ foreach ($admins as $admin) {
       <td>{$admin['useremail']}</td>
       <td>$gender</td>
       <td>{$admin['createdate']}</td>
-      <td><a href='update.admin.php?idAdmin={$admin['userid']}' class='btn btn-success btn-sm'>Update</a></td>
+      <td><a href='update.admin.php?idAdmin={$admin['userid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a></td>
       <td>$deleteButton</td>
    </tr>
   ";

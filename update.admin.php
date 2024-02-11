@@ -153,9 +153,11 @@ if (!empty($errors)) {
                         <img src="admin_images/<?php echo $admins[0]['userimg']; ?>" alt="User Image" class="img-thumbnail">
 <div class="input-group mb-3">
   <input type="file"  name='form_image'  class="form-control" id="inputGroupFile02">
-  <label class="input-group-text" for="inputGroupFile02">Upload Blog Image</label>
+  <label class="input-group-text" for="inputGroupFile02">Upload Admin Image &nbsp; <i class="bi bi-upload"></i></label>
 </div>
-                  <button type="submit" name="form_submit" class="btn btn-primary mb-3">Update Admin User</button>
+                  <button type="submit" name="form_submit" class="btn btn-primary mb-3">Update Admin User
+                  <i class="bi bi-send"></i>
+                  </button>
      </form>
      </div>
 

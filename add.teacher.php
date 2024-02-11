@@ -261,10 +261,12 @@ foreach ($lessons as $lesson) {
 </div>
 <div class="input-group mb-3">
   <input type="file"  name='form_image' class="form-control" id="inputGroupFile02"required>
-  <label class="input-group-text" for="inputGroupFile02">Upload Teacher Image</label>
+  <label class="input-group-text" for="inputGroupFile02">Upload Teacher Image &nbsp; <i class="bi bi-upload"></i></label>
 </div>
 
-                  <button type="submit" name="submit" class="btn btn-primary mt-3 ">Add Teacher User</button>
+                  <button type="submit" name="submit" class="btn btn-primary mt-3 ">Add Teacher User
+                  <i class="bi bi-send"></i>
+                  </button>
      </form>
      </div>
 </div>

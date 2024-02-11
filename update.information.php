@@ -140,7 +140,9 @@ foreach ($schoolinformations as $information) {
   <?php echo nl2br($informations[0]['schooladdress']); ?>
   </textarea>
 </div>
-                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Update School İnformation</button>
+                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Update School İnformation
+                  <i class="bi bi-send"></i>
+                  </button>
      </form>
      </div>
 </div>

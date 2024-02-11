@@ -22,7 +22,7 @@ if ($_SESSION['role'] != 2) {
   <div class='row text-end'>
   <p>
     <a href='add.class.php' class="btn btn-warning btn-sm ">
-     Add New Class<i class="bi bi-send"></i> </a>
+     Add New Class <i class="bi bi-send"></i> </a>
   </p>
 </div>
 </div>
@@ -70,8 +70,8 @@ foreach ($classes as $class) {
       <th>{$class['classid']}</th>
       <td>{$class['classname']}</td>
       <td>{$class['createdate']}</td>
-      <td><a href='' class='btn btn-success btn-sm'>Update</a></td>
-      <td><a href='list.class.php?removeClassid={$class['classid']}'onclick='return confirm(\"Are you sure you want to delete {$class['classname']}?\")' class='btn btn-danger btn-sm'>Delete</a></td>
+      <td><a href='' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a></td>
+      <td><a href='list.class.php?removeClassid={$class['classid']}'onclick='return confirm(\"Are you sure you want to delete {$class['classname']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a></td>
    </tr>
   ";
 }

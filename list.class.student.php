@@ -65,8 +65,8 @@ foreach ($students as $student) {
     <tr>
       <th>{$student['classid']}</th>
       <td><a href='view.student.php?idStudent={$student['userid']}' class=''>{$student['username']}</a></td>
-      <td><a href='update.student.php?idStudent={$student['userid']}' class='btn btn-success btn-sm'>Update</a></td>
-      <td><a href='list.class.student.php?removestudentid={$student['userid']}'onclick='return confirm(\"Are you sure you want to delete {$student['username']}?\")' class='btn btn-danger btn-sm'>Delete</a></td>
+      <td><a href='update.student.php?idStudent={$student['userid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a></td>
+      <td><a href='list.class.student.php?removestudentid={$student['userid']}'onclick='return confirm(\"Are you sure you want to delete {$student['username']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a></td>
    </tr>
   ";
 }

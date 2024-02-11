@@ -137,7 +137,9 @@ for ($i = 1950; $i <= date("Y"); $i++) {
   <label for="floatingTextarea2">School Address</label>
 </div>
 
-                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Add School İnformation</button>
+                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Add School İnformation
+                  <i class="bi bi-send"></i>
+                  </button>
      </form>
      </div>
 </div>
