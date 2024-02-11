@@ -11,19 +11,15 @@ if ($_SESSION['role'] != 1 and $_SESSION['role'] != 2) {
     die();
 }
 ?>
-
     <?php include 'navbar.php';?>
   <div class="container">
   <div class="row justify-content-center mt-3">
   <div class="col-6">
-
 <form method="POST">
 <h1 class="alert alert-info text-center">Announcement Update</h1>
 <?php
 require_once 'db.php';
-
 $id = $_GET['idannouncement'];
-
 $sql = "SELECT * FROM announcements WHERE announcementid = :idannouncement";
 $SORGU = $DB->prepare($sql);
 
@@ -36,13 +32,16 @@ $announcements = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 die(); */
 $isPublis = $announcements[0]['ispublish'];
 if (isset($_POST['form_submit'])) {
-    $announcementTitle = $_POST['form_title'];
+    //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
+    //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
+    //?Kullanıcıdan alınan veriler
+    $announcementTitle = htmlspecialchars($_POST['form_title']);
     $announcementStartDate = $_POST['form_startdate'];
     $announcementLastDate = $_POST['form_lastdate'];
 //!Checkbox değeri kontrolü
     //?checkbox işaretli ise 1 değilse 0
     $isPublish = isset($_POST['form_ispublish']) ? 1 : 0;
-    $announcementContent = $_POST['form_announcement'];
+    $announcementContent = htmlspecialchars($_POST['form_announcement']);
 
     $sql = "UPDATE announcements SET announcementtitle = :form_title, startdate = :form_startdate, lastdate=:form_lastdate,ispublish=:form_ispublish,announcement=:form_announcement WHERE announcementid = :idannouncement";
     $SORGU = $DB->prepare($sql);

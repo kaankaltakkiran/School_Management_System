@@ -9,6 +9,9 @@ sınıf olayında implode chatgpt
 id silmedeki get istekleri daha anlamlı yap
 update veya ekeleme yaparken aynı emailden kişi varsa ekleme veya update yapaamsın
 işlem yapan id
+
 duyru ekleme admin yapamasın
 genel kodlarını elden geçir yorum satırları boşluklar vb
-upsdate htmlchar
+
+localhosttan yazımları kontrol et başlık butonlar falan
+tüm sayflarda activetitle ve page control et

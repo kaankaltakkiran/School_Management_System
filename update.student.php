@@ -47,16 +47,17 @@ $selectLesonsArray = explode(",", $selectLessons);
 print_r($students);
 die(); */
 if (isset($_POST['form_submit'])) {
-
-    //!Form elemanları
-    $name = $_POST['form_username'];
-    $email = $_POST['form_email'];
-    $gender = $_POST['form_gender'];
-    $address = $_POST['form_adress'];
-    $phoneNumber = $_POST['form_phonenumber'];
+    //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
+    //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
+    //?Form elemanları
+    $name = htmlspecialchars($_POST['form_username']);
+    $email = htmlspecialchars($_POST['form_email']);
+    $gender = htmlspecialchars($_POST['form_gender']);
+    $address = htmlspecialchars($_POST['form_adress']);
+    $phoneNumber = htmlspecialchars($_POST['form_phonenumber']);
     $birthDate = $_POST['form_birthdate'];
-    $parentName = $_POST['form_parentname'];
-    $parentNumber = $_POST['form_parentnumber'];
+    $parentName = htmlspecialchars($_POST['form_parentname']);
+    $parentNumber = htmlspecialchars($_POST['form_parentnumber']);
     //!Chatgpt çözümü
 
     $classIds = array(); // Classid'leri tutacak dizi

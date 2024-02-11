@@ -37,10 +37,12 @@ print_r($admins);
 die(); */
 
 if (isset($_POST['form_submit'])) {
+    //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
+    //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
 
     //!Form elemanları
-    $name = $_POST['form_username'];
-    $email = $_POST['form_email'];
+    $name = htmlspecialchars($_POST['form_username']);
+    $email = htmlspecialchars($_POST['form_email']);
     $gender = $_POST['form_gender'];
     //!İmage elemanları
     $img_name = $_FILES['form_image']['name'];

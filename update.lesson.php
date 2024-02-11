@@ -35,8 +35,9 @@ $lessons = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 die(); */
 
 if (isset($_POST['form_submit'])) {
-
-    $lessonName = $_POST['from_lessonname'];
+    //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
+    //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
+    $lessonName = htmlspecialchars($_POST['from_lessonname']);
 
     $sql = "UPDATE lessons SET lessonname = :from_lessonname WHERE lessonid = :lessonid";
     //! Kullanıcı e-posta adresini değiştirdiyse, yeni e-posta adresi için veritabanında mevcut bir kullanıcı olup olmadığını kontrol et
