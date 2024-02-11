@@ -86,7 +86,7 @@ if (isset($_POST['form_submit'])) {
   <label>School Name</label>
 </div>
 <div class="form-floating mb-3">
-<select class="form-select" name="form_year" id="floatingSelect" aria-label="Floating label select example" required>
+<select class="form-select" name="form_year" id="floatingSelect" aria-label="Floating label select example">
         <option disabled value="">Select Year</option>
         <!-- Chatgpt çözümü seçili YILI getirme ve listeleme -->
         <?php
@@ -106,7 +106,7 @@ foreach ($informations as $information) {
     <label for="floatingSelect">School Year</label>
 </div>
 <div class="form-floating mb-3">
-<select class="form-select" name="form_term" id="floatingSelect1" aria-label="Floating label select example1" required>
+<select class="form-select" name="form_term" id="floatingSelect1" aria-label="Floating label select example1">
         <option disabled value="">Select Term</option>
         <!-- Chatgpt çözümü seçili TERM getirme ve listeleme -->
         <?php
