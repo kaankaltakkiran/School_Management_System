@@ -81,7 +81,7 @@ foreach ($admins as $admin) {
     <tr>
       <th>{$admin['userid']}</th>
       <td><img src='admin_images/{$admin['userimg']}' class='rounded-circle' width='100' height='100'></td>
-      <td>{$admin['username']}</td>
+      <td><a href='view.admin.php?idAdmin={$admin['userid']}'>{$admin['username']}</a></td>
       <td>{$admin['useremail']}</td>
       <td>$gender</td>
       <td>{$admin['createdate']}</td>
