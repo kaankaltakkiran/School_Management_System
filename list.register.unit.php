@@ -78,7 +78,7 @@ foreach ($registerunits as $registerunit) {
     <tr>
       <th>{$registerunit['userid']}</th>
       <td><img src='register_unit_images/{$registerunit['userimg']}' class='rounded-circle' width='100' height='100'></td>
-      <td>{$registerunit['username']}</td>
+      <td><a href='view.register.unit.php?idregisterunit={$registerunit['userid']}'>{$registerunit['username']}</a></td>
       <td>{$registerunit['useremail']}</td>
       <td>$gender</td>
       <td>{$registerunit['createdate']}</td>

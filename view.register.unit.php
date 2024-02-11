@@ -1,0 +1,70 @@
+<?php
+@session_start();
+$activeTitle = "School Management System";
+$activePage = "index";
+require 'up.html.php';
+require 'login.control.php';
+?>
+<?php require 'navbar.php'?>
+<?php
+require_once 'db.php';
+$id = $_GET['idregisterunit'];
+$sql = "SELECT * FROM registerunits where userid = :idregisterunit";
+$SORGU = $DB->prepare($sql);
+$SORGU->bindParam(':idregisterunit', $id);
+$SORGU->execute();
+$registerunits = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* echo '<pre>';
+print_r($registerunits);
+die(); */
+$gender = $registerunits[0]['usergender'];
+$gender = ($gender == 'M') ? 'Male' : 'Famale';
+?>
+<div class="container ">
+  <div class="row justify-content-center mt-3 ">
+ <div class="col-6">
+ <div class="card" style="width: 18rem;">
+  <img src="register_unit_images/<?php echo $registerunits[0]['userimg'] ?>" class='card-img-top'  alt="Student İmage">
+  <div class="card-body">
+    <h5 class="card-title"><?php echo "Register Unit" ?></h5>
+    <p class="card-text"><?php echo $registerunits[0]['username'] ?></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <span class="text-danger fw-bolder">User Name:</span>
+      <?php echo $registerunits[0]['username'] ?>
+    </li>
+    <li class="list-group-item">
+      <span class="text-danger fw-bolder">Email:</span>
+      <?php echo $registerunits[0]['useremail'] ?>
+    </li>
+    <li class="list-group-item">
+      <span class="text-danger fw-bolder">Gender:</span>
+      <?php echo $gender ?>
+    </li>
+    <li class="list-group-item">
+      <span class="text-danger fw-bolder">Create Date:</span>
+      <?php echo $registerunits[0]['createdate'] ?>
+    </li>
+    <li class="list-group-item">
+      <span class="text-danger fw-bolder">Adress:</span>
+      <?php echo $registerunits[0]['useraddress'] ?>
+    </li>
+    <li class="list-group-item">
+      <span class="text-danger fw-bolder">Phone Number:</span>
+      <?php echo $registerunits[0]['phonenumber'] ?>
+    </li>
+    <li class="list-group-item">
+      <span class="text-danger fw-bolder">BirthDate:</span>
+      <?php echo $registerunits[0]['birthdate'] ?>
+    </li>
+  </ul>
+  <div class="card-body">
+    <a href="list.register.unit.php" class="btn btn-warning">Go To List</a>
+  </div>
+</div>
+ </div>
+</div>
+</div>
+
+<?php require 'down.html.php';?>
