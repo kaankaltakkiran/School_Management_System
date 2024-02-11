@@ -136,6 +136,7 @@ if (!empty($errors)) {
   <input type="email" name="form_email"  value="<?php echo $admins[0]['useremail'] ?>" class="form-control">
   <label>Email</label>
 </div>
+<span class="text-danger fw-bold">Selected Gender</span>
 <div class="form-check">
   <input class="form-check-input" <?php echo ($selectGender == 'M') ? 'checked' : ''; ?> type="radio" name="form_gender" value="M"  >
   <label class="form-check-label" >

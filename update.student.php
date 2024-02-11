@@ -204,6 +204,7 @@ if (!empty($errors)) {
   <input type="date" name="form_birthdate" value="<?php echo $students[0]['birthdate'] ?>" class="form-control" id="exampleFormControlInput1" />
 </div>
 </div>
+<span class="text-danger fw-bold">Selected Gender</span>
 <div class="form-check">
   <input class="form-check-input" type="radio" <?php echo ($selectGender == 'M') ? 'checked' : ''; ?> name="form_gender" value="M"  >
   <label class="form-check-label" >

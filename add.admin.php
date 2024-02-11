@@ -138,6 +138,7 @@ if (!empty($approves)) {
   <input type="password"  name="form_password" class="form-control" id="password" placeholder="Password"required>
   <span class="input-group-text bg-transparent"><i id="togglePassword" class="bi bi-eye-slash"></i></span>
 </div>
+<span class="text-danger fw-bold  ">Select Gender</span>
 <div class="form-check">
   <input class="form-check-input" type="radio" name="form_gender" value="M" required >
   <label class="form-check-label" >

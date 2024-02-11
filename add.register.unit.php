@@ -159,6 +159,7 @@ if (!empty($approves)) {
   <input type="date" name="form_birthdate" class="form-control" id="exampleFormControlInput1" required/>
 </div>
 </div>
+<span class="text-danger fw-bold  ">Select Gender</span>
 <div class="form-check">
   <input class="form-check-input" type="radio" name="form_gender" value="M" required >
   <label class="form-check-label" >
