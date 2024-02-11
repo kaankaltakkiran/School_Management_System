@@ -18,7 +18,7 @@ if (isset($_POST['form_submit'])) {
     //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
     $announcementSenderid = $_SESSION['id'];
     $announcementSenderRole = $_SESSION['role'];
-    $announcementReciverid = $_POST['form_reciverid'];
+    $announcementReciverid = htmlspecialchars($_POST['form_reciverid']);
     $announcementTitle = htmlspecialchars($_POST['form_title']);
     $announcementStartDate = $_POST['form_startdate'];
     $announcementLastDate = $_POST['form_lastdate'];

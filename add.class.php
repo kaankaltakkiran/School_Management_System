@@ -19,10 +19,11 @@ require 'navbar.php'?>
 if (isset($_POST['form_classnumber'], $_POST['form_classletter'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
-
+    //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
+    //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
     require_once 'db.php';
-    $classNumber = $_POST['form_classnumber'];
-    $classLetter = $_POST['form_classletter'];
+    $classNumber = htmlspecialchars($_POST['form_classnumber']);
+    $classLetter = htmlspecialchars($_POST['form_classletter']);
     $addedUnitid = $_SESSION['id'];
     $addedUnitName = $_SESSION['userName'];
 
