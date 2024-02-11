@@ -11,3 +11,5 @@ update veya ekeleme yaparken aynı emailden kişi varsa ekleme veya update yapaa
 işlem yapan id
 duyru ekleme admin yapamasın
 genel kodlarını elden geçir yorum satırları boşluklar vb
+reqüred contorl
+upsdate htmlchar
