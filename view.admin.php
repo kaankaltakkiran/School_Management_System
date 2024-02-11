@@ -49,7 +49,9 @@ $gender = ($gender == 'M') ? 'Male' : 'Famale';
     </li>
   </ul>
   <div class="card-body">
-    <a href="list.admin.php" class="btn btn-warning">Go To List</a>
+    <a href="list.admin.php" class="btn btn-warning">Go To List
+    <i class="bi bi-backspace"></i>
+    </a>
   </div>
 </div>
  </div>
