@@ -76,6 +76,25 @@ INSERT INTO `classes` (`classid`, `classnumber`, `classletter`, `classname`, `cr
 (15,	'12',	'C',	'12/C',	'2024-01-30 20:29:25',	1,	'Kaan Kaltakkıran'),
 (16,	'12',	'D',	'12/D',	'2024-01-30 20:29:35',	1,	'Kaan Kaltakkıran');
 
+DROP TABLE IF EXISTS `informations`;
+CREATE TABLE `informations` (
+  `schoolid` int(11) NOT NULL AUTO_INCREMENT,
+  `schoolname` varchar(50) NOT NULL,
+  `schoolyear` year(4) NOT NULL,
+  `schoolterm` char(2) NOT NULL,
+  `schoolabout` text NOT NULL,
+  `schoolsummary` varchar(255) NOT NULL,
+  `schooladdress` varchar(255) NOT NULL,
+  `addedunitid` int(11) NOT NULL,
+  `addedunitname` varchar(50) NOT NULL,
+  `createdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`schoolid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+
+INSERT INTO `informations` (`schoolid`, `schoolname`, `schoolyear`, `schoolterm`, `schoolabout`, `schoolsummary`, `schooladdress`, `addedunitid`, `addedunitname`, `createdate`) VALUES
+(1,	'School 1',	'2016',	'I',	'School 1 About',	'School 1 About Summary',	'School 1 Address',	1,	'Kaan Kaltakkıran',	'2024-02-11 09:32:24'),
+(2,	'School 2',	'2023',	'II',	'School 2 About',	'School 2 About Summary',	'School 2 Address',	1,	'Kaan Kaltakkıran',	'2024-02-11 10:36:54');
+
 DROP TABLE IF EXISTS `lessons`;
 CREATE TABLE `lessons` (
   `lessonid` int(11) NOT NULL AUTO_INCREMENT,
@@ -169,4 +188,4 @@ INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `user
 (1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$F8BOCVniVNOqHhjl7gWf8e5ptBp1wNP.KhGPA3GA9pEJx0hPGEZOm',	'M',	3,	'2024-02-10 12:43:06',	'1,6,11,16',	'9/A,10/B,11/C,12/D',	'Address 1',	'23123112323',	'1975-01-01',	'IMG-65c7452a37d2d7.23094001.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
 (2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$a7xTEd88iyzI43udPEmrSeTmxBBaj9nf.JXtJV8NadXoRV1/GGe7q',	'F',	3,	'2024-02-10 12:43:40',	'1,10',	'9/A,11/B',	'Address 2',	'12331223123',	'1980-01-01',	'IMG-65c7454cee1627.24858158.png',	'3',	'Turkish',	1,	'Kaan Kaltakkıran');
 
--- 2024-02-10 09:44:49
+-- 2024-02-11 10:38:57
