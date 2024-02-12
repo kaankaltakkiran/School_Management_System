@@ -1,11 +1,45 @@
 <?php
-session_start();
+@session_start();
 $activeTitle = "School Management System";
 $activePage = "index";
 require 'up.html.php';
 ?>
 <?php require 'navbar.php'?>
 <div class="container">
+<?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] != 1) {?>
+  <?php
+require_once 'db.php';
+//!Ekleyen kayıt birimine göre çağırma
+    $id = $_SESSION['addedid'];
+    //!Giriş yapan kayıt birimine göre
+    $unitid = $_SESSION['id'];
+    if ($_SESSION['role'] == 2) {
+        $sql = "SELECT * FROM informations WHERE addedunitid=:unitid";
+    } else {
+        $sql = "SELECT * FROM informations WHERE addedunitid=:addedid";
+    }
+    $SORGU = $DB->prepare($sql);
+    // Parametreleri bağlayın
+    if ($_SESSION['role'] == 2) {
+        $SORGU->bindParam(':unitid', $unitid);
+    } else {
+        $SORGU->bindParam(':addedid', $id);
+    }
+    $SORGU->execute();
+    $informations = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* echo '<pre>';
+print_r($informations);
+die(); */
+    ?>
+  <div class="row justify-content-center mt-3 text-center  ">
+  <div class="col-6 ">
+    <h1 class="alert alert-info text-center">Welcome <?php echo $informations[0]['schoolname'] ?></h1>
+    <h2 class="text-center"><?php echo $informations[0]['schoolname'] ?>, was founded in <?php echo $informations[0]['schoolyear'] ?>.</h2>
+    <h3><span class="text-danger">Active Term:</span> <span> <?php echo $informations[0]['schoolterm'] ?>.</span></h3>
+    <h4><span class="text-danger">School About Summary:</span> <span> <?php echo $informations[0]['schoolsummary'] ?></span></h4>
+  </div>
+  </div>
+  <?php }?>
   <div class="row justify-content-center">
 <div class="row row-cols-1 row-cols-md-5 g-4 mt-4 ">
 <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 1) {?>

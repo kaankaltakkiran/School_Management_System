@@ -77,6 +77,7 @@ if (isset($_POST['form_email'])) {
                 $_SESSION['userName'] = $CEVAP[0]['username']; // Kullanıcının adını al
                 $_SESSION['id'] = $CEVAP[0]['userid']; // Kullanıcının ID'sini al
                 $_SESSION['role'] = $CEVAP[0]['roleuser']; // Kullanıcının ROL'ünü al
+                $_SESSION['addedid'] = $CEVAP[0]['addedunitid']; // Kullanıcının ekleyenin kayıt birimi idsini' al
                 header("location: index.php");
                 die();
             } else {
