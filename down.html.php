@@ -36,5 +36,50 @@
             updateClock();
         };
     </script>
+        <!--      Datatables için gerekli cdnler-->
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js"></script>
+<script
+<script>
+  //! Datatablestaki export butonlarının düzenlenmesi
+$(document).ready(function() {
+    var table = $('#example').DataTable( {
+        lengthChange: false,
+        dom: 'lBfrtip',
+        buttons: {
+        buttons: [
+          { extend: 'pageLength', className: 'btn-primary'},
+            { extend: 'copy', className: 'btn btn-dark'},
+            { extend: 'excel', className: 'btn btn-success'},
+            { extend: 'csv', className: 'btn btn-danger' },
+            { extend: 'pdf', className: 'btn btn-warning' },
+            { extend: 'print', className: 'btn btn-secondary' },
+            { extend: 'colvis', className: 'btn btn-info' }
+        ]
+      }
+    } );
+
+    table.buttons().container()
+        .appendTo( '#example_wrapper .col-md-6:eq(0)' );
+} );
+/* buttons: [ 'copy', 'excel','csv', 'pdf', 'colvis' ] */
+/* pagingType: 'full_numbers', */
+/* language: {
+        info: 'Showing page _PAGE_ of _PAGES_',
+        infoEmpty: 'No records available',
+        infoFiltered: '(filtered from _MAX_ total records)',
+        lengthMenu: 'Display _MENU_ records per page',
+        zeroRecords: 'Nothing found - sorry'
+    } */
+</script>
   </body>
 </html>

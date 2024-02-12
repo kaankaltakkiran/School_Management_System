@@ -26,8 +26,9 @@ if ($_SESSION['role'] != 2) {
   </p>
 </div>
 </div>
+<!-- table table-bordered table-striped -->
    <!-- tablo ile personel listeleme -->
-<table class="table table-bordered table-striped">
+<table id="example" class="table table-bordered table-striped " style="width:100%">
   <thead>
     <tr>
       <th>Teacher Id</th>
@@ -76,6 +77,23 @@ window.location.href = 'list.teacher.php';
 foreach ($teachers as $teacher) {
     $gender = $teacher['usergender'];
     $gender = ($gender == 'M') ? 'Male' : 'Famale';
+    //!Kullanıcının doğum tarihini alma
+    $userBirthdate = $teacher['birthdate'];
+    //!Tarihi parçalara ayırma
+    /* explode() fonksiyonu: Bu fonksiyon, bir metni belirli bir ayraç karakterine göre böler ve bir diziye dönüştürür.  */
+    $dateParts = explode('-', $userBirthdate);
+
+//? Yıl, ay ve gün bilgilerini alıyoruz
+    $year = $dateParts[0];
+    $month = $dateParts[1];
+    $day = $dateParts[2];
+
+//?Ay ismini bulmak için date() ve strtotime() fonksiyonlarını kullanıyoruz
+    //!F tam ay ismini alıyor.
+    $monthName = date("F", strtotime($userBirthdate));
+
+// Sonucu ekrana yazdırma
+    $formattedDate = "$day $monthName $year";
 
     echo "
     <tr>
@@ -89,7 +107,7 @@ foreach ($teachers as $teacher) {
       <td>{$teacher['createdate']}</td>
       <td>{$teacher['useraddress']}</td>
       <td>{$teacher['phonenumber']}</td>
-      <td>{$teacher['birthdate']}</td>
+      <td>$formattedDate</td>
       <td><a href='update.teacher.php?idTeacher={$teacher['userid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a></td>
       <td><a href='list.teacher.php?removeTeacherid={$teacher['userid']}' onclick='return confirm(\"Are you sure you want to delete {$teacher['username']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a></td>
    </tr>
