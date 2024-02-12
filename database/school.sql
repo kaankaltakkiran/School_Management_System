@@ -92,8 +92,8 @@ CREATE TABLE `informations` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `informations` (`schoolid`, `schoolname`, `schoolyear`, `schoolterm`, `schoolabout`, `schoolsummary`, `schooladdress`, `addedunitid`, `addedunitname`, `createdate`) VALUES
-(1,	'School 1',	'2016',	'I',	'School 1 About',	'School 1 About Summary',	'School 1 Address',	1,	'Kaan Kaltakkıran',	'2024-02-11 09:32:24'),
-(2,	'School 2',	'2023',	'II',	'School 2 About',	'School 2 About Summary',	'School 2 Address',	1,	'Kaan Kaltakkıran',	'2024-02-11 10:36:54');
+(1,	'School 1',	'2000',	'I',	'School 1 About',	'School 1 About Summary',	'School 1 About Address',	1,	'Kaan Kaltakkıran',	'2024-02-12 17:13:10'),
+(2,	'School 2',	'1990',	'II',	'School 2 About',	'School 2 Summary',	'School 2 Address',	2,	'Ahmet Yıldız',	'2024-02-12 17:13:59');
 
 DROP TABLE IF EXISTS `lessons`;
 CREATE TABLE `lessons` (
@@ -185,7 +185,7 @@ CREATE TABLE `teachers` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `roleuser`, `createdate`, `classid`, `classname`, `useraddress`, `phonenumber`, `birthdate`, `userimg`, `lessonid`, `lessonname`, `addedunitid`, `addedunitname`) VALUES
-(1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$F8BOCVniVNOqHhjl7gWf8e5ptBp1wNP.KhGPA3GA9pEJx0hPGEZOm',	'M',	3,	'2024-02-10 12:43:06',	'1,6,11,16',	'9/A,10/B,11/C,12/D',	'Address 1',	'23123112323',	'1975-01-01',	'IMG-65c7452a37d2d7.23094001.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
-(2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$a7xTEd88iyzI43udPEmrSeTmxBBaj9nf.JXtJV8NadXoRV1/GGe7q',	'F',	3,	'2024-02-10 12:43:40',	'1,10',	'9/A,11/B',	'Address 2',	'12331223123',	'1980-01-01',	'IMG-65c7454cee1627.24858158.png',	'3',	'Turkish',	1,	'Kaan Kaltakkıran');
+(1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$F8BOCVniVNOqHhjl7gWf8e5ptBp1wNP.KhGPA3GA9pEJx0hPGEZOm',	'M',	3,	'2024-02-10 12:43:06',	'1,6,11,16',	'9/A,10/B,11/C,12/D',	'Address 1',	'23123112323',	'1975-08-20',	'IMG-65c7452a37d2d7.23094001.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
+(2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$a7xTEd88iyzI43udPEmrSeTmxBBaj9nf.JXtJV8NadXoRV1/GGe7q',	'F',	3,	'2024-02-10 12:43:40',	'1,10',	'9/A,11/B',	'Address 2',	'12331223123',	'1980-01-15',	'IMG-65c7454cee1627.24858158.png',	'3',	'Turkish',	2,	'Kaan Kaltakkıran');
 
--- 2024-02-11 10:38:57
+-- 2024-02-12 17:17:01
