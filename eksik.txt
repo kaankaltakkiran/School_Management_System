@@ -21,5 +21,7 @@ tüm sayflarda activetitle ve page control et
 Kulanıcı sayfası şifre değiştirme resim değiştirme vb...
 yoklama sistemi
 derse ait öğrencileri listeleme
-okul bilgilinlirde güncel okuldaki kişi sayıları ve öğretmen sayısı ders sayısı ......
-veritabanında değişlik yaptım datada kontrol et
+sadece kendi oluşturduysa görsün update tüm sayfalarda kontrol et örnek school information
+buna ek olarak update kontrülü yap sadece ekleyen id güncellesin
+
+

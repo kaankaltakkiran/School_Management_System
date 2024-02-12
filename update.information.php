@@ -1,12 +1,23 @@
 <?php
-session_start();
+@session_start();
 $activeTitle = "School İnformation Update";
 $activePage = "update.information";
 require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
-if ($_SESSION['role'] != 2) {
+//! Ekleyen kayıt birimi ile güncelleyen kayıt birimi aynı olmalıdır
+require_once 'db.php';
+$id = $_GET['schoolid'];
+$sql = "SELECT * FROM informations WHERE schoolid = :schoolid";
+$SORGU = $DB->prepare($sql);
+$SORGU->bindParam(':schoolid', $id);
+$SORGU->execute();
+$informationsControl = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* var_dump($informations);
+die(); */
+$control_information = $informationsControl[0]['addedunitid'] != $_SESSION['id'];
+if ($control_information == true || $_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
     die();
 }
@@ -31,6 +42,7 @@ $SORGU->execute();
 $informations = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* var_dump($informations);
 die(); */
+
 //!Seçili yıl
 $selectedYear = $informations[0]['schoolyear'];
 //!Seçili dönem

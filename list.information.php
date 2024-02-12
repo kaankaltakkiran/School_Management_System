@@ -1,12 +1,17 @@
 <?php
-session_start();
+@session_start();
 $activeTitle = "School İnformation List";
 $activePage = "information.list";
 require 'up.html.php';
 require 'login.control.php';
 ?>
+  <?php
+if ($_SESSION['role'] != 2) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
 <?php require 'navbar.php'?>
-
     <div class="container">
       <div class="row mt-3">
       <div class='row justify-content-center text-center'>
@@ -39,7 +44,9 @@ require 'login.control.php';
   </div>
     <?php
 require_once 'db.php';
-$SORGU = $DB->prepare("SELECT * FROM informations");
+$adedid = $_SESSION['id'];
+$SORGU = $DB->prepare("SELECT * FROM informations WHERE addedunitid = :id");
+$SORGU->bindParam(':id', $adedid);
 $SORGU->execute();
 $informations = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //echo '<pre>'; print_r($informations);
