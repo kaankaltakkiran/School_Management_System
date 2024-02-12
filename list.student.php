@@ -26,8 +26,8 @@ if ($_SESSION['role'] != 2) {
   </p>
 </div>
 </div>
-   <!-- tablo ile personel listeleme -->
-<table class="table table-bordered table-striped">
+   <!-- tablo ile classes listeleme -->
+   <table id="example" class="table table-bordered table-striped " style="width:100%">
   <thead>
     <tr>
       <th>Class Id</th>

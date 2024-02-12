@@ -29,8 +29,8 @@ $students = $SORGU->fetchAll(PDO::FETCH_ASSOC);
   </p>
 </div>
 </div>
-   <!-- tablo ile personel listeleme -->
-<table class="table table-bordered table-striped">
+   <!-- tablo ile student listeleme -->
+   <table id="example" class="table table-bordered table-striped " style="width:100%">
   <thead>
     <tr>
       <th>Student Id</th>

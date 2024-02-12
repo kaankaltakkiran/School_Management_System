@@ -20,7 +20,7 @@ require 'login.control.php';
   </p>
 </div>
 </div>
-<table class="table table-bordered table-striped">
+<table id="example" class="table table-bordered table-striped " style="width:100%">
   <thead>
     <tr>
       <th>School Id</th>
