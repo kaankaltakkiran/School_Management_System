@@ -18,10 +18,26 @@ tüm sayflarda activetitle ve page control et
 <i class='bi bi-trash'></i>
 <i class='bi bi-arrow-clockwise'></i>
 &nbsp; <i class="bi bi-upload"></i>
-Kulanıcı sayfası şifre değiştirme resim değiştirme vb...
+Yapılmayanlar
+
+Sınav sistemi
+
 yoklama sistemi
-derse ait öğrencileri listeleme
+
+derse ait öğrencileri listeleme 
+
 sadece kendi oluşturduysa görsün update tüm sayfalarda kontrol et örnek school information
+
 buna ek olarak update kontrülü yap sadece ekleyen id güncellesin
+
+şifre güncelleme ekranı tasarla modallı bir şekilde
+
+password ekranında confirim password ekle
+
+tarih çevirme işlemini heryerde uygula örnek list teacher page
+
+Genel güvenlik koötürlü yap kontrol et
+
+
 
 
