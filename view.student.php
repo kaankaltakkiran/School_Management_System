@@ -21,6 +21,24 @@ $SORGU->execute();
 $students = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 $gender = $students[0]['usergender'];
 $gender = ($gender == 'M') ? 'Male' : 'Famale';
+
+//!Kullanıcının doğum tarihini alma
+$userBirthdate = $students[0]['birthdate'];
+//!Tarihi parçalara ayırma
+/* explode() fonksiyonu: Bu fonksiyon, bir metni belirli bir ayraç karakterine göre böler ve bir diziye dönüştürür.  */
+$dateParts = explode('-', $userBirthdate);
+
+//? Yıl, ay ve gün bilgilerini alıyoruz
+$year = $dateParts[0];
+$month = $dateParts[1];
+$day = $dateParts[2];
+
+//?Ay ismini bulmak için date() ve strtotime() fonksiyonlarını kullanıyoruz
+//!F tam ay ismini alıyor.
+$monthName = date("F", strtotime($userBirthdate));
+
+// Sonucu ekrana yazdırma
+$formattedDate = "$day $monthName $year";
 ?>
 <div class="container ">
   <div class="row justify-content-center mt-3 ">
@@ -62,7 +80,7 @@ $gender = ($gender == 'M') ? 'Male' : 'Famale';
     </li>
     <li class="list-group-item">
       <span class="text-danger fw-bolder">Birthdate:</span>
-      <?php echo $students[0]['birthdate'] ?>
+      <?php echo $formattedDate ?>
     </li>
     <li class="list-group-item">
       <span class="text-danger fw-bolder">Parent Name:</span>

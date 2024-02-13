@@ -34,11 +34,13 @@ buna ek olarak update kontrülü yap sadece ekleyen id güncellesin
 
 password ekranında confirim password ekle
 
-tarih çevirme işlemini heryerde uygula örnek list teacher page
+tarih çevirme işlemini heryerde uygula örnek list teacher page(birtthdate için yapıldı belki createdate?????)
 
-Genel güvenlik koötürlü yap kontrol et
+Genel güvenlik control yap kontrol et
 
 Veli girişi
+
+Ders ile öğretmen yoksa kontrol ?????
 
 
 
