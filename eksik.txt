@@ -32,9 +32,6 @@ buna ek olarak update kontrülü yap sadece ekleyen id güncellesin
 
 şifre güncelleme ekranı tasarla modallı bir şekilde
 
-password ekranında confirim password ekle
-
-tarih çevirme işlemini heryerde uygula örnek list teacher page(birtthdate için yapıldı belki createdate?????)
 
 Genel güvenlik control yap kontrol et
 
