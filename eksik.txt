@@ -38,6 +38,8 @@ tarih çevirme işlemini heryerde uygula örnek list teacher page
 
 Genel güvenlik koötürlü yap kontrol et
 
+Veli girişi
+
 
 
 
