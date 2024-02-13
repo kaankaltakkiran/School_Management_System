@@ -45,6 +45,22 @@ die(); */
 $gender = $studentLessons[0]['usergender'];
 $gender = ($gender == 'M') ? 'Male' : 'Famale';
 foreach ($studentLessons as $studentLesson) {
+    $userBirthdate = $studentLesson['birthdate'];
+    //!Tarihi parçalara ayırma
+    /* explode() fonksiyonu: Bu fonksiyon, bir metni belirli bir ayraç karakterine göre böler ve bir diziye dönüştürür.  */
+    $dateParts = explode('-', $userBirthdate);
+
+//? Yıl, ay ve gün bilgilerini alıyoruz
+    $year = $dateParts[0];
+    $month = $dateParts[1];
+    $day = $dateParts[2];
+
+//?Ay ismini bulmak için date() ve strtotime() fonksiyonlarını kullanıyoruz
+    //!F tam ay ismini alıyor.
+    $monthName = date("F", strtotime($userBirthdate));
+
+// Sonucu ekrana yazdırma
+    $formattedDate = "$day $monthName $year";
     echo "
     <tr>
       <th>{$studentLesson['userid']}</th>
@@ -53,7 +69,7 @@ foreach ($studentLessons as $studentLesson) {
       <td>$gender</td>
       <td>{$studentLesson['phonenumber']}</td>
       <td>{$studentLesson['classname']}</td>
-      <td>{$studentLesson['birthdate']}</td>
+      <td>$formattedDate</td>
    </tr>
   ";
 }
