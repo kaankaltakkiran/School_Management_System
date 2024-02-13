@@ -49,7 +49,8 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
     $studentLessonid = implode(',', $lessonIds);
     $studentLessonName = implode(',', $lessonNames);
 
-    $password = htmlspecialchars($_POST['form_password']);
+    $rePassword = $_POST['form_repassword'];
+    $password = ($_POST['form_password']);
 /*  Şifrele hashleme */
     $password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -75,6 +76,8 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
         $errors[] = "This email is already registered";
 
         //!Eğer kullanıcı yoksa kaydet
+    } else if ($_POST['form_password'] != $_POST['form_repassword']) {
+        $errors[] = "Passwords Do Not Match. !!!";
     } else if ($error === 0) {
         //!Resim boyutu kontrolü gözden geçmeli
         if ($img_size < 0) {
@@ -171,6 +174,10 @@ if (!empty($approves)) {
 <div class="input-group mb-3  input-group-lg">
   <input type="password"  name="form_password" class="form-control" id="password" placeholder="Password"required>
   <span class="input-group-text bg-transparent"><i id="togglePassword" class="bi bi-eye-slash"></i></span>
+</div>
+<div class="input-group mb-3  input-group-lg">
+  <input type="password"  name="form_repassword" class="form-control" id="password2" placeholder="Please Enter Your Password Again"required>
+  <span class="input-group-text bg-transparent"><i id="togglePassword2" class="bi bi-eye-slash"></i></span>
 </div>
 <?php
 require_once 'db.php';
