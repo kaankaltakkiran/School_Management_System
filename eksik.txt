@@ -45,6 +45,8 @@ acil add register unit,teacher şifre control
 
 şifre değiştirme ekranını my bloga yap
 
+şifre değiştirme ekranı modal kapanmasın ????? hata varsa
+
 myblog login kullanıcı yoksa kontrol et mesajı
 
 
