@@ -120,15 +120,15 @@ require 'db.php';
     $users = $users[0];
     ?>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
           <img src='<?php echo "$imageFolder/{$users['userimg']}"; ?>' class='rounded-circle' height="30" width='30'>
           </a>
           <ul class="dropdown-menu  dropdown-menu-end">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="">Profile <i class="bi bi-person-circle"></i></a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Change Password <i class="bi bi-arrow-repeat"></i></a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="logout.php">Logout <i class="bi bi-box-arrow-right"></i></a></li>
           </ul>
         </li>
         <?php }?>
@@ -141,3 +141,146 @@ require 'db.php';
     </div>
   </div>
 </nav>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form method="POST">
+<div class="input-group mb-3 inputGroup-sizing-default">
+  <input type="password" name="form_oldpassword" class="form-control" id="reoldPassword" placeholder="Write Old Password">
+  <span class="input-group-text bg-transparent"><i id="retoggleOldPassword" class="bi bi-eye-slash"></i></span>
+</div>
+<div class="input-group mb-3 inputGroup-sizing-default">
+  <input type="password" name="form_repassword" class="form-control" id="reoldRePassword" placeholder="Write Again Old Password">
+  <span class="input-group-text bg-transparent"><i id="retoggleOldRePassword" class="bi bi-eye-slash"></i></span>
+</div>
+<div class="input-group mb-3 inputGroup-sizing-default">
+  <input type="password"  name="form_newpassword" class="form-control" id="renewRePassword" placeholder="Write New Password">
+  <span class="input-group-text bg-transparent"><i id="retoggleNewRePassword" class="bi bi-eye-slash"></i></span>
+</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close <i class="bi bi-x-circle"></i></button>
+        <button type="submit" name="form_submit" class="btn btn-outline-success">Change Password <i class="bi bi-arrow-repeat"></i> </button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<?php
+//!form_email post edilmişse
+if (isset($_POST['form_submit'])) {
+    $errors = array();
+    require 'db.php';
+    //! Post edilen verileri değişkenlere atama
+    $oldPassword = $_POST['form_oldpassword'];
+    $olRePassword = $_POST['form_repassword'];
+    $newPassword = $_POST['form_newpassword'];
+
+    // Form gönderildi
+    // 1.DB'na bağlan
+    // 2.SQL hazırla ve çalıştır
+    // 3.Gelen sonuç 1 satırsa GİRİŞ BAŞARILI değilse, BAŞARISIZ
+    //! Eğer boş alan varsa uyarı mesajı
+    if (empty($_POST["form_oldpassword"]) || empty($_POST["form_newpassword"])) {
+        $errors[] = "Both Fields are required !";
+    } else if ($_POST['form_oldpassword'] != $_POST['form_repassword']) {
+        $errors[] = "Passwords Do Not Match!";
+    }
+    //! Boş alan yoksa
+    else {
+        //! SQL hazırlama ve çalıştırma
+        //! formdan gelen email ile db de varsa
+        $id = $_SESSION['id'];
+        if ($_SESSION['role'] == 1) {
+            $sql = "SELECT * FROM admins WHERE userid = :id";
+        } else if ($_SESSION['role'] == 2) {
+            $sql = "SELECT * FROM registerunits WHERE userid = :id";
+        } else if ($_SESSION['role'] == 3) {
+            $sql = "SELECT * FROM teachers WHERE userid = :id";
+        } else if ($_SESSION['role'] == 4) {
+            $sql = "SELECT * FROM students WHERE userid = :id";
+        }
+        $SORGU = $DB->prepare($sql);
+        $SORGU->bindParam(':id', $id);
+        $SORGU->execute();
+        $CEVAP = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+
+        /*    var_dump($CEVAP);
+        echo "Gelen cevap " . count($CEVAP) . " adet satırdan oluşuyor";
+        die(); */
+        //! Gelen sonuç 1 satırsa db de kullanıcı var olduğunu anlarız
+        if (count($CEVAP) == 1) {
+            //! Kullanıcının şifresini doğrulama
+            //? posttan gelen ile db den gelen karşılaştırma
+            //? password_verify() fonksiyonu ile
+            $hashedOldPassword = $CEVAP[0]['userpassword'];
+            if (password_verify($oldPassword, $hashedOldPassword)) {
+                //return true;
+                $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                $id = $_SESSION['id'];
+                if ($_SESSION['role'] == 1) {
+                    $sql = "UPDATE admins SET userpassword	 = '$hashedNewPassword' WHERE userid = :id";
+                } else if ($_SESSION['role'] == 2) {
+                    $sql = "UPDATE registerunits SET userpassword	 = '$hashedNewPassword' WHERE userid = :id";
+                } else if ($_SESSION['role'] == 3) {
+                    $sql = "UPDATE teachers SET userpassword	 = '$hashedNewPassword' WHERE userid = :id";
+                } else if ($_SESSION['role'] == 4) {
+                    $sql = "UPDATE students SET userpassword	 = '$hashedNewPassword' WHERE userid = :id";
+                }
+                $SORGU = $DB->prepare($sql);
+                $SORGU->bindParam(':id', $id);
+                $SORGU->execute();
+                $approves[] = "Password Changed Successfully...";
+            } else {
+                //return false;
+                //!Şifreler Eşleşmiyorsa
+                $errors[] = "INCORRECT Email OR PASSWORD MATCH!...";
+
+            }
+        } else {
+            //! Kullanıcı yoksa
+            $errors[] = "There Is No Such User !.";
+        }
+    }
+
+}
+?>
+<?php
+//! Hata mesajlarını göster
+if (!empty($errors)) {
+    foreach ($errors as $error) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+      <div class='toast align-items-center text-white bg-danger border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+          <div class='d-flex'>
+              <div class='toast-body'>
+              $error
+              </div>
+              <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+          </div>
+      </div>
+  </div>";
+    }
+}
+?>
+<?php
+//! Başarılı mesajlarını göster
+if (!empty($approves)) {
+    foreach ($approves as $approve) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+      <div class='toast align-items-center text-white bg-success border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+          <div class='d-flex'>
+              <div class='toast-body'>
+              $approve
+              </div>
+              <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+          </div>
+      </div>
+  </div>";
+    }
+}
+?>

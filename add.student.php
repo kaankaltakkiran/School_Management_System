@@ -177,12 +177,12 @@ if (!empty($approves)) {
   <label>Email</label>
 </div>
 <div class="input-group mb-3  input-group-lg">
-  <input type="password"  name="form_password" class="form-control" id="password" placeholder="Password"required>
-  <span class="input-group-text bg-transparent"><i id="togglePassword" class="bi bi-eye-slash"></i></span>
+  <input type="password"  name="form_password" class="form-control" id="oldPassword" placeholder="Password"required>
+  <span class="input-group-text bg-transparent"><i id="toggleOldPassword" class="bi bi-eye-slash"></i></span>
 </div>
 <div class="input-group mb-3  input-group-lg">
-  <input type="password"  name="form_repassword" class="form-control" id="password2" placeholder="Please Enter Your Password Again"required>
-  <span class="input-group-text bg-transparent"><i id="togglePassword2" class="bi bi-eye-slash"></i></span>
+  <input type="password"  name="form_repassword" class="form-control" id="oldRePassword" placeholder="Please Enter Your Password Again"required>
+  <span class="input-group-text bg-transparent"><i id="toggleOldRePassword" class="bi bi-eye-slash"></i></span>
 </div>
 <?php
 require_once 'db.php';

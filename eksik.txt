@@ -41,6 +41,12 @@ Select genderleri input gibi yap
 
 Ders ile öğretmen yoksa kontrol ?????
 
+acil add register unit,teacher şifre control
+
+şifre değiştirme ekranını my bloga yap
+
+myblog login kullanıcı yoksa kontrol et mesajı
+
 
 
 

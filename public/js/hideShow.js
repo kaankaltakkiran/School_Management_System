@@ -1,21 +1,30 @@
-/*          password için */
-const togglePassword = document.querySelector("#togglePassword");
-        const password = document.querySelector("#password");
-
-        togglePassword.addEventListener("click", function () {
+ const toggleOldPassword = document.querySelector("#toggleOldPassword");
+const oldPassword = document.querySelector("#oldPassword");
+toggleOldPassword.addEventListener("click", function () {
             // toggle the type attribute
-            const type = password.getAttribute("type") === "password" ? "text" : "password";
-            password.setAttribute("type", type);
-            
+            const type = oldPassword.getAttribute("type") === "password" ? "text" : "password";
+            oldPassword.setAttribute("type", type);
+
             // toggle the icon
             this.classList.toggle("bi-eye");
         });
-/*         Re password için */
-const togglePassword2 = document.querySelector("#togglePassword2");
-const password2 = document.querySelector("#password2");
 
-togglePassword2.addEventListener("click", function () {
-    const type = password2.getAttribute("type") === "password" ? "text" : "password";
-    password2.setAttribute("type", type);
-    this.classList.toggle("bi-eye");
-});
+const toggleOldRePassword = document.querySelector("#toggleOldRePassword");
+const oldRePassword = document.querySelector("#oldRePassword");
+ toggleOldRePassword.addEventListener("click", function () {
+  // toggle the type attribute
+ const type = oldRePassword.getAttribute("type") === "password" ? "text" : "password";
+ oldRePassword.setAttribute("type", type);// toggle the icon
+ this.classList.toggle("bi-eye");
+  });
+const toggleNewRePassword = document.querySelector("#toggleNewRePassword");
+const newRePassword = document.querySelector("#newRePassword");
+toggleNewRePassword.addEventListener("click", function () {
+  // toggle the type attribute
+ const type = newRePassword.getAttribute("type") === "password" ? "text" : "password";
+newRePassword.setAttribute("type", type);
+// toggle the icon
+this.classList.toggle("bi-eye");
+ });
+ 
+ 

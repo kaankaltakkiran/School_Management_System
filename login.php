@@ -4,10 +4,9 @@ $activeTitle = "Login";
 $activePage = "login";
 require 'up.html.php';
 ?>
+<?php require 'navbar.php';?>
 <?php
 require_once 'db.php';
-
-require 'navbar.php';
 
 //! Eğer zaten giriş yapmışsa, index.php'ye yönlendir
 if (isset($_SESSION['isLogin'])) {
@@ -31,7 +30,7 @@ if (isset($_POST['form_email'])) {
     //! Eğer boş alan varsa uyarı mesajı
     if (empty($_POST["form_email"]) || empty($_POST["form_password"])) {
 
-        $errors[] = "Both Fields are required";
+        $errors[] = "Both Fields are required !";
     }
     //! Boş alan yoksa
     else {
@@ -88,7 +87,7 @@ if (isset($_POST['form_email'])) {
             }
         } else {
             //! Kullanıcı yoksa
-            $errors[] = "INCORRECT EMAIL OR PASSWORD!...";
+            $errors[] = "There Is No Such User !.";
         }
     }
 
@@ -122,8 +121,8 @@ if (!empty($errors)) {
   <label>Email</label>
 </div>
 <div class="input-group mb-3  input-group-lg">
-  <input type="password"  name="form_password" class="form-control" id="password" placeholder="Password">
-  <span class="input-group-text bg-transparent"><i id="togglePassword" class="bi bi-eye-slash"></i></span>
+  <input type="password"  name="form_password" class="form-control" id="oldPassword" placeholder="Password">
+  <span class="input-group-text bg-transparent"><i id="toggleOldPassword" class="bi bi-eye-slash"></i></span>
 </div>
 <div class="form-floating mb-3">
   <select class="form-select" id="floatingSelect" name="form_selectrol"  required aria-label="Floating label select example" >
