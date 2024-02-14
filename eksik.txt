@@ -41,13 +41,11 @@ Select genderleri input gibi yap
 
 Ders ile öğretmen yoksa kontrol ?????
 
-acil add register unit,teacher şifre control
 
 şifre değiştirme ekranını my bloga yap
 
 şifre değiştirme ekranı modal kapanmasın ????? hata varsa
 
-myblog login kullanıcı yoksa kontrol et mesajı
 
 
 

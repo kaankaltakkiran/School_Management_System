@@ -53,6 +53,9 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
         $errors[] = "This email is already registered !";
 
         //!Eğer kullanıcı yoksa kaydet
+        //?Şifre kontrolü
+    } else if ($_POST['form_password'] != $_POST['form_repassword']) {
+        $errors[] = "Passwords Don't Match!";
     } else if ($error === 0) {
         //!Resim boyutu kontrolü gözden geçmeli
         if ($img_size < 0) {
@@ -148,8 +151,12 @@ if (!empty($approves)) {
   <label>Email</label>
 </div>
 <div class="input-group mb-3  input-group-lg">
-  <input type="password"  name="form_password" class="form-control" id="password" placeholder="Password"required>
-  <span class="input-group-text bg-transparent"><i id="togglePassword" class="bi bi-eye-slash"></i></span>
+  <input type="password"  name="form_password" class="form-control" id="oldPassword" placeholder="Password"required>
+  <span class="input-group-text bg-transparent"><i id="toggleOldPassword" class="bi bi-eye-slash"></i></span>
+</div>
+<div class="input-group mb-3  input-group-lg">
+  <input type="password"  name="form_repassword" class="form-control" id="oldRePassword" placeholder="Please Enter Your Password Again"required>
+  <span class="input-group-text bg-transparent"><i id="toggleOldRePassword" class="bi bi-eye-slash"></i></span>
 </div>
 <div class="form-floating mb-3">
   <textarea class="form-control text-break" style="height: 100px" placeholder="Adress" id="floatingTextarea"name="form_adress"  required></textarea>

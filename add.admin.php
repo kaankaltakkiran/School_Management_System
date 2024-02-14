@@ -53,7 +53,7 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
         //!Eğer kullanıcı yoksa kaydet
         //?Şifre kontrolü
     } else if ($_POST['form_password'] != $_POST['form_repassword']) {
-        $errors[] = "Passwords Do Not Match!";
+        $errors[] = "Passwords Don't Match!";
     } else if ($error === 0) {
         //!Resim boyutu kontrolü gözden geçmeli
         if ($img_size < 0) {
