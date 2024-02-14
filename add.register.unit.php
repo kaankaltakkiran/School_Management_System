@@ -122,13 +122,16 @@ if (!empty($errors)) {
 //! Başarılı mesajlarını göster
 if (!empty($approves)) {
     foreach ($approves as $approve) {
-        echo '
-        <div class="container">
-    <div class="auto-close alert mt-3 text-center alert-success" role="alert">
-    ' . $approve . '
-    </div>
-    </div>
-    ';
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+      <div class='toast align-items-center text-white bg-success border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+          <div class='d-flex'>
+              <div class='toast-body'>
+              $approve
+              </div>
+              <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+          </div>
+      </div>
+  </div>";
     }
 }
 ?>
