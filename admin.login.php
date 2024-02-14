@@ -27,7 +27,7 @@ if (isset($_POST['form_email'])) {
     //! Eğer boş alan varsa uyarı mesajı
     if (empty($_POST["form_email"]) || empty($_POST["form_password"])) {
 
-        $errors[] = "Both Fields are required";
+        $errors[] = "Both Fields are required !";
     }
     //! Boş alan yoksa
     else {
@@ -64,7 +64,7 @@ if (isset($_POST['form_email'])) {
             } else {
                 //return false;
                 //!Şifreler Eşleşmiyorsa
-                $errors[] = "INCORRECT EMAIL OR PASSWORD MATCH!...";
+                $errors[] = "INCORRECT EMAIL OR PASSWORD MATCH !";
 
             }
         } else {
@@ -85,13 +85,16 @@ if (isset($_POST['form_email'])) {
 //! Hata mesajlarını göster
 if (!empty($errors)) {
     foreach ($errors as $error) {
-        echo '
-        <div class="container">
-    <div class="auto-close alert mt-3 text-center alert-danger" role="alert">
-    ' . $error . '
-    </div>
-    </div>
-    ';
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+      <div class='toast align-items-center text-white bg-danger border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+          <div class='d-flex'>
+              <div class='toast-body'>
+              $error
+              </div>
+              <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+          </div>
+      </div>
+  </div>";
     }
 }
 ?>

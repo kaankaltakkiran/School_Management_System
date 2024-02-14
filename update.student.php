@@ -100,7 +100,7 @@ if (isset($_POST['form_submit'])) {
     if ($error === 0) {
         //!Resim boyutlarını gözden geçir
         if ($img_size < 0) {
-            $errors[] = "Sorry, your file is too large.";
+            $errors[] = "Sorry, your file is too large !";
         } else {
             $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
             $img_ex_lc = strtolower($img_ex);
@@ -118,7 +118,7 @@ if (isset($_POST['form_submit'])) {
                 $sql = "UPDATE students SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,userimg = '$new_img_name',parentname=:form_parentname,parentnumber=:form_parentnumber,classid=:classid,classname=:classname,lessonid = :lessonid, lessonname = :lessonname WHERE userid = :idStudent";
 
             } else {
-                $errors[] = "You can't upload files of this type";
+                $errors[] = "You can't upload files of this type !";
             }
         }
     } else {
@@ -135,7 +135,7 @@ if (isset($_POST['form_submit'])) {
         $checkEmailQuery->execute();
         $existingUser = $checkEmailQuery->fetch(PDO::FETCH_ASSOC);
         if ($existingUser) {
-            $errors[] = "This email is already in use.";
+            $errors[] = "This email is already in use !";
         } else {
             $SORGU = $DB->prepare($sql);
             $SORGU->bindParam(':form_username', $name);
@@ -154,7 +154,7 @@ if (isset($_POST['form_submit'])) {
             $SORGU->bindParam(':idStudent', $id);
             $SORGU->execute();
             echo '<script>';
-            echo 'alert("Student User Update Successful!");';
+            echo 'alert("Student User Update Successful...");';
             echo 'window.location.href = "update.student.php?idStudent=' . $students[0]['userid'] . '";';
             echo '</script>';
         }

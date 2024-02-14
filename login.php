@@ -105,7 +105,7 @@ if (isset($_POST['form_email'])) {
 if (!empty($errors)) {
     foreach ($errors as $error) {
         echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
-      <div class='toast align-items-center text-white bg-danger border-0' role='alert' aria-live='assertive' aria-atomic='true'>
+      <div class='toast align-items-center text-white bg-danger border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
           <div class='d-flex'>
               <div class='toast-body'>
               $error

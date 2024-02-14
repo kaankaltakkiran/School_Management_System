@@ -37,6 +37,8 @@ Genel güvenlik control yap kontrol et
 
 Veli girişi
 
+Select genderleri input gibi yap
+
 Ders ile öğretmen yoksa kontrol ?????
 
 

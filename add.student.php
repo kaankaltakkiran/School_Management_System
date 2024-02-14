@@ -73,15 +73,15 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
     die(); */
     //!Eğer kullanıcı üye olmuşsa  hata ver
     if ($isUser) {
-        $errors[] = "This email is already registered";
+        $errors[] = "This email is already registered !";
 
         //!Eğer kullanıcı yoksa kaydet
     } else if ($_POST['form_password'] != $_POST['form_repassword']) {
-        $errors[] = "Passwords Do Not Match. !!!";
+        $errors[] = "Passwords Do Not Match !";
     } else if ($error === 0) {
         //!Resim boyutu kontrolü gözden geçmeli
         if ($img_size < 0) {
-            $errors[] = "Sorry, your file is too large.";
+            $errors[] = "Sorry, your file is too large !";
         } else {
             $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
             $img_ex_lc = strtolower($img_ex);
@@ -114,12 +114,12 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 $SORGU->execute();
                 $approves[] = "Student User Added Successfully...";
             } else {
-                $errors[] = "You can't upload files of this type";
+                $errors[] = "You can't upload files of this type !";
             }
         }
     } else {
         /*     $errors[] = "unknown error occurred!"; */
-        $errors[] = "Image Not Selected";
+        $errors[] = "Image Not Selected !";
     }
 
 }
@@ -128,20 +128,22 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
   <div class="container">
   <div class="row justify-content-center mt-3">
   <div class="col-6">
-
 <form method="POST"enctype="multipart/form-data">
 <h1 class="alert alert-info text-center">Add Student User Form</h1>
 <?php
 //! Hata mesajlarını göster
 if (!empty($errors)) {
     foreach ($errors as $error) {
-        echo '
-        <div class="container">
-    <div class="auto-close alert mt-3 text-center alert-danger" role="alert">
-    ' . $error . '
-    </div>
-    </div>
-    ';
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+      <div class='toast align-items-center text-white bg-danger border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+          <div class='d-flex'>
+              <div class='toast-body'>
+              $error
+              </div>
+              <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+          </div>
+      </div>
+  </div>";
     }
 }
 ?>

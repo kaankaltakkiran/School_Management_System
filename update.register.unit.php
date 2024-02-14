@@ -60,7 +60,7 @@ if (isset($_POST['form_submit'])) {
     if ($error === 0) {
         //!Resim boyutlarını gözden geçir
         if ($img_size < 0) {
-            $errors[] = "Sorry, your file is too large.";
+            $errors[] = "Sorry, your file is too large !";
         } else {
             $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
             $img_ex_lc = strtolower($img_ex);
@@ -78,7 +78,7 @@ if (isset($_POST['form_submit'])) {
                 $sql = "UPDATE registerunits SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,userimg = '$new_img_name' WHERE userid = :idRegisterUnit";
 
             } else {
-                $errors[] = "You can't upload files of this type";
+                $errors[] = "You can't upload files of this type !";
             }
         }
     } else {
@@ -95,7 +95,7 @@ if (isset($_POST['form_submit'])) {
         $checkEmailQuery->execute();
         $existingUser = $checkEmailQuery->fetch(PDO::FETCH_ASSOC);
         if ($existingUser) {
-            $errors[] = "This email is already in use.";
+            $errors[] = "This email is already in use !";
         } else {
             $SORGU = $DB->prepare($sql);
             $SORGU->bindParam(':form_username', $name);
@@ -108,7 +108,7 @@ if (isset($_POST['form_submit'])) {
             $SORGU->bindParam(':idRegisterUnit', $id);
             $SORGU->execute();
             echo '<script>';
-            echo 'alert("Register Unit User Update Successful!");';
+            echo 'alert("Register Unit User Update Successful...");';
             echo 'window.location.href = "update.register.unit.php?idRegisterUnit=' . $registerunits[0]['userid'] . '";';
             echo '</script>';
         }
@@ -121,13 +121,16 @@ if (isset($_POST['form_submit'])) {
 //! Hata mesajlarını göster
 if (!empty($errors)) {
     foreach ($errors as $error) {
-        echo '
-        <div class="container">
-    <div class="auto-close alert mt-3 text-center alert-danger" role="alert">
-    ' . $error . '
-    </div>
-    </div>
-    ';
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+      <div class='toast align-items-center text-white bg-danger border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+          <div class='d-flex'>
+              <div class='toast-body'>
+              $error
+              </div>
+              <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+          </div>
+      </div>
+  </div>";
     }
 }
 ?>
