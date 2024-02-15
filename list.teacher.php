@@ -99,7 +99,7 @@ foreach ($teachers as $teacher) {
     <tr>
       <th>{$teacher['userid']}</th>
       <td><img src='teacher_images/{$teacher['userimg']}' class='rounded-circle' width='100' height='100'></td>
-      <td><a href='list.teacher.students.php?teacherid={$teacher['userid']}' class=''>{$teacher['username']}</a></td>
+      <td><a href='list.teacher.students.php?teacherid={$teacher['userid']}' class='link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'>{$teacher['username']}</a></td>
       <td>{$teacher['useremail']}</td>
       <td>{$teacher['classname']}</td>
       <td>{$teacher['lessonname']}</td>

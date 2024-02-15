@@ -62,7 +62,7 @@ foreach ($lessons as $lesson) {
     echo "
     <tr>
       <th>{$lesson['lessonid']}</th>
-      <td><a href='list.student.lesson.php?lessonName={$lesson['lessonname']}' class=''>{$lesson['lessonname']}</a></td>
+      <td><a href='list.student.lesson.php?lessonName={$lesson['lessonname']}' class='link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'>{$lesson['lessonname']}</a></td>
       <td>{$lesson['createdate']}</td>
       <td><a href='update.lesson.php?lessonid={$lesson['lessonid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a></td>
       <td><a href='list.lessons.php?removeLessonid={$lesson['lessonid']}'onclick='return confirm(\"Are you sure you want to delete {$lesson['lessonname']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a></td>
