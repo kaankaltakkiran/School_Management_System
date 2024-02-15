@@ -11,7 +11,7 @@
     <ul class="navbar-nav">
     <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 1) {?>
     <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <?=($activePage == 'add.admin' || $activePage == 'admin.list') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'add.admin' || $activePage == 'admin.list' || $activePage == 'view.admin') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Admin
           </a>
           <ul class="dropdown-menu">
@@ -21,7 +21,7 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <?=($activePage == 'register.unit.add' || $activePage == 'register.unit.list') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'register.unit.add' || $activePage == 'register.unit.list' || $activePage == 'view.register.unit') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Register Unit
 
           </a>
