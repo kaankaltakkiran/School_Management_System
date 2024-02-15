@@ -83,6 +83,10 @@ if (!empty($approves)) {
     }
 }
 ?>
+  <div class="form-floating mb-3">
+  <input type="text"  class="form-control" value="<?php echo $_SESSION['userName'] ?>"disabled readonly>
+  <label>Added By</label>
+</div>
 <div class="form-floating mb-3">
   <input type="text" id="floatingInput" placeholder="Announcement Title"  class="form-control" name="form_title" required>
   <label for="floatingInput">Announcement Title</label>

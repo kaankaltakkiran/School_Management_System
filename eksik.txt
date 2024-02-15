@@ -42,8 +42,6 @@ footer ekle
 
 Ders ile öğretmen yoksa kontrol ?????
 
-lesson update hatalı inputname
-!!!!
 şifre değiştirme ekranı modal kapanmasın ????? hata varsa
 
 

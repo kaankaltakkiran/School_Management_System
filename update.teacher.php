@@ -189,7 +189,7 @@ if (!empty($errors)) {
 ?>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" value="<?php echo $_SESSION['userName'] ?>"disabled readonly>
-  <label>Added By Admin Name</label>
+  <label>Added By Register Unit Name</label>
 </div>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" value="<?php echo $teachers[0]['username'] ?>" name="form_username">

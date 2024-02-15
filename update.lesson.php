@@ -15,21 +15,15 @@ if ($_SESSION['role'] != 2) {
   <div class="container">
   <div class="row justify-content-center mt-3">
   <div class="col-6">
-
 <form method="POST"enctype="multipart/form-data">
 <h1 class="alert alert-info text-center">Lesson Update</h1>
 <?php
 require_once 'db.php';
-
 $id = $_GET['lessonid'];
-
 $sql = "SELECT * FROM lessons WHERE lessonid = :lessonid";
 $SORGU = $DB->prepare($sql);
-
 $SORGU->bindParam(':lessonid', $id);
-
 $SORGU->execute();
-
 $lessons = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* var_dump($lessons);
 die(); */
@@ -66,11 +60,11 @@ if (isset($_POST['form_submit'])) {
 ?>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" value="<?php echo $_SESSION['userName'] ?>"disabled readonly>
-  <label>Added By Admin Name</label>
+  <label>Added By Register Unit Name</label>
 </div>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" value="<?php echo $lessons[0]['lessonname'] ?>" name="from_lessonname">
-  <label>User Name</label>
+  <label>Lesson Name</label>
 </div>
                   <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Update Lesson
                   <i class="bi bi-send"></i>

@@ -26,7 +26,6 @@ if ($control_information == true || $_SESSION['role'] != 2) {
   <div class="container">
   <div class="row justify-content-center mt-3">
   <div class="col-6">
-
 <form method="POST"enctype="multipart/form-data">
 <h1 class="alert alert-info text-center">School İnformation Update</h1>
 <?php
@@ -34,11 +33,8 @@ require_once 'db.php';
 $id = $_GET['schoolid'];
 $sql = "SELECT * FROM informations WHERE schoolid = :schoolid";
 $SORGU = $DB->prepare($sql);
-
 $SORGU->bindParam(':schoolid', $id);
-
 $SORGU->execute();
-
 $informations = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* var_dump($informations);
 die(); */
@@ -94,8 +90,8 @@ if (isset($_POST['form_submit'])) {
   <label>Added By Register Unit Name</label>
 </div>
 <div class="form-floating mb-3">
-  <input type="text"  class="form-control" name="form_name" value="<?php echo $informations[0]['schoolname'] ?>">
-  <label>School Name</label>
+  <input type="text"  class="form-control" value="<?php echo $informations[0]['schoolname'] ?>" id="floatingInput" placeholder="School Name" name="form_name" required>
+  <label for="floatingInput">School Name</label>
 </div>
 <div class="form-floating mb-3">
 <select class="form-select" name="form_year" id="floatingSelect" aria-label="Floating label select example">

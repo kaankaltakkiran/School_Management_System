@@ -65,7 +65,6 @@ if (isset($_POST['form_submit'])) {
     <div class="container">
   <div class="row justify-content-center mt-3">
   <div class="col-6">
-
 <form method="POST">
 <h1 class="alert alert-info text-center">Add School İnformation</h1>
 <?php
@@ -107,8 +106,8 @@ if (!empty($approves)) {
   <label>Added By Register Unit Name</label>
 </div>
 <div class="form-floating mb-3">
-  <input type="text"  class="form-control" name="form_name" required>
-  <label>School Name</label>
+  <input type="text"  class="form-control" id="floatingInput" placeholder="School Name" name="form_name" required>
+  <label for="floatingInput">School Name</label>
 </div>
 <div class="form-floating mb-3">
   <select class="form-select" name="form_year" id="floatingSelect" aria-label="Floating label select example">
