@@ -1,7 +1,7 @@
 <?php
 session_start();
 $activeTitle = "Admin Update";
-$activePage = "index";
+$activePage = "admin.update";
 require 'up.html.php';
 require 'login.control.php';
 ?>

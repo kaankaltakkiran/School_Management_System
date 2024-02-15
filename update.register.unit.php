@@ -1,7 +1,7 @@
 <?php
 session_start();
 $activeTitle = "Register Unit Update";
-$activePage = "index";
+$activePage = "update.register.unit";
 require 'up.html.php';
 require 'login.control.php';
 ?>

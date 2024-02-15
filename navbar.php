@@ -11,7 +11,7 @@
     <ul class="navbar-nav">
     <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 1) {?>
     <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <?=($activePage == 'add.admin' || $activePage == 'admin.list' || $activePage == 'view.admin') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'add.admin' || $activePage == 'admin.list' || $activePage == 'view.admin' || $activePage == 'admin.update') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Admin
           </a>
           <ul class="dropdown-menu">
@@ -21,7 +21,7 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <?=($activePage == 'register.unit.add' || $activePage == 'register.unit.list' || $activePage == 'view.register.unit') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'register.unit.add' || $activePage == 'register.unit.list' || $activePage == 'view.register.unit' || $activePage == 'update.register.unit') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Register Unit
 
           </a>
@@ -36,7 +36,7 @@
         <?php }?>
     <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 2) {?>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <?=($activePage == 'add.teacher' || $activePage == 'teacher.list ' || $activePage == 'student.lesson.list') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'add.teacher' || $activePage == 'teacher.list' || $activePage == 'student.lesson.list' || $activePage == 'teacher.update') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Teacher
           </a>
           <ul class="dropdown-menu">
@@ -46,7 +46,7 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <?=($activePage == 'add.student' || $activePage == 'student.list' || $activePage == 'class.student.list' || $activePage == 'view.student') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'add.student' || $activePage == 'student.list' || $activePage == 'class.student.list' || $activePage == 'view.student' || $activePage == 'student.update') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Student
           </a>
           <ul class="dropdown-menu">
@@ -66,7 +66,7 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <?=($activePage == 'add.lesson' || $activePage == 'lesson.list') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'add.lesson' || $activePage == 'lesson.list' || $activePage == 'lesson.update') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Lesson
           </a>
           <ul class="dropdown-menu">
@@ -76,13 +76,23 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <?=($activePage == 'send.announcement' || $activePage == 'list.announcement') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'send.announcement' || $activePage == 'list.announcement' || $activePage == 'announcement.update') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Announcement
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item <?=($activePage == 'send.announcement') ? 'active' : '';?>" href="add.announcement.php">Send  Announcement</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item <?=($activePage == 'list.announcement') ? 'active' : '';?>" href="list.announcement.php">List  Announcement</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'add.information' || $activePage == 'information.list' || $activePage == 'update.information') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Information
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item <?=($activePage == 'add.information') ? 'active' : '';?>" href="add.information.php">Add Information</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item <?=($activePage == 'information.list') ? 'active' : '';?>" href="list.information.php">List Information</a></li>
           </ul>
         </li>
         <?php }?>
