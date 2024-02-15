@@ -10,6 +10,9 @@
     <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
     <ul class="navbar-nav">
     <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 1) {?>
+      <li class="nav-item">
+          <a class="nav-link  <?=($activePage == 'index') ? 'active' : '';?>" href="index.php">Home</a>
+        </li>
     <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle <?=($activePage == 'add.admin' || $activePage == 'admin.list' || $activePage == 'view.admin' || $activePage == 'admin.update') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Admin
@@ -23,7 +26,6 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle <?=($activePage == 'register.unit.add' || $activePage == 'register.unit.list' || $activePage == 'view.register.unit' || $activePage == 'update.register.unit') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Register Unit
-
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item <?=($activePage == 'register.unit.add') ? 'active' : '';?>" href="add.register.unit.php">Add Register Unit
@@ -35,6 +37,9 @@
         </li>
         <?php }?>
     <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 2) {?>
+      <li class="nav-item">
+          <a class="nav-link  <?=($activePage == 'index') ? 'active' : '';?>" href="index.php">Home</a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle <?=($activePage == 'add.teacher' || $activePage == 'teacher.list' || $activePage == 'student.lesson.list' || $activePage == 'teacher.update') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Teacher
@@ -102,12 +107,6 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">
       <?php if ($_SESSION['isLogin'] == 1) {?>
-        <li class="nav-item">
-          <a class="nav-link  <?=($activePage == 'index') ? 'active' : '';?>" href="index.php">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="logout.php">Logout</a>
-        </li>
         <?php
 require 'db.php';
     $imageFolder = '';
@@ -131,7 +130,7 @@ require 'db.php';
     ?>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-
+<span class="badge rounded-pill text-bg-danger">Welcome! <?=$_SESSION['userName']?></span>
           <img src='<?php echo "$imageFolder/{$users['userimg']}"; ?>' class='rounded-circle' height="30" width='30'>
           </a>
           <ul class="dropdown-menu  dropdown-menu-end">
