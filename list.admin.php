@@ -76,12 +76,11 @@ foreach ($admins as $admin) {
     $deleteButton = ($_SESSION['id'] != $admin['userid']) ?
     "<a href='list.admin.php?removeAdminid={$admin['userid']}' onclick='return confirm(\"Are you sure you want to delete {$admin['username']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a>" :
     "<span class='text-danger fw-bold '>You can't Delete yourself!!!</span>";
-
     echo "
     <tr>
       <th>{$admin['userid']}</th>
       <td><img src='admin_images/{$admin['userimg']}' class='rounded-circle' width='100' height='100'></td>
-      <td><a href='view.admin.php?idAdmin={$admin['userid']}'>{$admin['username']}</a></td>
+      <td><a class='link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' href='view.admin.php?idAdmin={$admin['userid']}'>{$admin['username']}</a></td>
       <td>{$admin['useremail']}</td>
       <td>$gender</td>
       <td>{$admin['createdate']}</td>

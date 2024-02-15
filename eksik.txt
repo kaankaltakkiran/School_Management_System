@@ -26,8 +26,9 @@ yoklama sistemi
 
 derse ait öğrencileri listeleme 
 
+!!!!!!!!!!!!!!!!!!!
 sadece kendi oluşturduysa görsün update tüm sayfalarda kontrol et örnek school information
-
+!!!!!!!!!!
 buna ek olarak update kontrülü yap sadece ekleyen id güncellesin
 
 şifre güncelleme ekranı tasarla modallı bir şekilde
@@ -41,9 +42,7 @@ Select genderleri input gibi yap
 
 Ders ile öğretmen yoksa kontrol ?????
 
-list class sayfasında sınıfa tıkalyınca öğrenciler listelesin
-
-
+update classname
 şifre değiştirme ekranı modal kapanmasın ????? hata varsa
 
 
