@@ -101,7 +101,6 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
   <div class="container">
   <div class="row justify-content-center mt-3">
   <div class="col-6">
-
 <form method="POST"enctype="multipart/form-data">
 <h1 class="alert alert-info text-center">Add Register Unit User Form</h1>
 <?php
@@ -143,12 +142,12 @@ if (!empty($approves)) {
   <label>Added By Admin Name</label>
 </div>
 <div class="form-floating mb-3">
-  <input type="text"  class="form-control" name="form_username" required>
-  <label>User Name</label>
+  <input type="text"  class="form-control" id="floatingInput" placeholder="User Name" name="form_username" required>
+  <label for="floatingInput">User Name</label>
 </div>
   <div class="form-floating mb-3">
-  <input type="email" name="form_email"class="form-control"required>
-  <label>Email</label>
+  <input type="email" name="form_email"id="floatingInput" placeholder="Email"class="form-control"required>
+  <label for="floatingInput">Email</label>
 </div>
 <div class="input-group mb-3  input-group-lg">
   <input type="password"  name="form_password" class="form-control" id="oldPassword" placeholder="Password"required>
@@ -163,8 +162,8 @@ if (!empty($approves)) {
   <label for="floatingTextarea">Address</label>
 </div>
 <div class="form-floating mb-3">
-  <input type="tel"  class="form-control" maxlength="11" name="form_phonenumber" required>
-  <label>Phone Number</label>
+  <input type="tel" id="floatingInput" placeholder="Phone Number"  class="form-control" maxlength="11" name="form_phonenumber" required>
+  <label for="floatingInput">Phone Number</label>
 </div>
 <div class="form-floating mb-3">
 <div class="mb-3">
@@ -172,7 +171,7 @@ if (!empty($approves)) {
   <input type="date" name="form_birthdate" class="form-control" id="exampleFormControlInput1" required/>
 </div>
 </div>
-<span class="text-danger fw-bold  ">Select Gender</span>
+<span class="text-danger fw-bold">Select Gender</span>
 <div class="form-check">
   <input class="form-check-input" type="radio" name="form_gender" value="M" required >
   <label class="form-check-label" >

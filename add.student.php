@@ -169,12 +169,12 @@ if (!empty($approves)) {
   <label>Added By Admin Name</label>
 </div>
 <div class="form-floating mb-3">
-  <input type="text"  class="form-control" name="form_username" required>
-  <label>User Name</label>
+  <input type="text"  class="form-control" id="floatingInput" placeholder="User Name" name="form_username" required>
+  <label for="floatingInput">User Name</label>
 </div>
   <div class="form-floating mb-3">
-  <input type="email" name="form_email"class="form-control"required>
-  <label>Email</label>
+  <input type="email" name="form_email"id="floatingInput" placeholder="Email"class="form-control"required>
+  <label for="floatingInput">Email</label>
 </div>
 <div class="input-group mb-3  input-group-lg">
   <input type="password"  name="form_password" class="form-control" id="oldPassword" placeholder="Password"required>
@@ -198,10 +198,7 @@ $optionClasses = "";
 foreach ($classes as $class) {
     $optionClasses .= "<option value='{$class['classid']}-{$class['classname']}'>{$class['classname']}</option>";
 }
-
 ?>
-
-
 <div class="form-floating mb-3">
 <select class="form-select" name="form_class"required>
 <option disabled selected>Select Class</option>
@@ -210,12 +207,10 @@ foreach ($classes as $class) {
 </div>
 <?php
 require_once 'db.php';
-
 $SORGU = $DB->prepare("SELECT * FROM lessons");
 $SORGU->execute();
 $lessons = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //echo '<pre>'; print_r($lessons);
-
 ?>
 <div class="form-floating mb-3">
   <div class="row">
@@ -239,8 +234,8 @@ foreach ($lessons as $lesson) {
   <label for="floatingTextarea">Address</label>
 </div>
 <div class="form-floating mb-3">
-  <input type="tel"  class="form-control" maxlength="11" name="form_phonenumber" required>
-  <label>Phone Number</label>
+  <input type="tel" id="floatingInput" placeholder="Phone Number"  class="form-control" maxlength="11" name="form_phonenumber" required>
+  <label for="floatingInput">Phone Number</label>
 </div>
 <div class="form-floating mb-3">
 <div class="mb-3">
@@ -258,12 +253,12 @@ foreach ($lessons as $lesson) {
 </div>
 
 <div class="form-floating mb-3">
-  <input type="text"  class="form-control" name="form_parentname" required>
-  <label>Parent Name</label>
+  <input type="text"  class="form-control" id="floatingInput" placeholder="Parent Name" name="form_parentname" required>
+  <label for="floatingInput">Parent Name</label>
 </div>
 <div class="form-floating mb-3">
-  <input type="tel"  class="form-control" maxlength="11" name="form_parentnumber" required>
-  <label>Parent Phone Number</label>
+  <input type="tel"  class="form-control" id="floatingInput" placeholder="Parent Phone Number" maxlength="11" name="form_parentnumber" required>
+  <label for="floatingInput">Parent Phone Number</label>
 </div>
 <div class="input-group mb-3">
   <input type="file"  name='form_image' class="form-control" id="inputGroupFile02"required>

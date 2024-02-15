@@ -137,12 +137,12 @@ if (!empty($approves)) {
   <label>Added By Admin Name</label>
 </div>
 <div class="form-floating mb-3">
-  <input type="text"  class="form-control" name="form_username" required>
-  <label>User Name</label>
+  <input type="text"  class="form-control" id="floatingInput" placeholder="User Name" name="form_username" required>
+  <label for="floatingInput">User Name</label>
 </div>
   <div class="form-floating mb-3">
-  <input type="email" name="form_email"class="form-control"required>
-  <label>Email</label>
+  <input type="email" name="form_email"class="form-control" id="floatingInput" placeholder="Email"required>
+  <label for="floatingInput">Email</label>
 </div>
 <div class="input-group mb-3  input-group-lg">
   <input type="password"  name="form_password" class="form-control" id="oldPassword" placeholder="Password"required>

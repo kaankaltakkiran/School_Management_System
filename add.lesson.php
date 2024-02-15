@@ -56,7 +56,6 @@ if (isset($_POST['form_submit'])) {
     <div class="container">
   <div class="row justify-content-center mt-3">
   <div class="col-6">
-
 <form method="POST">
 <h1 class="alert alert-info text-center">Add Lesson</h1>
 <?php
@@ -98,8 +97,8 @@ if (!empty($approves)) {
   <label>Added By Register Unit Name</label>
 </div>
 <div class="form-floating mb-3">
-  <input type="text"  class="form-control" name="form_lesson" required>
-  <label>lesson Name</label>
+  <input type="text" id="floatingInput" placeholder="lesson Name"  class="form-control" name="form_lesson" required>
+  <label for="floatingInput">lesson Name</label>
 </div>
 
                   <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Add Lesson

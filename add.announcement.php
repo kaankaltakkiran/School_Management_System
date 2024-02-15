@@ -84,8 +84,8 @@ if (!empty($approves)) {
 }
 ?>
 <div class="form-floating mb-3">
-  <input type="text"  class="form-control" name="form_title" required>
-  <label>Announcement Title</label>
+  <input type="text" id="floatingInput" placeholder="Announcement Title"  class="form-control" name="form_title" required>
+  <label for="floatingInput">Announcement Title</label>
 </div>
 <div class="form-floating mb-3">
   <select class="form-select" id="floatingSelect" name="form_reciverid"  required aria-label="Floating label select example" >

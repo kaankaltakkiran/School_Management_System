@@ -29,6 +29,9 @@ derse ait öğrencileri listeleme
 !!!!!!!!!!!!!!!!!!!
 sadece kendi oluşturduysa görsün update tüm sayfalarda kontrol et örnek school information
 !!!!!!!!!!
+!!!!!!!!!!
+Kullanıcı profil sayfası
+!!!!!!!!!!
 buna ek olarak update kontrülü yap sadece ekleyen id güncellesin
 
 şifre güncelleme ekranı tasarla modallı bir şekilde
@@ -43,6 +46,7 @@ Select genderleri input gibi yap
 Ders ile öğretmen yoksa kontrol ?????
 
 update classname
+
 şifre değiştirme ekranı modal kapanmasın ????? hata varsa
 
 

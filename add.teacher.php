@@ -176,21 +176,19 @@ if (!empty($approves)) {
   <label>Added By Admin Name</label>
 </div>
 <div class="form-floating mb-3">
-  <input type="text"  class="form-control" name="form_username" required>
-  <label>User Name</label>
+  <input type="text"  class="form-control" id="floatingInput" placeholder="User Name" name="form_username" required>
+  <label for="floatingInput">User Name</label>
 </div>
   <div class="form-floating mb-3">
-  <input type="email" name="form_email"class="form-control"required>
-  <label>Email</label>
+  <input type="email" name="form_email" id="floatingInput" placeholder="Email"class="form-control"required>
+  <label for="floatingInput">Email</label>
 </div>
 <?php
 require_once 'db.php';
-
 $SORGU = $DB->prepare("SELECT * FROM classes");
 $SORGU->execute();
 $classes = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //echo '<pre>'; print_r($users);
-
 ?>
 <div class="form-floating mb-3">
   <div class="row">
@@ -247,8 +245,8 @@ foreach ($lessons as $lesson) {
   <label for="floatingTextarea">Address</label>
 </div>
 <div class="form-floating mb-3">
-  <input type="tel"  class="form-control" maxlength="11" name="form_phonenumber" required>
-  <label>Phone Number</label>
+  <input type="tel" id="floatingInput" placeholder="Phone Number"  class="form-control" maxlength="11" name="form_phonenumber" required>
+  <label for="floatingInput">Phone Number</label>
 </div>
 <div class="form-floating mb-3">
 <div class="mb-3">
