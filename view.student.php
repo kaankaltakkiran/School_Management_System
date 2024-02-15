@@ -1,7 +1,7 @@
 <?php
 session_start();
 $activeTitle = "School Management System";
-$activePage = "index";
+$activePage = "view.student";
 require 'up.html.php';
 require 'login.control.php';
 ?>

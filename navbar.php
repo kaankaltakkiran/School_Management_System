@@ -36,7 +36,7 @@
         <?php }?>
     <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 2) {?>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <?=($activePage == 'add.teacher' || $activePage == 'teacher.list') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'add.teacher' || $activePage == 'teacher.list ' || $activePage == 'student.lesson.list') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Teacher
           </a>
           <ul class="dropdown-menu">
@@ -46,7 +46,7 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <?=($activePage == 'add.student' || $activePage == 'student.list') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'add.student' || $activePage == 'student.list' || $activePage == 'class.student.list' || $activePage == 'view.student') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Student
           </a>
           <ul class="dropdown-menu">

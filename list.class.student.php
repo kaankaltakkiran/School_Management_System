@@ -1,7 +1,7 @@
 <?php
 session_start();
 $activeTitle = "Class Student List";
-$activePage = "index";
+$activePage = "class.student.list";
 require 'up.html.php';
 require 'login.control.php';
 ?>
