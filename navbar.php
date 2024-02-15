@@ -56,7 +56,7 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <?=($activePage == 'add.class' || $activePage == 'class.list') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'add.class' || $activePage == 'class.list' || $activePage == 'class.update') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Class
           </a>
           <ul class="dropdown-menu">

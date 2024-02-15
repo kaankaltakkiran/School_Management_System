@@ -41,8 +41,8 @@ Veli girişi
 footer ekle
 
 Ders ile öğretmen yoksa kontrol ?????
-Yarın yap !!!!
-update classname sayfası
+
+lesson update hatalı inputname
 !!!!
 şifre değiştirme ekranı modal kapanmasın ????? hata varsa
 

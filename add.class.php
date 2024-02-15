@@ -111,7 +111,7 @@ if (!empty($approves)) {
     <option value="11">11</option>
     <option value="12">12</option>
   </select>
-  <label for="floatingSelect">Class</label>
+  <label for="floatingSelect">Class Number</label>
 </div>
 <!-- Chatgpt ile sınıf harflerini gösterme
 ord ascıı karakterine çeviriyor -->

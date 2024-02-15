@@ -70,13 +70,12 @@ foreach ($classes as $class) {
       <th>{$class['classid']}</th>
       <td><a href='list.student.class.php?className={$class['classname']}' class='link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'>{$class['classname']}</a></td>
       <td>{$class['createdate']}</td>
-      <td><a href='' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a></td>
+      <td><a href='update.class.php?idClass={$class['classid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a></td>
       <td><a href='list.class.php?removeClassid={$class['classid']}'onclick='return confirm(\"Are you sure you want to delete {$class['classname']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a></td>
    </tr>
   ";
 }
 ?>
-
   </tbody>
 </table>
 </div>
