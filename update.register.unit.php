@@ -161,20 +161,19 @@ if (!empty($errors)) {
   <input type="date" name="form_birthdate" value="<?php echo $registerunits[0]['birthdate'] ?>" class="form-control" id="exampleFormControlInput1" />
 </div>
 </div>
-<span class="text-danger fw-bold">Selected Gender</span>
-<div class="form-check">
-  <input class="form-check-input" type="radio" <?php echo ($selectGender == 'M') ? 'checked' : ''; ?> name="form_gender" value="M"  >
-  <label class="form-check-label" >
-  Male
-  </label>
+<div class="form-floating mb-3">
+<select class="form-select" name="form_gender">
+<option selected disabled>Select Gender</option>
+        <option value="M" <?php if ($selectGender === 'M') {
+    echo 'selected';
+}
+?>>Male</option>
+        <option value="F" <?php if ($selectGender === 'F') {
+    echo 'selected';
+}
+?>>Female</option>
+    </select>
 </div>
-<div class="form-check mb-3">
-  <input class="form-check-input" type="radio" <?php echo ($selectGender == 'F') ? 'checked' : ''; ?> name="form_gender" value="F" >
-  <label class="form-check-label" >
-  Female
-  </label>
-</div>
-
 <label>Register Unit Image</label>
                         <img src="register_unit_images/<?php echo $registerunits[0]['userimg']; ?>" alt="User Image" class="img-thumbnail">
 <div class="input-group mb-3">

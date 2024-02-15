@@ -98,7 +98,6 @@ if (isset($_POST['form_submit'])) {
             $SORGU->bindParam(':form_username', $name);
             $SORGU->bindParam(':form_email', $email);
             $SORGU->bindParam(':form_gender', $gender);
-
             $SORGU->bindParam(':idAdmin', $id);
             $SORGU->execute();
             echo '<script>';
@@ -139,18 +138,18 @@ if (!empty($errors)) {
   <input type="email" name="form_email"  value="<?php echo $admins[0]['useremail'] ?>" class="form-control">
   <label>Email</label>
 </div>
-<span class="text-danger fw-bold">Selected Gender</span>
-<div class="form-check">
-  <input class="form-check-input" <?php echo ($selectGender == 'M') ? 'checked' : ''; ?> type="radio" name="form_gender" value="M"  >
-  <label class="form-check-label" >
-  Male
-  </label>
-</div>
-<div class="form-check mb-3">
-  <input class="form-check-input" <?php echo ($selectGender == 'F') ? 'checked' : ''; ?> type="radio" name="form_gender" value="F">
-  <label class="form-check-label" >
-  Female
-  </label>
+<div class="form-floating mb-3">
+<select class="form-select" name="form_gender">
+<option selected disabled>Select Gender</option>
+        <option value="M" <?php if ($selectGender === 'M') {
+    echo 'selected';
+}
+?>>Male</option>
+        <option value="F" <?php if ($selectGender === 'F') {
+    echo 'selected';
+}
+?>>Female</option>
+    </select>
 </div>
 <label>Admin Image</label>
                         <img src="admin_images/<?php echo $admins[0]['userimg']; ?>" alt="User Image" class="img-thumbnail">
@@ -163,8 +162,6 @@ if (!empty($errors)) {
                   </button>
      </form>
      </div>
-
 </div>
-
 </div>
 <?php require 'down.html.php';?>

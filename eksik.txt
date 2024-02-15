@@ -42,9 +42,11 @@ Genel güvenlik control yap kontrol et
 Veli girişi
 bunu yap
 htmlspcailchars control footer ekle
+update sayfaları active
+
 Ders ile öğretmen yoksa kontrol ?????
 
-update classname
+update classname sayfası
 
 şifre değiştirme ekranı modal kapanmasın ????? hata varsa
 
