@@ -40,9 +40,8 @@ buna ek olarak update kontrülü yap sadece ekleyen id güncellesin
 Genel güvenlik control yap kontrol et
 
 Veli girişi
-
-Select genderleri input gibi yap
-
+bunu yap
+htmlspcailchars control footer ekle
 Ders ile öğretmen yoksa kontrol ?????
 
 update classname

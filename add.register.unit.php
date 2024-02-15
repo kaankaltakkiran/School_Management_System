@@ -171,18 +171,13 @@ if (!empty($approves)) {
   <input type="date" name="form_birthdate" class="form-control" id="exampleFormControlInput1" required/>
 </div>
 </div>
-<span class="text-danger fw-bold">Select Gender</span>
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="form_gender" value="M" required >
-  <label class="form-check-label" >
-  Male
-  </label>
-</div>
-<div class="form-check mb-3">
-  <input class="form-check-input" type="radio" name="form_gender" value="F" required>
-  <label class="form-check-label" >
-  Female
-  </label>
+<div class="form-floating mb-3">
+  <select class="form-select" id="floatingSelect" name="form_gender"  required aria-label="Floating label select example" >
+    <option selected disabled>Select Gender</option>
+    <option value="M">Male</option>
+    <option value="F">Female</option>
+  </select>
+  <label for="floatingSelect">Gender</label>
 </div>
 <div class="input-group mb-3">
   <input type="file"  name='form_image' class="form-control" id="inputGroupFile02"required>
