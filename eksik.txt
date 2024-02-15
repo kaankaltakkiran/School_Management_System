@@ -41,8 +41,8 @@ Select genderleri input gibi yap
 
 Ders ile öğretmen yoksa kontrol ?????
 
+list class sayfasında sınıfa tıkalyınca öğrenciler listelesin
 
-şifre değiştirme ekranını my bloga yap
 
 şifre değiştirme ekranı modal kapanmasın ????? hata varsa
 
