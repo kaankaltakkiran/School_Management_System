@@ -132,7 +132,7 @@ require 'db.php';
     ?>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-<span class="badge rounded-pill text-bg-danger">Welcome! <?=$_SESSION['userName']?></span>
+<span class="badge rounded-pill text-bg-danger">Welcome! <?=$users['username']?></span>
           <img src='<?php echo "$imageFolder/{$users['userimg']}"; ?>' class='rounded-circle' height="30" width='30'>
           </a>
           <ul class="dropdown-menu  dropdown-menu-end">

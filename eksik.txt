@@ -35,15 +35,18 @@ Genel güvenlik control yap kontrol et
 
 Veli girişi
 
-footer ekle
+
 !!!!!!!
 rol kontrol örneğin update duyru yaparken sadece update yapan erişsin
 !!!!!!
-Ders ile öğretmen yoksa kontrol ?????
+
+
+
+Yapılan ama eksiklikler:
 
 şifre değiştirme ekranı modal kapanmasın ????? hata varsa
 
-
+footer ekle
 
 
 
