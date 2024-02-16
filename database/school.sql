@@ -30,8 +30,9 @@ DROP TABLE IF EXISTS `announcements`;
 CREATE TABLE `announcements` (
   `announcementid` int(11) NOT NULL AUTO_INCREMENT,
   `senderid` int(11) NOT NULL,
+  `sendername` varchar(50) NOT NULL,
   `senderrole` int(11) NOT NULL,
-  `receiverid` int(11) NOT NULL,
+  `receiverrole` int(11) NOT NULL,
   `createdate` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `announcementtitle` varchar(50) NOT NULL,
   `startdate` date NOT NULL,
@@ -41,10 +42,12 @@ CREATE TABLE `announcements` (
   PRIMARY KEY (`announcementid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
-INSERT INTO `announcements` (`announcementid`, `senderid`, `senderrole`, `receiverid`, `createdate`, `announcementtitle`, `startdate`, `lastdate`, `ispublish`, `announcement`) VALUES
-(1,	1,	2,	2,	'2024-02-10 11:28:00',	'Title 1',	'2024-02-07',	'2024-02-15',	'1',	'  Title 1  '),
-(2,	1,	2,	3,	'2024-02-09 17:59:51',	'Title 2',	'2024-02-07',	'2024-02-15',	'0',	'Title 2'),
-(3,	1,	3,	4,	'2024-02-09 15:11:29',	'Title 3',	'2024-02-09',	'2024-02-12',	'1',	'Title 3');
+INSERT INTO `announcements` (`announcementid`, `senderid`, `sendername`, `senderrole`, `receiverrole`, `createdate`, `announcementtitle`, `startdate`, `lastdate`, `ispublish`, `announcement`) VALUES
+(1,	1,	'Kaan Kaltakkıran',	2,	2,	'2024-02-16 12:33:58',	'Title 1',	'2024-02-16',	'2024-03-31',	'1',	'      Title 1 Annoucement      '),
+(2,	1,	'Kaan Kaltakkıran',	2,	2,	'2024-02-16 12:26:06',	'Title 2',	'2024-02-16',	'2024-03-04',	'0',	'Title 2 Annoucement'),
+(3,	1,	'Kaan Kaltakkıran',	2,	2,	'2024-02-16 12:30:18',	'Title 3',	'2024-02-08',	'2024-02-15',	'1',	'Title 3 Announcement'),
+(4,	1,	'Kaan Kaltakkıran',	2,	3,	'2024-02-16 12:47:32',	'Title 4',	'2024-02-16',	'2024-03-31',	'1',	'      Title 4 Announcement       '),
+(5,	1,	'Veli Yıldız',	3,	4,	'2024-02-16 12:28:43',	'Ttile 5',	'2024-02-16',	'2024-03-31',	'1',	'Title 5 Announcement ');
 
 DROP TABLE IF EXISTS `classes`;
 CREATE TABLE `classes` (
@@ -188,4 +191,4 @@ INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `user
 (1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$F8BOCVniVNOqHhjl7gWf8e5ptBp1wNP.KhGPA3GA9pEJx0hPGEZOm',	'M',	3,	'2024-02-10 12:43:06',	'1,6,11,16',	'9/A,10/B,11/C,12/D',	'Address 1',	'23123112323',	'1975-08-20',	'IMG-65c7452a37d2d7.23094001.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
 (2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$a7xTEd88iyzI43udPEmrSeTmxBBaj9nf.JXtJV8NadXoRV1/GGe7q',	'F',	3,	'2024-02-10 12:43:40',	'1,10',	'9/A,11/B',	'Address 2',	'12331223123',	'1980-01-15',	'IMG-65c7454cee1627.24858158.png',	'3',	'Turkish',	1,	'Kaan Kaltakkıran');
 
--- 2024-02-13 13:08:43
+-- 2024-02-16 09:50:46
