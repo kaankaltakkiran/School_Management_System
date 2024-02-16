@@ -5,12 +5,6 @@ $activePage = "announcement.update";
 require 'up.html.php';
 require 'login.control.php';
 ?>
-<?php
-if ($_SESSION['role'] != 1 and $_SESSION['role'] != 2) {
-    header("location: authorizationcontrol.php");
-    die();
-}
-?>
     <?php include 'navbar.php';?>
   <div class="container">
   <div class="row justify-content-center mt-3">
@@ -30,12 +24,16 @@ $SORGU->execute();
 $announcements = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* var_dump($announcements);
 die(); */
+//!Veritabanından publish announcement değerini al
 $isPublis = $announcements[0]['ispublish'];
+//!Veritabanından reciverrole id sin al
+$reciverRole = $announcements[0]['receiverrole'];
 if (isset($_POST['form_submit'])) {
     //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
     //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
     //?Kullanıcıdan alınan veriler
     $announcementTitle = htmlspecialchars($_POST['form_title']);
+    $announcementReciverRole = htmlspecialchars($_POST['form_reciverrole']);
     $announcementStartDate = $_POST['form_startdate'];
     $announcementLastDate = $_POST['form_lastdate'];
 //!Checkbox değeri kontrolü
@@ -43,9 +41,10 @@ if (isset($_POST['form_submit'])) {
     $isPublish = isset($_POST['form_ispublish']) ? 1 : 0;
     $announcementContent = htmlspecialchars($_POST['form_announcement']);
 
-    $sql = "UPDATE announcements SET announcementtitle = :form_title, startdate = :form_startdate, lastdate=:form_lastdate,ispublish=:form_ispublish,announcement=:form_announcement WHERE announcementid = :idannouncement";
+    $sql = "UPDATE announcements SET announcementtitle = :form_title,receiverrole=:form_reciverrole, startdate = :form_startdate, lastdate=:form_lastdate,ispublish=:form_ispublish,announcement=:form_announcement WHERE announcementid = :idannouncement";
     $SORGU = $DB->prepare($sql);
     $SORGU->bindParam(':form_title', $announcementTitle);
+    $SORGU->bindParam(':form_reciverrole', $announcementReciverRole);
     $SORGU->bindParam(':form_startdate', $announcementStartDate);
     $SORGU->bindParam(':form_lastdate', $announcementLastDate);
     $SORGU->bindParam(':form_ispublish', $isPublish);
@@ -60,7 +59,29 @@ if (isset($_POST['form_submit'])) {
 ?>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" value="<?php echo $_SESSION['userName'] ?>"disabled readonly>
-  <label>Update By Register Unit Name</label>
+  <label>Update By </label>
+</div>
+<div class="form-floating mb-3">
+<select class="form-select" name="form_reciverrole">
+<option selected disabled>Select Reciver</option>
+        <option value="1" <?php if ($reciverRole === '1') {
+    echo 'selected';
+}
+?>>Admin</option>
+        <option value="2" <?php if ($reciverRole === '2') {
+    echo 'selected';
+}
+?>>Register Unit</option>
+        <option value="3" <?php if ($reciverRole === '3') {
+    echo 'selected';
+}
+?>>Teacher</option>
+        <option value="4" <?php if ($reciverRole === '4') {
+    echo 'selected';
+}
+?>>Student</option>
+    </select>
+    <label for="floatingSelect">Receiver</label>
 </div>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" value="<?php echo $announcements[0]['announcementtitle'] ?>" name="form_title">
