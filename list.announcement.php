@@ -17,7 +17,7 @@ require 'login.control.php';
 require_once 'db.php';
 $roleid = $_SESSION['role'];
 $userid = $_SESSION['id'];
-$SORGU = $DB->prepare("SELECT * FROM announcements WHERE receiverid=:roleid AND ispublish=1 AND CURDATE() BETWEEN startdate AND lastdate");
+$SORGU = $DB->prepare("SELECT * FROM announcements WHERE receiverrole=:roleid AND ispublish=1 AND CURDATE() BETWEEN startdate AND lastdate");
 $SORGU->bindParam(':roleid', $roleid);
 $SORGU->execute();
 $announcements = $SORGU->fetchAll(PDO::FETCH_ASSOC);
@@ -51,6 +51,22 @@ die(); */
 /* $fullAnnouncement['ispublish'] == 0 || $kaan == 0 */
 if ($userid == $fullAnnouncements[0]['senderid']) {
     foreach ($fullAnnouncements as $fullAnnouncement) {
+        //!Kullanıcı role id sine göre role adını belirleme
+        $senderRole = "";
+        if ($fullAnnouncement['senderrole'] == 1) {
+            $senderRole = "Admin";
+        } else if ($fullAnnouncement['senderrole'] == 2) {
+            $senderRole = "Register Unit";
+        } else if ($fullAnnouncement['senderrole'] == 3) {
+            $senderRole = "Teacher";
+        } else if ($fullAnnouncement['senderrole'] == 4) {
+            $senderRole = "Student";
+        } else if ($fullAnnouncement['senderrole'] == 5) {
+            $senderRole = "Parent";
+        } else if ($fullAnnouncement['senderrole'] == 6) {
+            $senderRole = "Other";
+        }
+
         $dateControl = strtotime($fullAnnouncement['startdate']) <= time() && strtotime($fullAnnouncement['lastdate']) >= time();
         $publishAlert = ''; // Her döngü adımında publishAlert sıfırlanıyor.
         //? Eğer ispublish 0 ise veya tarih kontrolü false ise
@@ -67,7 +83,9 @@ if ($userid == $fullAnnouncements[0]['senderid']) {
         // Tarih ve saat formatını ayarlayın
         $formatted_datetime = date_format($datetime, 'd.m.Y H:i');
         ?>
-    <div class="accordion-item">
+    <div class="accordion-item mt-4 ">
+    <span class="badge bg-danger">Sender Name: <?php echo $fullAnnouncement['sendername']; ?></span>
+    <span class="badge bg-success float-end ">Sender Role: <?php echo $senderRole ?></span>
       <h2 class="accordion-header" id="headingOne">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo $announcementid ?>" aria-expanded="false" aria-controls="<?php echo $announcementid ?>">
           <?php echo $fullAnnouncement['announcementtitle']; ?>
@@ -92,13 +110,30 @@ if ($userid == $fullAnnouncements[0]['senderid']) {
 <?php }
 } else {
     foreach ($announcements as $announcement) {
+        //!Kullanıcı role id sine göre role adını belirleme
+        $senderRole = "";
+        if ($announcement['senderrole'] == 1) {
+            $senderRole = "Admin";
+        } else if ($announcement['senderrole'] == 2) {
+            $senderRole = "Register Unit";
+        } else if ($announcement['senderrole'] == 3) {
+            $senderRole = "Teacher";
+        } else if ($announcement['senderrole'] == 4) {
+            $senderRole = "Student";
+        } else if ($announcement['senderrole'] == 5) {
+            $senderRole = "Parent";
+        } else if ($announcement['senderrole'] == 6) {
+            $senderRole = "Other";
+        }
         $announcementid = "accordionflush{$announcement['announcementid']}";
         $datetime = new DateTime($announcement["createdate"]);
 
         // Tarih ve saat formatını ayarlayın
         $formatted_datetime = date_format($datetime, 'd.m.Y H:i');
         ?>
-      <div class="accordion-item">
+      <div class="accordion-item mt-4 ">
+      <span class="badge bg-danger">Sender Name: <?php echo $announcement['sendername']; ?></span>
+    <span class="badge bg-success float-end ">Sender Role: <?php echo $senderRole ?></span>
         <h2 class="accordion-header" id="headingOne">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo $announcementid ?>" aria-expanded="false" aria-controls="<?php echo $announcementid ?>">
           <?php echo $announcement['announcementtitle']; ?>
@@ -106,7 +141,6 @@ if ($userid == $fullAnnouncements[0]['senderid']) {
         </h2>
         <div id="<?php echo $announcementid ?>" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
       <div class="accordion-body">
-
       <div class="d-flex mb-3">
                     <div class="p-2">
                     <?php echo $announcement['announcement']; ?>

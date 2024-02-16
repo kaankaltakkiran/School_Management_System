@@ -18,7 +18,8 @@ if (isset($_POST['form_submit'])) {
     //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
     $announcementSenderid = $_SESSION['id'];
     $announcementSenderRole = $_SESSION['role'];
-    $announcementReciverid = htmlspecialchars($_POST['form_reciverid']);
+    $announcementSenderName = $_SESSION['userName'];
+    $announcementReciverRole = htmlspecialchars($_POST['form_reciverrole']);
     $announcementTitle = htmlspecialchars($_POST['form_title']);
     $announcementStartDate = $_POST['form_startdate'];
     $announcementLastDate = $_POST['form_lastdate'];
@@ -28,11 +29,12 @@ if (isset($_POST['form_submit'])) {
     $announcementContent = htmlspecialchars($_POST['form_announcement']);
 
     // Insert into Database
-    $sql = "INSERT INTO announcements (senderid,senderrole,receiverid,announcementtitle,startdate,lastdate,ispublish,announcement) VALUES (:senderid,:senderrole,:receiverid,:announcementtitle,:form_startdate,:form_lastdate,:form_ispublish,:announcement)";
+    $sql = "INSERT INTO announcements (senderid,sendername,senderrole,receiverrole,announcementtitle,startdate,lastdate,ispublish,announcement) VALUES (:senderid,:sendername,:senderrole,:form_reciverrole,:announcementtitle,:form_startdate,:form_lastdate,:form_ispublish,:announcement)";
     $SORGU = $DB->prepare($sql);
     $SORGU->bindParam(':senderid', $announcementSenderid);
+    $SORGU->bindParam(':sendername', $announcementSenderName);
     $SORGU->bindParam(':senderrole', $announcementSenderRole);
-    $SORGU->bindParam(':receiverid', $announcementReciverid);
+    $SORGU->bindParam(':form_reciverrole', $announcementReciverRole);
     $SORGU->bindParam(':announcementtitle', $announcementTitle);
     $SORGU->bindParam(':form_startdate', $announcementStartDate);
     $SORGU->bindParam(':form_lastdate', $announcementLastDate);
@@ -46,7 +48,6 @@ if (isset($_POST['form_submit'])) {
     <div class="container">
   <div class="row justify-content-center mt-3">
   <div class="col-6">
-
 <form method="POST">
 <h1 class="alert alert-info text-center">Send Announcement</h1>
 <?php
@@ -92,7 +93,7 @@ if (!empty($approves)) {
   <label for="floatingInput">Announcement Title</label>
 </div>
 <div class="form-floating mb-3">
-  <select class="form-select" id="floatingSelect" name="form_reciverid"  required aria-label="Floating label select example" >
+  <select class="form-select" id="floatingSelect" name="form_reciverrole"  required aria-label="Floating label select example" >
     <option selected disabled>Select Receiver User</option>
     <option value="1">Admin</option>
     <option value="2">Register Unit</option>
