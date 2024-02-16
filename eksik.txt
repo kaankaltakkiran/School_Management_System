@@ -39,7 +39,9 @@ Genel güvenlik control yap kontrol et
 Veli girişi
 
 footer ekle
-
+Yarın!!!!!!!!
+duyru listesinde eklyen id ve isim ekle ve bu liste göster
+!!!!!!!
 Ders ile öğretmen yoksa kontrol ?????
 
 şifre değiştirme ekranı modal kapanmasın ????? hata varsa

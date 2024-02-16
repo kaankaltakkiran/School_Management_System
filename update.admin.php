@@ -151,8 +151,12 @@ if (!empty($errors)) {
 ?>>Female</option>
     </select>
 </div>
-<label>Admin Image</label>
-                        <img src="admin_images/<?php echo $admins[0]['userimg']; ?>" alt="User Image" class="img-thumbnail">
+<div class="row">
+    <div class="col-6">
+    <span>Current Image</span>
+                    <img src="admin_images/<?php echo $admins[0]['userimg']; ?>" alt="User Image"  class="img-thumbnail m-3 ">
+                    </div>
+</div>
 <div class="input-group mb-3">
   <input type="file"  name='form_image'  class="form-control" id="inputGroupFile02">
   <label class="input-group-text" for="inputGroupFile02">Upload Admin Image &nbsp; <i class="bi bi-upload"></i></label>

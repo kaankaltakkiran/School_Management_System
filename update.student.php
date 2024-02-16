@@ -316,8 +316,12 @@ foreach ($lessons as $lesson) {
   <input type="tel"  class="form-control" value="<?php echo $students[0]['phonenumber'] ?>" maxlength="11" name="form_parentnumber" >
   <label>Parent Phone Number</label>
 </div>
-<label>Student User Image</label>
-                        <img src="student_images/<?php echo $students[0]['userimg']; ?>" alt="User Image" class="img-thumbnail">
+<div class="row">
+    <div class="col-6">
+    <span>Current Image</span>
+                    <img src="student_images/<?php echo $students[0]['userimg']; ?>" alt="User Image"  class="img-thumbnail m-3 ">
+                    </div>
+</div>
 <div class="input-group mb-3">
   <input type="file"  name='form_image' class="form-control" id="inputGroupFile02">
   <label class="input-group-text" for="inputGroupFile02">Upload Student User Image &nbsp; <i class="bi bi-upload"></i></label>

@@ -312,9 +312,12 @@ echo '<span id="checkbox-message" class="text-danger mt-3 fw-bold ">' . (($selec
 ?>
 </div>
 </div>
-
-<label>Teacher User Image</label>
-                        <img src="teacher_images/<?php echo $teachers[0]['userimg']; ?>" alt="User Image" class="img-thumbnail">
+<div class="row">
+    <div class="col-6">
+    <span>Current Image</span>
+                    <img src="teacher_images/<?php echo $teachers[0]['userimg']; ?>" alt="User Image"  class="img-thumbnail m-3 ">
+                    </div>
+</div>
 <div class="input-group mb-3">
   <input type="file"  name='form_image' class="form-control" id="inputGroupFile02">
   <label class="input-group-text" for="inputGroupFile02">Upload Teacher User Image &nbsp; <i class="bi bi-upload"></i></label>
