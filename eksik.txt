@@ -24,14 +24,11 @@ Sınav sistemi
 
 yoklama sistemi
 
-derse ait öğrencileri listeleme 
 
 !!!!!!!!!!!!!!!!!!!
 sadece kendi oluşturduysa görsün update tüm sayfalarda kontrol et örnek school information
 !!!!!!!!!!
-!!!!!!!!!!
-Kullanıcı profil sayfası
-!!!!!!!!!!
+
 buna ek olarak update kontrülü yap sadece ekleyen id güncellesin
 
 Genel güvenlik control yap kontrol et

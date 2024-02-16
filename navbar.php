@@ -127,6 +127,8 @@ require 'db.php';
     $SORGU->execute();
     $users = $SORGU->fetchAll(PDO::FETCH_ASSOC);
     $users = $users[0];
+    //! Kullanıcı resim dosyası
+    $_SESSION['imageFolderName'] = $imageFolder;
     ?>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -134,7 +136,9 @@ require 'db.php';
           <img src='<?php echo "$imageFolder/{$users['userimg']}"; ?>' class='rounded-circle' height="30" width='30'>
           </a>
           <ul class="dropdown-menu  dropdown-menu-end">
-            <li><a class="dropdown-item" href="">Profile <i class="bi bi-person-circle"></i></a></li>
+          <?php if ($_SESSION['role'] == 3 || $_SESSION['role'] == 4) {?>
+            <li><a class="dropdown-item <?=($activePage == 'user.profile') ? 'active' : '';?> " href="show.user.profile.php">Profile <i class="bi bi-person-circle"></i></a></li>
+            <?php }?>
             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Change Password <i class="bi bi-arrow-repeat"></i></a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="logout.php">Logout <i class="bi bi-box-arrow-right"></i></a></li>

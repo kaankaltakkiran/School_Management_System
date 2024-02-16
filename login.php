@@ -40,15 +40,16 @@ if (isset($_POST['form_email'])) {
         //! SQL hazırlama ve çalıştırma
         //! formdan gelen email ile db de varsa
 
-        //! user rol 1 ise admin tablosundan sorgula
+        //! user rol 1 ise admins tablosundan sorgula
         if ($rol == 1) {
             $sql = "SELECT * FROM admins  WHERE useremail = :form_email";
             //! user rol 2 ise registerunits tablosundan sorgula
         } else if ($rol == 2) {
             $sql = "SELECT * FROM registerunits  WHERE useremail = :form_email";
-            //! user rol 3 ise teacher tablosundan sorgula
+            //! user rol 3 ise teachers tablosundan sorgula
         } else if ($rol == 3) {
             $sql = "SELECT * FROM teachers  WHERE useremail = :form_email";
+            //! user rol 4 ise students tablosundan sorgula
         } else if ($rol == 4) {
             $sql = "SELECT * FROM students  WHERE useremail = :form_email";
 
