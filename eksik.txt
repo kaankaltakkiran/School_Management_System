@@ -23,30 +23,13 @@ Yapılmayanlar
 Sınav sistemi
 
 yoklama sistemi
-
-update sayflarında activepage eksik
-students sayfasında bütün öğrencileri çek
-Admin@süper admin gibi düşün her şeye eriimi var 
 !!!!!!!!!!!!!!!!!!!
-sadece kendi oluşturduysa görsün update tüm sayfalarda kontrol et örnek school information ve kayıtlı birimin oluşturduğu öğretmenler ve öğrenciler gözüksün
-!!!!!!!!!!
+students sayfasında bütün öğrencileri çek
+!!!!!!!!!!!!!!!!!!!
 Datatablestaki charı yap
 
-!!!!!!!!!!!!!!!!!!!sadece 1 liste kontorlü yemekhane
-!!!!!!!!!!!!!!!!!!!
-
-buna ek olarak update kontrülü yap sadece ekleyen id güncellesin
-
-Genel güvenlik control yap kontrol et
 
 Veli girişi
-
-
-!!!!!!!
-rol kontrol örneğin update duyru yaparken sadece update yapan erişsin
-!!!!!!
-
-
 
 Yapılan ama eksiklikler:
 

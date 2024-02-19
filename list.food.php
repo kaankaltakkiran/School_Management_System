@@ -55,8 +55,9 @@ require 'login.control.php';
     <?php
 
 require_once 'db.php';
-
-$SORGU = $DB->prepare("SELECT * FROM foodlist");
+$addedUnitid = $_SESSION['id'];
+$SORGU = $DB->prepare("SELECT * FROM foodlist WHERE addedunitid = :unitid");
+$SORGU->bindParam(':unitid', $addedUnitid);
 $SORGU->execute();
 $foods = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //echo '<pre>'; print_r($foods);

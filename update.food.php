@@ -19,8 +19,10 @@ if ($_SESSION['role'] != 2) {
 <h1 class="alert alert-info text-center">Food Menu Update</h1>
 <?php
 require_once 'db.php';
-$sql = "SELECT * FROM foodlist";
+$addedUnitid = $_SESSION['id'];
+$sql = "SELECT * FROM foodlist WHERE addedunitid = :unitid";
 $SORGU = $DB->prepare($sql);
+$SORGU->bindParam(':unitid', $addedUnitid);
 $SORGU->execute();
 $foods = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* var_dump($foods);
@@ -125,19 +127,11 @@ if (isset($_POST['form_submit'])) {
 //!Pazar menüsü birleştirme
     $day7Menu = $day7first . ', ' . $day7second . ', ' . $day7third . ', ' . $day7fourth;
 //!Update sorgusu
-
-    //?Kullanıcı var mı yok mu kontrol etme
-    $sql = "SELECT * FROM foodlist";
-    $SORGU = $DB->prepare($sql);
-    $SORGU->execute();
-    $isFoodCount = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-    /*  echo '<pre>';
-    print_r($isFoodCount);
-    die(); */
-    if (count($isFoodCount) > 1) {
+    if (count($foods) > 1) {
         $errors[] = "An attached record was found. You can only add a list !";
     } else {
-        $sql = "UPDATE foodlist SET day1 = :day1Menu, day2 = :day2Menu, day3 = :day3Menu, day4 = :day4Menu, day5 = :day5Menu, day6 = :day6Menu, day7 = :day7Menu WHERE id = 1";
+
+        $sql = "UPDATE foodlist SET day1 = :day1Menu, day2 = :day2Menu, day3 = :day3Menu, day4 = :day4Menu, day5 = :day5Menu, day6 = :day6Menu, day7 = :day7Menu WHERE addedunitid = :unitid";
 
         $SORGU = $DB->prepare($sql);
         $SORGU->bindParam(':day1Menu', $day1Menu);
@@ -147,6 +141,7 @@ if (isset($_POST['form_submit'])) {
         $SORGU->bindParam(':day5Menu', $day5Menu);
         $SORGU->bindParam(':day6Menu', $day6Menu);
         $SORGU->bindParam(':day7Menu', $day7Menu);
+        $SORGU->bindParam(':unitid', $addedUnitid);
         $SORGU->execute();
         echo '<script>';
         echo 'alert("Food Menu  Update Successful!");';

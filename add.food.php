@@ -74,13 +74,13 @@ if (isset($_POST['form_submit'])) {
 
     $addedUnitid = $_SESSION['id'];
     $addedUnitName = $_SESSION['userName'];
-
     //?Kullanıcı var mı yok mu kontrol etme
-    $sql = "SELECT * FROM foodlist";
+    $sql = "SELECT * FROM foodlist WHERE addedunitid = :unitid";
     $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':unitid', $addedUnitid);
     $SORGU->execute();
     $isFoodCount = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-    /*  echo '<pre>';
+    /*   echo '<pre>';
     print_r($isFoodCount);
     die(); */
     //!Eğer aynı isimde ders varsa  hata ver
