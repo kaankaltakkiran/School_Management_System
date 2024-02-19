@@ -5,6 +5,12 @@ $activePage = "send.announcement";
 require 'up.html.php';
 require 'login.control.php';
 ?>
+  <?php
+if ($_SESSION['role'] == 4) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
 <?php
 require 'navbar.php'?>
 <?php

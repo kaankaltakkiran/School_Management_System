@@ -5,7 +5,12 @@ $activePage = "user.profile";
 require 'up.html.php';
 require 'login.control.php';
 ?>
-
+<?php
+if ($_SESSION['role'] != 3 && $_SESSION['role'] != 4) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
 <?php
 require_once 'db.php';
 $userid = $_SESSION['id'];

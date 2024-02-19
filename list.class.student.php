@@ -1,13 +1,18 @@
 <?php
-session_start();
+@session_start();
 $activeTitle = "Class Student List";
 $activePage = "class.student.list";
 require 'up.html.php';
 require 'login.control.php';
 ?>
+  <?php
+if ($_SESSION['role'] != 2 && $_SESSION['role'] != 3) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
 <?php require 'navbar.php'?>
 <?php
-
 require_once 'db.php';
 $classİd = $_GET['idClass'];
 $SORGU = $DB->prepare("SELECT * FROM students where classid = :idClass");

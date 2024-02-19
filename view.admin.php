@@ -10,6 +10,12 @@ if ($_SESSION['role'] == 1) {
     $role = "Admin";
 }
 ?>
+  <?php
+if ($_SESSION['role'] != 1) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
 <?php require 'navbar.php'?>
 <?php
 require_once 'db.php';

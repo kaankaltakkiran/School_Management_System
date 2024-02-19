@@ -5,6 +5,12 @@ $activePage = "update.information";
 require 'up.html.php';
 require 'login.control.php';
 ?>
+  <?php
+if ($_SESSION['role'] != 2) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
 <?php
 //! Ekleyen kayıt birimi ile güncelleyen kayıt birimi aynı olmalıdır
 require_once 'db.php';

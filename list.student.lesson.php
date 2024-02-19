@@ -6,6 +6,12 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+if ($_SESSION['role'] != 2) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
+<?php
 $get_lesson_name = $_GET['lessonName'];
 ?>
 <?php require 'navbar.php'?>

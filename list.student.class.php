@@ -5,6 +5,12 @@ $activePage = "class.student.list";
 require 'up.html.php';
 require 'login.control.php';
 ?>
+  <?php
+if ($_SESSION['role'] != 2 && $_SESSION['role'] != 3) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
 <?php
 //!GET ile gelen sınıf adını alıyoruz.
 $get_class_name = $_GET['className'];

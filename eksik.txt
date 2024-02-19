@@ -24,12 +24,14 @@ Sınav sistemi
 
 yoklama sistemi
 
-
+Admin@süper admin gibi düşün her şeye eriimi var 
 !!!!!!!!!!!!!!!!!!!
 sadece kendi oluşturduysa görsün update tüm sayfalarda kontrol et örnek school information ve kayıtlı birimin oluşturduğu öğretmenler ve öğrenciler gözüksün
 !!!!!!!!!!
 Datatablestaki charı yap
-sadece 1 liste kontorlü yemekhane
+
+!!!!!!!!!!!!!!!!!!!sadece 1 liste kontorlü yemekhane
+!!!!!!!!!!!!!!!!!!!
 
 buna ek olarak update kontrülü yap sadece ekleyen id güncellesin
 

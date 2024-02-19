@@ -5,19 +5,20 @@ $activePage = "view.student";
 require 'up.html.php';
 require 'login.control.php';
 ?>
+  <?php
+if ($_SESSION['role'] != 2 && $_SESSION['role'] != 3) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
 <?php require 'navbar.php'?>
 <?php
 require_once 'db.php';
-
 $id = $_GET['idStudent'];
-
 $sql = "SELECT * FROM students where userid = :idStudent";
 $SORGU = $DB->prepare($sql);
-
 $SORGU->bindParam(':idStudent', $id);
-
 $SORGU->execute();
-
 $students = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 $gender = $students[0]['usergender'];
 $gender = ($gender == 'M') ? 'Male' : 'Famale';

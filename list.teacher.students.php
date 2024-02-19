@@ -6,6 +6,12 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+if ($_SESSION['role'] != 2 && $_SESSION['role'] != 3) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
+<?php
 require_once 'db.php';
 $teacher_id = $_GET['teacherid'];
 $SORGU = $DB->prepare("SELECT * FROM teachers WHERE userid=:teacherid");
