@@ -29,8 +29,7 @@ yoklama sistemi
 sadece kendi oluşturduysa görsün update tüm sayfalarda kontrol et örnek school information ve kayıtlı birimin oluşturduğu öğretmenler ve öğrenciler gözüksün
 !!!!!!!!!!
 Datatablestaki charı yap
-sayaç ekle
-yemekhane menü
+sadece 1 liste kontorlü yemekhane
 
 buna ek olarak update kontrülü yap sadece ekleyen id güncellesin
 
