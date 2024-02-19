@@ -6,12 +6,6 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
-if ($_SESSION['role'] != 2 && $_SESSION['role'] != 3) {
-    header("location: authorizationcontrol.php");
-    die();
-}
-?>
-<?php
 require_once 'db.php';
 $teacher_id = $_GET['teacherid'];
 $SORGU = $DB->prepare("SELECT * FROM teachers WHERE userid=:teacherid");
@@ -21,6 +15,14 @@ $teacher = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* echo '<pre>';
 print_r($teacher);
 die(); */
+if ($_SESSION['role'] != 2 && $_SESSION['role'] != 3) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+if ($teacher[0]['addedunitid'] != $_SESSION['id']) {
+    header("location: authorizationcontrol.php");
+    die();
+}
 ?>
 <?php require 'navbar.php'?>
 

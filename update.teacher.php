@@ -6,21 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
-if ($_SESSION['role'] != 2) {
-    header("location: authorizationcontrol.php");
-    die();
-}
-?>
-    <?php include 'navbar.php';?>
-  <div class="container">
-  <div class="row justify-content-center mt-3">
-  <div class="col-6">
-
-<form method="POST"enctype="multipart/form-data">
-<h1 class="alert alert-info text-center">Teacher User Update</h1>
-<?php
 require_once 'db.php';
-
 $id = $_GET['idTeacher'];
 //! Teacherın seçtiği sınıfları çekme
 //! joinle clases tablosundaki classid ile teachers tablosundaki classid'yi içeren classidleri eşleşenleri getir
@@ -30,11 +16,8 @@ FROM classes
 JOIN teachers ON teachers.classid LIKE CONCAT('%', classes.classid, '%')
 WHERE userid = :idTeacher */
 $SORGU = $DB->prepare($sql);
-
 $SORGU->bindParam(':idTeacher', $id);
-
 $SORGU->execute();
-
 $teachers = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //! Veritabandaki cinsiyete göre checked yapma
 $selectGender = $teachers[0]['usergender'];
@@ -52,6 +35,23 @@ $selectLesonsArray = explode(",", $selectLessons);
 print_r($teachers);
 die(); */
 
+if ($_SESSION['role'] != 2) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+if ($teachers[0]['addedunitid'] != $_SESSION['id']) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
+    <?php include 'navbar.php';?>
+  <div class="container">
+  <div class="row justify-content-center mt-3">
+  <div class="col-6">
+
+<form method="POST"enctype="multipart/form-data">
+<h1 class="alert alert-info text-center">Teacher User Update</h1>
+<?php
 if (isset($_POST['form_submit'])) {
     //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
     //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
@@ -189,7 +189,7 @@ if (!empty($errors)) {
 ?>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" value="<?php echo $_SESSION['userName'] ?>"disabled readonly>
-  <label>Added By Register Unit Name</label>
+  <label>Update By Register Unit Name</label>
 </div>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" value="<?php echo $teachers[0]['username'] ?>" name="form_username">
@@ -328,8 +328,7 @@ echo '<span id="checkbox-message" class="text-danger mt-3 fw-bold ">' . (($selec
                   </button>
      </form>
      </div>
-
 </div>
-
 </div>
+<?php require 'footer.php';?>
 <?php require 'down.html.php';?>

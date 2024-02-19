@@ -6,18 +6,6 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
-if ($_SESSION['role'] == 1) {
-    $role = "Admin";
-}
-?>
-  <?php
-if ($_SESSION['role'] != 1) {
-    header("location: authorizationcontrol.php");
-    die();
-}
-?>
-<?php require 'navbar.php'?>
-<?php
 require_once 'db.php';
 $id = $_GET['idAdmin'];
 $sql = "SELECT * FROM admins where userid = :idAdmin";
@@ -30,7 +18,22 @@ print_r($admins);
 die(); */
 $gender = $admins[0]['usergender'];
 $gender = ($gender == 'M') ? 'Male' : 'Famale';
+if ($_SESSION['role'] == 1) {
+    $role = "Admin";
+}
+if ($_GET['idAdmin'] == 1 && $_SESSION['id'] != 1) {
+    header("location: authorizationcontrol.php");
+    die();
+}
 ?>
+  <?php
+if ($_SESSION['role'] != 1) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
+<?php require 'navbar.php'?>
+
 <div class="container ">
   <div class="row justify-content-center mt-3 ">
  <div class="col-6">
