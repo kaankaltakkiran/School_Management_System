@@ -44,10 +44,14 @@ if ($_SESSION['role'] != 1) {
   </div>
 
     <?php
-
+$id = $_SESSION['id'];
 require_once 'db.php';
-
-$SORGU = $DB->prepare("SELECT * FROM admins");
+if ($_SESSION['id'] == 1) {
+    $SORGU = $DB->prepare("SELECT * FROM admins");
+} else {
+    $SORGU = $DB->prepare("SELECT * FROM admins WHERE userid =:id");
+    $SORGU->bindParam(':id', $id);
+}
 $SORGU->execute();
 $admins = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //echo '<pre>'; print_r($admins);
@@ -55,13 +59,9 @@ $admins = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 if (isset($_GET['removeAdminid'])) {
     require 'db.php';
     $remove_id = $_GET['removeAdminid'];
-    $id = $_SESSION['id'];
-
     $sql = "DELETE FROM admins WHERE userid = :removeAdminid";
     $SORGU = $DB->prepare($sql);
-
     $SORGU->bindParam(':removeAdminid', $remove_id);
-
     $SORGU->execute();
     echo "<script>
 alert('The Admin User has been deleted. You are redirected to the Admin List page...!');
@@ -72,10 +72,6 @@ window.location.href = 'list.admin.php';
 foreach ($admins as $admin) {
     $gender = $admin['usergender'];
     $gender = ($gender == 'M') ? 'Male' : 'Famale';
-    //! Eğer $_SESSION içerisindeki id, şu anki adminin id'sine eşit değilse silemesin
-    $deleteButton = ($_SESSION['id'] != $admin['userid']) ?
-    "<a href='list.admin.php?removeAdminid={$admin['userid']}' onclick='return confirm(\"Are you sure you want to delete {$admin['username']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a>" :
-    "<span class='text-danger fw-bold '>You can't Delete yourself!!!</span>";
     echo "
     <tr>
       <th>{$admin['userid']}</th>
@@ -85,7 +81,7 @@ foreach ($admins as $admin) {
       <td>$gender</td>
       <td>{$admin['createdate']}</td>
       <td><a href='update.admin.php?idAdmin={$admin['userid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a></td>
-      <td>$deleteButton</td>
+      <td><a href='list.admin.php?removeAdminid={$admin['userid']}' onclick='return confirm(\"Are you sure you want to delete {$admin['username']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a></td>
    </tr>
   ";
 }

@@ -72,27 +72,28 @@ window.location.href = 'list.register.unit.php';
 }
 
 foreach ($registerunits as $registerunit) {
-    $gender = $registerunit['usergender'];
-    $gender = ($gender == 'M') ? 'Male' : 'Famale';
-    //!Kullanıcının doğum tarihini alma
-    $userBirthdate = $registerunit['birthdate'];
-    //!Tarihi parçalara ayırma
-    /* explode() fonksiyonu: Bu fonksiyon, bir metni belirli bir ayraç karakterine göre böler ve bir diziye dönüştürür.  */
-    $dateParts = explode('-', $userBirthdate);
+    if ($_SESSION['id'] == $registerunit['adedadminid']) {
+        $gender = $registerunit['usergender'];
+        $gender = ($gender == 'M') ? 'Male' : 'Famale';
+        //!Kullanıcının doğum tarihini alma
+        $userBirthdate = $registerunit['birthdate'];
+        //!Tarihi parçalara ayırma
+        /* explode() fonksiyonu: Bu fonksiyon, bir metni belirli bir ayraç karakterine göre böler ve bir diziye dönüştürür.  */
+        $dateParts = explode('-', $userBirthdate);
 
-    //? Yıl, ay ve gün bilgilerini alıyoruz
-    $year = $dateParts[0];
-    $month = $dateParts[1];
-    $day = $dateParts[2];
+        //? Yıl, ay ve gün bilgilerini alıyoruz
+        $year = $dateParts[0];
+        $month = $dateParts[1];
+        $day = $dateParts[2];
 
-    //?Ay ismini bulmak için date() ve strtotime() fonksiyonlarını kullanıyoruz
-    //!F tam ay ismini alıyor.
-    $monthName = date("F", strtotime($userBirthdate));
+        //?Ay ismini bulmak için date() ve strtotime() fonksiyonlarını kullanıyoruz
+        //!F tam ay ismini alıyor.
+        $monthName = date("F", strtotime($userBirthdate));
 
-    // Sonucu ekrana yazdırma
-    $formattedDate = "$day $monthName $year";
+        // Sonucu ekrana yazdırma
+        $formattedDate = "$day $monthName $year";
 
-    echo "
+        echo "
     <tr>
       <th>{$registerunit['userid']}</th>
       <td><img src='register_unit_images/{$registerunit['userimg']}' class='rounded-circle' width='100' height='100'></td>
@@ -104,9 +105,10 @@ foreach ($registerunits as $registerunit) {
       <td>{$registerunit['phonenumber']}</td>
       <td>$formattedDate</td>
       <td><a href='update.register.unit.php?idRegisterUnit={$registerunit['userid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a></td>
-      <td><a href='update.register.unit.php?idRegisterUnit={$registerunit['userid']}' onclick='return confirm(\"Are you sure you want to delete {$registerunit['username']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a></td>
+      <td><a href='list.register.unit.php?removeRegisterUnitid={$registerunit['userid']}' onclick='return confirm(\"Are you sure you want to delete {$registerunit['username']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a></td>
    </tr>
   ";
+    }
 }
 ?>
 

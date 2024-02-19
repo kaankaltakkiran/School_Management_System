@@ -23,7 +23,7 @@ Yapılmayanlar
 Sınav sistemi
 
 yoklama sistemi
-
+update sayflarında activepage eksik
 Admin@süper admin gibi düşün her şeye eriimi var 
 !!!!!!!!!!!!!!!!!!!
 sadece kendi oluşturduysa görsün update tüm sayfalarda kontrol et örnek school information ve kayıtlı birimin oluşturduğu öğretmenler ve öğrenciler gözüksün

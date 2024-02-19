@@ -1,5 +1,5 @@
 <?php
-session_start();
+@session_start();
 $activeTitle = "Admin Update";
 $activePage = "admin.update";
 require 'up.html.php';
@@ -10,32 +10,30 @@ if ($_SESSION['role'] != 1) {
     header("location: authorizationcontrol.php");
     die();
 }
-?>
-    <?php include 'navbar.php';?>
-  <div class="container">
-  <div class="row justify-content-center mt-3">
-  <div class="col-6">
-
-<form method="POST"enctype="multipart/form-data">
-<h1 class="alert alert-info text-center">Admin User Update</h1>
-<?php
 require_once 'db.php';
-
 $id = $_GET['idAdmin'];
-
 $sql = "SELECT * FROM admins WHERE userid = :idAdmin";
 $SORGU = $DB->prepare($sql);
-
 $SORGU->bindParam(':idAdmin', $id);
-
 $SORGU->execute();
-
 $admins = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 $selectGender = $admins[0]['usergender'];
 /* echo "<pre>";
 print_r($admins);
 die(); */
-
+//!idsi 1 olan admin her admini update eder ama diğer adminler sadece kendi bilgilerini günceller
+if ($_GET['idAdmin'] == 1 && $_SESSION['id'] != 1) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
+    <?php include 'navbar.php';?>
+  <div class="container">
+  <div class="row justify-content-center mt-3">
+  <div class="col-6">
+<form method="POST"enctype="multipart/form-data">
+<h1 class="alert alert-info text-center">Admin User Update</h1>
+<?php
 if (isset($_POST['form_submit'])) {
     //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
     //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
@@ -128,7 +126,7 @@ if (!empty($errors)) {
 ?>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" value="<?php echo $_SESSION['userName'] ?>"disabled readonly>
-  <label>Added By Admin Name</label>
+  <label>Update By Admin Name</label>
 </div>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" value="<?php echo $admins[0]['username'] ?>" name="form_username" >

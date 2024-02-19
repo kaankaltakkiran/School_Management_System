@@ -6,9 +6,27 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
   <?php
+require_once 'db.php';
+$id = $_GET['idRegisterUnit'];
+$sql = "SELECT * FROM registerunits WHERE userid = :idRegisterUnit";
+$SORGU = $DB->prepare($sql);
+$SORGU->bindParam(':idRegisterUnit', $id);
+$SORGU->execute();
+$registerunits = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+$selectGender = $registerunits[0]['usergender'];
+/* echo "<pre>";
+print_r($registerunits);
+die(); */
+
 if ($_SESSION['role'] != 1) {
     header("location: authorizationcontrol.php");
     die();
+}
+if ($registerunits[0]['adedadminid'] != $_SESSION['id']) {
+    if ($_SESSION['id'] != $registerunits[0]['adedadminid']) {
+        header("location: authorizationcontrol.php");
+        die();
+    }
 }
 ?>
     <?php include 'navbar.php';?>
@@ -19,23 +37,6 @@ if ($_SESSION['role'] != 1) {
 <form method="POST"enctype="multipart/form-data">
 <h1 class="alert alert-info text-center">Register Unit User Update</h1>
 <?php
-require_once 'db.php';
-
-$id = $_GET['idRegisterUnit'];
-
-$sql = "SELECT * FROM registerunits WHERE userid = :idRegisterUnit";
-$SORGU = $DB->prepare($sql);
-
-$SORGU->bindParam(':idRegisterUnit', $id);
-
-$SORGU->execute();
-
-$registerunits = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-$selectGender = $registerunits[0]['usergender'];
-/* echo "<pre>";
-print_r($registerunits);
-die(); */
-
 if (isset($_POST['form_submit'])) {
     //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
     //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
@@ -136,7 +137,7 @@ if (!empty($errors)) {
 ?>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" value="<?php echo $_SESSION['userName'] ?>"disabled readonly>
-  <label>Added By Admin Name</label>
+  <label>Update By Admin Name</label>
 </div>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" value="<?php echo $registerunits[0]['username'] ?>" name="form_username">
@@ -185,7 +186,7 @@ if (!empty($errors)) {
   <label class="input-group-text" for="inputGroupFile02">Upload Register Unit Image &nbsp; <i class="bi bi-upload"></i></label>
 </div>
 
-                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Add Register Unit User
+                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Update Register Unit User
                   <i class="bi bi-send"></i>
                   </button>
      </form>
