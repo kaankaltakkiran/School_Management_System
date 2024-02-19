@@ -50,23 +50,24 @@ die(); */
 $gender = $classStudents[0]['usergender'];
 $gender = ($gender == 'M') ? 'Male' : 'Famale';
 foreach ($classStudents as $classStudent) {
-    $userBirthdate = $classStudent['birthdate'];
-    //!Tarihi parçalara ayırma
-    /* explode() fonksiyonu: Bu fonksiyon, bir metni belirli bir ayraç karakterine göre böler ve bir diziye dönüştürür.  */
-    $dateParts = explode('-', $userBirthdate);
+    if ($classStudent['addedunitid'] == $_SESSION['id']) {
+        $userBirthdate = $classStudent['birthdate'];
+        //!Tarihi parçalara ayırma
+        /* explode() fonksiyonu: Bu fonksiyon, bir metni belirli bir ayraç karakterine göre böler ve bir diziye dönüştürür.  */
+        $dateParts = explode('-', $userBirthdate);
 
 //? Yıl, ay ve gün bilgilerini alıyoruz
-    $year = $dateParts[0];
-    $month = $dateParts[1];
-    $day = $dateParts[2];
+        $year = $dateParts[0];
+        $month = $dateParts[1];
+        $day = $dateParts[2];
 
 //?Ay ismini bulmak için date() ve strtotime() fonksiyonlarını kullanıyoruz
-    //!F tam ay ismini alıyor.
-    $monthName = date("F", strtotime($userBirthdate));
+        //!F tam ay ismini alıyor.
+        $monthName = date("F", strtotime($userBirthdate));
 
 // Sonucu ekrana yazdırma
-    $formattedDate = "$day $monthName $year";
-    echo "
+        $formattedDate = "$day $monthName $year";
+        echo "
     <tr>
       <th>{$classStudent['userid']}</th>
       <td><img src='student_images/{$classStudent['userimg']}' class='rounded-circle' width='100' height='100'></td>
@@ -77,6 +78,7 @@ foreach ($classStudents as $classStudent) {
       <td>$formattedDate</td>
    </tr>
   ";
+    }
 }
 ?>
 
