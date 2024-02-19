@@ -84,8 +84,8 @@ if (isset($_POST['form_submit'])) {
     print_r($isFoodCount);
     die(); */
     //!Eğer aynı isimde ders varsa  hata ver
-    if (count($isFoodCount) > 1) {
-        $errors[] = "There is a lesson with the same name !";
+    if (count($isFoodCount) > 0) {
+        $errors[] = "An attached record was found. You can only add a list !";
 
         //!Eğer aynı isimde ders yoksa kaydet
     } else {
