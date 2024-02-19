@@ -5,12 +5,6 @@ $activePage = "announcement.update";
 require 'up.html.php';
 require 'login.control.php';
 ?>
-    <?php include 'navbar.php';?>
-  <div class="container">
-  <div class="row justify-content-center mt-3">
-  <div class="col-6">
-<form method="POST">
-<h1 class="alert alert-info text-center">Announcement Update</h1>
 <?php
 require_once 'db.php';
 $id = $_GET['idannouncement'];
@@ -28,6 +22,19 @@ die(); */
 $isPublis = $announcements[0]['ispublish'];
 //!Veritabanından reciverrole id sin al
 $reciverRole = $announcements[0]['receiverrole'];
+
+if ($announcements[0]['senderid'] != $_SESSION['id']) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
+    <?php include 'navbar.php';?>
+  <div class="container">
+  <div class="row justify-content-center mt-3">
+  <div class="col-6">
+<form method="POST">
+<h1 class="alert alert-info text-center">Announcement Update</h1>
+<?php
 if (isset($_POST['form_submit'])) {
     //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
     //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
