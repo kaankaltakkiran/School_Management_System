@@ -64,7 +64,8 @@ window.location.href = 'list.lessons.php';
 }
 
 foreach ($lessons as $lesson) {
-    echo "
+    if ($lesson['addedunitid'] == $_SESSION['id']) {
+        echo "
     <tr>
       <th>{$lesson['lessonid']}</th>
       <td><a href='list.student.lesson.php?lessonName={$lesson['lessonname']}' class='link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'>{$lesson['lessonname']}</a></td>
@@ -73,6 +74,7 @@ foreach ($lessons as $lesson) {
       <td><a href='list.lessons.php?removeLessonid={$lesson['lessonid']}'onclick='return confirm(\"Are you sure you want to delete {$lesson['lessonname']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a></td>
    </tr>
   ";
+    }
 }
 ?>
 

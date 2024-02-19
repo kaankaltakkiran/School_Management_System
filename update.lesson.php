@@ -6,7 +6,20 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+require_once 'db.php';
+$id = $_GET['lessonid'];
+$sql = "SELECT * FROM lessons WHERE lessonid = :lessonid";
+$SORGU = $DB->prepare($sql);
+$SORGU->bindParam(':lessonid', $id);
+$SORGU->execute();
+$lessons = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* var_dump($lessons);
+die(); */
 if ($_SESSION['role'] != 2) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+if ($lessons[0]['addedunitid'] != $_SESSION['id']) {
     header("location: authorizationcontrol.php");
     die();
 }
@@ -18,16 +31,6 @@ if ($_SESSION['role'] != 2) {
 <form method="POST"enctype="multipart/form-data">
 <h1 class="alert alert-info text-center">Lesson Update</h1>
 <?php
-require_once 'db.php';
-$id = $_GET['lessonid'];
-$sql = "SELECT * FROM lessons WHERE lessonid = :lessonid";
-$SORGU = $DB->prepare($sql);
-$SORGU->bindParam(':lessonid', $id);
-$SORGU->execute();
-$lessons = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-/* var_dump($lessons);
-die(); */
-
 if (isset($_POST['form_submit'])) {
     //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
     //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür

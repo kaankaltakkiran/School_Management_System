@@ -6,13 +6,26 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+/* lessonName */
+$get_lesson_name = $_GET['lessonName'];
+require_once 'db.php';
+$get_lesson_name = $_GET['lessonName'];
+$SORGU = $DB->prepare("SELECT * FROM students WHERE lessonname LIKE '%$get_lesson_name%'");
+$SORGU->execute();
+$studentLessons = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* echo '<pre>';
+print_r($studentLessons);
+die(); */
+$gender = $studentLessons[0]['usergender'];
+$gender = ($gender == 'M') ? 'Male' : 'Famale';
 if ($_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
     die();
 }
-?>
-<?php
-$get_lesson_name = $_GET['lessonName'];
+if ($studentLessons[0]['addedunitid'] != $_SESSION['id']) {
+    header("location: authorizationcontrol.php");
+    die();
+}
 ?>
 <?php require 'navbar.php'?>
 
@@ -39,17 +52,6 @@ $get_lesson_name = $_GET['lessonName'];
   </div>
 
     <?php
-/* lessonName */
-require_once 'db.php';
-$get_lesson_name = $_GET['lessonName'];
-$SORGU = $DB->prepare("SELECT * FROM students WHERE lessonname LIKE '%$get_lesson_name%'");
-$SORGU->execute();
-$studentLessons = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-/* echo '<pre>';
-print_r($studentLessons);
-die(); */
-$gender = $studentLessons[0]['usergender'];
-$gender = ($gender == 'M') ? 'Male' : 'Famale';
 foreach ($studentLessons as $studentLesson) {
     $userBirthdate = $studentLesson['birthdate'];
     //!Tarihi parçalara ayırma
