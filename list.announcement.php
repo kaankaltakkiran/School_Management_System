@@ -49,6 +49,12 @@ $fullAnnouncements = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 print_r($fullAnnouncements);
 die(); */
 /* $fullAnnouncement['ispublish'] == 0 || $kaan == 0 */
+
+$sql = "UPDATE announcements SET readcount =readcount + 1 WHERE senderid=:userid AND senderrole=:roleid";
+$SORGU = $DB->prepare($sql);
+$SORGU->bindParam(':userid', $userid);
+$SORGU->bindParam(':roleid', $roleid);
+$SORGU->execute();
 if ($userid == $fullAnnouncements[0]['senderid']) {
     foreach ($fullAnnouncements as $fullAnnouncement) {
         //!Kullanıcı role id sine göre role adını belirleme
@@ -97,18 +103,23 @@ if ($userid == $fullAnnouncements[0]['senderid']) {
             <div class="p-2">
               <?php echo nl2br($fullAnnouncement['announcement']) ?>
             </div>
-            <div class="ms-auto p-2">Date: <?php echo $formatted_datetime ?></div>
+            <div class="ms-auto p-2"></div>
             <div class="text-end">
               <?php echo $update_button; ?>
               <?php echo $delete_button; ?>
             </div>
           </div>
           <?php echo $publishAlert; ?>
+          <span class="badge bg-primary float-end me-2  "><?php echo $fullAnnouncement['createdate'] ?> / Read <?php echo $fullAnnouncement['readcount'] ?> times. </span>
         </div>
       </div>
     </div>
 <?php }
 } else {
+    $sql = "UPDATE announcements SET readcount =readcount + 1 WHERE receiverrole=:roleid";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':roleid', $roleid);
+    $SORGU->execute();
     foreach ($announcements as $announcement) {
         //!Kullanıcı role id sine göre role adını belirleme
         $senderRole = "";
@@ -141,12 +152,13 @@ if ($userid == $fullAnnouncements[0]['senderid']) {
         </h2>
         <div id="<?php echo $announcementid ?>" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
       <div class="accordion-body">
-      <div class="d-flex mb-3">
+      <div class="d-flex">
                     <div class="p-2">
                     <?php echo $announcement['announcement']; ?>
                     </div>
-                    <div class="ms-auto p-2">Date: <?php echo $formatted_datetime ?></div>
+                    <div class="ms-auto"></div>
                 </div>
+                <span class="badge bg-primary float-end me-2  "><?php echo $announcement['createdate'] ?> / Read <?php echo $announcement['readcount'] ?> times. </span>
       </div>
     </div>
       </div>
