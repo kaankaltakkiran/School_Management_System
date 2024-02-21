@@ -118,8 +118,8 @@ if (!empty($errors)) {
 }
 ?>
   <div class="form-floating mb-3">
-  <input type="email" name="form_email" value="<?php echo $_POST['form_email'] ?>" class="form-control">
-  <label>Email</label>
+  <input type="email" id="floatingInput" placeholder="Email" name="form_email" value="<?php echo $_POST['form_email'] ?>" class="form-control">
+  <label for="floatingInput">Email</label>
 </div>
 <div class="input-group mb-3  input-group-lg">
   <input type="password"  name="form_password" class="form-control" id="oldPassword" placeholder="Password">
