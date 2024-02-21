@@ -38,6 +38,7 @@ die(); */
     <h3><span class="text-danger">Active Term:</span> <span> <?php echo $informations[0]['schoolterm'] ?>.</span></h3>
     <h4><span class="text-danger">School About Summary:</span> <span> <?php echo $informations[0]['schoolsummary'] ?></span></h4>
   </div>
+  <?php require 'info.graphic.php';?>
   </div>
   <?php }?>
   <div class="row justify-content-center">

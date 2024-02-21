@@ -19,15 +19,13 @@ tüm sayflarda activetitle ve page control et
 <i class='bi bi-arrow-clockwise'></i>
 &nbsp; <i class="bi bi-upload"></i>
 Yapılmayanlar
-
+!!!!!!
 Sınav sistemi
-
+!!!!!!
 yoklama sistemi
-!!!!
-Datatablestaki charı yap
+
 !!!
-!!!
-telefon rehberi
+telefon rehberi?????? çok gerekli değil
 update yetkilerinde butonlar ona göre gözüksün tüm sayfaları kontrol et
 !!!
 
