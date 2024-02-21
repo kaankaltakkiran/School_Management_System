@@ -1,5 +1,5 @@
 <?php
-session_start();
+@session_start();
 $activeTitle = "School Management System";
 $activePage = "view.student";
 require 'up.html.php';
@@ -93,7 +93,7 @@ $formattedDate = "$day $monthName $year";
     </li>
   </ul>
   <div class="card-body">
-    <a href="list.class.student.php?idClass=<?php echo $students[0]['classid'] ?>" class="btn btn-warning">Go To List
+    <a href="list.student.php" class="btn btn-warning">Go To List
     <i class="bi bi-backspace"></i></a>
   </div>
 </div>

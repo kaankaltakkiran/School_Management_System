@@ -23,11 +23,12 @@ Yapılmayanlar
 Sınav sistemi
 
 yoklama sistemi
-!!!!!!!!!!!!!!!!!!!
-students sayfasında bütün öğrencileri çek
-!!!!!!!!!!!!!!!!!!!
+!!!!
 Datatablestaki charı yap
-
+!!!
+!!!
+update yetkilerinde butonlar ona göre gözüksün tüm sayfaları kontrol et
+!!!
 
 Veli girişi
 

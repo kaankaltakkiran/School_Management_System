@@ -1,35 +1,17 @@
 <?php
-session_start();
+@session_start();
 $activeTitle = "Student User Update";
 $activePage = "student.update";
 require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
-if ($_SESSION['role'] != 2) {
-    header("location: authorizationcontrol.php");
-    die();
-}
-?>
-    <?php include 'navbar.php';?>
-  <div class="container">
-  <div class="row justify-content-center mt-3">
-  <div class="col-6">
-
-<form method="POST"enctype="multipart/form-data">
-<h1 class="alert alert-info text-center">Student User Update</h1>
-<?php
 require_once 'db.php';
-
 $id = $_GET['idStudent'];
-
 $sql = "SELECT * FROM students where userid = :idStudent";
 $SORGU = $DB->prepare($sql);
-
 $SORGU->bindParam(':idStudent', $id);
-
 $SORGU->execute();
-
 $students = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* var_dump($students);
 die(); */
@@ -46,6 +28,22 @@ $selectLesonsArray = explode(",", $selectLessons);
 /* echo "<pre>";
 print_r($students);
 die(); */
+if ($_SESSION['role'] != 2) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+if ($students[0]['addedunitid'] != $_SESSION['id']) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
+    <?php include 'navbar.php';?>
+  <div class="container">
+  <div class="row justify-content-center mt-3">
+  <div class="col-6">
+<form method="POST"enctype="multipart/form-data">
+<h1 class="alert alert-info text-center">Student User Update</h1>
+<?php
 if (isset($_POST['form_submit'])) {
     //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
     //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
@@ -332,8 +330,7 @@ foreach ($lessons as $lesson) {
                   </button>
      </form>
      </div>
-
 </div>
-
 </div>
+<?php require 'footer.php';?>
 <?php require 'down.html.php';?>
