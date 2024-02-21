@@ -20,7 +20,8 @@ tüm sayflarda activetitle ve page control et
 &nbsp; <i class="bi bi-upload"></i>
 Yapılmayanlar
 !!!!!!
-Sınav sistemi
+Sınav sistemi deneme yap 
+tüm formlarda validation işlemleri yap bootsrap ile
 !!!!!!
 yoklama sistemi
 
