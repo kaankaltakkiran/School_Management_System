@@ -100,6 +100,16 @@
             <li><a class="dropdown-item <?=($activePage == 'information.list') ? 'active' : '';?>" href="list.information.php">List Information</a></li>
           </ul>
         </li>
+            <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'add.food' || $activePage == 'food.list' || $activePage == 'food.update') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Food
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item <?=($activePage == 'add.food') ? 'active' : '';?>" href="add.food.php">Add Food</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item <?=($activePage == 'food.list') ? 'active' : '';?>" href="list.food.php">List Information</a></li>
+          </ul>
+        </li>
         <?php }?>
       </ul>
     </div>

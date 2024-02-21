@@ -27,6 +27,7 @@ yoklama sistemi
 Datatablestaki charı yap
 !!!
 !!!
+telefon rehberi
 update yetkilerinde butonlar ona göre gözüksün tüm sayfaları kontrol et
 !!!
 
