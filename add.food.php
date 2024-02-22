@@ -16,7 +16,7 @@ require 'navbar.php'?>
 <?php
 
 //!form submit edilmişse
-if (isset($_POST['submit_form'])) {
+if (isset($_POST['btn_add'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
     //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
@@ -110,7 +110,7 @@ if (isset($_POST['submit_form'])) {
 ?>
     <div class="container">
   <div class="row justify-content-center mt-3">
-  <div class="col-6">
+  <div class="col-12">
 <form method="POST" class="needs-validation" novalidate>
 <h1 class="alert alert-info text-center">Add Food List</h1>
 <?php
@@ -222,7 +222,7 @@ if (!empty($approves)) {
     </div>
 </div>
 
-                  <button type="submit" name="submit_form   " class="btn btn-primary mt-3 ">Add Food List
+                  <button type="submit" name="btn_add" class="btn btn-primary mt-3 ">Add Food List
                   <i class="bi bi-send"></i>
                   </button>
      </form>
