@@ -12,7 +12,7 @@ if ($_SESSION['role'] != 1) {
 }
 ?>
 <?php
-if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
+if (isset($_POST['submit_form'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
     require_once 'db.php';
@@ -101,7 +101,7 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
   <div class="container">
   <div class="row justify-content-center mt-3">
   <div class="col-6">
-<form method="POST"enctype="multipart/form-data">
+<form method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
 <h1 class="alert alert-info text-center">Add Register Unit User Form</h1>
 <?php
 //! Hata mesajlarını göster
@@ -144,31 +144,52 @@ if (!empty($approves)) {
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" id="floatingInput" placeholder="User Name" name="form_username" required>
   <label for="floatingInput">User Name</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Your Name !
+    </div>
 </div>
   <div class="form-floating mb-3">
   <input type="email" name="form_email"id="floatingInput" placeholder="Email"class="form-control"required>
   <label for="floatingInput">Email</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Your Email !
+    </div>
 </div>
 <div class="input-group mb-3  input-group-lg">
   <input type="password"  name="form_password" class="form-control" id="oldPassword" placeholder="Password"required>
   <span class="input-group-text bg-transparent"><i id="toggleOldPassword" class="bi bi-eye-slash"></i></span>
+  <div class="invalid-feedback fw-bold">
+      Please Write Your Password !
+    </div>
 </div>
 <div class="input-group mb-3  input-group-lg">
   <input type="password"  name="form_repassword" class="form-control" id="oldRePassword" placeholder="Please Enter Your Password Again"required>
   <span class="input-group-text bg-transparent"><i id="toggleOldRePassword" class="bi bi-eye-slash"></i></span>
+  <div class="invalid-feedback fw-bold">
+      Please Write Your Password Again !
+    </div>
 </div>
 <div class="form-floating mb-3">
   <textarea class="form-control text-break" style="height: 100px" placeholder="Adress" id="floatingTextarea"name="form_adress"  required></textarea>
   <label for="floatingTextarea">Address</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Your Address !
+    </div>
 </div>
 <div class="form-floating mb-3">
   <input type="tel" id="floatingInput" placeholder="Phone Number"  class="form-control" maxlength="11" name="form_phonenumber" required>
   <label for="floatingInput">Phone Number</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Your Phone Number !
+    </div>
 </div>
 <div class="form-floating mb-3">
 <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">Birthdate</label>
   <input type="date" name="form_birthdate" class="form-control" id="exampleFormControlInput1" required/>
+  <div class="invalid-feedback fw-bold">
+  Please Select Your Birthdate !
+    </div>
 </div>
 </div>
 <div class="form-floating mb-3">
@@ -178,13 +199,19 @@ if (!empty($approves)) {
     <option value="F">Female</option>
   </select>
   <label for="floatingSelect">Gender</label>
+  <div class="invalid-feedback fw-bold">
+      Please Select  Your Gender !
+    </div>
 </div>
 <div class="input-group mb-3">
   <input type="file"  name='form_image' class="form-control" id="inputGroupFile02"required>
   <label class="input-group-text" for="inputGroupFile02">Upload Register Unit Image&nbsp; <i class="bi bi-upload"></i></label>
+  <div class="invalid-feedback fw-bold">
+      Please Upload Your Image !
+    </div>
 </div>
 
-                  <button type="submit" name="submit" class="btn btn-primary mt-3 ">
+                  <button type="submit" name="submit_form" class="btn btn-primary mt-3 ">
                     Add Register Unit User
                     <i class="bi bi-send"></i>
                   </button>

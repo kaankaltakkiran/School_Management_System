@@ -12,9 +12,9 @@ if ($_SESSION['role'] != 1) {
 }
 ?>
 <?php
-if (isset($_POST['form_submit'])) {
+if (isset($_POST['submit_form'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
-    $addAdminErrors = array();
+    $errors = array();
     require_once 'db.php';
     //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
     //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
@@ -45,16 +45,16 @@ if (isset($_POST['form_submit'])) {
     die(); */
     //!Eğer kullanıcı üye olmuşsa  hata ver
     if ($isUser) {
-        $addAdminErrors[] = "This email is already registered !";
+        $errors[] = "This email is already registered !";
 
         //!Eğer kullanıcı yoksa kaydet
         //?Şifre kontrolü
     } else if ($_POST['form_password'] != $_POST['form_repassword']) {
-        $addAdminErrors[] = "Passwords Don't Match!";
+        $errors[] = "Passwords Don't Match!";
     } else if ($error === 0) {
         //!Resim boyutu kontrolü gözden geçmeli
         if ($img_size < 0) {
-            $addAdminErrors[] = "Sorry, your file is too large.";
+            $errors[] = "Sorry, your file is too large.";
         } else {
             $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
             $img_ex_lc = strtolower($img_ex);
@@ -78,12 +78,12 @@ if (isset($_POST['form_submit'])) {
                 $SORGU->execute();
                 $approves[] = "Admin Added Successfully...";
             } else {
-                $addAdminErrors[] = "You can't upload files of this type !";
+                $errors[] = "You can't upload files of this type !";
             }
         }
     } else {
         /*     $errors[] = "unknown error occurred!"; */
-        $addAdminErrors[] = "Image Not Selected !";
+        $errors[] = "Image Not Selected !";
     }
 
 }
@@ -96,8 +96,8 @@ if (isset($_POST['form_submit'])) {
 <h1 class="alert alert-info text-center">Add Admin User Form</h1>
 <?php
 //! Hata mesajlarını göster
-if (!empty($addAdminErrors)) {
-    foreach ($addAdminErrors as $error) {
+if (!empty($errors)) {
+    foreach ($errors as $error) {
         echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
       <div class='toast align-items-center text-white bg-danger border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
           <div class='d-flex'>
@@ -178,7 +178,7 @@ if (!empty($approves)) {
       Please Upload Your Image !
     </div>
 </div>
-                  <button type="submit" name="form_submit" class="btn btn-primary mb-3">
+                  <button type="submit" name="submit_form" class="btn btn-primary mb-3">
                     Add Admin User
                     <i class="bi bi-send"></i>
                   </button>
