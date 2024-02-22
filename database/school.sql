@@ -24,7 +24,7 @@ CREATE TABLE `admins` (
 
 INSERT INTO `admins` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `roleuser`, `createdate`, `userimg`, `adedadminid`, `adedadminname`) VALUES
 (1,	'Admin',	'admin@gmail.com',	'$2y$10$KiJGRPAyVQpk5xjkMIXEgO61qgVxRZnNA5qc6hd7vOSMoliu96QqW',	'M',	1,	'2024-01-30 18:00:41',	'IMG-65b90f199e75b6.61068605.jpg',	1,	'Admin'),
-(2,	'Admin 2 ',	'admin2@gmail.com',	'$2y$10$Vl/POjjK9Y5ZVF9b4.jQ5unloIpLDnVg7h77VQkWOkOF/sOA/4GCy',	'F',	1,	'2024-01-30 18:01:43',	'IMG-65b90f57e40c18.69953318.png',	1,	'Admin');
+(2,	'Admin 2',	'admin2@gmail.com',	'$2y$10$Vl/POjjK9Y5ZVF9b4.jQ5unloIpLDnVg7h77VQkWOkOF/sOA/4GCy',	'F',	1,	'2024-01-30 18:01:43',	'IMG-65b90f57e40c18.69953318.png',	1,	'Admin');
 
 DROP TABLE IF EXISTS `announcements`;
 CREATE TABLE `announcements` (
@@ -44,11 +44,11 @@ CREATE TABLE `announcements` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `announcements` (`announcementid`, `senderid`, `sendername`, `senderrole`, `receiverrole`, `createdate`, `announcementtitle`, `startdate`, `lastdate`, `ispublish`, `announcement`, `readcount`) VALUES
-(1,	1,	'Kaan Kaltakkıran',	2,	2,	'2024-02-19 12:40:42',	'Title 1',	'2024-02-16',	'2024-03-31',	'1',	'      Title 1 Annoucement      ',	11),
-(2,	1,	'Kaan Kaltakkıran',	2,	2,	'2024-02-19 12:40:42',	'Title 2',	'2024-02-16',	'2024-03-04',	'0',	'Title 2 Annoucement',	11),
-(3,	1,	'Kaan Kaltakkıran',	2,	2,	'2024-02-19 12:40:42',	'Title 3',	'2024-02-08',	'2024-02-15',	'1',	'Title 3 Announcement',	11),
-(4,	1,	'Kaan Kaltakkıran',	2,	3,	'2024-02-19 12:40:42',	'Title 4',	'2024-02-16',	'2024-03-31',	'1',	'      Title 4 Announcement       ',	11),
-(5,	1,	'Veli Yıldız',	3,	4,	'2024-02-19 12:41:17',	'Ttile 5',	'2024-02-16',	'2024-03-31',	'1',	'Title 5 Announcement ',	20);
+(1,	1,	'Kaan Kaltakkıran',	2,	2,	'2024-02-19 20:35:56',	'Title 1',	'2024-02-16',	'2024-03-31',	'1',	'      Title 1 Annoucement      ',	23),
+(2,	1,	'Kaan Kaltakkıran',	2,	2,	'2024-02-19 20:35:56',	'Title 2',	'2024-02-16',	'2024-03-04',	'0',	'Title 2 Annoucement',	23),
+(3,	1,	'Kaan Kaltakkıran',	2,	2,	'2024-02-19 20:35:56',	'Title 3',	'2024-02-08',	'2024-02-15',	'1',	'Title 3 Announcement',	23),
+(4,	1,	'Kaan Kaltakkıran',	2,	3,	'2024-02-19 20:35:56',	'Title 4',	'2024-02-16',	'2024-03-31',	'1',	'      Title 4 Announcement       ',	17),
+(5,	1,	'Veli Yıldız',	3,	4,	'2024-02-19 18:23:40',	'Ttile 5',	'2024-02-16',	'2024-03-31',	'1',	'Title 5 Announcement ',	21);
 
 DROP TABLE IF EXISTS `classes`;
 CREATE TABLE `classes` (
@@ -97,7 +97,7 @@ CREATE TABLE `foodlist` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `foodlist` (`id`, `day1`, `day2`, `day3`, `day4`, `day5`, `day6`, `day7`, `createdate`, `addedunitid`, `addedunitname`) VALUES
-(1,	'Domates Çorbası,\r\nİçli Köfte,\r\nMantı,\r\nÇoban Salata\r\n',	'Tutmaç Çorbası,\r\nBezelye Yemeği,\r\nBulgur Pilavı,\r\nSupangle\r\n',	'Ezogelin Çorbası,\r\nSebzeli Tavuk Sote,\r\nSade Pilav,\r\nAyran',	'Patates Çorbası,\r\nEtli Biber Dolma,\r\nNapoliten Soslu Makarna,\r\nÜzüm',	'Mercimek Çorbası,\r\nBahçıvan Kebap,\r\nArpa Şehriyeli Pirinç Pilavı,\r\nPembe Sultan',	'Mercimek Çorbası,\r\nCordon Bleu,\r\nNapoliten Soslu Makarna,\r\nMeyve Suyu',	'Domates Çorbası,\r\nPatlıcan Musakka,\r\nArpa Şehriyeli Pirinç Pilavı,\r\nCacık',	'2024-02-19 15:50:23',	1,	'Kaan Kaltakkıran');
+(1,	'TARHANA ÇORBA,\nTAVUK KAVURMA,\nPEYNİRLİ MİLFÖY,\nAYRAN',	'KIRMIZI MERC. ÇORBA,\nKIYMALI TAZE FASULYE,\n Bulgur Pilavı,\nŞEKERPARE',	'YAYLA ÇORBA,\nPÜRELİ HASAN P. KÖFTE,\nSEBZELİ MAKARNA,\nMEYVE',	'ŞEH. TAVUK SUYU ÇORBA,\nETLİ KURUFASULYE,\nSADE PİRİNÇ PİLAVI,\n KEŞKÜL',	'DOMATES ÇORBA,\nMANTARLI ET SOTE,\nArpa Şehriyeli Pirinç Pilavı,\nKARIŞIK SALATA',	'KÖY ÇORBA,\nTAS KEBAP,\nMISIRLI PİRİÇ PİLAVI	,\nYOĞURT',	'EZOGELİN ÇORBA,\nETLİ FIRIN TÜRLÜ,\nYOĞURTLU MAKARNA,\nCEV. TEL KADAYIF',	'2024-02-22 18:20:55',	1,	'Kaan Kaltakkıran');
 
 DROP TABLE IF EXISTS `informations`;
 CREATE TABLE `informations` (
@@ -183,7 +183,7 @@ CREATE TABLE `students` (
 
 INSERT INTO `students` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `useraddress`, `phonenumber`, `roleuser`, `createdate`, `classid`, `classname`, `birthdate`, `userimg`, `parentname`, `parentnumber`, `lessonid`, `lessonname`, `addedunitid`, `addedunitname`) VALUES
 (1,	'Ali Yılmaz',	'ali@gmail.com',	'$2y$10$UFHeEWCOJioUY.qdE.71o.egEaETLBqjiYquIYv450X3/PJl7F9fC',	'M',	'Adress 1',	'12331223123',	4,	'2024-01-30 18:13:53',	1,	'9/A',	'2000-01-01',	'IMG-65cf8d6b14ec89.64266568.png',	'Ali Father',	'12331223123',	'1,3',	'Math,Turkish',	1,	'Kaan Kaltakkıran'),
-(2,	'Selin Yıldız',	'selin@gmail.com',	'$2y$10$QKjJT6hdDZidt0PE5w0puOJGBpG.AT4HzuXxtnlYIKnLbzsBjHhLO',	'F',	'Address 2',	'31232312132',	4,	'2024-01-30 18:14:25',	2,	'12/D',	'1996-01-01',	'IMG-65b91251666283.15293271.jpg',	'Selin Mother',	'76546554464',	'3',	'Turkish',	1,	'Kaan Kaltakkıran');
+(2,	'Selin Yıldız',	'selin@gmail.com',	'$2y$10$QKjJT6hdDZidt0PE5w0puOJGBpG.AT4HzuXxtnlYIKnLbzsBjHhLO',	'F',	'Address 2',	'31232312132',	4,	'2024-01-30 18:14:25',	16,	'12/D',	'1996-01-01',	'IMG-65b91251666283.15293271.jpg',	'Selin Mother',	'76546554464',	'3',	'Turkish',	1,	'Kaan Kaltakkıran');
 
 DROP TABLE IF EXISTS `teachers`;
 CREATE TABLE `teachers` (
@@ -211,4 +211,4 @@ INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `user
 (1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$F8BOCVniVNOqHhjl7gWf8e5ptBp1wNP.KhGPA3GA9pEJx0hPGEZOm',	'M',	3,	'2024-02-10 12:43:06',	'1,6,11,16',	'9/A,10/B,11/C,12/D',	'Address1',	'23123112323',	'1975-08-20',	'IMG-65cf8e230c7946.47057921.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
 (2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$a7xTEd88iyzI43udPEmrSeTmxBBaj9nf.JXtJV8NadXoRV1/GGe7q',	'F',	3,	'2024-02-10 12:43:40',	'1,10',	'9/A,11/B',	'Address 2',	'12331223123',	'1980-01-15',	'IMG-65c7454cee1627.24858158.png',	'3',	'Turkish',	1,	'Kaan Kaltakkıran');
 
--- 2024-02-19 12:52:26
+-- 2024-02-22 15:23:46
