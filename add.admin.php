@@ -12,10 +12,9 @@ if ($_SESSION['role'] != 1) {
 }
 ?>
 <?php
-if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
-    require_once 'db.php';
+if (isset($_POST['form_submit'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
-    $errors = array();
+    $addAdminErrors = array();
     require_once 'db.php';
     //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
     //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
@@ -34,8 +33,6 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
     $img_size = $_FILES['form_image']['size'];
     $tmp_name = $_FILES['form_image']['tmp_name'];
     $error = $_FILES['form_image']['error'];
-    // Hata kontrolü
-    $errors = array();
 
     //?Kullanıcı var mı yok mu kontrol etme
     $sql = "SELECT * FROM admins WHERE useremail = :form_email";
@@ -48,16 +45,16 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
     die(); */
     //!Eğer kullanıcı üye olmuşsa  hata ver
     if ($isUser) {
-        $errors[] = "This email is already registered !";
+        $addAdminErrors[] = "This email is already registered !";
 
         //!Eğer kullanıcı yoksa kaydet
         //?Şifre kontrolü
     } else if ($_POST['form_password'] != $_POST['form_repassword']) {
-        $errors[] = "Passwords Don't Match!";
+        $addAdminErrors[] = "Passwords Don't Match!";
     } else if ($error === 0) {
         //!Resim boyutu kontrolü gözden geçmeli
         if ($img_size < 0) {
-            $errors[] = "Sorry, your file is too large.";
+            $addAdminErrors[] = "Sorry, your file is too large.";
         } else {
             $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
             $img_ex_lc = strtolower($img_ex);
@@ -81,12 +78,12 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 $SORGU->execute();
                 $approves[] = "Admin Added Successfully...";
             } else {
-                $errors[] = "You can't upload files of this type !";
+                $addAdminErrors[] = "You can't upload files of this type !";
             }
         }
     } else {
         /*     $errors[] = "unknown error occurred!"; */
-        $errors[] = "Image Not Selected !";
+        $addAdminErrors[] = "Image Not Selected !";
     }
 
 }
@@ -95,13 +92,12 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
   <div class="container">
   <div class="row justify-content-center mt-3">
   <div class="col-6">
-
-<form method="POST"enctype="multipart/form-data">
+<form method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
 <h1 class="alert alert-info text-center">Add Admin User Form</h1>
 <?php
 //! Hata mesajlarını göster
-if (!empty($errors)) {
-    foreach ($errors as $error) {
+if (!empty($addAdminErrors)) {
+    foreach ($addAdminErrors as $error) {
         echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
       <div class='toast align-items-center text-white bg-danger border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
           <div class='d-flex'>
@@ -139,18 +135,30 @@ if (!empty($approves)) {
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" id="floatingInput" placeholder="User Name" name="form_username" required>
   <label for="floatingInput">User Name</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Your Name !
+    </div>
 </div>
   <div class="form-floating mb-3">
   <input type="email" name="form_email"class="form-control" id="floatingInput" placeholder="Email"required>
   <label for="floatingInput">Email</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Your Email !
+    </div>
 </div>
 <div class="input-group mb-3  input-group-lg">
   <input type="password"  name="form_password" class="form-control" id="oldPassword" placeholder="Password"required>
   <span class="input-group-text bg-transparent"><i id="toggleOldPassword" class="bi bi-eye-slash"></i></span>
+  <div class="invalid-feedback fw-bold">
+      Please Write Your Password !
+    </div>
 </div>
 <div class="input-group mb-3  input-group-lg">
   <input type="password"  name="form_repassword" class="form-control" id="oldRePassword" placeholder="Please Enter Your Password Again"required>
   <span class="input-group-text bg-transparent"><i id="toggleOldRePassword" class="bi bi-eye-slash"></i></span>
+  <div class="invalid-feedback fw-bold">
+      Please Write Your Password Again !
+    </div>
 </div>
 <div class="form-floating mb-3">
   <select class="form-select" id="floatingSelect" name="form_gender"  required aria-label="Floating label select example" >
@@ -159,18 +167,24 @@ if (!empty($approves)) {
     <option value="F">Female</option>
   </select>
   <label for="floatingSelect">Gender</label>
+  <div class="invalid-feedback fw-bold">
+      Please Select Your Gender !
+    </div>
 </div>
 <div class="input-group mb-3">
   <input type="file"  name='form_image' class="form-control" id="inputGroupFile02"required>
   <label class="input-group-text" for="inputGroupFile02">Upload Admin Image&nbsp; <i class="bi bi-upload"></i></label>
+  <div class="invalid-feedback fw-bold">
+      Please Upload Your Image !
+    </div>
 </div>
-                  <button type="submit" name="submit" class="btn btn-primary mb-3">
+                  <button type="submit" name="form_submit" class="btn btn-primary mb-3">
                     Add Admin User
                     <i class="bi bi-send"></i>
                   </button>
      </form>
      </div>
 </div>
-
 </div>
+<?php require 'footer.php';?>
 <?php require 'down.html.php';?>
