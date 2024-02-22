@@ -16,7 +16,7 @@ require 'navbar.php'?>
 <?php
 
 //!form submit edilmişse
-if (isset($_POST['form_submit'])) {
+if (isset($_POST['submit_form'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
     //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
@@ -65,7 +65,7 @@ if (isset($_POST['form_submit'])) {
     <div class="container">
   <div class="row justify-content-center mt-3">
   <div class="col-6">
-<form method="POST">
+<form method="POST" class="needs-validation" novalidate>
 <h1 class="alert alert-info text-center">Add School İnformation</h1>
 <?php
 //! Hata mesajlarını göster
@@ -108,10 +108,13 @@ if (!empty($approves)) {
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" id="floatingInput" placeholder="School Name" name="form_name" required>
   <label for="floatingInput">School Name</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Your School Name !
+    </div>
 </div>
 <div class="form-floating mb-3">
-  <select class="form-select" name="form_year" id="floatingSelect" aria-label="Floating label select example">
-  <option selected disabled>Select Year</option>
+  <select class="form-select" name="form_year" id="floatingSelect" aria-label="Floating label select example"required>
+  <option selected disabled value="">Select Year</option>
   <?php
 //! 1950'den bugüne kadar yılları seçen bir döngü
 for ($i = 1950; $i <= date("Y"); $i++) {
@@ -120,26 +123,41 @@ for ($i = 1950; $i <= date("Y"); $i++) {
 ?>
   </select>
   <label for="floatingSelect">School Year</label>
+  <div class="invalid-feedback fw-bold">
+      Select Your School Year !
+    </div>
 </div>
 <div class="form-floating mb-3 ">
-  <select class="form-select" name="form_term" id="floatingSelect2" aria-label="Floating label select example 2">
-    <option selected disabled>Select Term</option>
+  <select class="form-select" name="form_term" id="floatingSelect2" aria-label="Floating label select example 2" required>
+    <option selected disabled value="">Select Term</option>
     <option value="I">I</option>
     <option value="II">II</option>
   </select>
   <label for="floatingSelect2">School Term</label>
+  <div class="invalid-feedback fw-bold">
+      Select Your School Term !
+    </div>
 </div>
 <div class="form-floating mb-3 ">
-  <textarea class="form-control" name="form_about" placeholder="School About" id="floatingTextarea3" style="height: 100px"></textarea>
+  <textarea class="form-control" name="form_about" placeholder="School About" id="floatingTextarea3" style="height: 100px" required></textarea>
   <label for="floatingTextarea3">School About</label>
+  <div class="invalid-feedback fw-bold">
+      Write Your School About !
+    </div>
 </div>
 <div class="form-floating mb-3 ">
-  <textarea class="form-control" name="form_summary" placeholder="School About Summary" id="floatingTextarea4" style="height: 100px"></textarea>
+  <textarea class="form-control" name="form_summary" placeholder="School About Summary" id="floatingTextarea4" style="height: 100px" required></textarea>
   <label for="floatingTextarea4">School About Summary</label>
+  <div class="invalid-feedback fw-bold">
+      Write Your School About Summary !
+    </div>
 </div>
 <div class="form-floating mb-3 ">
-  <textarea class="form-control" name="form_address" placeholder="School Address" id="floatingTextarea2" style="height: 100px"></textarea>
+  <textarea class="form-control" name="form_address" placeholder="School Address" id="floatingTextarea2" style="height: 100px" required></textarea>
   <label for="floatingTextarea2">School Address</label>
+  <div class="invalid-feedback fw-bold">
+      Write Your School Address !
+    </div>
 </div>
 
                   <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Add School İnformation
@@ -149,4 +167,5 @@ for ($i = 1950; $i <= date("Y"); $i++) {
      </div>
 </div>
 </div>
+<?php require 'footer.php';?>
 <?php require 'down.html.php';?>

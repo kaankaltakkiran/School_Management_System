@@ -16,7 +16,7 @@ require 'navbar.php'?>
 <?php
 
 //!form submit edilmişse
-if (isset($_POST['form_classnumber'], $_POST['form_classletter'])) {
+if (isset($_POST['submit_form'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
     //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
@@ -62,8 +62,7 @@ if (isset($_POST['form_classnumber'], $_POST['form_classletter'])) {
     <div class="container">
   <div class="row justify-content-center mt-3">
   <div class="col-6">
-
-<form method="POST">
+<form method="POST"  class="needs-validation"novalidate>
 <h1 class="alert alert-info text-center">Add Class</h1>
 <?php
 //! Hata mesajlarını göster
@@ -104,20 +103,23 @@ if (!empty($approves)) {
   <label>Added By Register Unit Name</label>
 </div>
 <div class="form-floating mb-3">
-  <select class="form-select" name="form_classnumber" id="floatingSelect" aria-label="Floating label select example">
-    <option selected disabled>Select Class Number</option>
+  <select class="form-select" name="form_classnumber" id="floatingSelect" aria-label="Floating label select example"required>
+    <option selected disabled value="">Select Class Number</option>
     <option value="9">9</option>
     <option value="10">10</option>
     <option value="11">11</option>
     <option value="12">12</option>
   </select>
   <label for="floatingSelect">Class Number</label>
+  <div class="invalid-feedback fw-bold">
+      Select Class Number !
+    </div>
 </div>
 <!-- Chatgpt ile sınıf harflerini gösterme
 ord ascıı karakterine çeviriyor -->
 <div class="form-floating mb-3">
-  <select class="form-select" name="form_classletter" id="floatingSelect2" aria-label="Floating label select example">
-    <option selected disabled>Select Class Letter</option>
+  <select class="form-select" name="form_classletter" id="floatingSelect2" aria-label="Floating label select example" required>
+    <option selected disabled value="">Select Class Letter</option>
     <?php
 for ($i = ord('A'); $i <= ord('Z'); $i++) {
     $letter = chr($i);
@@ -126,8 +128,11 @@ for ($i = ord('A'); $i <= ord('Z'); $i++) {
 ?>
   </select>
   <label for="floatingSelect2">Class Letter</label>
+  <div class="invalid-feedback fw-bold">
+      Select Class Letter !
+    </div>
 </div>
-                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Add Class
+                  <button type="submit" name="submit_form" class="btn btn-primary mt-3 ">Add Class
                   <i class="bi bi-send"></i>
                   </button>
      </form>

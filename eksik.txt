@@ -23,6 +23,7 @@ Yapılmayanlar
 Sınav sistemi deneme yap 
 tüm formlarda validation işlemleri yap bootsrap ile
 hata mesajları isimlerini değiştir.
+publish annocment mantığını değiştir
 !!!!!!
 yoklama sistemi
 

@@ -16,7 +16,7 @@ require 'navbar.php'?>
 <?php
 
 //!form submit edilmişse
-if (isset($_POST['form_submit'])) {
+if (isset($_POST['submit_form'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
     require_once 'db.php';
@@ -54,7 +54,7 @@ if (isset($_POST['form_submit'])) {
     <div class="container">
   <div class="row justify-content-center mt-3">
   <div class="col-6">
-<form method="POST">
+<form method="POST" class="needs-validation"novalidate>
 <h1 class="alert alert-info text-center">Send Announcement</h1>
 <?php
 //! Hata mesajlarını göster
@@ -97,47 +97,66 @@ if (!empty($approves)) {
 <div class="form-floating mb-3">
   <input type="text" id="floatingInput" placeholder="Announcement Title"  class="form-control" name="form_title" required>
   <label for="floatingInput">Announcement Title</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Announcement Title !
+    </div>
 </div>
 <div class="form-floating mb-3">
   <select class="form-select" id="floatingSelect" name="form_reciverrole"  required aria-label="Floating label select example" >
-    <option selected disabled>Select Receiver User</option>
+    <option selected disabled value="">Select Receiver User</option>
     <option value="1">Admin</option>
     <option value="2">Register Unit</option>
     <option value="3">Teacher</option>
     <option value="4">Student</option>
   </select>
   <label for="floatingSelect">Receiver</label>
+  <div class="invalid-feedback fw-bold">
+      Please Select Receiver !
+    </div>
 </div>
 <div class="form-floating mb-3">
 <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">Start Publish Date</label>
-  <input type="date" name="form_startdate" class="form-control" id="exampleFormControlInput1"  min="<?php echo date('Y-m-d'); ?>" />
+  <input type="date" name="form_startdate" required class="form-control" id="exampleFormControlInput1"  min="<?php echo date('Y-m-d'); ?>" />
+  <div class="invalid-feedback fw-bold">
+      Please Select Start Publish Date !
+    </div>
 </div>
 </div>
 <div class="form-floating mb-3">
 <div class="mb-3">
   <label for="exampleFormControlInput2" class="form-label">Last Published Date</label>
-  <input type="date" name="form_lastdate" class="form-control" id="exampleFormControlInput2"  min="<?php echo date('Y-m-d'); ?>" />
+  <input type="date" name="form_lastdate" required class="form-control" id="exampleFormControlInput2"  min="<?php echo date('Y-m-d'); ?>" />
+  <div class="invalid-feedback fw-bold">
+      Please Select Last Published Date !
+    </div>
 </div>
 </div>
 <div class="mb-3">
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" name='form_ispublish' id="flexCheckChecked" checked>
+  <input class="form-check-input" type="checkbox" name='form_ispublish' id="flexCheckChecked" checked required>
   <label class="form-check-label" for="flexCheckChecked">
   Publish Announcement
   </label>
+  <div class="invalid-feedback fw-bold">
+      Please Select Publish Announcement !
+    </div>
 </div>
 </div>
 <div class="form-floating">
-  <textarea class="form-control" placeholder="Leave a Announcement here" id="floatingTextarea2" name="form_announcement" style="height: 100px"></textarea>
+  <textarea class="form-control" placeholder="Leave a Announcement here" id="floatingTextarea2" name="form_announcement" style="height: 100px" required></textarea>
   <label for="floatingTextarea2">Announcement</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Announcement !
+    </div>
 </div>
 
-                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Send Announcement
+                  <button type="submit" name="submit_form" class="btn btn-primary mt-3 ">Send Announcement
                   <i class="bi bi-send"></i>
                   </button>
      </form>
      </div>
 </div>
 </div>
+<?php require 'footer.php';?>
 <?php require 'down.html.php';?>

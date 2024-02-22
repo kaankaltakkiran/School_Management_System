@@ -16,7 +16,7 @@ require 'navbar.php'?>
 <?php
 
 //!form submit edilmişse
-if (isset($_POST['form_submit'])) {
+if (isset($_POST['submit_form'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
     //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
@@ -56,7 +56,7 @@ if (isset($_POST['form_submit'])) {
     <div class="container">
   <div class="row justify-content-center mt-3">
   <div class="col-6">
-<form method="POST">
+<form method="POST" class="needs-validation" novalidate>
 <h1 class="alert alert-info text-center">Add Lesson</h1>
 <?php
 //! Hata mesajlarını göster
@@ -99,9 +99,12 @@ if (!empty($approves)) {
 <div class="form-floating mb-3">
   <input type="text" id="floatingInput" placeholder="lesson Name"  class="form-control" name="form_lesson" required>
   <label for="floatingInput">lesson Name</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write lesson Name !
+    </div>
 </div>
 
-                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Add Lesson
+                  <button type="submit" name="submit_form" class="btn btn-primary mt-3 ">Add Lesson
                   <i class="bi bi-send"></i>
                   </button>
      </form>

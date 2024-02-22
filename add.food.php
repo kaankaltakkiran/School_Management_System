@@ -16,7 +16,7 @@ require 'navbar.php'?>
 <?php
 
 //!form submit edilmişse
-if (isset($_POST['form_submit'])) {
+if (isset($_POST['submit_form'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
     //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
@@ -83,11 +83,11 @@ if (isset($_POST['form_submit'])) {
     /*   echo '<pre>';
     print_r($isFoodCount);
     die(); */
-    //!Eğer aynı isimde ders varsa  hata ver
+    //!Eğer Kayıtlı bir menü varsa  hata ver
     if (count($isFoodCount) > 0) {
-        $errors[] = "An attached record was found. You can only add a list !";
+        $errors[] = "An attached record was found. You can only add 1 list !";
 
-        //!Eğer aynı isimde ders yoksa kaydet
+        //!Eğer aynı isimde menü yoksa kaydet
     } else {
         // Insert into Database
         $sql = "INSERT INTO foodlist (day1,day2,day3,day4,day5,day6,day7,addedunitid,addedunitname) VALUES (:day1Menu,:day2Menu,:day3Menu,:day4Menu,:day5Menu,:day6Menu,:day7Menu,:unitid,:unitname)";
@@ -111,7 +111,7 @@ if (isset($_POST['form_submit'])) {
     <div class="container">
   <div class="row justify-content-center mt-3">
   <div class="col-6">
-<form method="POST">
+<form method="POST" class="needs-validation" novalidate>
 <h1 class="alert alert-info text-center">Add Food List</h1>
 <?php
 //! Hata mesajlarını göster
@@ -153,55 +153,76 @@ if (!empty($approves)) {
 </div>
 <div class="input-group mb-3 ">
   <span class="input-group-text">Day 1 Menu</span>
-  <input type="text" name="form_day1first" placeholder="First Food" aria-label="First Food" class="form-control">
-  <input type="text"  name="form_day1second" placeholder="Second Food" aria-label="Second Food" class="form-control">
-  <input type="text"  name="form_day1third" placeholder="Third Food" aria-label="Third Food" class="form-control">
-  <input type="text"  name="form_day1fourth" placeholder="Fourth Food" aria-label="Second Food" class="form-control">
+  <input type="text" name="form_day1first" placeholder="First Food" aria-label="First Food" class="form-control"required>
+  <input type="text"  name="form_day1second" placeholder="Second Food" aria-label="Second Food" class="form-control"required>
+  <input type="text"  name="form_day1third" placeholder="Third Food" aria-label="Third Food" class="form-control"required>
+  <input type="text"  name="form_day1fourth" placeholder="Fourth Food" aria-label="Second Food" class="form-control"required>
+    <div class="invalid-feedback fw-bold">
+      Please Write Day 1 Menu !
+    </div>
 </div>
 <div class="input-group mb-3 ">
   <span class="input-group-text">Day 2 Menu</span>
-  <input type="text" name="form_day2first" placeholder="First Food" aria-label="First Food" class="form-control">
-  <input type="text"  name="form_day2second" placeholder="Second Food" aria-label="Second Food" class="form-control">
-  <input type="text"  name="form_day2third" placeholder="Third Food" aria-label="Third Food" class="form-control">
-  <input type="text"  name="form_day2fourth" placeholder="Fourth Food" aria-label="Second Food" class="form-control">
+  <input type="text" name="form_day2first" placeholder="First Food" aria-label="First Food" class="form-control"required>
+  <input type="text"  name="form_day2second" placeholder="Second Food" aria-label="Second Food" class="form-control"required>
+  <input type="text"  name="form_day2third" placeholder="Third Food" aria-label="Third Food" class="form-control"required>
+  <input type="text"  name="form_day2fourth" placeholder="Fourth Food" aria-label="Second Food" class="form-control"required>
+  <div class="invalid-feedback fw-bold">
+      Please Write Day 2 Menu !
+    </div>
 </div>
 <div class="input-group mb-3 ">
   <span class="input-group-text">Day 3 Menu</span>
-  <input type="text" name="form_day3first" placeholder="First Food" aria-label="First Food" class="form-control">
-  <input type="text"  name="form_day3second" placeholder="Second Food" aria-label="Second Food" class="form-control">
-  <input type="text"  name="form_day3third" placeholder="Third Food" aria-label="Third Food" class="form-control">
-  <input type="text"  name="form_day3fourth" placeholder="Fourth Food" aria-label="Second Food" class="form-control">
+  <input type="text" name="form_day3first" placeholder="First Food" aria-label="First Food" class="form-control"required>
+  <input type="text"  name="form_day3second" placeholder="Second Food" aria-label="Second Food" class="form-control"required>
+  <input type="text"  name="form_day3third" placeholder="Third Food" aria-label="Third Food" class="form-control"required>
+  <input type="text"  name="form_day3fourth" placeholder="Fourth Food" aria-label="Second Food" class="form-control"required>
+  <div class="invalid-feedback fw-bold">
+      Please Write Day 3 Menu !
+    </div>
 </div>
 <div class="input-group mb-3 ">
   <span class="input-group-text">Day 4 Menu</span>
-  <input type="text" name="form_day4first" placeholder="First Food" aria-label="First Food" class="form-control">
-  <input type="text"  name="form_day4second" placeholder="Second Food" aria-label="Second Food" class="form-control">
-  <input type="text"  name="form_day4third" placeholder="Third Food" aria-label="Third Food" class="form-control">
-  <input type="text"  name="form_day4fourth" placeholder="Fourth Food" aria-label="Second Food" class="form-control">
+  <input type="text" name="form_day4first" placeholder="First Food" aria-label="First Food" class="form-control"required>
+  <input type="text"  name="form_day4second" placeholder="Second Food" aria-label="Second Food" class="form-control"required>
+  <input type="text"  name="form_day4third" placeholder="Third Food" aria-label="Third Food" class="form-control"required>
+  <input type="text"  name="form_day4fourth" placeholder="Fourth Food" aria-label="Second Food" class="form-control"required>
+  <div class="invalid-feedback fw-bold">
+      Please Write Day 4 Menu !
+    </div>
 </div>
 <div class="input-group mb-3 ">
   <span class="input-group-text">Day 5 Menu</span>
-  <input type="text" name="form_day5first" placeholder="First Food" aria-label="First Food" class="form-control">
-  <input type="text"  name="form_day5second" placeholder="Second Food" aria-label="Second Food" class="form-control">
-  <input type="text"  name="form_day5third" placeholder="Third Food" aria-label="Third Food" class="form-control">
-  <input type="text"  name="form_day5fourth" placeholder="Fourth Food" aria-label="Second Food" class="form-control">
+  <input type="text" name="form_day5first" placeholder="First Food" aria-label="First Food" class="form-control"required>
+  <input type="text"  name="form_day5second" placeholder="Second Food" aria-label="Second Food" class="form-control"required>
+  <input type="text"  name="form_day5third" placeholder="Third Food" aria-label="Third Food" class="form-control"required>
+  <input type="text"  name="form_day5fourth" placeholder="Fourth Food" aria-label="Second Food" class="form-control"required>
+  <div class="invalid-feedback fw-bold">
+      Please Write Day 5 Menu !
+    </div>
 </div>
 <div class="input-group mb-3 ">
   <span class="input-group-text">Day 6 Menu</span>
-  <input type="text" name="form_day6first" placeholder="First Food" aria-label="First Food" class="form-control">
-  <input type="text"  name="form_day6second" placeholder="Second Food" aria-label="Second Food" class="form-control">
-  <input type="text"  name="form_day6third" placeholder="Third Food" aria-label="Third Food" class="form-control">
-  <input type="text"  name="form_day6fourth" placeholder="Fourth Food" aria-label="Second Food" class="form-control">
+  <input type="text" name="form_day6first" placeholder="First Food" aria-label="First Food" class="form-control"required>
+  <input type="text"  name="form_day6second" placeholder="Second Food" aria-label="Second Food" class="form-control"required>
+  <input type="text"  name="form_day6third" placeholder="Third Food" aria-label="Third Food" class="form-control"required>
+  <input type="text"  name="form_day6fourth" placeholder="Fourth Food" aria-label="Second Food" class="form-control"required>
+  <div class="invalid-feedback fw-bold">
+      Please Write Day 6 Menu !
+    </div>
 </div>
 <div class="input-group mb-3 ">
   <span class="input-group-text">Day 7 Menu</span>
-  <input type="text" name="form_day7first" placeholder="First Food" aria-label="First Food" class="form-control">
-  <input type="text"  name="form_day7second" placeholder="Second Food" aria-label="Second Food" class="form-control">
-  <input type="text"  name="form_day7third" placeholder="Third Food" aria-label="Third Food" class="form-control">
-  <input type="text"  name="form_day7fourth" placeholder="Fourth Food" aria-label="Second Food" class="form-control">
+  <input type="text" name="form_day7first" placeholder="First Food" aria-label="First Food" class="form-control"required>
+  <input type="text"  name="form_day7second" placeholder="Second Food" aria-label="Second Food" class="form-control"required>
+  <input type="text"  name="form_day7third" placeholder="Third Food" aria-label="Third Food" class="form-control"required>
+  <input type="text"  name="form_day7fourth" placeholder="Fourth Food" aria-label="Second Food" class="form-control"required>
+  <div class="invalid-feedback fw-bold">
+      Please Write Day 7 Menu !
+    </div>
 </div>
 
-                  <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Add Food List
+                  <button type="submit" name="submit_form   " class="btn btn-primary mt-3 ">Add Food List
                   <i class="bi bi-send"></i>
                   </button>
      </form>
