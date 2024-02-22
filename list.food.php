@@ -66,13 +66,13 @@ foreach ($foods as $food) {
     echo "
     <tr>
       <th>{$food['id']}</th>
-      <td>" . nl2br($food['day1']) . "</td>
-      <td>" . nl2br($food['day2']) . "</td>
-      <td>" . nl2br($food['day3']) . "</td>
-      <td>" . nl2br($food['day4']) . "</td>
-      <td>" . nl2br($food['day5']) . "</td>
-      <td>" . nl2br($food['day6']) . "</td>
-      <td>" . nl2br($food['day7']) . "</td>
+      <td>" . nl2br(implode("<br>", explode(",", $food['day1']))) . "</td>
+      <td>" . nl2br(implode("<br>", explode(",", $food['day2']))) . "</td>
+      <td>" . nl2br(implode("<br>", explode(",", $food['day3']))) . "</td>
+      <td>" . nl2br(implode("<br>", explode(",", $food['day4']))) . "</td>
+      <td>" . nl2br(implode("<br>", explode(",", $food['day5']))) . "</td>
+      <td>" . nl2br(implode("<br>", explode(",", $food['day6']))) . "</td>
+      <td>" . nl2br(implode("<br>", explode(",", $food['day7']))) . "</td>
     </tr>
   ";
 }

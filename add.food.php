@@ -28,49 +28,49 @@ if (isset($_POST['btn_add'])) {
     $day1third = htmlspecialchars($_POST['form_day1third']);
     $day1fourth = htmlspecialchars($_POST['form_day1fourth']);
     //!Pazartesi menüsü birleştirme
-    $day1Menu = $day1first . ', ' . $day1second . ', ' . $day1third . ', ' . $day1fourth;
+    $day1Menu = $day1first . ",\n" . $day1second . ",\n" . $day1third . ",\n" . $day1fourth;
 //!Salı menüsü
     $day2first = htmlspecialchars($_POST['form_day2first']);
     $day2second = htmlspecialchars($_POST['form_day2second']);
     $day2third = htmlspecialchars($_POST['form_day2third']);
     $day2fourth = htmlspecialchars($_POST['form_day2fourth']);
     //!Salı menüsü birleştirme
-    $day2Menu = $day2first . ', ' . $day2second . ', ' . $day2third . ', ' . $day2fourth;
+    $day2Menu = $day2first . ",\n" . $day2second . ",\n" . $day2third . ",\n" . $day2fourth;
 //!Çarşamba menüsü
     $day3first = htmlspecialchars($_POST['form_day3first']);
     $day3second = htmlspecialchars($_POST['form_day3second']);
     $day3third = htmlspecialchars($_POST['form_day3third']);
     $day3fourth = htmlspecialchars($_POST['form_day3fourth']);
     //!Çarşamba menüsü birleştirme
-    $day3Menu = $day3first . ', ' . $day3second . ', ' . $day3third . ', ' . $day3fourth;
+    $day3Menu = $day3first . ",\n" . $day3second . ",\n" . $day3third . ",\n" . $day3fourth;
 //!Perşembe menüsü
     $day4first = htmlspecialchars($_POST['form_day4first']);
     $day4second = htmlspecialchars($_POST['form_day4second']);
     $day4third = htmlspecialchars($_POST['form_day4third']);
     $day4fourth = htmlspecialchars($_POST['form_day4fourth']);
     //!Perşembe menüsü birleştirme
-    $day4Menu = $day4first . ', ' . $day4second . ', ' . $day4third . ', ' . $day4fourth;
+    $day4Menu = $day4first . ",\n" . $day4second . ",\n" . $day4third . ",\n" . $day4fourth;
 //!Cuma menüsü
     $day5first = htmlspecialchars($_POST['form_day5first']);
     $day5second = htmlspecialchars($_POST['form_day5second']);
     $day5third = htmlspecialchars($_POST['form_day5third']);
     $day5fourth = htmlspecialchars($_POST['form_day5fourth']);
 //!Cuma menüsü birleştirme
-    $day5Menu = $day5first . ', ' . $day5second . ', ' . $day5third . ', ' . $day5fourth;
+    $day5Menu = $day5first . ",\n" . $day5second . ",\n" . $day5third . ",\n" . $day5fourth;
 //!Cumartesi menüsü
     $day6first = htmlspecialchars($_POST['form_day6first']);
     $day6second = htmlspecialchars($_POST['form_day6second']);
     $day6third = htmlspecialchars($_POST['form_day6third']);
     $day6fourth = htmlspecialchars($_POST['form_day6fourth']);
 //!Cumartesi menüsü birleştirme
-    $day6Menu = $day6first . ', ' . $day6second . ', ' . $day6third . ', ' . $day6fourth;
+    $day6Menu = $day6first . ",\n" . $day6second . ",\n" . $day6third . ",\n" . $day6fourth;
 //!Pazar menüsü
     $day7first = htmlspecialchars($_POST['form_day7first']);
     $day7second = htmlspecialchars($_POST['form_day7second']);
     $day7third = htmlspecialchars($_POST['form_day7third']);
     $day7fourth = htmlspecialchars($_POST['form_day7fourth']);
 //!Pazar menüsü birleştirme
-    $day7Menu = $day7first . ', ' . $day7second . ', ' . $day7third . ', ' . $day7fourth;
+    $day7Menu = $day7first . ",\n" . $day7second . ",\n" . $day7third . ",\n" . $day7fourth;
 
     $addedUnitid = $_SESSION['id'];
     $addedUnitName = $_SESSION['userName'];
