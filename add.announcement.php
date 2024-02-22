@@ -134,7 +134,7 @@ if (!empty($approves)) {
 </div>
 <div class="mb-3">
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" name='form_ispublish' id="flexCheckChecked" checked required>
+  <input class="form-check-input" type="checkbox" name='form_ispublish' id="flexCheckChecked" required>
   <label class="form-check-label" for="flexCheckChecked">
   Publish Announcement
   </label>
