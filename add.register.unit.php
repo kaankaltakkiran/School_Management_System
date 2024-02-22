@@ -194,7 +194,7 @@ if (!empty($approves)) {
 </div>
 <div class="form-floating mb-3">
   <select class="form-select" id="floatingSelect" name="form_gender"  required aria-label="Floating label select example" >
-    <option selected disabled>Select Gender</option>
+    <option selected disabled value="">Select Gender</option>
     <option value="M">Male</option>
     <option value="F">Female</option>
   </select>
