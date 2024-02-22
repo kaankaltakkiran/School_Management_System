@@ -273,6 +273,29 @@ die(); */
       <?php }?>
 </div>
 </div>
+<div class="container">
+  <div class="row">
+  <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 3) {?>
+      <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card h-100 " style="width: 18rem;">
+            <img src="./public/img/exam.jpg" class="card-img-top" alt="Exam img">
+            <div class="card-body">
+              <h5 class="card-title">Create Exam</h5>
+              <p class="card-text">Teacher Create Exam</p>
+              <div class="d-flex justify-content-between">
+          <a href="add.exam.php" class="btn  me-2  btn-danger mt-5">Create Exam
+            <i class="bi bi-send-fill"></i>
+          </a>
+          <a href="list.exam.php" class="btn  btn-warning mt-5">List Exam
+            <i class="bi bi-send-fill"></i>
+          </a>
+        </div>
+            </div>
+          </div>
+      </div>
+      <?php }?>
+  </div>
+</div>
 <?php if ($_SESSION['isLogin'] == 1) {?>
 <footer class="bg-body-tertiary text-center text-lg-start mt-3  ">
   <!-- Copyright -->
