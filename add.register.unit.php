@@ -36,8 +36,6 @@ if (isset($_POST['submit_form'])) {
     $img_size = $_FILES['form_image']['size'];
     $tmp_name = $_FILES['form_image']['tmp_name'];
     $error = $_FILES['form_image']['error'];
-    // Hata kontrolü
-    $errors = array();
 
     //?Kullanıcı var mı yok mu kontrol etme
     $sql = "SELECT * FROM registerunits WHERE useremail = :form_email";
