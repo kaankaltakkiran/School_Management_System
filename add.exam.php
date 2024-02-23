@@ -40,6 +40,10 @@ if (isset($_POST['submit_form'])) {
     $studentClassid = implode(',', $classIds);
     $studentClassName = implode(',', $classNames);
 
+    //!Checkbox değeri kontrolü
+    //?checkbox işaretli ise 1 değilse 0
+    $isPublish = isset($_POST['form_ispublish']) ? 1 : 0;
+
     //!Resim yükleme
     $img_name = $_FILES['form_image']['name'];
     $img_size = $_FILES['form_image']['size'];
@@ -79,13 +83,14 @@ if (isset($_POST['submit_form'])) {
                 move_uploaded_file($tmp_name, $img_upload_path);
 
                 // Insert into Database
-                $sql = "INSERT INTO exams (examtitle,examdescription,examstartdate,examenddate,examtime,classid,classname,addedid,addedname,examimg) VALUES (:examtitle,:examdescription,:examstartdate,:examenddate,:examtime,:classid,:classname,:addedid,:addedname,'$new_img_name')";
+                $sql = "INSERT INTO exams (examtitle,examdescription,examstartdate,examenddate,examtime,ispublish,classid,classname,addedid,addedname,examimg) VALUES (:form_examtitle,:form_examdescription,:form_examstartdate,:form_examenddate,:form_examtime,:form_ispublish,:classid,:classname,:addedid,:addedname,'$new_img_name')";
                 $SORGU = $DB->prepare($sql);
                 $SORGU->bindParam(':form_examtitle', $examtitle);
                 $SORGU->bindParam(':form_examdescription', $examdescription);
                 $SORGU->bindParam(':form_examstartdate', $examstartdate);
                 $SORGU->bindParam(':form_examenddate', $examenddate);
                 $SORGU->bindParam(':form_examtime', $examtime);
+                $SORGU->bindParam(':form_ispublish', $isPublish);
                 $SORGU->bindParam(':classid', $studentClassid);
                 $SORGU->bindParam(':classname', $studentClassName);
                 $SORGU->bindParam(':addedid', $addedid);
@@ -216,6 +221,10 @@ foreach ($classes as $class) {
   <div class="invalid-feedback fw-bold">
       Please Select Exam Time Limit !
     </div>
+</div>
+<div class="form-check form-switch mb-3">
+  <input class="form-check-input" type="checkbox" name='form_ispublish'  role="switch" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">Publish Exam</label>
 </div>
 <div class="input-group mb-3">
   <input type="file"  name='form_image' class="form-control" id="inputGroupFile02"required>

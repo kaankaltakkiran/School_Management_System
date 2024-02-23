@@ -22,6 +22,9 @@ die(); */
 $selectedClassId = $exams[0]['classid'];
 //!Database'den gelen seçili exam time
 $selectedExamTime = $exams[0]['examtime'];
+//!Veritabanından publish announcement değerini al
+$isPublis = $exams[0]['ispublish'];
+
 if ($_SESSION['role'] != 3) {
     header("location: authorizationcontrol.php");
     die();
@@ -61,6 +64,10 @@ if (isset($_POST['form_submit'])) {
     // Virgülle ayrılmış bir şekilde lessonid ve lessonname'leri oluştur
     $studentClassid = implode(',', $classIds);
     $studentClassName = implode(',', $classNames);
+    //!Checkbox değeri kontrolü
+    //?checkbox işaretli ise 1 değilse 0
+    $isPublish = isset($_POST['form_ispublish']) ? 1 : 0;
+
     //!Resim yükleme
     $img_name = $_FILES['form_image']['name'];
     $img_size = $_FILES['form_image']['size'];
@@ -88,7 +95,7 @@ if (isset($_POST['form_submit'])) {
                 //?unlink dosya silmek için kullanılır
                 unlink('exam_images/' . $old_img_name);
                 //!Foto güncellediyse veritabanına yeni fotoğraf adını kaydet
-                $sql = "UPDATE exams SET examtitle = :form_examtitle, examdescription = :form_examdescription, examstartdate = :form_examstartdate, examenddate = :form_examenddate, examtime = :form_examtime, examimg = '$new_img_name', classid=:classid,classname=:classname WHERE examid = :idExam";
+                $sql = "UPDATE exams SET examtitle = :form_examtitle, examdescription = :form_examdescription, examstartdate = :form_examstartdate, examenddate = :form_examenddate, examtime = :form_examtime,ispublish=:form_ispublish, examimg = '$new_img_name', classid=:classid,classname=:classname WHERE examid = :idExam";
 
             } else {
                 $errors[] = "You can't upload files of this type !";
@@ -96,7 +103,7 @@ if (isset($_POST['form_submit'])) {
         }
     } else {
         //!Foto güncellemediysen eski fotoğrafı kullan
-        $sql = "UPDATE exams SET examtitle = :form_examtitle, examdescription = :form_examdescription, examstartdate = :form_examstartdate, examenddate = :form_examenddate, examtime = :form_examtime, classid=:classid,classname=:classname WHERE examid = :idExam";
+        $sql = "UPDATE exams SET examtitle = :form_examtitle, examdescription = :form_examdescription, examstartdate = :form_examstartdate, examenddate = :form_examenddate, examtime = :form_examtime,ispublish=:form_ispublish, classid=:classid,classname=:classname WHERE examid = :idExam";
     }
     //! Hata yoksa veritabanına kaydet
     if (empty($errors)) {
@@ -115,6 +122,7 @@ if (isset($_POST['form_submit'])) {
             $SORGU->bindParam(':form_examstartdate', $examstartdate);
             $SORGU->bindParam(':form_examenddate', $examenddate);
             $SORGU->bindParam(':form_examtime', $examtime);
+            $SORGU->bindParam(':form_ispublish', $isPublish);
             $SORGU->bindParam(':classid', $studentClassid);
             $SORGU->bindParam(':classname', $studentClassName);
             $SORGU->bindParam(':idExam', $id);
@@ -209,6 +217,10 @@ foreach ($classes as $class) {
 }
 ?>>60 minutes</option>
     </select>
+</div>
+<div class="form-check form-switch mb-3">
+  <input class="form-check-input" type="checkbox" <?php echo ($isPublis == 1) ? 'checked' : ''; ?> name='form_ispublish'  role="switch" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">Publish Exam</label>
 </div>
 <div class="row">
     <div class="col-6">
