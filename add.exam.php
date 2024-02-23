@@ -5,6 +5,21 @@ $activePage = "add.exam";
 require 'up.html.php';
 require 'login.control.php';
 ?>
+<?php
+require_once 'db.php';
+$addedid = $_SESSION['id'];
+$sql = "SELECT e.*, t.*
+  FROM exams e
+  INNER JOIN teachers t ON FIND_IN_SET(e.classid, t.classid) where addedid=:addedid ";
+$SORGU = $DB->prepare($sql);
+$SORGU->bindParam(':addedid', $addedid);
+$SORGU->execute();
+$isUser = $SORGU->fetchall(PDO::FETCH_ASSOC);
+/*   echo '<pre>';
+print_r($isUser);
+die(); */
+?>
+
   <?php
 if ($_SESSION['role'] != 3) {
     header("location: authorizationcontrol.php");
@@ -49,19 +64,21 @@ if (isset($_POST['submit_form'])) {
     $img_size = $_FILES['form_image']['size'];
     $tmp_name = $_FILES['form_image']['tmp_name'];
     $error = $_FILES['form_image']['error'];
-
-    //?Kullanıcı var mı yok mu kontrol etme
-    $sql = "SELECT * FROM admins WHERE useremail = :form_email";
+    //!Aynı ders için aynı sınavın eklenmemesi kontrolü
+    require_once 'db.php';
+    $addedid = $_SESSION['id'];
+    $sql = "SELECT * FROM exams where addedid=:addedid";
     $SORGU = $DB->prepare($sql);
-    $SORGU->bindParam(':form_email', $email);
+    $SORGU->bindParam(':addedid', $addedid);
     $SORGU->execute();
-    $isUser = $SORGU->fetch(PDO::FETCH_ASSOC);
-    /*  echo '<pre>';
-    print_r($isUser);
+    $isExams = $SORGU->fetchall(PDO::FETCH_ASSOC);
+    /*   echo '<pre>';
+    print_r($isExams);
     die(); */
+
     //!Eğer kullanıcı üye olmuşsa  hata ver
-    if ($isUser) {
-        $errors[] = "This email is already registered !";
+    if ($isExams[0]['classid'] == $studentClassid) {
+        $errors[] = "This Exam is already Created !";
 
         //!Eğer kullanıcı yoksa kaydet
         //?Şifre kontrolü
@@ -151,6 +168,10 @@ if (!empty($approves)) {
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" value="<?php echo $_SESSION['userName'] ?>"disabled readonly>
   <label>Added By Teacher Name</label>
+</div>
+<div class="form-floating mb-3">
+  <input type="text"  class="form-control" value="<?php echo $isUser[0]['lessonname']; ?>"disabled readonly>
+  <label>Lesson Name</label>
 </div>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" id="floatingInput" placeholder="Exam Title" name="form_examtitle" required>

@@ -22,10 +22,13 @@ Yapılmayanlar
 !!!!!!
 Sınav sistemi deneme yap 
 time sistemi değişmeli
+Yarın
 tarih update var mı ? tüm sayfalarda örneğin birthdate
 eski foto adı update ismi her sayfada kontrol et
-sınav kontröl mekinzmasnı değiştir add ve update için
+Öğretmen sadece sahip olduğu sınıfları görsün
+????sınav kontröl mekinzmasnı değiştir add ve update için
 !!!!!!
+Yarın
 yoklama sistemi
 
 !!!
