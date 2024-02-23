@@ -48,6 +48,19 @@ $exams = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* echo '<pre>';
 print_r($exams);
 die(); */
+if (isset($_GET['removeExamid'])) {
+    require 'db.php';
+    $remove_id = $_GET['removeExamid'];
+    $sql = "DELETE FROM exams WHERE examid = :removeExamid";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':removeExamid', $remove_id);
+    $SORGU->execute();
+    echo "<script>
+alert('Exam has been deleted. You are redirected to the Exam List page...!');
+window.location.href = 'list.exam.php';
+</script>";
+}
+
 foreach ($exams as $exam) {
     echo "
     <tr>
@@ -60,8 +73,8 @@ foreach ($exams as $exam) {
       <td>{$exam['examtime']} minutes</td>
       <td>{$exam['classname']}</td>
       <td>
-      <a href='update.lesson.php?lessonid={$lesson['lessonid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a>
-      <a href='list.lessons.php?removeLessonid={$lesson['lessonid']}'onclick='return confirm(\"Are you sure you want to delete {$lesson['lessonname']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a>
+      <a href='update.lesson.php?lessonid={$exam['examid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a>
+      <a href='list.exam.php?removeExamid={$exam['examid']}'onclick='return confirm(\"Are you sure you want to delete {$exam['examtitle']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a>
     </td>
    </tr>
   ";
