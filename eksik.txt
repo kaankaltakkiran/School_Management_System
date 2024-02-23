@@ -22,6 +22,11 @@ Yapılmayanlar
 !!!!!!
 Sınav sistemi deneme yap 
 time sistemi değişmeli
+isactive
+tarih update var mı ?
+eski foto adı update ismi
+studentClassid değiştir
+sınav kontröl mekinzmasnı değiştir add ve update için
 !!!!!!
 yoklama sistemi
 

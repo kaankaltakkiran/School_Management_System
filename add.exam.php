@@ -40,10 +40,6 @@ if (isset($_POST['submit_form'])) {
     $studentClassid = implode(',', $classIds);
     $studentClassName = implode(',', $classNames);
 
-    $rePassword = $_POST['form_repassword'];
-    /*  Şifrele hashleme */
-    $password = password_hash($password, PASSWORD_DEFAULT);
-
     //!Resim yükleme
     $img_name = $_FILES['form_image']['name'];
     $img_size = $_FILES['form_image']['size'];
@@ -85,11 +81,11 @@ if (isset($_POST['submit_form'])) {
                 // Insert into Database
                 $sql = "INSERT INTO exams (examtitle,examdescription,examstartdate,examenddate,examtime,classid,classname,addedid,addedname,examimg) VALUES (:examtitle,:examdescription,:examstartdate,:examenddate,:examtime,:classid,:classname,:addedid,:addedname,'$new_img_name')";
                 $SORGU = $DB->prepare($sql);
-                $SORGU->bindParam(':examtitle', $examtitle);
-                $SORGU->bindParam(':examdescription', $examdescription);
-                $SORGU->bindParam(':examstartdate', $examstartdate);
-                $SORGU->bindParam(':examenddate', $examenddate);
-                $SORGU->bindParam(':examtime', $examtime);
+                $SORGU->bindParam(':form_examtitle', $examtitle);
+                $SORGU->bindParam(':form_examdescription', $examdescription);
+                $SORGU->bindParam(':form_examstartdate', $examstartdate);
+                $SORGU->bindParam(':form_examenddate', $examenddate);
+                $SORGU->bindParam(':form_examtime', $examtime);
                 $SORGU->bindParam(':classid', $studentClassid);
                 $SORGU->bindParam(':classname', $studentClassName);
                 $SORGU->bindParam(':addedid', $addedid);
@@ -149,7 +145,7 @@ if (!empty($approves)) {
 ?>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" value="<?php echo $_SESSION['userName'] ?>"disabled readonly>
-  <label>Added By Admin Name</label>
+  <label>Added By Teacher Name</label>
 </div>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" id="floatingInput" placeholder="Exam Title" name="form_examtitle" required>
@@ -212,7 +208,7 @@ foreach ($classes as $class) {
   <select class="form-select" id="floatingSelect" name="form_examtime"  required aria-label="Floating label select example" >
     <option selected disabled value="">Select Exam Time</option>
     <option value="10">10 minutes</option>
-    <option value="30">45 minutes</option>
+    <option value="30">30 minutes</option>
     <option value="45">45 minutes</option>
     <option value="60">60 minutes</option>
   </select>

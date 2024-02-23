@@ -73,7 +73,7 @@ foreach ($exams as $exam) {
       <td>{$exam['examtime']} minutes</td>
       <td>{$exam['classname']}</td>
       <td>
-      <a href='update.lesson.php?lessonid={$exam['examid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a>
+      <a href='update.exam.php?idExam={$exam['examid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a>
       <a href='list.exam.php?removeExamid={$exam['examid']}'onclick='return confirm(\"Are you sure you want to delete {$exam['examtitle']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a>
     </td>
    </tr>
