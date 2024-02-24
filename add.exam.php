@@ -61,7 +61,7 @@ if (isset($_POST['submit_form'])) {
     print_r($isExams);
     die(); */
 
-    //!Eğer kullanıcı üye olmuşsa  hata ver
+    //!Eğer aynı sınıfta  sınav varsa   hata ver
     if ($isExams[0]['classid'] == $studentClassid) {
         $errors[] = "This Exam is already Created !";
     } else if ($error === 0) {

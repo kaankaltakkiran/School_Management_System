@@ -33,7 +33,7 @@ $exams = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* var_dump($exams);
 die(); */
 //!Database'den gelen seçili classid
-$selectedClassId = $exams[0]['classid'];
+$examClassid = $exams[0]['classid'];
 //!Database'den gelen seçili exam time
 $selectedExamTime = $exams[0]['examtime'];
 //!Veritabanından publish announcement değerini al
@@ -169,6 +169,17 @@ if (!empty($errors)) {
   <input type="text"  class="form-control" value="<?php echo $_SESSION['userName'] ?>"disabled readonly>
   <label>Update By Teacher Name</label>
 </div>
+<?php
+require_once 'db.php';
+$addedid = $_SESSION['id'];
+$sql = "SELECT * FROM teachers WHERE  userid=:addedid";
+$SORGU = $DB->prepare($sql);
+$SORGU->bindParam(':addedid', $addedid);
+$SORGU->execute();
+$teachers = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* var_dump($teachers);
+die(); */
+?>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" value="<?php echo $isUser[0]['lessonname']; ?>"disabled readonly>
   <label>Lesson Name</label>
@@ -181,27 +192,32 @@ if (!empty($errors)) {
   <input type="text"  class="form-control" value="<?php echo $exams[0]['examdescription'] ?>" name="form_examdescription">
   <label>Exam Description</label>
 </div>
+
 <?php
-require_once 'db.php';
-$sql = "SELECT * FROM classes";
-$SORGU = $DB->prepare($sql);
-$SORGU->execute();
-$classes = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-/* var_dump($classes);
-die(); */
+//! Öğretmenin girdiği sınıfların idsi
+$selectedClassId = $teachers[0]['classid'];
+//! Öğretmenin girdiği sınıfların ismi
+$selectedClassName = $teachers[0]['classname'];
+
+//! Öğretmenin girdiği sınıfların ismi
+$classArrayId = explode(",", $selectedClassId);
+$classArrayName = explode(",", $selectedClassName);
 ?>
 <div class="form-floating mb-3">
 <select class="form-select" name="form_class[]" required>
-        <option disabled value="">Select Class Name</option>
-        <!-- Chatgpt çözümü seçili categoriyi getirme ve listeleme -->
-        <?php
-foreach ($classes as $class) {
-    $selected = ($class['classid'] == $selectedClassId) ? 'selected' : '';
-    echo "<option value='" . $class['classid'] . "-" . $class['classname'] . "' $selected>{$class['classname']}</option>";
+<option disabled selected value="">Select Class Name</option>
+<?php
+// Her bir değeri bir seçenek olarak ekle
+foreach ($classArrayName as $key => $value) {
+    $classid = $classArrayId[$key];
+    $classname = $value;
+    $selected = ($classid == $examClassid) ? 'selected' : '';
+    echo "<option $selected value=$classid-$classname>$value</option>";
 }
 ?>
     </select>
 </div>
+
 <div class="form-floating mb-3">
 <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">Start Exam Date</label>
