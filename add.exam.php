@@ -5,21 +5,6 @@ $activePage = "add.exam";
 require 'up.html.php';
 require 'login.control.php';
 ?>
-<?php
-require_once 'db.php';
-$addedid = $_SESSION['id'];
-$sql = "SELECT e.*, t.*
-  FROM exams e
-  INNER JOIN teachers t ON FIND_IN_SET(e.classid, t.classid) where addedid=:addedid ";
-$SORGU = $DB->prepare($sql);
-$SORGU->bindParam(':addedid', $addedid);
-$SORGU->execute();
-$isUser = $SORGU->fetchall(PDO::FETCH_ASSOC);
-/*   echo '<pre>';
-print_r($isUser);
-die(); */
-?>
-
   <?php
 if ($_SESSION['role'] != 3) {
     header("location: authorizationcontrol.php");
@@ -79,11 +64,6 @@ if (isset($_POST['submit_form'])) {
     //!Eğer kullanıcı üye olmuşsa  hata ver
     if ($isExams[0]['classid'] == $studentClassid) {
         $errors[] = "This Exam is already Created !";
-
-        //!Eğer kullanıcı yoksa kaydet
-        //?Şifre kontrolü
-    } else if ($_POST['form_password'] != $_POST['form_repassword']) {
-        $errors[] = "Passwords Don't Match!";
     } else if ($error === 0) {
         //!Resim boyutu kontrolü gözden geçmeli
         if ($img_size < 0) {
@@ -169,8 +149,19 @@ if (!empty($approves)) {
   <input type="text"  class="form-control" value="<?php echo $_SESSION['userName'] ?>"disabled readonly>
   <label>Added By Teacher Name</label>
 </div>
+<?php
+require_once 'db.php';
+$addedid = $_SESSION['id'];
+$sql = "SELECT * FROM teachers WHERE  userid=:addedid";
+$SORGU = $DB->prepare($sql);
+$SORGU->bindParam(':addedid', $addedid);
+$SORGU->execute();
+$teachers = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* var_dump($teachers);
+die(); */
+?>
 <div class="form-floating mb-3">
-  <input type="text"  class="form-control" value="<?php echo $isUser[0]['lessonname']; ?>"disabled readonly>
+  <input type="text"  class="form-control" value="<?php echo $teachers[0]['lessonname']; ?>"disabled readonly>
   <label>Lesson Name</label>
 </div>
 <div class="form-floating mb-3">
@@ -188,25 +179,27 @@ if (!empty($approves)) {
     </div>
 </div>
 <?php
-require_once 'db.php';
-$sql = "SELECT * FROM classes";
-$SORGU = $DB->prepare($sql);
-$SORGU->execute();
-$classes = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+//! Öğretmenin girdiği sınıfların idsi
+$selectedClassId = $teachers[0]['classid'];
+//! Öğretmenin girdiği sınıfların ismi
+$selectedClassName = $teachers[0]['classname'];
 
-/* var_dump($classes);
-die(); */
-
-$optionClassName = "";
-foreach ($classes as $class) {
-    $optionClassName .= "<option value='" . $class['classid'] . "-" . $class['classname'] . "'>" . $class['classname'] . "</option>";
-}
+//! Öğretmenin girdiği sınıfların ismi
+$classArrayId = explode(",", $selectedClassId);
+$classArrayName = explode(",", $selectedClassName);
 
 ?>
 <div class="form-floating mb-3">
 <select class="form-select" name="form_class[]" required>
 <option disabled selected value="">Select Class Name</option>
-      <?php echo $optionClassName; ?>
+<?php
+// Her bir değeri bir seçenek olarak ekle
+foreach ($classArrayName as $key => $value) {
+    $classid = $classArrayId[$key];
+    $classname = $value;
+    echo "<option value=$classid-$classname>$value</option>";
+}
+?>
     </select>
     <div class="invalid-feedback fw-bold">
       Please Select Class Name !
@@ -264,3 +257,18 @@ foreach ($classes as $class) {
 </div>
 <?php require 'footer.php';?>
 <?php require 'down.html.php';?>
+
+<?php
+/* require_once 'db.php';
+$addedid = $_SESSION['id'];
+$sql = "SELECT e.*, t.*
+FROM exams e
+INNER JOIN teachers t ON FIND_IN_SET(e.classid, t.classid) where addedid=:addedid ";
+$SORGU = $DB->prepare($sql);
+$SORGU->bindParam(':addedid', $addedid);
+$SORGU->execute();
+$isUser = $SORGU->fetchall(PDO::FETCH_ASSOC);
+echo '<pre>';
+print_r($isUser);
+die(); */
+?>
