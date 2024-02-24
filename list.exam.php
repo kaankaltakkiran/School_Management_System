@@ -31,6 +31,7 @@ if ($_SESSION['role'] != 3) {
       <th>Exam End Date</th>
       <th>Exam Time</th>
       <th>Exam Class Name</th>
+      <th>Create Questions</th>
       <th>Manage</th>
     </tr>
   </thead>
@@ -72,8 +73,9 @@ foreach ($exams as $exam) {
       <td>{$exam['examenddate']}</td>
       <td>{$exam['examtime']} minutes</td>
       <td>{$exam['classname']}</td>
+      <td><a href='add.questions.php' class='btn btn-primary btn-sm'>Create Questions <i class='bi bi-plus-circle'></i></a></td>
       <td>
-      <a href='update.exam.php?idExam={$exam['examid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a>
+      <a href='update.exam.php?idExam={$exam['examid']}' class='btn btn-success mb-3  btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a>
       <a href='list.exam.php?removeExamid={$exam['examid']}'onclick='return confirm(\"Are you sure you want to delete {$exam['examtitle']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a>
     </td>
    </tr>
