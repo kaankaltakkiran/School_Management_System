@@ -26,6 +26,7 @@ Yarın
 tarih update var mı ? tüm sayfalarda örneğin birthdate
 eski foto adı update ismi her sayfada kontrol et
 ?? update exam kontrol problem var 
+kendi oluşturduğu sınavları görsün başakalarını göremesin
 
 yoklama sistemi
 

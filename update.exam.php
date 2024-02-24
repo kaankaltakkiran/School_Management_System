@@ -8,20 +8,6 @@ require 'login.control.php';
 ?>
 <?php
 require_once 'db.php';
-$addedid = $_SESSION['id'];
-$sql = "SELECT e.*, t.*
-  FROM exams e
-  INNER JOIN teachers t ON FIND_IN_SET(e.classid, t.classid) where addedid=:addedid ";
-$SORGU = $DB->prepare($sql);
-$SORGU->bindParam(':addedid', $addedid);
-$SORGU->execute();
-$isUser = $SORGU->fetchall(PDO::FETCH_ASSOC);
-/*   echo '<pre>';
-print_r($isUser);
-die(); */
-?>
-<?php
-require_once 'db.php';
 $id = $_GET['idExam'];
 $addedid = $_SESSION['id'];
 $sql = "SELECT * FROM exams where examid = :idExam AND addedid = :addedid";
@@ -30,6 +16,10 @@ $SORGU->bindParam(':idExam', $id);
 $SORGU->bindParam(':addedid', $addedid);
 $SORGU->execute();
 $exams = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+if ($exams[0]['addedid'] != $_SESSION['id']) {
+    header("location: authorizationcontrol.php");
+    die();
+}
 /* var_dump($exams);
 die(); */
 //!Database'den gelen seçili classid
@@ -181,7 +171,7 @@ $teachers = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 die(); */
 ?>
 <div class="form-floating mb-3">
-  <input type="text"  class="form-control" value="<?php echo $isUser[0]['lessonname']; ?>"disabled readonly>
+  <input type="text"  class="form-control" value="<?php echo $teachers[0]['lessonname']; ?>"disabled readonly>
   <label>Lesson Name</label>
 </div>
 <div class="form-floating mb-3">
