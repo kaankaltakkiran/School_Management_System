@@ -23,6 +23,7 @@ Yapılmayanlar
 Sınav sistemi deneme yap 
 time sistemi değişmeli
 Yarın
+badge ile soru sayısı yazdır ekrana
 ?? update exam kontrol problem var 
 
 yoklama sistemi
