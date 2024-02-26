@@ -136,28 +136,22 @@ foreach ($classArrayName as $key => $value) {
      </form>
     </div>
     <?php
-if (isset($_GET['removeAllQuestions'])) {
+if (isset($_POST['removeAllQuestions'])) {
     require 'db.php';
-    $remove_id = $_GET['removeAllQuestions'];
-    $sql = "DELETE FROM questions WHERE examid = :removeAllQuestions";
+    $remove_id = $_GET['idExam'];
+    $sql = "DELETE FROM questions WHERE examid = :idExam";
     $SORGU = $DB->prepare($sql);
-    $SORGU->bindParam(':removeAllQuestions', $remove_id);
+    $SORGU->bindParam(':idExam', $remove_id);
     $SORGU->execute();
     $errors[] = "All Questions Deleted Successfully...";
-    // JavaScript kullanarak belirli bir süre sonra yönlendirme yap
-    echo '<script>';
-    echo 'setTimeout(function(){';
-    echo 'window.location.href = "add.questions.php?idExam=' . $remove_id . '";';
-    echo '}, 2000);'; // 4000 milisaniye = 4 saniye
-    echo '</script>';
-
 }
 ?>
     <div class="col-6">
     <h3 class="alert alert-primary mt-2">Exam Questions</h3>
+    <form method="post">
     <a data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn btn-success mb-3 ">Add Questions <i class="bi bi-send-plus"></i></a>
-    <a href="add.questions.php?removeAllQuestions=<?php echo $exams[0]['examid']; ?>" onclick="return confirm('Are you sure you want to delete <?php echo $lesson['lessonname']; ?>?')" class="btn btn-danger float-end">Delete All Questions <i class="bi bi-trash"></i> </a>
-
+    <button type="sumbit" name="removeAllQuestions" onclick="return confirm('Are you sure you want to delete ?')" class="btn btn-danger float-end">Delete All Questions <i class="bi bi-trash"></i> </button>
+    </form>
     <div class="accordion accordion-flush" id="accordionFlushExample">
 <?php
 require_once 'db.php';
