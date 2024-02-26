@@ -25,7 +25,8 @@ time sistemi değişmeli
 Yarın
 badge ile soru sayısı yazdır ekrana
 başlık 
-delete all sorular
+iconlar
+tekil soru silme
 ?? update exam kontrol problem var 
 
 yoklama sistemi
