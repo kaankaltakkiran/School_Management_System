@@ -226,12 +226,13 @@ foreach ($questions as $question) {
             </div>
       </div>
     </div>
-  </div>
+
 <?php
 // Her döngüde soru sayacını artır
     $questionNumber++;
 }
 ?>
+</div>
 </div>
   </div>
 </div>
