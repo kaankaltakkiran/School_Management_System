@@ -27,6 +27,9 @@ badge ile soru sayısı yazdır ekrana
 başlık 
 iconlar
 tekil soru silme
+validation
+requeired
+count ile delete buton ilişkilendir
 ?? update exam kontrol problem var 
 
 yoklama sistemi

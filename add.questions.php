@@ -152,6 +152,7 @@ if (isset($_POST['removeAllQuestions'])) {
     <a data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn btn-success mb-3 ">Add Questions <i class="bi bi-send-plus"></i></a>
     <button type="sumbit" name="removeAllQuestions" onclick="return confirm('Are you sure you want to delete ?')" class="btn btn-danger float-end">Delete All Questions <i class="bi bi-trash"></i> </button>
     </form>
+    <h2 class="text-center text-danger ">Questions</h2>
     <div class="accordion accordion-flush" id="accordionFlushExample">
 <?php
 require_once 'db.php';
@@ -218,44 +219,44 @@ foreach ($questions as $question) {
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel2">Add Question</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
       </div>
       <div class="modal-body">
         <form method="post">
 <div class="form-floating mb-3">
-  <textarea class="form-control" placeholder="Question Title" id="floatingTextarea2" name="form_title" style="height: 100px"></textarea>
+  <textarea class="form-control" placeholder="Question Title" id="floatingTextarea2" name="form_title" style="height: 100px"required></textarea>
   <label for="floatingTextarea2">Question Title</label>
 </div>
   <div class="form-check">
   <input class="form-check-input" type="radio"  id="flexRadioDefault1"> (A)
   <div class="form-floating mb-3">
-  <input type="text" class="form-control" name="form_answer1" placeholder="Answer(A)">
-  <label for="floatingInput">Answer(A)</label>
+  <textarea class="form-control" placeholder="Answer(A)" id="floatingTextarea2" name="form_answer1" style="height: 100px" required></textarea>
+  <label for="floatingTextarea2">Answer(A)</label>
 </div>
 </div>
 <div class="form-check">
   <input class="form-check-input" type="radio"  id="flexRadioDefault1"> (B)
   <div class="form-floating mb-3">
-  <input type="text" class="form-control" name="form_answer2" placeholder="Answer(B)">
-  <label for="floatingInput">Answer(B)</label>
+  <textarea class="form-control" placeholder="Answer(B)" id="floatingTextarea2" name="form_answer2" style="height: 100px" required></textarea>
+  <label for="floatingTextarea2">Answer(B)</label>
 </div>
 </div>
 <div class="form-check">
   <input class="form-check-input" type="radio"  id="flexRadioDefault1"> (C)
   <div class="form-floating mb-3">
-  <input type="text" class="form-control" name="form_answer3" placeholder="Answer(C)">
-  <label for="floatingInput">Answer(C)</label>
+  <textarea class="form-control" placeholder="Answer(C)" id="floatingTextarea2" name="form_answer3" style="height: 100px" required></textarea>
+  <label for="floatingTextarea2">Answer(C)</label>
 </div>
 </div>
 <div class="form-check">
   <input class="form-check-input" type="radio"  id="flexRadioDefault1"> (D)
   <div class="form-floating mb-3">
-  <input type="text" class="form-control" name="form_answer4" placeholder="Answer(D)">
-  <label for="floatingInput">Answer(D)</label>
+  <textarea class="form-control" placeholder="Answer(D)" id="floatingTextarea2" name="form_answer4" style="height: 100px" required></textarea>
+  <label for="floatingTextarea2">Answer(D)</label>
 </div>
 </div>
 <div class="form-floating mt-3 ">
-  <select class="form-select" name="form_true_answer" id="floatingSelect" aria-label="Floating label select example">
+  <select class="form-select" name="form_true_answer" id="floatingSelect" aria-label="Floating label select example" required>
     <option selected disabled>Select True Answer</option>
     <option value="A">(A)</option>
     <option value="B">(B)</option>
@@ -266,8 +267,8 @@ foreach ($questions as $question) {
 </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        <button type="submit"   name="submit_form" class="btn btn-success">Add Question</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close <i class="bi bi-x-circle"></i></button>
+        <button type="submit"   name="submit_form" class="btn btn-success">Add  Question  <i class="bi bi-send"></i></button>
       </div>
       </form>
     </div>
