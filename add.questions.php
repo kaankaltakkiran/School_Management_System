@@ -136,6 +136,7 @@ foreach ($classArrayName as $key => $value) {
      </form>
     </div>
     <?php
+//!Tüm soruları silme
 if (isset($_POST['removeAllQuestions'])) {
     require 'db.php';
     $remove_id = $_GET['idExam'];
@@ -144,6 +145,18 @@ if (isset($_POST['removeAllQuestions'])) {
     $SORGU->bindParam(':idExam', $remove_id);
     $SORGU->execute();
     $errors[] = "All Questions Deleted Successfully...";
+}
+?>
+<?php
+//!Tekil soru silme
+if (isset($_POST['removeQuestion'])) {
+    require 'db.php';
+    $remove_id = $_POST['removeQuestion'];
+    $sql = "DELETE FROM questions WHERE questionid = :removeQuestion";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':removeQuestion', $remove_id);
+    $SORGU->execute();
+    $errors[] = "Question Deleted Successfully...";
 }
 ?>
     <div class="col-6">
@@ -167,7 +180,9 @@ die(); */
 // Başlangıç sayacı
 $questionNumber = 1;
 foreach ($questions as $question) {
+    //!Accordion id için unique id oluştur
     $questiontid = "accordionflush{$question['questionid']}";
+    //!Radio button id için unique id oluştur
     $answerLabelid = "flexRadioDefault{$question['questionid']}";
     ?>
   <div class="accordion-item">
@@ -202,6 +217,13 @@ foreach ($questions as $question) {
   <?php echo $question['answerd'] ?>
   </label>
 </div>
+<form method="post">
+    <div class="text-end">
+        <?php echo "kaan"; ?>
+        <button  type="submit" value="<?php echo $question['questionid'] ?>" name="removeQuestion" onclick="return confirm('Are you sure you want to delete ?')" class="btn btn-danger float-end">Delete Question <i class="bi bi-trash"></i> </button>
+    </div>
+</form>
+            </div>
       </div>
     </div>
   </div>
