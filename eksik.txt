@@ -24,6 +24,8 @@ Sınav sistemi deneme yap
 time sistemi değişmeli
 Yarın
 badge ile soru sayısı yazdır ekrana
+başlık 
+delete all sorular
 ?? update exam kontrol problem var 
 
 yoklama sistemi

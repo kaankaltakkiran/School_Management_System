@@ -140,61 +140,62 @@ foreach ($classArrayName as $key => $value) {
     <a data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn btn-success mb-3 ">Add Questions <i class="bi bi-send-plus"></i></a>
     <a href="" class="btn btn-danger float-end">Delete All Questions <i class="bi bi-trash"></i> </a>
     <div class="accordion accordion-flush" id="accordionFlushExample">
+<?php
+require_once 'db.php';
+$id = $_GET['idExam'];
+$sql = "SELECT * FROM questions WHERE  examid=:idExam";
+$SORGU = $DB->prepare($sql);
+$SORGU->bindParam(':idExam', $id);
+$SORGU->execute();
+$questions = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* var_dump($questions);
+die(); */
+// Başlangıç sayacı
+$questionNumber = 1;
+foreach ($questions as $question) {
+    $questiontid = "accordionflush{$question['questionid']}";
+    $answerLabelid = "flexRadioDefault{$question['questionid']}";
+    ?>
   <div class="accordion-item">
     <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-        Aşağıdakilerden hangisi Türkiye Cumhuriyeti'nin ilk cumhurbaşkanıdır?
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo $questiontid ?>" aria-expanded="false" aria-controls="<?php echo $questiontid ?>">
+      <?php echo $questionNumber . ") " . $question['questiontitle'] ?>
       </button>
     </h2>
-    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+    <div id="<?php echo $questiontid ?>" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
       <div class="accordion-body">
       <div class="form-check">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1">
-    Default radio
+  <input class="form-check-input" <?php echo ($question['answera'] === $question['trueanswer']) ? 'checked' : ''; ?> type="radio" name="<?php echo $answerLabelid ?>" id="<?php echo $answerLabelid ?>">
+  <label class="form-check-label <?php echo ($question['answera'] === $question['trueanswer']) ? 'text-success' : ''; ?>" for="<?php echo $answerLabelid ?>">
+  <?php echo $question['answera'] ?>
   </label>
 </div>
 <div class="form-check">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1">
-    Default radio
+  <input class="form-check-input" <?php echo ($question['answerb'] === $question['trueanswer']) ? 'checked' : ''; ?>  type="radio" name="<?php echo $answerLabelid ?>" id="<?php echo $answerLabelid ?>">
+  <label class="form-check-label <?php echo ($question['answerb'] === $question['trueanswer']) ? 'text-success' : ''; ?>" for="<?php echo $answerLabelid ?>">
+  <?php echo $question['answerb'] ?>
   </label>
 </div>
 <div class="form-check">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1">
-    Default radio
+  <input class="form-check-input" <?php echo ($question['answerc'] === $question['trueanswer']) ? 'checked' : ''; ?> type="radio" name="<?php echo $answerLabelid ?>" id="<?php echo $answerLabelid ?>">
+  <label class="form-check-label <?php echo ($question['answerc'] === $question['trueanswer']) ? 'text-success' : ''; ?>" for="<?php echo $answerLabelid ?>">
+  <?php echo $question['answerc'] ?>
   </label>
 </div>
 <div class="form-check">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1">
-    Default radio
+  <input class="form-check-input" <?php echo ($question['answerd'] === $question['trueanswer']) ? 'checked' : ''; ?> type="radio" name="<?php echo $answerLabelid ?>" id="<?php echo $answerLabelid ?>">
+  <label class="form-check-label <?php echo ($question['answerd'] === $question['trueanswer']) ? 'text-success' : ''; ?>" for="<?php echo $answerLabelid ?>">
+  <?php echo $question['answerd'] ?>
   </label>
 </div>
       </div>
     </div>
   </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-        Accordion Item #2
-      </button>
-    </h2>
-    <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-        Accordion Item #3
-      </button>
-    </h2>
-    <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-    </div>
-  </div>
+<?php
+// Her döngüde soru sayacını artır
+    $questionNumber++;
+}
+?>
 </div>
   </div>
 </div>
@@ -253,7 +254,7 @@ foreach ($classArrayName as $key => $value) {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        <button type="submit" name="submit_form" class="btn btn-success">Add Question</button>
+        <button type="submit"   name="submit_form" class="btn btn-success">Add Question</button>
       </div>
       </form>
     </div>
@@ -346,8 +347,10 @@ if (!empty($approves)) {
             </div>
         </div>
     </div>";
+        // 4 saniye sonra sayfayı yenilemek için yönlendirme
+        echo "<meta http-equiv='refresh' content='4'>";
+
     }
 }
 ?>
-
 <?php require 'down.html.php';?>
