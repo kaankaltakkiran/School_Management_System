@@ -19,7 +19,7 @@ if ($_SESSION['role'] != 3) {
   </div>
   <div class="row">
     <div class="col-6">
-    <h3 class="alert alert-primary mt-2">Exam İnformation</h3>
+    <h3 class="alert alert-primary mt-2 text-center ">Exam İnformation</h3>
     <form>
     <?php
 require_once 'db.php';
@@ -159,15 +159,7 @@ if (isset($_POST['removeQuestion'])) {
     $errors[] = "Question Deleted Successfully...";
 }
 ?>
-    <div class="col-6">
-    <h3 class="alert alert-primary mt-2">Exam Questions</h3>
-    <form method="post">
-    <a data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn btn-success mb-3 ">Add Questions <i class="bi bi-send-plus"></i></a>
-    <button type="sumbit" name="removeAllQuestions" onclick="return confirm('Are you sure you want to delete ?')" class="btn btn-danger float-end">Delete All Questions <i class="bi bi-trash"></i> </button>
-    </form>
-    <h2 class="text-center text-danger ">Questions</h2>
-    <div class="accordion accordion-flush" id="accordionFlushExample">
-<?php
+    <?php
 require_once 'db.php';
 $id = $_GET['idExam'];
 $sql = "SELECT * FROM questions WHERE  examid=:idExam";
@@ -177,6 +169,19 @@ $SORGU->execute();
 $questions = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* var_dump($questions);
 die(); */
+?>
+    <div class="col-6">
+    <h3 class="alert alert-primary mt-2 text-center ">Exam Questions</h3>
+    <form method="post">
+    <a data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn btn-success mb-3 ">Add Questions <i class="bi bi-send-plus"></i></a>
+    <?php if (count($questions) > 0) {?>
+    <button type="sumbit" name="removeAllQuestions" onclick="return confirm('Are you sure you want to delete ?')" class="btn btn-danger float-end">Delete All Questions <i class="bi bi-trash"></i> </button>
+    <?php }?>
+    </form>
+<span class="badge rounded-pill text-bg-secondary">Total Questions: <?php echo count($questions) ?></span>
+    <h2 class="text-center text-danger ">Questions</h2>
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+<?php
 // Başlangıç sayacı
 $questionNumber = 1;
 foreach ($questions as $question) {
