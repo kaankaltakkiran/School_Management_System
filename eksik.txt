@@ -23,9 +23,7 @@ Yapılmayanlar
 Sınav sistemi deneme yap 
 time sistemi değişmeli
 Yarın
-badge ile soru sayısı yazdır ekrana
-validation
-count ile delete buton ilişkilendir
+update quesiton
 ?? update exam kontrol problem var 
 
 yoklama sistemi

@@ -243,23 +243,29 @@ foreach ($questions as $question) {
 </div>
 </div>
 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel2">Add Question</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
       </div>
       <div class="modal-body">
-        <form method="post">
+        <form method="post" class="needs-validation" novalidate>
 <div class="form-floating mb-3">
   <textarea class="form-control" placeholder="Question Title" id="floatingTextarea2" name="form_title" style="height: 100px"required></textarea>
   <label for="floatingTextarea2">Question Title</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Question Title !
+    </div>
 </div>
   <div class="form-check">
   <input class="form-check-input" type="radio"  id="flexRadioDefault1"> (A)
   <div class="form-floating mb-3">
   <textarea class="form-control" placeholder="Answer(A)" id="floatingTextarea2" name="form_answer1" style="height: 100px" required></textarea>
   <label for="floatingTextarea2">Answer(A)</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Answer(A) !
+    </div>
 </div>
 </div>
 <div class="form-check">
@@ -267,6 +273,9 @@ foreach ($questions as $question) {
   <div class="form-floating mb-3">
   <textarea class="form-control" placeholder="Answer(B)" id="floatingTextarea2" name="form_answer2" style="height: 100px" required></textarea>
   <label for="floatingTextarea2">Answer(B)</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Answer(B) !
+    </div>
 </div>
 </div>
 <div class="form-check">
@@ -274,6 +283,9 @@ foreach ($questions as $question) {
   <div class="form-floating mb-3">
   <textarea class="form-control" placeholder="Answer(C)" id="floatingTextarea2" name="form_answer3" style="height: 100px" required></textarea>
   <label for="floatingTextarea2">Answer(C)</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Answer(C) !
+    </div>
 </div>
 </div>
 <div class="form-check">
@@ -281,17 +293,23 @@ foreach ($questions as $question) {
   <div class="form-floating mb-3">
   <textarea class="form-control" placeholder="Answer(D)" id="floatingTextarea2" name="form_answer4" style="height: 100px" required></textarea>
   <label for="floatingTextarea2">Answer(D)</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Answer(D) !
+    </div>
 </div>
 </div>
 <div class="form-floating mt-3 ">
   <select class="form-select" name="form_true_answer" id="floatingSelect" aria-label="Floating label select example" required>
-    <option selected disabled>Select True Answer</option>
+    <option selected disabled value="">Select True Answer</option>
     <option value="A">(A)</option>
     <option value="B">(B)</option>
     <option value="C">(C)</option>
     <option value="D">(D)</option>
   </select>
-  <label for="floatingSelect">True Answer</label>
+  <label for="floatingTextarea2">True Answer</label>
+  <div class="invalid-feedback fw-bold">
+      Please Select True Answer !
+    </div>
 </div>
       </div>
       <div class="modal-footer">
