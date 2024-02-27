@@ -95,20 +95,18 @@ die(); */
 <?php
 // Başlangıç sayacı
 $questionNumber = 1;
-// Doğru ve yanlış sayılarını tutacak değişkenler
-$totalquestions = 0;
-$totalTrue = 0;
-$totalFalse = 0;
-$result = "";
+$totalquestions = 0; // Her form gönderiminde sıfırlanır
+$totalTrue = 0; // Her form gönderiminde sıfırlanır
+$totalFalse = 0; // Her form gönderiminde sıfırlanır
 // Form gönderildiğinde işlenecek kod
 if (isset($_POST['form_result'])) {
     $userid = $_SESSION['id'];
-    // Her bir soru için işlem yap
+
     foreach ($questions as $question) {
+
         $soru_id = $question['questionid'];
         $cevap = $_POST["form_answer_$soru_id"]; // Her soru için farklı bir input name'i olacak
         $true_answer = $question['trueanswer'];
-
         // Kullanıcının cevabını doğru cevapla karşılaştırma
         if ($cevap == $true_answer) {
             $totalTrue++;
@@ -133,13 +131,15 @@ if (isset($_POST['form_result'])) {
     $SORGU->bindParam(':totalfalse', $totalFalse);
     $SORGU->bindParam(':result', $result);
     $SORGU->execute();
+    echo '<script>';
+    echo 'alert("The Exam Ended Successfully...");';
+    echo 'window.location.href = "show.exam.result.php?userid=' . $userid . '";';
+    echo '</script>';
 }
 ?>
 <?php
 //!Soruları listele
 foreach ($questions as $question) {
-    //! Başlangıç sayacı
-    $questionNumber = 1;
     ?>
   <div class="row justify-content-center g-2 ">
       <div class="col-6">
