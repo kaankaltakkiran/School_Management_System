@@ -59,7 +59,7 @@ foreach ($exams as $exam) {
       <td>{$exam['examenddate']}</td>
       <td>{$exam['examtime']} minutes</td>
       <td>{$exam['classname']}</td>
-      <td><a href='start.exam.php?examid={$exam['examid']}' class='btn btn-success'>Start Exam <i class='bi bi-skip-start'></i></a></td>
+      <td><a href='show.exam.php?idExam={$exam['examid']}' class='btn btn-success'>Start Exam <i class='bi bi-skip-start'></i></a></td>
    </tr>
   ";
 }
