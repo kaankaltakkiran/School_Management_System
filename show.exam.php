@@ -191,6 +191,7 @@ foreach ($questions as $question) {
             if (sayi < 0) {
                 clearInterval(sayaçDurdur);
                 sayaç.innerHTML = "Time Is Up!";
+                window.location.href = 'time.control.php';
             }
         }
 
