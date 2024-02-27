@@ -96,6 +96,17 @@ die(); */
                        <?php }?>
                        </div>
                        </div>
+                       <div class="row justify-content-center">
+<div class="row row-cols-1 row-cols-md-5 g-4 mt-4 ">
+ <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 4) {?>
+ <a href="list.student.exams.php" class="col btn btn-warning m-2 py-3">
+ <img width="48" height="48" src="https://img.icons8.com/ios/48/exam.png" alt="exam"/>
+ <br>
+Exams List
+</a>
+   <?php }?>
+   </div>
+   </div>
 <!-- Eğer adamin giriş yaparsa aşaığıdaki kısımlar görünür(role=2) -->
 <?php if ($_SESSION['role'] == 1 || $_SESSION['role'] == 2) {?>
       <div class="container my-3 ">
