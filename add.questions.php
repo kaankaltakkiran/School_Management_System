@@ -11,6 +11,28 @@ if ($_SESSION['role'] != 3) {
     die();
 }
 ?>
+<?php
+require_once 'db.php';
+$id = $_GET['idExam'];
+$sql = "SELECT * FROM exams WHERE  examid=:idExam";
+$SORGU = $DB->prepare($sql);
+$SORGU->bindParam(':idExam', $id);
+$SORGU->execute();
+$exams = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* echo '<pre>';
+print_r($exams);
+die(); */
+$selectedExamTime = $exams[0]['examtime'];
+$isPublis = $exams[0]['ispublish'];
+//!Database'den gelen seçili classid
+$examClassid = $exams[0]['classid'];
+?>
+<?php
+if ($_SESSION['userName'] != $exams[0]['addedname']) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
 <?php require 'navbar.php'?>
 <div class="container">
   <div class="row justify-content-center  ">
@@ -22,21 +44,6 @@ if ($_SESSION['role'] != 3) {
      <!--  Teacharın oluşturduğu sınav bilgileri -->
     <h3 class="alert alert-primary mt-2 text-center ">Exam İnformation</h3>
     <form>
-    <?php
-require_once 'db.php';
-$id = $_GET['idExam'];
-$sql = "SELECT * FROM exams WHERE  examid=:idExam";
-$SORGU = $DB->prepare($sql);
-$SORGU->bindParam(':idExam', $id);
-$SORGU->execute();
-$exams = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-/* var_dump($exams);
-die(); */
-$selectedExamTime = $exams[0]['examtime'];
-$isPublis = $exams[0]['ispublish'];
-//!Database'den gelen seçili classid
-$examClassid = $exams[0]['classid'];
-?>
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" value="<?php echo $_SESSION['userName'] ?>"disabled readonly>
   <label>Update By Teacher Name</label>
