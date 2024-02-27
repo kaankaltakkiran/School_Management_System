@@ -23,8 +23,7 @@ Yapılmayanlar
 Sınav sistemi deneme yap 
 time sistemi değişmeli
 Yarın
-update quesiton
-?? update exam kontrol problem var 
+yetki kontrol
 
 yoklama sistemi
 

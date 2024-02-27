@@ -19,6 +19,7 @@ if ($_SESSION['role'] != 3) {
   </div>
   <div class="row">
     <div class="col-6">
+     <!--  Teacharın oluşturduğu sınav bilgileri -->
     <h3 class="alert alert-primary mt-2 text-center ">Exam İnformation</h3>
     <form>
     <?php
@@ -88,7 +89,6 @@ foreach ($classArrayName as $key => $value) {
 ?>
     </select>
 </div>
-
 <div class="form-floating mb-3">
 <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">Start Exam Date</label>
@@ -173,7 +173,7 @@ die(); */
     <div class="col-6">
     <h3 class="alert alert-primary mt-2 text-center ">Exam Questions</h3>
     <form method="post">
-    <a data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn btn-success mb-3 ">Add Questions <i class="bi bi-send-plus"></i></a>
+    <a data-bs-toggle="modal" data-bs-target="#addmodal" class="btn btn-success mb-3 ">Add Questions <i class="bi bi-send-plus"></i></a>
     <?php if (count($questions) > 0) {?>
     <button type="sumbit" name="removeAllQuestions" onclick="return confirm('Are you sure you want to delete ?')" class="btn btn-danger float-end">Delete All Questions <i class="bi bi-trash"></i> </button>
     <?php }?>
@@ -184,11 +184,132 @@ die(); */
 <?php
 // Başlangıç sayacı
 $questionNumber = 1;
+//!Soruları listele
 foreach ($questions as $question) {
     //!Accordion id için unique id oluştur
     $questiontid = "accordionflush{$question['questionid']}";
     //!Radio button id için unique id oluştur
     $answerLabelid = "flexRadioDefault{$question['questionid']}";
+    //!Modal id için unique id oluştur
+    $modalid = "exampleModal{$question['questionid']}";
+    ?>
+   <!--  Update Modal -->
+    <div class="modal fade" id="<?php echo $modalid ?>" tabindex="-1" aria-labelledby="exampleModalLabel<?php echo $question['questionid']; ?>" aria-hidden="true">
+<div class="modal-dialog modal-lg modal-dialog-scrollable">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="exampleModalLabel3">Update Question</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+    </div>
+    <div class="modal-body">
+      <form method="post">
+<div class="form-floating mb-3">
+<textarea class="form-control" placeholder="Question Title" id="floatingTextarea2" name="form_title" style="height: 100px"><?php echo $question['questiontitle'] ?></textarea>
+<label for="floatingTextarea2">Question Title</label>
+</div>
+<div class="form-check">
+<input class="form-check-input" type="radio"  id="flexRadioDefault1"> (A)
+<div class="form-floating mb-3">
+<textarea class="form-control" placeholder="Answer(A)" id="floatingTextarea2" name="form_answer1" style="height: 100px"><?php echo $question['answera'] ?></textarea>
+<label for="floatingTextarea2">Answer(A)</label>
+</div>
+</div>
+<div class="form-check">
+<input class="form-check-input" type="radio"  id="flexRadioDefault1"> (B)
+<div class="form-floating mb-3">
+<textarea class="form-control" placeholder="Answer(B)" id="floatingTextarea2" name="form_answer2" style="height: 100px"><?php echo $question['answerb'] ?></textarea>
+<label for="floatingTextarea2">Answer(B)</label>
+</div>
+</div>
+<div class="form-check">
+<input class="form-check-input" type="radio"  id="flexRadioDefault1"> (C)
+<div class="form-floating mb-3">
+<textarea class="form-control" placeholder="Answer(C)" id="floatingTextarea2" name="form_answer3" style="height: 100px"><?php echo $question['answerc'] ?></textarea>
+<label for="floatingTextarea2">Answer(C)</label>
+</div>
+</div>
+<div class="form-check">
+<input class="form-check-input" type="radio"  id="flexRadioDefault1"> (D)
+<div class="form-floating mb-3">
+<textarea class="form-control" placeholder="Answer(D)" id="floatingTextarea2" name="form_answer4" style="height: 100px"><?php echo $question['answerd'] ?></textarea>
+<label for="floatingTextarea2">Answer(D)</label>
+</div>
+</div>
+<div class="form-floating mt-3 ">
+<select class="form-select" name="form_true_answer" id="floatingSelect" aria-label="Floating label select example">
+  <option selected disabled value="">Select True Answer</option>
+  <option value="A"<?php echo ($question['answera'] === $question['trueanswer']) ? ' selected' : ''; ?>
+    ?>(A)</option>
+    <option value="B"<?php echo ($question['answerb'] === $question['trueanswer']) ? ' selected' : ''; ?>
+    ?>(B)</option>
+    <option value="C"<?php echo ($question['answerc'] === $question['trueanswer']) ? ' selected' : ''; ?>
+    ?>(C)</option>
+    <option value="D"<?php echo ($question['answerd'] === $question['trueanswer']) ? ' selected' : ''; ?>
+    ?>(D)</option>
+</select>
+<label for="floatingTextarea2">True Answer</label>
+<div class="invalid-feedback fw-bold">
+    Please Select True Answer !
+  </div>
+</div>
+<input type="hidden" name="idquestion" value="<?php echo $question['questionid'] ?>">
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close <i class="bi bi-x-circle"></i></button>
+      <button type="submit"   name="update_form" class="btn btn-success">Update  Question  <i class="bi bi-send"></i></button>
+    </div>
+    </form>
+  </div>
+</div>
+</div>
+    <!--  End Update Modal  -->
+    <?php
+//!form update edilmişse
+    if (isset($_POST['update_form'])) {
+        require_once 'db.php';
+        //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
+        //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
+        require_once 'db.php';
+        $idQuestion = $_POST['idquestion'];
+        $questionTitle = htmlspecialchars($_POST['form_title']);
+        $answer1 = htmlspecialchars($_POST['form_answer1']);
+        $answer2 = htmlspecialchars($_POST['form_answer2']);
+        $answer3 = htmlspecialchars($_POST['form_answer3']);
+        $answer4 = htmlspecialchars($_POST['form_answer4']);
+        $optionAnswer = htmlspecialchars($_POST['form_true_answer']);
+
+        //!Chatgpt ile doğru cevabı kontrol etme
+        // Doğru cevabı belirleme
+        $trueAnswer = ''; // Doğru cevabı tutacak değişken
+
+        switch ($optionAnswer) {
+            case 'A':
+                $trueAnswer = $answer1;
+                break;
+            case 'B':
+                $trueAnswer = $answer2;
+                break;
+            case 'C':
+                $trueAnswer = $answer3;
+                break;
+            case 'D':
+                $trueAnswer = $answer4;
+                break;
+            default:
+                $trueAnswer = "Invalid";
+        }
+        $sql = "UPDATE questions SET questiontitle = :form_title, answera = :form_answer1, answerb = :form_answer2, answerc = :form_answer3, answerd = :form_answer4, trueanswer = :true_answer WHERE questionid = :idquestion";
+        $SORGU = $DB->prepare($sql);
+        $SORGU->bindParam(':form_title', $questionTitle);
+        $SORGU->bindParam(':form_answer1', $answer1);
+        $SORGU->bindParam(':form_answer2', $answer2);
+        $SORGU->bindParam(':form_answer3', $answer3);
+        $SORGU->bindParam(':form_answer4', $answer4);
+        $SORGU->bindParam(':true_answer', $trueAnswer);
+        $SORGU->bindParam(':idquestion', $idQuestion);
+        $SORGU->execute();
+        $approves[] = "Question Updated Successfully...";
+    }
     ?>
   <div class="accordion-item">
     <h2 class="accordion-header">
@@ -224,7 +345,7 @@ foreach ($questions as $question) {
 </div>
 <form method="post">
     <div class="text-end">
-        <?php echo "kaan"; ?>
+    <a data-bs-toggle="modal" data-bs-target="#<?php echo $modalid ?>" class="btn btn-success me-3 mb-3 ">Update <i class='bi bi-arrow-clockwise'></i></a>
         <button  type="submit" value="<?php echo $question['questionid'] ?>" name="removeQuestion" onclick="return confirm('Are you sure you want to delete ?')" class="btn btn-danger float-end">Delete Question <i class="bi bi-trash"></i> </button>
     </div>
 </form>
@@ -242,7 +363,8 @@ foreach ($questions as $question) {
   </div>
 </div>
 </div>
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+<!-- Soru Ekleme Modal -->
+<div class="modal fade" id="addmodal" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
@@ -320,9 +442,11 @@ foreach ($questions as $question) {
     </div>
   </div>
 </div>
+<!--  End Soru Ekleme Modal  -->
 <?php
 $id = $_GET['idExam'];
 //!form submit edilmişse
+//!Soruları ekleme
 if (isset($_POST['submit_form'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
@@ -413,4 +537,5 @@ if (!empty($approves)) {
     }
 }
 ?>
+<?php require 'footer.php'?>
 <?php require 'down.html.php';?>
