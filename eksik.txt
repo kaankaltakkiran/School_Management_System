@@ -23,7 +23,9 @@ Yapılmayanlar
 Sınav sistemi deneme yap 
 time sistemi değişmeli
 Yarın
-yetki kontrol
+yetki kontrol show exam page için
+sorun htmlspical chrackter sorunu
+index sayfasına sınav sonucu görceği sistem yap
 
 yoklama sistemi
 

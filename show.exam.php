@@ -83,38 +83,34 @@ if ($exams[0]['classname'] != $students[0]['classname']) {
 </div>
 <?php
 $id = $_GET['idExam'];
-$sql = "SELECT * FROM questions WHERE  examid=:idExam";
+$sql = "SELECT * FROM questions WHERE examid=:idExam";
 $SORGU = $DB->prepare($sql);
 $SORGU->bindParam(':idExam', $id);
 $SORGU->execute();
 $questions = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-/* echo '<pre>';
-print_r($questions);
-die(); */
-?>
-<?php
+
 // Başlangıç sayacı
 $questionNumber = 1;
-$totalquestions = 0; // Her form gönderiminde sıfırlanır
-$totalTrue = 0; // Her form gönderiminde sıfırlanır
-$totalFalse = 0; // Her form gönderiminde sıfırlanır
+$totalTrue = 0; // Doğru cevap sayısını tutmak için
+$totalFalse = 0; // Yanlış cevap sayısını tutmak için
+$totalquestions = count($questions); // Toplam soru sayısını al
+
 // Form gönderildiğinde işlenecek kod
 if (isset($_POST['form_result'])) {
     $userid = $_SESSION['id'];
-
+    // Her soru için doğru ve yanlış cevap kontrolü yap
     foreach ($questions as $question) {
-
-        $soru_id = $question['questionid'];
-        $cevap = $_POST["form_answer_$soru_id"]; // Her soru için farklı bir input name'i olacak
-        $true_answer = $question['trueanswer'];
-        // Kullanıcının cevabını doğru cevapla karşılaştırma
-        if ($cevap == $true_answer) {
+        $questionId = $question['questionid'];
+        // Post verisinden seçilen cevabı al
+        $selectedAnswer = $_POST['form_answer_' . $questionId];
+        // Doğru cevabı al
+        $trueAnswer = $question['trueanswer'];
+        // Eğer seçilen cevap doğru cevaba eşitse doğru cevap sayısını artır, aksi halde yanlış cevap sayısını artır
+        if ($selectedAnswer === $trueAnswer) {
             $totalTrue++;
-
         } else {
             $totalFalse++;
         }
-        $totalquestions = $totalTrue + $totalFalse;
         if ($totalTrue > $totalFalse) {
             $result = "Passed";
         } else {
@@ -136,62 +132,62 @@ if (isset($_POST['form_result'])) {
     echo 'window.location.href = "show.exam.result.php?userid=' . $userid . '";';
     echo '</script>';
 }
-?>
-<?php
-//!Soruları listele
+
+// Soruları listele
 foreach ($questions as $question) {
     ?>
-  <div class="row justify-content-center g-2 ">
-      <div class="col-6">
-          <form method="post">
-              <P class="alert alert-info "><?php echo $questionNumber ?>) <?php echo $question['questiontitle'] ?></p>
-              <?php
+    <div class="row justify-content-center g-2 ">
+        <div class="col-6">
+            <form method="post">
+                <p class="alert alert-info "><?php echo $questionNumber ?>) <?php echo $question['questiontitle'] ?></p>
+                <?php
 // Her radio buton için benzersiz bir id oluştur
     $answerLabelidA = "flexRadioDefault{$question['questionid']}A";
     $answerLabelidB = "flexRadioDefault{$question['questionid']}B";
     $answerLabelidC = "flexRadioDefault{$question['questionid']}C";
     $answerLabelidD = "flexRadioDefault{$question['questionid']}D";
     ?>
-              <div class="form-check">
-                  <input class="form-check-input" required type="radio" name="form_answer_<?php echo $question['questionid'] ?>" id="<?php echo $answerLabelidA ?>" value="<?php echo $question['answera'] ?>">
-                  <label class="form-check-label" for="<?php echo $answerLabelidA ?>">
-                      <?php echo $question['answera'] ?>
-                  </label>
-              </div>
-              <div class="form-check">
-                  <input class="form-check-input" required type="radio" name="form_answer_<?php echo $question['questionid'] ?>" id="<?php echo $answerLabelidB ?>" value=" <?php echo $question['answerb'] ?>">
-                  <label class="form-check-label" for="<?php echo $answerLabelidB ?>">
-                      <?php echo $question['answerb'] ?>
-                  </label>
-              </div>
-              <div class="form-check">
-                  <input class="form-check-input" required type="radio" name="form_answer_<?php echo $question['questionid'] ?>" id="<?php echo $answerLabelidC ?>" value=" <?php echo $question['answerc'] ?>">
-                  <label class="form-check-label" for="<?php echo $answerLabelidC ?>">
-                      <?php echo $question['answerc'] ?>
-                  </label>
-              </div>
-              <div class="form-check">
-                  <input class="form-check-input" required type="radio" name="form_answer_<?php echo $question['questionid'] ?>" id="<?php echo $answerLabelidD ?>" value=" <?php echo $question['answerd'] ?>">
-                  <label class="form-check-label" for="<?php echo $answerLabelidD ?>">
-                      <?php echo $question['answerd'] ?>
-                  </label>
-              </div>
-              <!--   Sorular arası çizgi -->
-              <hr class="border border-danger border-2 opacity-50">
-      </div>
-  </div>
-  <?php
+                <div class="form-check">
+                    <input class="form-check-input" required type="radio" name="form_answer_<?php echo $question['questionid'] ?>" id="<?php echo $answerLabelidA ?>" value="<?php echo $question['answera'] ?>">
+                    <label class="form-check-label" for="<?php echo $answerLabelidA ?>">
+                        <?php echo $question['answera'] ?>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" required type="radio" name="form_answer_<?php echo $question['questionid'] ?>" id="<?php echo $answerLabelidB ?>" value="<?php echo $question['answerb'] ?>">
+                    <label class="form-check-label" for="<?php echo $answerLabelidB ?>">
+                        <?php echo $question['answerb'] ?>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" required type="radio" name="form_answer_<?php echo $question['questionid'] ?>" id="<?php echo $answerLabelidC ?>" value="<?php echo $question['answerc'] ?>">
+                    <label class="form-check-label" for="<?php echo $answerLabelidC ?>">
+                        <?php echo $question['answerc'] ?>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" required type="radio" name="form_answer_<?php echo $question['questionid'] ?>" id="<?php echo $answerLabelidD ?>" value="<?php echo $question['answerd'] ?>">
+                    <label class="form-check-label" for="<?php echo $answerLabelidD ?>">
+                        <?php echo $question['answerd'] ?>
+                    </label>
+                </div>
+                <!--   Sorular arası çizgi -->
+                <hr class="border border-danger border-2 opacity-50">
+        </div>
+    </div>
+<?php
 // Her döngüde soru sayacını artır
     $questionNumber++;
 }
 ?>
 </div>
 <div class="row justify-content-center ">
-<div class="col-2">
-<button type="submit" name="form_result" class="btn btn-primary m-4 ">End The Exam <i class="bi bi-skip-end-fill"></i></button>
-</div>
+    <div class="col-2">
+        <button type="submit" name="form_result" class="btn btn-primary m-4 ">Sınavı Bitir <i class="bi bi-skip-end-fill"></i></button>
+    </div>
 </div>
 </form>
+
 </div>
 <script>
          // Sayacı geriye doğru çalıştıran JavaScript kodu
