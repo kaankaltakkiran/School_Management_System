@@ -14,6 +14,24 @@ if ($_SESSION['role'] != 4) {
 ?>
 <?php
 require 'db.php';
+$id = $_SESSION['id'];
+$sql = "SELECT * FROM results WHERE  userid=:userid";
+$SORGU = $DB->prepare($sql);
+$SORGU->bindParam(':userid', $id);
+$SORGU->execute();
+$results = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* echo '<pre>';
+print_r($results);
+die(); */
+?>
+<?php
+if (count($results) > 0) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
+<?php
+require 'db.php';
 $id = $_GET['idExam'];
 $sql = "SELECT * FROM exams WHERE  examid=:idExam";
 $SORGU = $DB->prepare($sql);
