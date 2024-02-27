@@ -48,8 +48,21 @@ $exams = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* echo '<pre>';
 print_r($exams);
 die(); */
-foreach ($exams as $exam) {
-    echo "
+
+require_once 'db.php';
+$studentid = $_SESSION['id'];
+$SORGU = $DB->prepare("SELECT * FROM results WHERE userid=:studentid");
+$SORGU->bindParam(':studentid', $studentid);
+$SORGU->execute();
+$results = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* echo '<pre>';
+print_r($results);
+die(); */
+if (count($results) > 0) {
+    $error = "You have already taken the exam";
+} else {
+    foreach ($exams as $exam) {
+        echo "
     <tr>
       <th>{$exam['examid']}</th>
       <td><img src='exam_images/{$exam['examimg']}' class='rounded-circle' width='100' height='100'></td>
@@ -62,6 +75,7 @@ foreach ($exams as $exam) {
       <td><a href='show.exam.php?idExam={$exam['examid']}' class='btn btn-success'>Start Exam <i class='bi bi-skip-start'></i></a></td>
    </tr>
   ";
+    }
 }
 ?>
 
