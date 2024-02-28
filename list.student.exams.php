@@ -41,7 +41,14 @@ if ($_SESSION['role'] != 4) {
 /* lessonName */
 require_once 'db.php';
 $studentid = $_SESSION['id'];
-$SORGU = $DB->prepare("SELECT *FROM exams JOIN students ON exams.classid= students.classid where userid=:studentid");
+/* SELECT *FROM exams JOIN students ON exams.classid= students.classid where userid=:studentid */
+$SORGU = $DB->prepare("SELECT *
+FROM exams
+JOIN students ON exams.classid = students.classid
+WHERE userid=:studentid
+AND exams.ispublish = 1
+AND examstartdate <= CURDATE()
+AND examenddate >= CURDATE();");
 $SORGU->bindParam(':studentid', $studentid);
 $SORGU->execute();
 $exams = $SORGU->fetchAll(PDO::FETCH_ASSOC);

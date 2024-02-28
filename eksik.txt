@@ -22,7 +22,7 @@ Yapılmayanlar
 !!!!!!
 Sınav sistemi deneme yap 
 time sistemi değişmeli
-ispublic 1 sql ekle sınav gösterme de
+teacherın neden sınavının yayınlamdığı bildir
 Yarın
 yoklama sistemi
 
