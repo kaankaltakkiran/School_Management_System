@@ -34,6 +34,11 @@ if (isset($_POST['form_submit'])) {
     $classNumber = htmlspecialchars($_POST['form_classnumber']);
     $classLetter = htmlspecialchars($_POST['form_classletter']);
 
+    //!Hata kontrolü
+    $errors = array();
+    //!Onay mesajları
+    $approves = array();
+
     //!Sınıf Adı Birleştirme
     $className = strtoupper($classNumber . "/" . $classLetter);
 
@@ -46,10 +51,7 @@ if (isset($_POST['form_submit'])) {
     $checkClassQuery->execute();
     $existingClass = $checkClassQuery->fetch(PDO::FETCH_ASSOC);
     if ($existingClass) {
-        echo '<script>';
-        echo 'alert("This Class Name is already in use !");';
-        echo 'window.location.href = "update.class.php?idClass=' . $classes[0]['classid'] . '";';
-        echo '</script>';
+        $errors[] = "This Class Name is already in use !";
     } else {
         $SORGU = $DB->prepare($sql);
         $SORGU->bindParam(':form_classnumber', $classNumber);
@@ -57,10 +59,44 @@ if (isset($_POST['form_submit'])) {
         $SORGU->bindParam(':classname', $className);
         $SORGU->bindParam(':idClass', $id);
         $SORGU->execute();
-        echo '<script>';
-        echo 'alert("Class Name Update Successful...!");';
-        echo 'window.location.href = "update.class.php?idClass=' . $classes[0]['classid'] . '";';
-        echo '</script>';
+        $approves[] = "Class Name Update Successful...";
+    }
+}
+?>
+  <?php
+//! Hata mesajlarını göster
+if (!empty($errors)) {
+    foreach ($errors as $error) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+      <div class='toast align-items-center text-white bg-danger border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+          <div class='d-flex'>
+              <div class='toast-body'>
+              $error
+              </div>
+              <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+          </div>
+      </div>
+  </div>";
+    }
+}
+?>
+<?php
+//! Başarılı mesajlarını göster
+if (!empty($approves)) {
+    foreach ($approves as $approve) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+        <div class='toast align-items-center text-white bg-success border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+            <div class='d-flex'>
+                <div class='toast-body'>
+                $approve
+                </div>
+                <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+            </div>
+        </div>
+    </div>";
+        //!4 saniye sonra sayfayı yenilemek için yönlendirme
+        echo "<meta http-equiv='refresh' content='3'>";
+
     }
 }
 ?>

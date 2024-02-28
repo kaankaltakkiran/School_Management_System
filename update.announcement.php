@@ -43,6 +43,12 @@ if (isset($_POST['form_submit'])) {
     $announcementReciverRole = htmlspecialchars($_POST['form_reciverrole']);
     $announcementStartDate = $_POST['form_startdate'];
     $announcementLastDate = $_POST['form_lastdate'];
+
+    //!Hata kontrolü
+    $errors = array();
+    //!Onay mesajları
+    $approves = array();
+
 //!Checkbox değeri kontrolü
     //?checkbox işaretli ise 1 değilse 0
     $isPublish = isset($_POST['form_ispublish']) ? 1 : 0;
@@ -58,10 +64,44 @@ if (isset($_POST['form_submit'])) {
     $SORGU->bindParam(':form_announcement', $announcementContent);
     $SORGU->bindParam(':idannouncement', $id);
     $SORGU->execute();
-    echo '<script>';
-    echo 'alert("Announcement  Update Successful!");';
-    echo 'window.location.href = "update.announcement.php?idannouncement=' . $announcements[0]['announcementid'] . '";';
-    echo '</script>';
+    $approves[] = "Announcement Update Successful!";
+}
+?>
+<?php
+//! Hata mesajlarını göster
+if (!empty($errors)) {
+    foreach ($errors as $error) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+      <div class='toast align-items-center text-white bg-danger border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+          <div class='d-flex'>
+              <div class='toast-body'>
+              $error
+              </div>
+              <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+          </div>
+      </div>
+  </div>";
+    }
+}
+?>
+<?php
+//! Başarılı mesajlarını göster
+if (!empty($approves)) {
+    foreach ($approves as $approve) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+        <div class='toast align-items-center text-white bg-success border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+            <div class='d-flex'>
+                <div class='toast-body'>
+                $approve
+                </div>
+                <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+            </div>
+        </div>
+    </div>";
+        //!4 saniye sonra sayfayı yenilemek için yönlendirme
+        echo "<meta http-equiv='refresh' content='3'>";
+
+    }
 }
 ?>
 <div class="form-floating mb-3">
@@ -122,8 +162,6 @@ if (isset($_POST['form_submit'])) {
                   </button>
      </form>
      </div>
-
 </div>
-
 </div>
 <?php require 'down.html.php';?>

@@ -36,6 +36,11 @@ if (isset($_POST['form_submit'])) {
     //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
     $lessonName = htmlspecialchars($_POST['from_lessonname']);
 
+    //!Hata kontrolü
+    $errors = array();
+    //!Onay mesajları
+    $approves = array();
+
     $sql = "UPDATE lessons SET lessonname = :from_lessonname WHERE lessonid = :lessonid";
     //! Kullanıcı e-posta adresini değiştirdiyse, yeni e-posta adresi için veritabanında mevcut bir kullanıcı olup olmadığını kontrol et
     //? Eğer post edilen email update yapılan kişinin dışında bir kullanıcıda varsa hata mesajı göster
@@ -45,19 +50,50 @@ if (isset($_POST['form_submit'])) {
     $checkLessonQuery->execute();
     $existingLesson = $checkLessonQuery->fetch(PDO::FETCH_ASSOC);
     if ($existingLesson) {
-        echo '<script>';
-        echo 'alert("This Lesson Name is already in use.!");';
-        echo 'window.location.href = "update.lesson.php?lessonid=' . $lessons[0]['lessonid'] . '";';
-        echo '</script>';
+        $errors[] = "This Lesson Name is already in use !";
     } else {
         $SORGU = $DB->prepare($sql);
         $SORGU->bindParam(':from_lessonname', $lessonName);
         $SORGU->bindParam(':lessonid', $id);
         $SORGU->execute();
-        echo '<script>';
-        echo 'alert("Lesson  Update Successful!");';
-        echo 'window.location.href = "update.lesson.php?lessonid=' . $lessons[0]['lessonid'] . '";';
-        echo '</script>';
+        $approves[] = "Lesson Update Successful!";
+    }
+}
+?>
+<?php
+//! Hata mesajlarını göster
+if (!empty($errors)) {
+    foreach ($errors as $error) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+      <div class='toast align-items-center text-white bg-danger border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+          <div class='d-flex'>
+              <div class='toast-body'>
+              $error
+              </div>
+              <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+          </div>
+      </div>
+  </div>";
+    }
+}
+?>
+<?php
+//! Başarılı mesajlarını göster
+if (!empty($approves)) {
+    foreach ($approves as $approve) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+        <div class='toast align-items-center text-white bg-success border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+            <div class='d-flex'>
+                <div class='toast-body'>
+                $approve
+                </div>
+                <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+            </div>
+        </div>
+    </div>";
+        //!4 saniye sonra sayfayı yenilemek için yönlendirme
+        echo "<meta http-equiv='refresh' content='3'>";
+
     }
 }
 ?>
@@ -74,8 +110,6 @@ if (isset($_POST['form_submit'])) {
                   </button>
      </form>
      </div>
-
 </div>
-
 </div>
 <?php require 'down.html.php';?>

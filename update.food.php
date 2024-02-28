@@ -74,6 +74,8 @@ $food28 = $foodDay7[3];
 if (isset($_POST['form_submit'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
+    //!Onay mesajları
+    $approves = array();
     //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
     //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
     require_once 'db.php';
@@ -143,10 +145,7 @@ if (isset($_POST['form_submit'])) {
         $SORGU->bindParam(':day7Menu', $day7Menu);
         $SORGU->bindParam(':unitid', $addedUnitid);
         $SORGU->execute();
-        echo '<script>';
-        echo 'alert("Food Menu  Update Successful!");';
-        echo 'window.location.href = "update.food.php";';
-        echo '</script>';
+        $approves[] = "Food Menu Update Successful!";
 
     }
 }
@@ -182,6 +181,8 @@ if (!empty($approves)) {
             </div>
         </div>
     </div>";
+        //!4 saniye sonra sayfayı yenilemek için yönlendirme
+        echo "<meta http-equiv='refresh' content='3'>";
     }
 }
 ?>
@@ -243,8 +244,7 @@ if (!empty($approves)) {
                   </button>
      </form>
      </div>
-
 </div>
-
 </div>
+<?php require 'footer.php';?>
 <?php require 'down.html.php';?>

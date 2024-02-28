@@ -90,8 +90,10 @@ if (isset($_POST['form_submit'])) {
     $tmp_name = $_FILES['form_image']['tmp_name'];
     $error = $_FILES['form_image']['error'];
 
-    // Hata kontrolü
+    //!Hata kontrolü
     $errors = array();
+    //!Onay mesajları
+    $approves = array();
     //!Eski fotoğraf adını al
     $old_img_name = $students[0]['userimg'];
 
@@ -148,13 +150,9 @@ if (isset($_POST['form_submit'])) {
             $SORGU->bindParam(':classname', $studentClassName);
             $SORGU->bindParam(':lessonid', $studentLessonid);
             $SORGU->bindParam(':lessonname', $studentLessonName);
-
             $SORGU->bindParam(':idStudent', $id);
             $SORGU->execute();
-            echo '<script>';
-            echo 'alert("Student User Update Successful...");';
-            echo 'window.location.href = "update.student.php?idStudent=' . $students[0]['userid'] . '";';
-            echo '</script>';
+            $approves[] = "Student User Update Successful...";
         }
     }
 
@@ -165,13 +163,36 @@ if (isset($_POST['form_submit'])) {
 //! Hata mesajlarını göster
 if (!empty($errors)) {
     foreach ($errors as $error) {
-        echo '
-        <div class="container">
-    <div class="auto-close alert mt-3 text-center alert-danger" role="alert">
-    ' . $error . '
-    </div>
-    </div>
-    ';
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+      <div class='toast align-items-center text-white bg-danger border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+          <div class='d-flex'>
+              <div class='toast-body'>
+              $error
+              </div>
+              <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+          </div>
+      </div>
+  </div>";
+    }
+}
+?>
+<?php
+//! Başarılı mesajlarını göster
+if (!empty($approves)) {
+    foreach ($approves as $approve) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+        <div class='toast align-items-center text-white bg-success border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+            <div class='d-flex'>
+                <div class='toast-body'>
+                $approve
+                </div>
+                <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+            </div>
+        </div>
+    </div>";
+        //!4 saniye sonra sayfayı yenilemek için yönlendirme
+        echo "<meta http-equiv='refresh' content='3'>";
+
     }
 }
 ?>

@@ -24,6 +24,7 @@ Sınav sistemi deneme yap
 time sistemi değişmeli
 teacherın neden sınavının yayınlamdığı bildir
 update windows script yerine approves kullan
+update sonrasın boşluk oluyor???????
 Yarın
 yoklama sistemi
 

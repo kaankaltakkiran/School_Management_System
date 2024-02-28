@@ -50,7 +50,6 @@ $selectedYear = $informations[0]['schoolyear'];
 //!Seçili dönem
 $selectedTerm = $informations[0]['schoolterm'];
 if (isset($_POST['form_submit'])) {
-
     //!htmlspecialchars() kullanıcıdan alınan veriyi güvenli hale getirir
     //! eğer kullanıcı zararlı bir kod gönderirse bunu html etiketlerine dönüştürür
     require_once 'db.php';
@@ -61,6 +60,11 @@ if (isset($_POST['form_submit'])) {
     $schoolSummary = htmlspecialchars($_POST['form_summary']);
     $schoolAddress = htmlspecialchars($_POST['form_address']);
 
+    //!Hata kontrolü
+    $errors = array();
+    //!Onay mesajları
+    $approves = array();
+
     $sql = "UPDATE informations SET schoolname = :form_name,schoolyear=:form_year,schoolterm=:form_term,schoolabout=:form_about,schoolsummary=:form_summary,schooladdress=:form_address WHERE schoolid = :schoolid";
     //! Kullanıcı OKUL ismini değiştirdiyse, yeni okul  ismi için veritabanında mevcut bir kullanıcı olup olmadığını kontrol et
     //? Eğer post edilen ism update yapılan kişinin dışında bir ismi varsa hata mesajı göster
@@ -70,10 +74,7 @@ if (isset($_POST['form_submit'])) {
     $checkNameQuery->execute();
     $existingName = $checkNameQuery->fetch(PDO::FETCH_ASSOC);
     if ($existingName) {
-        echo '<script>';
-        echo 'alert("This School Name is already in use.!");';
-        echo 'window.location.href = "update.information.php?schoolid=' . $informations[0]['schoolid'] . '";';
-        echo '</script>';
+        $errors[] = "This School Name is already in use !";
     } else {
         $SORGU = $DB->prepare($sql);
         $SORGU->bindParam(':form_name', $schoolName);
@@ -84,10 +85,44 @@ if (isset($_POST['form_submit'])) {
         $SORGU->bindParam(':form_address', $schoolAddress);
         $SORGU->bindParam(':schoolid', $id);
         $SORGU->execute();
-        echo '<script>';
-        echo 'alert("School İnformation  Update Successful!");';
-        echo 'window.location.href = "update.information.php?schoolid=' . $informations[0]['schoolid'] . '";';
-        echo '</script>';
+        $approves[] = "School İnformation Update Successful!";
+    }
+}
+?>
+<?php
+//! Hata mesajlarını göster
+if (!empty($errors)) {
+    foreach ($errors as $error) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+      <div class='toast align-items-center text-white bg-danger border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+          <div class='d-flex'>
+              <div class='toast-body'>
+              $error
+              </div>
+              <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+          </div>
+      </div>
+  </div>";
+    }
+}
+?>
+<?php
+//! Başarılı mesajlarını göster
+if (!empty($approves)) {
+    foreach ($approves as $approve) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+        <div class='toast align-items-center text-white bg-success border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+            <div class='d-flex'>
+                <div class='toast-body'>
+                $approve
+                </div>
+                <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+            </div>
+        </div>
+    </div>";
+        //!4 saniye sonra sayfayı yenilemek için yönlendirme
+        echo "<meta http-equiv='refresh' content='3'>";
+
     }
 }
 ?>
@@ -160,6 +195,6 @@ foreach ($schoolinformations as $information) {
      </form>
      </div>
 </div>
-
 </div>
+<?php require 'footer.php';?>
 <?php require 'down.html.php';?>
