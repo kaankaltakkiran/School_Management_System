@@ -176,6 +176,16 @@ Exams Result
 </a>';
 }
     ?>
+      <a href="list.announcement.php" class="col btn btn-warning m-2 py-3">
+               <img width="48" height="48" src="https://img.icons8.com/color/48/commercial.png" alt="commercial"/>
+                 <br>
+                 Announcement
+               </a>
+               <a href="list.food.php" class="col btn btn-danger m-2 py-3">
+               <img width="48" height="48" src="https://img.icons8.com/external-vectorslab-flat-vectorslab/48/external-Food-Menu-food-and-drink-vectorslab-flat-vectorslab.png" alt="external-Food-Menu-food-and-drink-vectorslab-flat-vectorslab"/>
+                 <br>
+                 Food Menu
+               </a>
    <?php }?>
    </div>
    </div>
