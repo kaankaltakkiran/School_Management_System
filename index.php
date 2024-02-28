@@ -96,6 +96,17 @@ die(); */
                        <?php }?>
                        </div>
                        </div>
+                       <div class="row justify-content-center m-5 ">
+                        <div class="d-grid col-4 m-5 ">
+                       <?php if ($_SESSION['isLogin'] == 0) {?>
+                        <a href="login.php" class="btn btn-primary  m-2 py-3">
+<img width="48" height="48" src="./public/img/login.gif" alt="Login Gif"/>
+<br>
+              Login
+               </a>
+               <?php }?>
+               </div>
+               </div>
                        <div class="row justify-content-center">
 <div class="row row-cols-1 row-cols-md-5 g-4 mt-4 ">
   <?php
