@@ -53,8 +53,10 @@ if (isset($_POST['form_submit'])) {
     $tmp_name = $_FILES['form_image']['tmp_name'];
     $error = $_FILES['form_image']['error'];
 
-    // Hata kontrolü
+    //!Hata kontrolü
     $errors = array();
+    //!Onay mesajları
+    $approves = array();
     //!Eski fotoğraf adını al
     $old_img_name = $registerunits[0]['userimg'];
 
@@ -105,13 +107,9 @@ if (isset($_POST['form_submit'])) {
             $SORGU->bindParam(':form_adress', $address);
             $SORGU->bindParam(':form_phonenumber', $phoneNumber);
             $SORGU->bindParam(':form_birthdate', $birthDate);
-
             $SORGU->bindParam(':idRegisterUnit', $id);
             $SORGU->execute();
-            echo '<script>';
-            echo 'alert("Register Unit User Update Successful...");';
-            echo 'window.location.href = "update.register.unit.php?idRegisterUnit=' . $registerunits[0]['userid'] . '";';
-            echo '</script>';
+            $approves[] = "Register Unit User Update Successful...";
         }
     }
 
@@ -132,6 +130,26 @@ if (!empty($errors)) {
           </div>
       </div>
   </div>";
+    }
+}
+?>
+<?php
+//! Başarılı mesajlarını göster
+if (!empty($approves)) {
+    foreach ($approves as $approve) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+        <div class='toast align-items-center text-white bg-success border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+            <div class='d-flex'>
+                <div class='toast-body'>
+                $approve
+                </div>
+                <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+            </div>
+        </div>
+    </div>";
+        //!4 saniye sonra sayfayı yenilemek için yönlendirme
+        echo "<meta http-equiv='refresh' content='3'>";
+
     }
 }
 ?>
@@ -191,8 +209,7 @@ if (!empty($errors)) {
                   </button>
      </form>
      </div>
-
 </div>
-
 </div>
+<?php require 'footer.php';?>
 <?php require 'down.html.php';?>
