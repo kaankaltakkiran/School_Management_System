@@ -102,9 +102,10 @@ if (isset($_POST['form_result'])) {
     foreach ($questions as $question) {
         $questionId = $question['questionid'];
         // Post verisinden seçilen cevabı al
-        $selectedAnswer = $_POST['form_answer_' . $questionId];
+        //!htmlspecialchars_decode() fonksiyonu ile html etiketlerini kaldırıyoruz
+        $selectedAnswer = htmlspecialchars_decode($_POST['form_answer_' . $questionId]);
         // Doğru cevabı al
-        $trueAnswer = $question['trueanswer'];
+        $trueAnswer = htmlspecialchars_decode($question['trueanswer']);
         // Eğer seçilen cevap doğru cevaba eşitse doğru cevap sayısını artır, aksi halde yanlış cevap sayısını artır
         if ($selectedAnswer === $trueAnswer) {
             $totalTrue++;
