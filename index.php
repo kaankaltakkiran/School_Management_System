@@ -98,12 +98,32 @@ die(); */
                        </div>
                        <div class="row justify-content-center">
 <div class="row row-cols-1 row-cols-md-5 g-4 mt-4 ">
+  <?php
+require 'db.php';
+$id = $_SESSION['id'];
+$sql = "SELECT * FROM results WHERE  userid=:id";
+$SORGU = $DB->prepare($sql);
+$SORGU->bindParam(':id', $id);
+$SORGU->execute();
+$results = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* echo '<pre>';
+print_r($results);
+die(); */
+?>
  <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 4) {?>
  <a href="list.student.exams.php" class="col btn btn-warning m-2 py-3">
  <img width="48" height="48" src="https://img.icons8.com/ios/48/exam.png" alt="exam"/>
  <br>
 Exams List
 </a>
+<?php if (count($results) > 0) {
+    echo '<a href="show.exam.result.php?userid=' . $results[0]['userid'] . '" class="col btn btn-info m-2 py-3">
+<img width="50" height="50" src="https://img.icons8.com/ios/50/report-card.png" alt="report-card"/>
+ <br>
+Exams Result
+</a>';
+}
+    ?>
    <?php }?>
    </div>
    </div>

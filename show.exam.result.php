@@ -7,6 +7,12 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+if ($_SESSION['role'] != 4) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
+<?php
 require 'db.php';
 $id = $_GET['userid'];
 $sql = "SELECT * FROM results WHERE  userid=:userid";
@@ -20,6 +26,12 @@ die(); */
 $examid = $results[0]['examid'];
 ?>
 <?php
+if ($results[0]['userid'] != $_SESSION['id']) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
+<?php
 require 'db.php';
 $sql = "SELECT DISTINCT * FROM results
 JOIN exams ON results.examid= exams.examid WHERE results.examid=:idexam ";
@@ -27,6 +39,7 @@ $SORGU = $DB->prepare($sql);
 $SORGU->bindParam(':idexam', $examid);
 $SORGU->execute();
 $exams = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+
 /* echo '<pre>';
 print_r($exams);
 die(); */
