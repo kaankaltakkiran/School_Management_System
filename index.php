@@ -67,7 +67,24 @@ die(); */
   <?php }?>
   <div class="row justify-content-center">
 <div class="row row-cols-1 row-cols-md-5 g-4 mt-4 ">
-<?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 1) {?>
+<?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 3) {?>
+  <a href="list.teacher.class.php" class="col btn btn-secondary m-2 py-3">
+               <img width="48" height="48" src="https://img.icons8.com/officel/48/class.png" alt="class"/>
+                 <br>
+                  Class
+               </a>
+               <a href="list.announcement.php" class="col btn btn-warning m-2 py-3">
+               <img width="48" height="48" src="https://img.icons8.com/color/48/commercial.png" alt="commercial"/>
+                 <br>
+                 Announcement
+               </a>
+               <a href="list.food.php" class="col btn btn-danger m-2 py-3">
+               <img width="48" height="48" src="https://img.icons8.com/external-vectorslab-flat-vectorslab/48/external-Food-Menu-food-and-drink-vectorslab-flat-vectorslab.png" alt="external-Food-Menu-food-and-drink-vectorslab-flat-vectorslab"/>
+                 <br>
+                 Food Menu
+               </a>
+               <?php }?>
+               <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 1) {?>
 <a href="list.admin.php" class="col btn btn-danger  m-2 py-3">
 <img width="48" height="48" src="https://img.icons8.com/color/48/admin-settings-male.png" alt="admin-settings-male"/>
 <br>
@@ -342,6 +359,23 @@ Exams Result
             <i class="bi bi-send-fill"></i>
           </a>
           <a href="list.exam.php" class="btn  btn-warning mt-5">List Exam
+            <i class="bi bi-send-fill"></i>
+          </a>
+        </div>
+            </div>
+          </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card h-100 " style="width: 18rem;">
+            <img src="./public/img/announcement.jpg" class="card-img-top" alt="announcement img">
+            <div class="card-body">
+              <h5 class="card-title">Send Announcement</h5>
+              <p class="card-text">Register Unit Send Announcement</p>
+              <div class="d-flex justify-content-between">
+          <a href="add.announcement.php" class="btn btn-sm  me-2  btn-danger mt-5">Send Announcement
+            <i class="bi bi-send-fill"></i>
+          </a>
+          <a href="list.announcement.php" class="btn btn-sm btn-warning mt-5">List Announcement
             <i class="bi bi-send-fill"></i>
           </a>
         </div>
