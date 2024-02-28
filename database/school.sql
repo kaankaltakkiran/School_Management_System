@@ -80,6 +80,30 @@ INSERT INTO `classes` (`classid`, `classnumber`, `classletter`, `classname`, `cr
 (15,	'12',	'C',	'12/C',	'2024-01-30 20:29:25',	1,	'Kaan Kaltakkıran'),
 (16,	'12',	'D',	'12/D',	'2024-01-30 20:29:35',	1,	'Kaan Kaltakkıran');
 
+DROP TABLE IF EXISTS `exams`;
+CREATE TABLE `exams` (
+  `examid` int(11) NOT NULL AUTO_INCREMENT,
+  `examimg` varchar(255) NOT NULL,
+  `examtitle` varchar(50) NOT NULL,
+  `examdescription` varchar(100) NOT NULL,
+  `examstartdate` date NOT NULL,
+  `examenddate` date NOT NULL,
+  `examtime` char(2) NOT NULL,
+  `ispublish` char(1) NOT NULL,
+  `classid` text NOT NULL,
+  `classname` text NOT NULL,
+  `addedid` int(11) NOT NULL,
+  `addedname` varchar(50) NOT NULL,
+  `createdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updateddate` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`examid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+
+INSERT INTO `exams` (`examid`, `examimg`, `examtitle`, `examdescription`, `examstartdate`, `examenddate`, `examtime`, `ispublish`, `classid`, `classname`, `addedid`, `addedname`, `createdate`, `updateddate`) VALUES
+(1,	'IMG-65d9f46b758223.72202667.jpg',	'Exam 1',	'Exam 1 Description',	'2024-02-26',	'2024-02-29',	'30',	'1',	'6',	'10/B',	1,	'Veli Yıldız',	'2024-02-24 13:51:39',	'2024-02-24 13:51:39'),
+(2,	'IMG-65d9f4de400f41.39052431.jpg',	'Exam 2',	'Exam 2 Description',	'2024-02-24',	'2024-02-24',	'30',	'0',	'1',	'9/A',	1,	'Veli Yıldız',	'2024-02-24 13:53:34',	'2024-02-24 13:53:34'),
+(3,	'IMG-65d9f50650b898.46077420.jpg',	'Exam 3',	'Exam 3 Description',	'2024-02-24',	'2024-02-29',	'60',	'1',	'10',	'11/B',	2,	'Ayse Yılmaz',	'2024-02-24 13:54:14',	'2024-02-24 13:54:14');
+
 DROP TABLE IF EXISTS `foodlist`;
 CREATE TABLE `foodlist` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -135,6 +159,29 @@ INSERT INTO `lessons` (`lessonid`, `lessonname`, `createdate`, `addedunitid`, `a
 (4,	'English',	'2024-01-30 18:12:19',	1,	'Kaan Kaltakkıran'),
 (5,	'Science',	'2024-01-30 18:12:21',	1,	'Kaan Kaltakkıran');
 
+DROP TABLE IF EXISTS `questions`;
+CREATE TABLE `questions` (
+  `questionid` int(11) NOT NULL AUTO_INCREMENT,
+  `questiontitle` varchar(150) NOT NULL,
+  `answera` text NOT NULL,
+  `answerb` text NOT NULL,
+  `answerc` text NOT NULL,
+  `answerd` text NOT NULL,
+  `trueanswer` text NOT NULL,
+  `examid` int(11) NOT NULL,
+  `addedid` int(11) NOT NULL,
+  `addedname` varchar(50) NOT NULL,
+  `createdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updateddate` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`questionid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+
+INSERT INTO `questions` (`questionid`, `questiontitle`, `answera`, `answerb`, `answerc`, `answerd`, `trueanswer`, `examid`, `addedid`, `addedname`, `createdate`, `updateddate`) VALUES
+(1,	'PHP\'de &quot;echo&quot; ve &quot;print&quot; arasındaki fark nedir?',	'&quot;print&quot; değişkenleri çıktıya yazdırırken &quot;echo&quot; sadece metni çıktılar.',	'&quot;echo&quot; sadece bir değişkeni yazdırırken &quot;print&quot; birden fazla değişkeni yazdırabilir.',	'&quot;echo&quot; daha hızlıdır ve herhangi bir değer döndürmezken &quot;print&quot; bir değer döndürür.',	' &quot;print&quot; metni çift tırnak içinde yazdırırken &quot;echo&quot; tek tırnak içinde yazdırır.',	'&quot;echo&quot; daha hızlıdır ve herhangi bir değer döndürmezken &quot;print&quot; bir değer döndürür.',	1,	1,	'Veli Yıldız',	'2024-02-27 21:00:46',	'2024-02-28 00:00:46'),
+(2,	'PHP\'de &quot;include&quot; ve &quot;require&quot; arasındaki fark nedir?',	'&quot;include&quot; dosya bulunamazsa uyarı döndürürken, &quot;require&quot; hata üretir.',	'&quot;include&quot; ile dahil edilen dosya isteğe bağlıdır, &quot;require&quot; ise zorunludur.',	'&quot;include&quot; ile dahil edilen dosya sadece bir kez dahil edilirken, &quot;require&quot; birden fazla kez dahil edilebilir.',	'&quot;include&quot; ile dahil edilen dosyada bir hata oluşursa işlem devam ederken, &quot;require&quot; durumu kontrol eder ve devam etmez',	'&quot;include&quot; dosya bulunamazsa uyarı döndürürken, &quot;require&quot; hata üretir.',	1,	1,	'Veli Yıldız',	'2024-02-27 21:01:45',	'2024-02-28 00:01:45'),
+(3,	' PHP\'nin kullanımıyla ilgili hangisi doğrudur?',	'PHP, sadece sunucu taraflı bir betik dili olarak kullanılabilir.',	'PHP, yalnızca Linux işletim sistemi üzerinde çalışabilir.',	'PHP, HTML içine gömülerek web sayfalarının dinamik içeriğini oluşturmak için kullanılabilir.',	'PHP, sadece front-end web geliştirmesi için kullanılır.',	'PHP, HTML içine gömülerek web sayfalarının dinamik içeriğini oluşturmak için kullanılabilir.',	3,	2,	'Ayse Yılmaz',	'2024-02-28 10:02:35',	'2024-02-28 00:02:59'),
+(4,	'PHP\'de &quot;GET&quot; ve &quot;POST&quot; metodları arasındaki fark nedir?',	'&quot;GET&quot; metodu, verileri URL\'nin bir parçası olarak gönderirken, &quot;POST&quot; metodu ise HTTP gövdesinde verileri gönderir.',	'&quot;GET&quot; metoduyla sadece metin verileri gönderilirken, &quot;POST&quot; metoduyla dosya da gönderilebilir.',	'&quot;GET&quot; metodu sınırlı miktarda veri gönderirken, &quot;POST&quot; metodu daha fazla veri gönderebilir.',	'&quot;GET&quot; metodu güvenliği artırırken, &quot;POST&quot; metodu güvenlik zafiyetlerine yol açar.',	'&quot;GET&quot; metodu, verileri URL\'nin bir parçası olarak gönderirken, &quot;POST&quot; metodu ise HTTP gövdesinde verileri gönderir.',	3,	2,	'Ayse Yılmaz',	'2024-02-28 10:04:45',	'2024-02-28 00:04:06');
+
 DROP TABLE IF EXISTS `registerunits`;
 CREATE TABLE `registerunits` (
   `userid` int(11) NOT NULL AUTO_INCREMENT,
@@ -156,6 +203,24 @@ CREATE TABLE `registerunits` (
 INSERT INTO `registerunits` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `roleuser`, `createdate`, `useraddress`, `phonenumber`, `birthdate`, `userimg`, `adedadminid`, `adedadminname`) VALUES
 (1,	'Kaan Kaltakkıran',	'kaan_fb_aslan@hotmail.com',	'$2y$10$8Lt16VFU4ZHyRGOfW7FA3O2s9G2rJ51.Ih/dnHqSZiJOckffwEQb.',	'M',	2,	'2024-01-30 18:06:22',	'Adress 1',	'05076600884',	'2000-01-01',	'IMG-65b9106edde915.94476959.jpg',	1,	'Admin'),
 (2,	'Ahmet Yıldız',	'ahmet@gmail.com',	'$2y$10$gUuy9WL.muHiht7i0Oyh4e/fisBgNIJORR5.bybkKWaeZoPbHavCG',	'M',	2,	'2024-01-30 18:07:09',	'Address 2',	'23123112323',	'1987-01-01',	'IMG-65b9109d6e3128.04596518.png',	1,	'Admin');
+
+DROP TABLE IF EXISTS `results`;
+CREATE TABLE `results` (
+  `resultid` int(11) NOT NULL AUTO_INCREMENT,
+  `examid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `totalquestions` text NOT NULL,
+  `totaltrueanswer` text NOT NULL,
+  `totalfalseanswer` text NOT NULL,
+  `result` varchar(10) NOT NULL,
+  `createdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updateddate` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`resultid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+
+INSERT INTO `results` (`resultid`, `examid`, `userid`, `totalquestions`, `totaltrueanswer`, `totalfalseanswer`, `result`, `createdate`, `updateddate`) VALUES
+(1,	1,	1,	'2',	'2',	'0',	'Passed',	'2024-02-28 10:31:37',	'2024-02-28 13:31:37'),
+(2,	3,	2,	'2',	'1',	'1',	'Failed',	'2024-02-28 10:32:29',	'2024-02-28 13:32:29');
 
 DROP TABLE IF EXISTS `students`;
 CREATE TABLE `students` (
@@ -182,8 +247,8 @@ CREATE TABLE `students` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `students` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `useraddress`, `phonenumber`, `roleuser`, `createdate`, `classid`, `classname`, `birthdate`, `userimg`, `parentname`, `parentnumber`, `lessonid`, `lessonname`, `addedunitid`, `addedunitname`) VALUES
-(1,	'Ali Yılmaz',	'ali@gmail.com',	'$2y$10$UFHeEWCOJioUY.qdE.71o.egEaETLBqjiYquIYv450X3/PJl7F9fC',	'M',	'Adress 1',	'12331223123',	4,	'2024-01-30 18:13:53',	1,	'9/A',	'2000-01-01',	'IMG-65cf8d6b14ec89.64266568.png',	'Ali Father',	'12331223123',	'1,3',	'Math,Turkish',	1,	'Kaan Kaltakkıran'),
-(2,	'Selin Yıldız',	'selin@gmail.com',	'$2y$10$QKjJT6hdDZidt0PE5w0puOJGBpG.AT4HzuXxtnlYIKnLbzsBjHhLO',	'F',	'Address 2',	'31232312132',	4,	'2024-01-30 18:14:25',	16,	'12/D',	'1996-01-01',	'IMG-65b91251666283.15293271.jpg',	'Selin Mother',	'76546554464',	'3',	'Turkish',	1,	'Kaan Kaltakkıran');
+(1,	'Ali Yılmaz',	'ali@gmail.com',	'$2y$10$UFHeEWCOJioUY.qdE.71o.egEaETLBqjiYquIYv450X3/PJl7F9fC',	'M',	'Adress 1',	'12331223123',	4,	'2024-01-30 18:13:53',	6,	'10/B',	'2000-01-01',	'IMG-65cf8d6b14ec89.64266568.png',	'Ali Father',	'12331223123',	'1,3',	'Math,Turkish',	1,	'Kaan Kaltakkıran'),
+(2,	'Selin Yıldız',	'selin@gmail.com',	'$2y$10$QKjJT6hdDZidt0PE5w0puOJGBpG.AT4HzuXxtnlYIKnLbzsBjHhLO',	'F',	'Address 2',	'31232312132',	4,	'2024-01-30 18:14:25',	10,	'11/B',	'1996-01-01',	'IMG-65b91251666283.15293271.jpg',	'Selin Mother',	'31232312132',	'3',	'Turkish',	1,	'Kaan Kaltakkıran');
 
 DROP TABLE IF EXISTS `teachers`;
 CREATE TABLE `teachers` (
@@ -211,4 +276,4 @@ INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `user
 (1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$F8BOCVniVNOqHhjl7gWf8e5ptBp1wNP.KhGPA3GA9pEJx0hPGEZOm',	'M',	3,	'2024-02-10 12:43:06',	'1,6,11,16',	'9/A,10/B,11/C,12/D',	'Address1',	'23123112323',	'1975-08-20',	'IMG-65cf8e230c7946.47057921.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
 (2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$a7xTEd88iyzI43udPEmrSeTmxBBaj9nf.JXtJV8NadXoRV1/GGe7q',	'F',	3,	'2024-02-10 12:43:40',	'1,10',	'9/A,11/B',	'Address 2',	'12331223123',	'1980-01-15',	'IMG-65c7454cee1627.24858158.png',	'3',	'Turkish',	1,	'Kaan Kaltakkıran');
 
--- 2024-02-22 15:23:46
+-- 2024-02-28 10:33:12

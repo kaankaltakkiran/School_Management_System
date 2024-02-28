@@ -22,11 +22,8 @@ Yapılmayanlar
 !!!!!!
 Sınav sistemi deneme yap 
 time sistemi değişmeli
+ispublic 1 sql ekle sınav gösterme de
 Yarın
-yetki kontrol show exam page için
-sorun htmlspical chrackter sorunu
-index sayfasına sınav sonucu görceği sistem yap
-
 yoklama sistemi
 
 !!!
