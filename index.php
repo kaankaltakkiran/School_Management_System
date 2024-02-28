@@ -6,7 +6,31 @@ require 'up.html.php';
 ?>
 <?php require 'navbar.php'?>
 <div class="container">
-<?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] != 1) {?>
+  <!-- Eğer adamin giriş yaparsa aşaığıdaki kısımlar görünür(role=2) -->
+<?php if ($_SESSION['role'] == 1 || $_SESSION['role'] == 2) {?>
+      <div class="container my-3 ">
+      <div class="row justify-content-center">
+          <div class="col-6">
+          <h1 class="text-center text-danger mt-3">Welcome</h1>
+          <h3 class="text-center text-muted"><?=($_SESSION['role'] == 1) ? 'Admin' : 'Register Unit';?>: <?php echo $_SESSION['userName']; ?></h3>
+          <h4 class="text-center text-danger fw-bold" id="clock">
+</h4>
+       </div>
+        </div>
+       <?php }?>
+         <!-- Eğer adamin giriş yaparsa aşaığıdaki kısımlar görünür(role=2) -->
+<?php if ($_SESSION['role'] == 3 || $_SESSION['role'] == 4) {?>
+      <div class="container my-3 ">
+      <div class="row justify-content-center">
+          <div class="col-6">
+          <h1 class="text-center text-danger mt-3">Welcome</h1>
+          <h3 class="text-center text-muted"><?=($_SESSION['role'] == 3) ? 'Teacher' : 'Student';?>: <?php echo $_SESSION['userName']; ?></h3>
+          <h4 class="text-center text-danger fw-bold" id="clock">
+</h4>
+       </div>
+        </div>
+       <?php }?>
+<?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 2) {?>
   <?php
 require_once 'db.php';
 //!Ekleyen kayıt birimine göre çağırma
@@ -82,7 +106,7 @@ die(); */
                  <br>
                  Announcement
                </a>
-               <a href="" class="col btn btn-dark m-2 py-3">
+               <a href="list.information.php" class="col btn btn-dark m-2 py-3">
                <img src="./public/img/icons8-information.gif" alt="icon">
                  <br>
                   School İnformation
@@ -96,8 +120,8 @@ die(); */
                        <?php }?>
                        </div>
                        </div>
-                       <div class="row justify-content-center m-5 ">
-                        <div class="d-grid col-4 m-5 ">
+                       <div class="row justify-content-center">
+                        <div class="d-grid col-4">
                        <?php if ($_SESSION['isLogin'] == 0) {?>
                         <a href="login.php" class="btn btn-primary  m-2 py-3">
 <img width="48" height="48" src="./public/img/login.gif" alt="Login Gif"/>
@@ -138,21 +162,10 @@ Exams Result
    <?php }?>
    </div>
    </div>
-<!-- Eğer adamin giriş yaparsa aşaığıdaki kısımlar görünür(role=2) -->
-<?php if ($_SESSION['role'] == 1 || $_SESSION['role'] == 2) {?>
-      <div class="container my-3 ">
-      <div class="row justify-content-center">
-          <div class="col-6">
-          <h1 class="text-center text-danger mt-3">Welcome</h1>
-          <h3 class="text-center text-muted">Admin: <?php echo $_SESSION['userName']; ?></h3>
-          <h4 class="text-center text-danger fw-bold" id="clock">
-</h4>
-       </div>
-        </div>
-       <?php }?>
+
        <?php if ($_SESSION['role'] == 1) {?>
-        <div class="row justify-content-center g-4">
-          <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="row justify-content-center">
+          <div class="col-sm-6 col-md-4 col-lg-3 me-md-5">
             <div class="card h-100 " style="width: 18rem;">
               <img src="./public/img/admin.jpg" class="card-img-top" alt="Admin img">
               <div class="card-body">
@@ -169,7 +182,7 @@ Exams Result
               </div>
             </div>
         </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="col-sm-6 col-md-4 col-lg-3 me-md-5">
         <div class="card h-100 " style="width: 18rem;">
           <img src="./public/img/office.jpg" class="card-img-top" alt="Register Unit img">
           <div class="card-body">
@@ -231,7 +244,7 @@ Exams Result
               <h5 class="card-title">Add Class</h5>
               <p class="card-text">Register Unit Adds Class</p>
               <div class="d-flex justify-content-between">
-          <a href="add.class.php" class="btn me-2  btn-danger mt-5">Add Class
+          <a href="add.class.php" class="btn  me-2 btn-danger mt-5">Add Class
             <i class="bi bi-send-fill"></i>
           </a>
           <a href="list.class.php" class="btn btn-warning mt-5">List Class
@@ -267,7 +280,7 @@ Exams Result
               <h5 class="card-title">Send Announcement</h5>
               <p class="card-text">Register Unit Send Announcement</p>
               <div class="d-flex justify-content-between">
-          <a href="add.announcement.php" class="btn btn-sm me-2  btn-danger mt-5">Send Announcement
+          <a href="add.announcement.php" class="btn btn-sm  me-2  btn-danger mt-5">Send Announcement
             <i class="bi bi-send-fill"></i>
           </a>
           <a href="list.announcement.php" class="btn btn-sm btn-warning mt-5">List Announcement
@@ -284,10 +297,10 @@ Exams Result
               <h5 class="card-title">Add School İnformation</h5>
               <p class="card-text">Register Unit Add School İnformation</p>
               <div class="d-flex justify-content-between">
-          <a href="add.information.php" class="btn  me-2  btn-danger mt-5">Add School İnformation
+          <a href="add.information.php" class="btn btn-sm  me-2  btn-danger mt-5">Add School İnformation
             <i class="bi bi-send-fill"></i>
           </a>
-          <a href="list.information.php" class="btn  btn-warning mt-5">List School İnformation
+          <a href="list.information.php" class="btn btn-sm  btn-warning mt-5">List School İnformation
             <i class="bi bi-send-fill"></i>
           </a>
         </div>
@@ -301,7 +314,7 @@ Exams Result
               <h5 class="card-title">Add Food List</h5>
               <p class="card-text">Register Unit Add Food List</p>
               <div class="d-flex justify-content-between">
-          <a href="add.food.php" class="btn  me-2  btn-danger mt-5"> Add Food List
+          <a href="add.food.php" class="btn   me-2  btn-danger mt-5"> Add Food List
             <i class="bi bi-send-fill"></i>
           </a>
           <a href="list.food.php" class="btn  btn-warning mt-5">List Food List
@@ -338,8 +351,8 @@ Exams Result
       <?php }?>
   </div>
 </div>
-<?php if ($_SESSION['isLogin'] == 1) {?>
-<footer class="bg-body-tertiary text-center text-lg-start mt-3  ">
+<?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] != 4) {?>
+<footer class="bg-body-tertiary text-center text-lg-start mt-3">
   <!-- Copyright -->
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
     <p style="margin-bottom: 0;">© 2023 Copyright: Kaan Kaltakkıran

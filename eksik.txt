@@ -23,6 +23,7 @@ Yapılmayanlar
 Sınav sistemi deneme yap 
 time sistemi değişmeli
 teacherın neden sınavının yayınlamdığı bildir
+list lesson da hata var
 Yarın
 yoklama sistemi
 
