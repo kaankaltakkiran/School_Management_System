@@ -22,8 +22,8 @@ if ($_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
     die();
 }
-if ($studentLessons[0]['addedunitid'] != $_SESSION['id']) {
-    header("location: authorizationcontrol.php");
+if (count($studentLessons) == 0) {
+    header("location: list.lessons.php");
     die();
 }
 ?>
