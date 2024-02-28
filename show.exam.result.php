@@ -1,8 +1,8 @@
 
 <?php
 @session_start();
-$activeTitle = "Show Exam";
-$activePage = "show.exam";
+$activeTitle = "Show Exam Result";
+$activePage = "show.exam.result";
 require 'up.html.php';
 require 'login.control.php';
 ?>

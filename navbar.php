@@ -36,6 +36,60 @@
           </ul>
         </li>
         <?php }?>
+        <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 3) {?>
+      <li class="nav-item">
+          <a class="nav-link  <?=($activePage == 'index') ? 'active' : '';?>" href="index.php">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link  <?=($activePage == 'teacher.class.list') ? 'active' : '';?>" href="list.teacher.class.php">Student's Class</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'send.announcement' || $activePage == 'list.announcement' || $activePage == 'announcement.update') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Announcement
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item <?=($activePage == 'send.announcement') ? 'active' : '';?>" href="add.announcement.php">Send  Announcement</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item <?=($activePage == 'list.announcement') ? 'active' : '';?>" href="list.announcement.php">List  Announcement</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link  <?=($activePage == 'food.list') ? 'active' : '';?>" href="list.food.php">Food Menu</a>
+        </li>
+        <?php }?>
+        <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 4) {?>
+      <li class="nav-item">
+          <a class="nav-link  <?=($activePage == 'index') ? 'active' : '';?>" href="index.php">Home</a>
+        </li>
+        <?php
+require 'db.php';
+    $id = $_SESSION['id'];
+    $sql = "SELECT * FROM results WHERE  userid=:id";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':id', $id);
+    $SORGU->execute();
+    $results = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* echo '<pre>';
+print_r($results);
+die(); */
+    ?>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'list.student.exams' || $activePage == 'show.exam.result' || $activePage == 'announcement.update') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Exams
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item <?=($activePage == 'list.student.exams') ? 'active' : '';?>" href="list.student.exams.php">Exam List</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item <?=($activePage == 'show.exam.result') ? 'active' : '';?>" href="show.exam.result.php?userid=<?php echo $results[0]['userid'] ?>">Exam Result</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link  <?=($activePage == 'list.announcement') ? 'active' : '';?>" href="list.announcement.php">Annoucement</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link  <?=($activePage == 'food.list') ? 'active' : '';?>" href="list.food.php">Food Menu</a>
+        </li>
+        <?php }?>
     <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 2) {?>
       <li class="nav-item">
           <a class="nav-link  <?=($activePage == 'index') ? 'active' : '';?>" href="index.php">Home</a>
