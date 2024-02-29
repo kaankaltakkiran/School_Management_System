@@ -44,11 +44,9 @@ CREATE TABLE `announcements` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `announcements` (`announcementid`, `senderid`, `sendername`, `senderrole`, `receiverrole`, `createdate`, `announcementtitle`, `startdate`, `lastdate`, `ispublish`, `announcement`, `readcount`) VALUES
-(1,	1,	'Kaan Kaltakkıran',	2,	2,	'2024-02-19 20:35:56',	'Title 1',	'2024-02-16',	'2024-03-31',	'1',	'      Title 1 Annoucement      ',	23),
-(2,	1,	'Kaan Kaltakkıran',	2,	2,	'2024-02-19 20:35:56',	'Title 2',	'2024-02-16',	'2024-03-04',	'0',	'Title 2 Annoucement',	23),
-(3,	1,	'Kaan Kaltakkıran',	2,	2,	'2024-02-19 20:35:56',	'Title 3',	'2024-02-08',	'2024-02-15',	'1',	'Title 3 Announcement',	23),
-(4,	1,	'Kaan Kaltakkıran',	2,	3,	'2024-02-19 20:35:56',	'Title 4',	'2024-02-16',	'2024-03-31',	'1',	'      Title 4 Announcement       ',	17),
-(5,	1,	'Veli Yıldız',	3,	4,	'2024-02-19 18:23:40',	'Ttile 5',	'2024-02-16',	'2024-03-31',	'1',	'Title 5 Announcement ',	21);
+(1,	1,	'Kaan Kaltakkıran',	2,	3,	'2024-02-29 20:46:00',	'Register Unit To Teachers',	'2024-02-29',	'2024-03-31',	'1',	'This Announcement Register Unit To Teachers      ',	31),
+(2,	1,	'Veli Yıldız',	3,	4,	'2024-02-29 20:09:39',	'Teacher To Students',	'2024-02-29',	'2024-05-01',	'1',	'This Annoucement Teacher To Students',	20),
+(3,	1,	'Kaan Kaltakkıran',	2,	4,	'2024-02-29 20:46:00',	'Register Unit To Students',	'2024-02-29',	'2024-04-01',	'0',	'This Annoucement Register Unit To Students',	20);
 
 DROP TABLE IF EXISTS `classes`;
 CREATE TABLE `classes` (
@@ -100,9 +98,9 @@ CREATE TABLE `exams` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `exams` (`examid`, `examimg`, `examtitle`, `examdescription`, `examstartdate`, `examenddate`, `examtime`, `ispublish`, `classid`, `classname`, `addedid`, `addedname`, `createdate`, `updateddate`) VALUES
-(1,	'IMG-65d9f46b758223.72202667.jpg',	'Exam 1',	'Exam 1 Description',	'2024-02-26',	'2024-02-29',	'30',	'1',	'6',	'10/B',	1,	'Veli Yıldız',	'2024-02-24 13:51:39',	'2024-02-24 13:51:39'),
-(2,	'IMG-65d9f4de400f41.39052431.jpg',	'Exam 2',	'Exam 2 Description',	'2024-02-24',	'2024-02-24',	'30',	'0',	'1',	'9/A',	1,	'Veli Yıldız',	'2024-02-24 13:53:34',	'2024-02-24 13:53:34'),
-(3,	'IMG-65d9f50650b898.46077420.jpg',	'Exam 3',	'Exam 3 Description',	'2024-02-24',	'2024-02-29',	'60',	'1',	'10',	'11/B',	2,	'Ayse Yılmaz',	'2024-02-24 13:54:14',	'2024-02-24 13:54:14');
+(1,	'IMG-65d9f46b758223.72202667.jpg',	'Exam 1',	'Exam 1 Description',	'2024-02-29',	'2024-04-01',	'10',	'1',	'6',	'10/B',	1,	'Veli Yıldız',	'2024-02-29 17:41:26',	'2024-02-24 13:51:39'),
+(2,	'IMG-65e0bccbe765d9.72184758.jpg',	'Exam 2',	'Exam 2 Description',	'2024-02-29',	'2024-04-29',	'45',	'1',	'1',	'9/A',	1,	'Veli Yıldız',	'2024-02-29 17:20:29',	'2024-02-24 13:53:34'),
+(3,	'IMG-65e0c24ce0c1a1.52900404.jpg',	'Exam 3',	'Exam 3 Description',	'2024-02-29',	'2024-04-30',	'60',	'1',	'10',	'11/B',	2,	'Ayse Yılmaz',	'2024-02-29 17:43:40',	'2024-02-24 13:54:14');
 
 DROP TABLE IF EXISTS `foodlist`;
 CREATE TABLE `foodlist` (
@@ -121,7 +119,7 @@ CREATE TABLE `foodlist` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `foodlist` (`id`, `day1`, `day2`, `day3`, `day4`, `day5`, `day6`, `day7`, `createdate`, `addedunitid`, `addedunitname`) VALUES
-(1,	'TARHANA ÇORBA,\nTAVUK KAVURMA,\nPEYNİRLİ MİLFÖY,\nAYRAN',	'KIRMIZI MERC. ÇORBA,\nKIYMALI TAZE FASULYE,\n Bulgur Pilavı,\nŞEKERPARE',	'YAYLA ÇORBA,\nPÜRELİ HASAN P. KÖFTE,\nSEBZELİ MAKARNA,\nMEYVE',	'ŞEH. TAVUK SUYU ÇORBA,\nETLİ KURUFASULYE,\nSADE PİRİNÇ PİLAVI,\n KEŞKÜL',	'DOMATES ÇORBA,\nMANTARLI ET SOTE,\nArpa Şehriyeli Pirinç Pilavı,\nKARIŞIK SALATA',	'KÖY ÇORBA,\nTAS KEBAP,\nMISIRLI PİRİÇ PİLAVI	,\nYOĞURT',	'EZOGELİN ÇORBA,\nETLİ FIRIN TÜRLÜ,\nYOĞURTLU MAKARNA,\nCEV. TEL KADAYIF',	'2024-02-22 18:20:55',	1,	'Kaan Kaltakkıran');
+(1,	'TARHANA ÇORBA, TAVUK KAVURMA, PEYNİRLİ MİLFÖY, AYRAN',	'KIRMIZI MERC. ÇORBA, KIYMALI TAZE FASULYE, Bulgur Pilavı, ŞEKERPARE',	'YAYLA ÇORBA, PÜRELİ HASAN P. KÖFTE, SEBZELİ MAKARNA, MEYVE',	'ŞEH. TAVUK SUYU ÇORBA, ETLİ KURUFASULYE, SADE PİRİNÇ PİLAVI, KEŞKÜL',	'DOMATES ÇORBA,  MANTARLI ET SOTE, Arpa Şehriyeli Pirinç Pilavı, KARIŞIK SALATA',	'KÖY ÇORBA,  TAS KEBAP,  MISIRLI PİRİÇ PİLAVI	, YOĞURT',	'EZOGELİN ÇORBA, ETLİ FIRIN TÜRLÜ, YOĞURTLU MAKARNA, CEV. TEL KADAYIF',	'2024-02-22 18:20:55',	1,	'Kaan Kaltakkıran');
 
 DROP TABLE IF EXISTS `informations`;
 CREATE TABLE `informations` (
@@ -139,7 +137,7 @@ CREATE TABLE `informations` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `informations` (`schoolid`, `schoolname`, `schoolyear`, `schoolterm`, `schoolabout`, `schoolsummary`, `schooladdress`, `addedunitid`, `addedunitname`, `createdate`) VALUES
-(1,	'School 1',	'2000',	'I',	'  School 1 About  ',	'  School 1 About Summary  ',	'  School 1 About Address  ',	1,	'Kaan Kaltakkıran',	'2024-02-12 17:41:40'),
+(1,	'School 1',	'2000',	'I',	' School 1 About        ',	'School 1 About Summary        ',	'School 1 About Address        ',	1,	'Kaan Kaltakkıran',	'2024-02-29 17:08:48'),
 (2,	'School 2',	'1990',	'II',	'    School 2 About    ',	'    School 2 Summary    ',	'    School 2 Address    ',	2,	'Ahmet Yıldız',	'2024-02-12 17:53:39');
 
 DROP TABLE IF EXISTS `lessons`;
@@ -180,7 +178,11 @@ INSERT INTO `questions` (`questionid`, `questiontitle`, `answera`, `answerb`, `a
 (1,	'PHP\'de &quot;echo&quot; ve &quot;print&quot; arasındaki fark nedir?',	'&quot;print&quot; değişkenleri çıktıya yazdırırken &quot;echo&quot; sadece metni çıktılar.',	'&quot;echo&quot; sadece bir değişkeni yazdırırken &quot;print&quot; birden fazla değişkeni yazdırabilir.',	'&quot;echo&quot; daha hızlıdır ve herhangi bir değer döndürmezken &quot;print&quot; bir değer döndürür.',	' &quot;print&quot; metni çift tırnak içinde yazdırırken &quot;echo&quot; tek tırnak içinde yazdırır.',	'&quot;echo&quot; daha hızlıdır ve herhangi bir değer döndürmezken &quot;print&quot; bir değer döndürür.',	1,	1,	'Veli Yıldız',	'2024-02-27 21:00:46',	'2024-02-28 00:00:46'),
 (2,	'PHP\'de &quot;include&quot; ve &quot;require&quot; arasındaki fark nedir?',	'&quot;include&quot; dosya bulunamazsa uyarı döndürürken, &quot;require&quot; hata üretir.',	'&quot;include&quot; ile dahil edilen dosya isteğe bağlıdır, &quot;require&quot; ise zorunludur.',	'&quot;include&quot; ile dahil edilen dosya sadece bir kez dahil edilirken, &quot;require&quot; birden fazla kez dahil edilebilir.',	'&quot;include&quot; ile dahil edilen dosyada bir hata oluşursa işlem devam ederken, &quot;require&quot; durumu kontrol eder ve devam etmez',	'&quot;include&quot; dosya bulunamazsa uyarı döndürürken, &quot;require&quot; hata üretir.',	1,	1,	'Veli Yıldız',	'2024-02-27 21:01:45',	'2024-02-28 00:01:45'),
 (3,	' PHP\'nin kullanımıyla ilgili hangisi doğrudur?',	'PHP, sadece sunucu taraflı bir betik dili olarak kullanılabilir.',	'PHP, yalnızca Linux işletim sistemi üzerinde çalışabilir.',	'PHP, HTML içine gömülerek web sayfalarının dinamik içeriğini oluşturmak için kullanılabilir.',	'PHP, sadece front-end web geliştirmesi için kullanılır.',	'PHP, HTML içine gömülerek web sayfalarının dinamik içeriğini oluşturmak için kullanılabilir.',	3,	2,	'Ayse Yılmaz',	'2024-02-28 10:02:35',	'2024-02-28 00:02:59'),
-(4,	'PHP\'de &quot;GET&quot; ve &quot;POST&quot; metodları arasındaki fark nedir?',	'&quot;GET&quot; metodu, verileri URL\'nin bir parçası olarak gönderirken, &quot;POST&quot; metodu ise HTTP gövdesinde verileri gönderir.',	'&quot;GET&quot; metoduyla sadece metin verileri gönderilirken, &quot;POST&quot; metoduyla dosya da gönderilebilir.',	'&quot;GET&quot; metodu sınırlı miktarda veri gönderirken, &quot;POST&quot; metodu daha fazla veri gönderebilir.',	'&quot;GET&quot; metodu güvenliği artırırken, &quot;POST&quot; metodu güvenlik zafiyetlerine yol açar.',	'&quot;GET&quot; metodu, verileri URL\'nin bir parçası olarak gönderirken, &quot;POST&quot; metodu ise HTTP gövdesinde verileri gönderir.',	3,	2,	'Ayse Yılmaz',	'2024-02-28 10:04:45',	'2024-02-28 00:04:06');
+(4,	'PHP\'de &quot;GET&quot; ve &quot;POST&quot; metodları arasındaki fark nedir?',	'&quot;GET&quot; metodu, verileri URL\'nin bir parçası olarak gönderirken, &quot;POST&quot; metodu ise HTTP gövdesinde verileri gönderir.',	'&quot;GET&quot; metoduyla sadece metin verileri gönderilirken, &quot;POST&quot; metoduyla dosya da gönderilebilir.',	'&quot;GET&quot; metodu sınırlı miktarda veri gönderirken, &quot;POST&quot; metodu daha fazla veri gönderebilir.',	'&quot;GET&quot; metodu güvenliği artırırken, &quot;POST&quot; metodu güvenlik zafiyetlerine yol açar.',	'&quot;GET&quot; metodu, verileri URL\'nin bir parçası olarak gönderirken, &quot;POST&quot; metodu ise HTTP gövdesinde verileri gönderir.',	3,	2,	'Ayse Yılmaz',	'2024-02-28 10:04:45',	'2024-02-28 00:04:06'),
+(5,	'Aşağıdaki uzantılardan hangisi doğru bir PHP dosya uzantısıdır?',	'.cpp',	'.html',	'.css',	'.php',	'.php',	2,	1,	'Veli Yıldız',	'2024-02-29 17:22:36',	'2024-02-29 20:22:36'),
+(6,	'PHP\'de &quot;Merhaba Dünya&quot; nasıl yazılır ?',	'Document.Write(&quot;Hello World&quot;);',	'&quot;Hello World&quot;;',	'echo &quot;Merhaba Dünya&quot;;',	'Consol.log(&quot;Merhaba Dünya&quot;);',	'echo &quot;Merhaba Dünya&quot;;',	2,	1,	'Veli Yıldız',	'2024-02-29 17:23:38',	'2024-02-29 20:23:38'),
+(7,	'PHP\'deki tüm değişkenler hangi sembolle başlar?',	'$',	'!',	'&amp;',	'?',	'$',	1,	1,	'Veli Yıldız',	'2024-02-29 17:24:29',	'2024-02-29 20:24:29'),
+(8,	'Aşağıda yazılan PHP\'nin çalışması ile ilgili açıklamalardan hangisi yanlıştır?',	'Sunucu taraflı çalışır.',	'PHP kodlarının karşığı olan HTML kodları istemciye gönderilir.',	'PHP sayfalarının uzantısı .php\'dir.',	'HTML ve PHP kodları aynı sayfada olamaz.',	'HTML ve PHP kodları aynı sayfada olamaz.',	1,	1,	'Veli Yıldız',	'2024-02-29 17:27:05',	'2024-02-29 20:27:05');
 
 DROP TABLE IF EXISTS `registerunits`;
 CREATE TABLE `registerunits` (
@@ -219,8 +221,8 @@ CREATE TABLE `results` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `results` (`resultid`, `examid`, `userid`, `totalquestions`, `totaltrueanswer`, `totalfalseanswer`, `result`, `createdate`, `updateddate`) VALUES
-(1,	1,	1,	'2',	'2',	'0',	'Passed',	'2024-02-28 10:31:37',	'2024-02-28 13:31:37'),
-(2,	3,	2,	'2',	'1',	'1',	'Failed',	'2024-02-28 10:32:29',	'2024-02-28 13:32:29');
+(1,	2,	3,	'2',	'2',	'0',	'Passed',	'2024-02-29 17:31:19',	'2024-02-29 20:31:19'),
+(2,	3,	2,	'2',	'1',	'1',	'Failed',	'2024-02-29 17:32:01',	'2024-02-29 20:32:01');
 
 DROP TABLE IF EXISTS `students`;
 CREATE TABLE `students` (
@@ -248,7 +250,11 @@ CREATE TABLE `students` (
 
 INSERT INTO `students` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `useraddress`, `phonenumber`, `roleuser`, `createdate`, `classid`, `classname`, `birthdate`, `userimg`, `parentname`, `parentnumber`, `lessonid`, `lessonname`, `addedunitid`, `addedunitname`) VALUES
 (1,	'Ali Yılmaz',	'ali@gmail.com',	'$2y$10$UFHeEWCOJioUY.qdE.71o.egEaETLBqjiYquIYv450X3/PJl7F9fC',	'M',	'Adress 1',	'12331223123',	4,	'2024-01-30 18:13:53',	6,	'10/B',	'2000-01-01',	'IMG-65cf8d6b14ec89.64266568.png',	'Ali Father',	'12331223123',	'1,3',	'Math,Turkish',	1,	'Kaan Kaltakkıran'),
-(2,	'Selin Yıldız',	'selin@gmail.com',	'$2y$10$QKjJT6hdDZidt0PE5w0puOJGBpG.AT4HzuXxtnlYIKnLbzsBjHhLO',	'F',	'Address 2',	'31232312132',	4,	'2024-01-30 18:14:25',	10,	'11/B',	'1996-01-01',	'IMG-65b91251666283.15293271.jpg',	'Selin Mother',	'31232312132',	'3',	'Turkish',	1,	'Kaan Kaltakkıran');
+(2,	'Selin Yıldız',	'selin@gmail.com',	'$2y$10$QKjJT6hdDZidt0PE5w0puOJGBpG.AT4HzuXxtnlYIKnLbzsBjHhLO',	'F',	'Address 2',	'31232312132',	4,	'2024-01-30 18:14:25',	10,	'11/B',	'1996-01-01',	'IMG-65b91251666283.15293271.jpg',	'Selin Mother',	'31232312132',	'3',	'Turkish',	1,	'Kaan Kaltakkıran'),
+(3,	'Student 1',	'student1@gmail.com',	'$2y$10$Mnmitc7xaYt/4Yv.N1/4wOQeG7HFcW2CwFbLjnV2K8eFFniHSOlmy',	'M',	'Address 3',	'12331223123',	4,	'2024-02-29 19:21:10',	1,	'9/A',	'2000-01-01',	'IMG-65e0aef60f1b43.07278008.jpg',	'Student 1 Father',	'12331223123',	'1,3,5',	'Math,Turkish,Science',	1,	'Kaan Kaltakkıran'),
+(4,	'Student 2',	'student2@gmail.com',	'$2y$10$XRl2j6Xul5TMt2s5B.NLEuCkpWAD0Jyu6JRdkKNOFIvoJ648wpBIG',	'F',	'Address 4',	'12312312312',	4,	'2024-02-29 19:32:50',	2,	'9/B',	'2000-10-01',	'IMG-65e0b1b21084d4.16246724.jpg',	'Studnet 2 Mother',	'76546554464',	'1,2,3,4,5',	'Math,Spor,Turkish,English,Science',	1,	'Kaan Kaltakkıran'),
+(5,	'Student 3',	'student3@gmail.com',	'$2y$10$56UjhjG9E2ZrwRRjwd9xXOwogOy77fQuCa4pX.m1uDYBAnb1hEwJu',	'M',	'Adress 5',	'23123112323',	4,	'2024-02-29 19:34:13',	7,	'10/C',	'1999-01-01',	'IMG-65e0b205dfb589.02415346.jpg',	'Student 3 Father',	'56678667867',	'1,3,4,5',	'Math,Turkish,English,Science',	1,	'Kaan Kaltakkıran'),
+(6,	'Student 6',	'student6@gmail.com',	'$2y$10$fMhOVy.t8vEGs8I5Wh9DYe7gV6cZ/lzDnFY2UBHp1na4CiNBW2nh6',	'F',	'Adress 6',	'12312312312',	4,	'2024-02-29 19:35:32',	9,	'11/A',	'1998-01-01',	'IMG-65e0b254c8f867.54354519.jpg',	'Student 6 Father',	'12331223121',	'1,3,4',	'Math,Turkish,English',	1,	'Kaan Kaltakkıran');
 
 DROP TABLE IF EXISTS `teachers`;
 CREATE TABLE `teachers` (
@@ -273,7 +279,10 @@ CREATE TABLE `teachers` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `roleuser`, `createdate`, `classid`, `classname`, `useraddress`, `phonenumber`, `birthdate`, `userimg`, `lessonid`, `lessonname`, `addedunitid`, `addedunitname`) VALUES
-(1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$F8BOCVniVNOqHhjl7gWf8e5ptBp1wNP.KhGPA3GA9pEJx0hPGEZOm',	'M',	3,	'2024-02-10 12:43:06',	'1,6,11,16',	'9/A,10/B,11/C,12/D',	'Address1',	'23123112323',	'1975-08-20',	'IMG-65cf8e230c7946.47057921.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
-(2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$a7xTEd88iyzI43udPEmrSeTmxBBaj9nf.JXtJV8NadXoRV1/GGe7q',	'F',	3,	'2024-02-10 12:43:40',	'1,10',	'9/A,11/B',	'Address 2',	'12331223123',	'1980-01-15',	'IMG-65c7454cee1627.24858158.png',	'3',	'Turkish',	1,	'Kaan Kaltakkıran');
+(1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$F8BOCVniVNOqHhjl7gWf8e5ptBp1wNP.KhGPA3GA9pEJx0hPGEZOm',	'M',	3,	'2024-02-10 12:43:06',	'1,6,11,16',	'9/A,10/B,11/C,12/D',	'Address 1',	'23123112323',	'1975-08-20',	'IMG-65cf8e230c7946.47057921.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
+(2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$a7xTEd88iyzI43udPEmrSeTmxBBaj9nf.JXtJV8NadXoRV1/GGe7q',	'F',	3,	'2024-02-10 12:43:40',	'1,10',	'9/A,11/B',	'Address 2',	'12331223123',	'1980-01-15',	'IMG-65c7454cee1627.24858158.png',	'3',	'Turkish',	1,	'Kaan Kaltakkıran'),
+(3,	'Spor Teacher',	'sporteacher@gmail.com',	'$2y$10$9drgD7QvkdJm9HMBMHzg.uDfJfWmGBpNnf5TchsIA2r5VT2x0Dkga',	'F',	3,	'2024-02-29 19:09:23',	'4,7,10,13',	'9/D,10/C,11/B,12/A',	'Address 3',	'05076600889',	'1968-01-01',	'IMG-65e0ac33d8e721.72086549.jpg',	'2',	'Spor',	1,	'Kaan Kaltakkıran'),
+(4,	'English Teacher',	'englishteacher@gmail.com',	'$2y$10$RHkpNyJ4JHTQxMKfrcLn0.q8xni0akO9voQtVG0f/ZwlVzRL1QosK',	'F',	3,	'2024-02-29 19:10:39',	'1,2,9,11,16',	'9/A,9/B,11/A,11/C,12/D',	'Address 4',	'12312312312',	'1972-10-10',	'IMG-65e0ac7fbcfa54.07364665.jpg',	'4',	'English',	1,	'Kaan Kaltakkıran'),
+(5,	'Science Teacher',	'scienceteacher@gmail.com',	'$2y$10$7VWTS5FjJRZCxkuWQSN94uyYh8gjvHHSXvJx7jK6h4KjBvrmG76Su',	'M',	3,	'2024-02-29 19:12:09',	'1,6,10,13,15',	'9/A,10/B,11/B,12/A,12/C',	'Address 5',	'12312312312',	'1965-07-08',	'IMG-65e0acd98f8b82.08350264.jpg',	'5',	'Science',	1,	'Kaan Kaltakkıran');
 
--- 2024-02-28 10:33:12
+-- 2024-02-29 17:52:11
