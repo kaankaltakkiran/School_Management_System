@@ -42,10 +42,7 @@ if ($_SESSION['role'] != 2 && $_SESSION['role'] != 3) {
       <th>Birth date</th>
       <th>Parent Name</th>
       <th>Parent Number</th>
-      <?php if ($_SESSION['role'] == 2) {?>
-      <th>Update</th>
-      <th>Delete</th>
-      <?php }?>
+        <th>Manage</th>
     </tr>
   </thead>
   <tbody>
@@ -90,7 +87,9 @@ foreach ($students as $student) {
 //?Ay ismini bulmak için date() ve strtotime() fonksiyonlarını kullanıyoruz
     //!F tam ay ismini alıyor.
     $monthName = date("F", strtotime($userBirthdate));
+    if ($isRegisterUnit) {
 
+    }
 // Sonucu ekrana yazdırma
     $formattedDate = "$day $monthName $year";
 
@@ -110,13 +109,12 @@ foreach ($students as $student) {
     <td>$formattedDate</td>
     <td>{$student['parentname']}</td>
     <td>{$student['parentnumber']}</td>
+    <td>
+    <a href='update.student.php?idStudent={$student['userid']}' class='btn btn-success mb-3  btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a>
+    <a href='list.student.php?removestudentid={$student['userid']}'onclick='return confirm(\"Are you sure you want to delete {$student['username']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a>
+  </td>
+ </tr>
     ";
-    //!Sadece Register unit öğrencileri için güncelleme ve silme butonlarını göster
-    if ($isRegisterUnit) {
-        echo " <td><a href='update.student.php?idStudent={$student['userid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a></td>";
-        echo "<td><a href='list.student.php?removestudentid={$student['userid']}' onclick='return confirm(\"Are you sure you want to delete {$student['username']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a></td>";
-    }
-    echo "</tr>";
 }
 ?>
   </tbody>
