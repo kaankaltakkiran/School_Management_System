@@ -21,7 +21,7 @@ $get_class_name = $_GET['className'];
       <div class="row mt-3">
       <div class='row justify-content-center text-center'>
         <div class="col-sm-4 col-md-6 col-lg-8">
-  <h1 class='alert alert-primary mt-2'> <?php echo $get_class_name ?> Grade Students</h1>
+  <h1 class='alert alert-primary mt-2'> <?php echo $get_class_name ?> Class Students</h1>
   </div>
 </div>
    <table id="example" class="table table-bordered table-striped " style="width:100%">

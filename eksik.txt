@@ -28,10 +28,7 @@ update sonrasın boşluk oluyor???????
 food yoksa error ver ekleyemesin
 grade vardı onu class yap
 tek bir sınav hakkı bırak aliye
-add teachardaki down php al
-show examdekini de
-silme işlemlerindeki yönlendirme
-
+Genel olarak script kodlarını düzenlemek
 !!!
 telefon rehberi?????? çok gerekli değil
 update yetkilerinde butonlar ona göre gözüksün tüm sayfaları kontrol et
