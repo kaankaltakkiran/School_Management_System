@@ -30,7 +30,6 @@ grade vardı onu class yap
 tek bir sınav hakkı bırak aliye
 add teachardaki down php al
 show examdekini de
-update de eksik köntroller var
 silme işlemlerindeki yönlendirme
 
 !!!

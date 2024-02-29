@@ -73,6 +73,11 @@ die(); */
                  <br>
                   Class
                </a>
+               <a href="list.exam.php" class="col btn btn-success m-2 py-3">
+ <img width="48" height="48" src="https://img.icons8.com/ios/48/exam.png" alt="exam"/>
+ <br>
+Exams List
+</a>
                <a href="list.announcement.php" class="col btn btn-warning m-2 py-3">
                <img width="48" height="48" src="https://img.icons8.com/color/48/commercial.png" alt="commercial"/>
                  <br>
