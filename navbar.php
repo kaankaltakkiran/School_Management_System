@@ -44,13 +44,14 @@
           <a class="nav-link  <?=($activePage == 'teacher.class.list') ? 'active' : '';?>" href="list.teacher.class.php">Student's Class</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <?=($activePage == 'add.exam' || $activePage == 'list.exam') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'add.exam' || $activePage == 'list.exam' || $activePage == 'teacher.exam.result') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Exams
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item <?=($activePage == 'add.exam') ? 'active' : '';?>" href="add.exam.php">Add Exam </a></li>
-            <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item <?=($activePage == 'list.exam') ? 'active' : '';?>" href="list.exam.php">Exam List</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item <?=($activePage == 'teacher.exam.result') ? 'active' : '';?>" href="teacher.exam.result.php">Exam Result</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">

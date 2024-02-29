@@ -53,12 +53,13 @@ require 'login.control.php';
   </div>
     <?php
 require_once 'db.php';
-$addedUnitid = $_SESSION['id'];
-$SORGU = $DB->prepare("SELECT * FROM foodlist WHERE addedunitid = :unitid");
-$SORGU->bindParam(':unitid', $addedUnitid);
+/* $addedUnitid = $_SESSION['id']; */
+$SORGU = $DB->prepare("SELECT * FROM foodlist");
+/* $SORGU->bindParam(':unitid', $addedUnitid); */
 $SORGU->execute();
 $foods = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-//echo '<pre>'; print_r($foods);
+/* echo '<pre>';
+print_r($foods); */
 foreach ($foods as $food) {
     echo "
     <tr>
