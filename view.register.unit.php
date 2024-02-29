@@ -5,13 +5,6 @@ $activePage = "view.register.unit";
 require 'up.html.php';
 require 'login.control.php';
 ?>
-  <?php
-if ($_SESSION['role'] != 2) {
-    header("location: authorizationcontrol.php");
-    die();
-}
-?>
-<?php require 'navbar.php'?>
 <?php
 require_once 'db.php';
 $id = $_GET['idregisterunit'];
@@ -23,6 +16,15 @@ $registerunits = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* echo '<pre>';
 print_r($registerunits);
 die(); */
+?>
+  <?php
+if ($_SESSION['role'] != 1 || $registerunits[0]['adedadminid'] != $_SESSION['id']) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
+<?php require 'navbar.php'?>
+<?php
 $gender = $registerunits[0]['usergender'];
 $gender = ($gender == 'M') ? 'Male' : 'Famale';
 //!Kullanıcının doğum tarihini alma

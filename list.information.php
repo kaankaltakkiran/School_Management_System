@@ -35,7 +35,6 @@ if ($_SESSION['role'] != 2) {
       <th>School About</th>
       <th>School Summary</th>
       <th>School Address</th>
-      <th>Create Date</th>
       <th>Update</th>
       <th>Delete</th>
     </tr>
@@ -76,7 +75,6 @@ foreach ($informations as $information) {
       <td>{$information['schoolabout']}</td>
       <td>{$information['schoolsummary']}</td>
       <td>{$information['schooladdress']}</td>
-      <td>{$information['createdate']}</td>
       <td><a href='update.information.php?schoolid={$information['schoolid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a></td>
       <td><a href='list.information.php?removeSchoolid={$information['schoolid']}'onclick='return confirm(\"Are you sure you want to delete {$information['schoolname']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a></td>
    </tr>

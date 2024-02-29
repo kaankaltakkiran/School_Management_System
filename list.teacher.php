@@ -38,7 +38,6 @@ if ($_SESSION['role'] != 2) {
       <th>Class</th>
       <th>Lessons</th>
       <th>Gender</th>
-      <th>Create Date</th>
       <th>Address</th>
       <th>Phone Number</th>
       <th>BirthDate</th>
@@ -100,7 +99,6 @@ foreach ($teachers as $teacher) {
       <td>{$teacher['classname']}</td>
       <td>{$teacher['lessonname']}</td>
       <td>$gender</td>
-      <td>{$teacher['createdate']}</td>
       <td>{$teacher['useraddress']}</td>
       <td>{$teacher['phonenumber']}</td>
       <td>$formattedDate</td>
