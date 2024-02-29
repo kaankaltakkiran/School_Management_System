@@ -29,6 +29,7 @@ food yoksa error ver ekleyemesin
 grade vardı onu class yap
 tek bir sınav hakkı bırak aliye
 Genel olarak script kodlarını düzenlemek
+exam reslut sayfası
 !!!
 telefon rehberi?????? çok gerekli değil
 update yetkilerinde butonlar ona göre gözüksün tüm sayfaları kontrol et
