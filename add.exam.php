@@ -6,12 +6,14 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
   <?php
+//! Rol idsi 3 olan teacher sadece sınav ekleyebilir
 if ($_SESSION['role'] != 3) {
     header("location: authorizationcontrol.php");
     die();
 }
 ?>
 <?php
+//! Veri tabanına sınav ekleme
 if (isset($_POST['submit_form'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
@@ -257,18 +259,3 @@ foreach ($classArrayName as $key => $value) {
 </div>
 <?php require 'footer.php';?>
 <?php require 'down.html.php';?>
-
-<?php
-/* require_once 'db.php';
-$addedid = $_SESSION['id'];
-$sql = "SELECT e.*, t.*
-FROM exams e
-INNER JOIN teachers t ON FIND_IN_SET(e.classid, t.classid) where addedid=:addedid ";
-$SORGU = $DB->prepare($sql);
-$SORGU->bindParam(':addedid', $addedid);
-$SORGU->execute();
-$isUser = $SORGU->fetchall(PDO::FETCH_ASSOC);
-echo '<pre>';
-print_r($isUser);
-die(); */
-?>

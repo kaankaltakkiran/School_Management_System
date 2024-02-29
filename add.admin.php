@@ -6,12 +6,14 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
   <?php
+//!Admin role id 1 dir
 if ($_SESSION['role'] != 1) {
     header("location: authorizationcontrol.php");
     die();
 }
 ?>
 <?php
+//!Veri tabanına admin ekleme
 if (isset($_POST['submit_form'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();

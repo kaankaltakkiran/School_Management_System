@@ -39,7 +39,6 @@ $SORGU = $DB->prepare($sql);
 $SORGU->bindParam(':idexam', $examid);
 $SORGU->execute();
 $exams = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-
 /* echo '<pre>';
 print_r($exams);
 die(); */

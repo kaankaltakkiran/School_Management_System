@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
   <?php
+//! Rol idsi 2 olan register unit sadece school information listeyebilir
 if ($_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
     die();
@@ -52,19 +53,15 @@ $informations = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 if (isset($_GET['removeSchoolid'])) {
     require 'db.php';
     $remove_id = $_GET['removeSchoolid'];
-
     $sql = "DELETE FROM informations WHERE schoolid = :removeSchoolid";
     $SORGU = $DB->prepare($sql);
-
     $SORGU->bindParam(':removeSchoolid', $remove_id);
-
     $SORGU->execute();
     echo "<script>
 alert('School İnformation has been deleted. You are redirected to the School İnformation List page...!');
 window.location.href = 'list.information.php';
 </script>";
 }
-
 foreach ($informations as $information) {
     echo "
     <tr>

@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//! Rol idsi 2 olan register unit sadece ders ekleyebilir
 if ($_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
     die();
@@ -14,8 +15,7 @@ if ($_SESSION['role'] != 2) {
 <?php
 require 'navbar.php'?>
 <?php
-
-//!form submit edilmişse
+//! Veri tabanına ders ekleme
 if (isset($_POST['submit_form'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
@@ -47,7 +47,6 @@ if (isset($_POST['submit_form'])) {
         $SORGU->bindParam(':form_lesson', $lessonName);
         $SORGU->bindParam(':unitid', $addedUnitid);
         $SORGU->bindParam(':unitname', $addedUnitName);
-
         $SORGU->execute();
         $approves[] = "lesson Added Successfully...";
     }
@@ -103,7 +102,6 @@ if (!empty($approves)) {
       Please Write lesson Name !
     </div>
 </div>
-
                   <button type="submit" name="submit_form" class="btn btn-primary mt-3 ">Add Lesson
                   <i class="bi bi-send"></i>
                   </button>

@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
   <?php
+//! Student role id 4 dir ve studentlerin duyuru ekleme yetkisi yoktur
 if ($_SESSION['role'] == 4) {
     header("location: authorizationcontrol.php");
     die();
@@ -14,8 +15,7 @@ if ($_SESSION['role'] == 4) {
 <?php
 require 'navbar.php'?>
 <?php
-
-//!form submit edilmişse
+//!Veri tabanına duyuru ekleme
 if (isset($_POST['submit_form'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
@@ -150,7 +150,6 @@ if (!empty($approves)) {
       Please Write Announcement !
     </div>
 </div>
-
                   <button type="submit" name="submit_form" class="btn btn-primary mt-3 ">Send Announcement
                   <i class="bi bi-send"></i>
                   </button>

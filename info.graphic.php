@@ -1,5 +1,6 @@
 <?php
 @session_start();
+//!Toplam öğrenci ve öğretmen sayısını bulma
 require_once 'db.php';
 $id = $_SESSION['id'];
 $SORGU = $DB->prepare("SELECT * FROM students WHERE addedunitid = :id");
@@ -60,7 +61,7 @@ $schoolName = $informations[0]['schoolname'];
         categories: [schoolName],
         crosshair: true,
         accessibility: {
-            description: 'Countries'
+            description: 'School'
         }
     },
     yAxis: {

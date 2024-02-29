@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//! Rol idsi 2 ve 3 olan register unit ve teacher sadece student listeyebilir
 if ($_SESSION['role'] != 2 && $_SESSION['role'] != 3) {
     header("location: authorizationcontrol.php");
     die();
@@ -110,7 +111,6 @@ foreach ($students as $student) {
     <td>{$student['parentname']}</td>
     <td>{$student['parentnumber']}</td>
     ";
-
     //!Sadece Register unit öğrencileri için güncelleme ve silme butonlarını göster
     if ($isRegisterUnit) {
         echo " <td><a href='update.student.php?idStudent={$student['userid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a></td>";

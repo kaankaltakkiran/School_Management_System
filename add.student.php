@@ -6,12 +6,14 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//! Rol idsi 2 olan register unit sadece öğrenci ekleyebilir
 if ($_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
     die();
 }
 ?>
 <?php
+//! Veri tabanına öğrenci ekleme
 if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
@@ -110,7 +112,6 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 $SORGU->bindParam(':lessonname', $studentLessonName);
                 $SORGU->bindParam(':unitid', $addedUnitid);
                 $SORGU->bindParam(':unitname', $addedUnitName);
-
                 $SORGU->execute();
                 $approves[] = "Student User Added Successfully...";
             } else {
@@ -264,14 +265,12 @@ foreach ($lessons as $lesson) {
   <input type="file"  name='form_image' class="form-control" id="inputGroupFile02"required>
   <label class="input-group-text" for="inputGroupFile02">Upload Student Image &nbsp; <i class="bi bi-upload"></i></label>
 </div>
-
                   <button type="submit" name="submit" class="btn btn-primary mt-3 ">Add Student User
                   <i class="bi bi-send"></i>
                   </button>
      </form>
      </div>
 </div>
-
 </div>
 <?php require 'footer.php'?>
 <?php require 'down.html.php';?>

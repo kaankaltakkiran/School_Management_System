@@ -6,13 +6,13 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//! Rol idsi 1 olan admin kullanıcılar listeyebilir
 if ($_SESSION['role'] != 1) {
     header("location: authorizationcontrol.php");
     die();
 }
 ?>
 <?php require 'navbar.php'?>
-
     <div class="container">
       <div class="row mt-3">
       <div class='row justify-content-center text-center'>
@@ -26,7 +26,7 @@ if ($_SESSION['role'] != 1) {
   </p>
 </div>
 </div>
-   <!-- tablo ile personel listeleme -->
+   <!-- tablo ile admin listeleme -->
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
@@ -86,7 +86,6 @@ foreach ($admins as $admin) {
   ";
 }
 ?>
-
   </tbody>
 </table>
 </div>

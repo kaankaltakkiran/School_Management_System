@@ -7,6 +7,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//! Rol idsi 4 olan öğrenci sınavı görebilir
 if ($_SESSION['role'] != 4) {
     header("location: authorizationcontrol.php");
     die();
@@ -25,6 +26,7 @@ print_r($results);
 die(); */
 ?>
 <?php
+//! Eğer öğrenci daha önce sınavı bitirmişse, tekrar sınavı göremez
 if (count($results) > 0) {
     header("location: authorizationcontrol.php");
     die();
@@ -188,7 +190,6 @@ foreach ($questions as $question) {
     </div>
 </div>
 </form>
-
 </div>
 <script>
          // Sayacı geriye doğru çalıştıran JavaScript kodu

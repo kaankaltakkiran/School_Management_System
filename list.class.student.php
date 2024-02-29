@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
   <?php
+//! Rol idsi 2 ve 3 olan register unit ve teacher sadece class student listeyebilir
 if ($_SESSION['role'] != 2 && $_SESSION['role'] != 3) {
     header("location: authorizationcontrol.php");
     die();
@@ -46,18 +47,13 @@ $students = $SORGU->fetchAll(PDO::FETCH_ASSOC);
   </thead>
   <tbody>
   </div>
-
     <?php
-
 if (isset($_GET['removestudentid'])) {
     require 'db.php';
     $remove_id = $_GET['removestudentid'];
-
     $sql = "DELETE FROM students WHERE userid = :removestudentid";
     $SORGU = $DB->prepare($sql);
-
     $SORGU->bindParam(':removestudentid', $remove_id);
-
     $SORGU->execute();
     echo "<script>
 alert('Student has been deleted. You are redirected to the Student List page...!');
@@ -78,7 +74,6 @@ foreach ($students as $student) {
     }
 }
 ?>
-
   </tbody>
 </table>
 </div>

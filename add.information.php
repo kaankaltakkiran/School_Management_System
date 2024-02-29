@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//!Rol idsi 2 olan register unit sadece information ekleyebilir
 if ($_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
     die();
@@ -14,8 +15,7 @@ if ($_SESSION['role'] != 2) {
 <?php
 require 'navbar.php'?>
 <?php
-
-//!form submit edilmişse
+//! Veri tabanına information ekleme
 if (isset($_POST['submit_form'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
@@ -159,7 +159,6 @@ for ($i = 1950; $i <= date("Y"); $i++) {
       Write Your School Address !
     </div>
 </div>
-
                   <button type="submit" name="form_submit" class="btn btn-primary mt-3 ">Add School İnformation
                   <i class="bi bi-send"></i>
                   </button>

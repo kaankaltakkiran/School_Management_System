@@ -6,12 +6,14 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//! Rol idsi 2 olan register unit sadece öğretmen kullanıcı ekleyebilir
 if ($_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
     die();
 }
 ?>
 <?php
+//! Veri tabanına teacher user ekleme
 if (isset($_POST['submit_form'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
@@ -117,7 +119,6 @@ if (isset($_POST['submit_form'])) {
                 $SORGU->bindParam(':lessonname', $teacherLessonName);
                 $SORGU->bindParam(':unitid', $addedUnitid);
                 $SORGU->bindParam(':unitname', $addedUnitName);
-
                 $SORGU->execute();
                 $approves[] = "Teacher User Added Successfully...";
             } else {
@@ -327,7 +328,3 @@ foreach ($lessons as $lesson) {
 </script>
 <?php require 'footer.php'?>
 <?php require 'down.html.php';?>
-<!-- Öğretmenin sahip olduğu sınıfları gösterme -->
-<!-- SELECT DISTINCT classes.*
-FROM classes
-JOIN teachers ON teachers.classid LIKE CONCAT('%', classes.classid, '%'); -->

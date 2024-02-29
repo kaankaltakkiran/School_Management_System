@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//! Rol idsi 3 olan teacher sadece teacher listeyebilir
 if ($_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
     die();
@@ -109,7 +110,6 @@ foreach ($teachers as $teacher) {
     }
 }
 ?>
-
   </tbody>
 </table>
 </div>

@@ -6,13 +6,13 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//! Rol idsi 2 olan kayıt birimi sınıf listesini görebilir
 if ($_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
     die();
 }
 ?>
 <?php require 'navbar.php'?>
-
     <div class="container">
       <div class="row mt-3">
       <div class='row justify-content-center text-center'>
@@ -40,9 +40,7 @@ if ($_SESSION['role'] != 2) {
   </div>
 
     <?php
-
 require_once 'db.php';
-
 $SORGU = $DB->prepare("SELECT * FROM classes LIMIT 16");
 $SORGU->execute();
 $classes = $SORGU->fetchAll(PDO::FETCH_ASSOC);
@@ -50,12 +48,9 @@ $classes = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 if (isset($_GET['removeClassid'])) {
     require 'db.php';
     $remove_id = $_GET['removeClassid'];
-
     $sql = "DELETE FROM classes WHERE classid = :removeClassid";
     $SORGU = $DB->prepare($sql);
-
     $SORGU->bindParam(':removeClassid', $remove_id);
-
     $SORGU->execute();
     echo "<script>
 alert('Class has been deleted. You are redirected to the Class List page...!');

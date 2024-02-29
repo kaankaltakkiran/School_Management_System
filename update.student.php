@@ -28,6 +28,7 @@ $selectLesonsArray = explode(",", $selectLessons);
 /* echo "<pre>";
 print_r($students);
 die(); */
+//! Rol idsi 2 olan register unit sadece kendi eklediği student userları güncelleyebilir
 if ($_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
     die();

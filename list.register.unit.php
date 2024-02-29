@@ -6,13 +6,13 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//! Rol idsi 1 olan admin register userları listeyebilir
 if ($_SESSION['role'] != 1) {
     header("location: authorizationcontrol.php");
     die();
 }
 ?>
 <?php require 'navbar.php'?>
-
     <div class="container">
       <div class="row mt-3">
       <div class='row justify-content-center text-center'>
@@ -26,7 +26,7 @@ if ($_SESSION['role'] != 1) {
   </p>
 </div>
 </div>
-   <!-- tablo ile personel listeleme -->
+   <!-- tablo ile Register Unit listeleme -->
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
@@ -45,32 +45,24 @@ if ($_SESSION['role'] != 1) {
   </thead>
   <tbody>
   </div>
-
     <?php
-
 require_once 'db.php';
-
 $SORGU = $DB->prepare("SELECT * FROM registerunits");
 $SORGU->execute();
 $registerunits = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //echo '<pre>'; print_r($registerunits);
-
 if (isset($_GET['removeRegisterUnitid'])) {
     require 'db.php';
     $remove_id = $_GET['removeRegisterUnitid'];
-
     $sql = "DELETE FROM registerunits WHERE userid = :removeRegisterUnitid";
     $SORGU = $DB->prepare($sql);
-
     $SORGU->bindParam(':removeRegisterUnitid', $remove_id);
-
     $SORGU->execute();
     echo "<script>
 alert('The Register Unit User has been deleted. You are redirected to the Register Unit List page...!');
 window.location.href = 'list.register.unit.php';
 </script>";
 }
-
 foreach ($registerunits as $registerunit) {
     if ($_SESSION['id'] == $registerunit['adedadminid']) {
         $gender = $registerunit['usergender'];
@@ -111,7 +103,6 @@ foreach ($registerunits as $registerunit) {
     }
 }
 ?>
-
   </tbody>
 </table>
 </div>

@@ -27,6 +27,7 @@ if ($_GET['idAdmin'] == 1 && $_SESSION['id'] != 1) {
 }
 ?>
   <?php
+//! Rol idsi 1 olan admin sadece admin listesini görebilir
 if ($_SESSION['role'] != 1) {
     header("location: authorizationcontrol.php");
     die();

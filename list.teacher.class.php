@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//! Rol idsi 3 olan teacher sadece kendi sınıf listesini görebilir
 if ($_SESSION['role'] != 3) {
     header("location: authorizationcontrol.php");
     die();

@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//! Rol idsi 3 olan teacher  sınav sorusu ekleyebilir
 if ($_SESSION['role'] != 3) {
     header("location: authorizationcontrol.php");
     die();
@@ -502,7 +503,6 @@ if (isset($_POST['submit_form'])) {
     $SORGU->bindParam(':idExam', $id);
     $SORGU->bindParam(':addedid', $addedid);
     $SORGU->bindParam(':addedname', $addedName);
-
     $SORGU->execute();
     $approves[] = "Question Added Successfully...";
 }

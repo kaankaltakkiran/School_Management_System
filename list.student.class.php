@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
   <?php
+//! Rol idsi 2 ve 3 olan register unit ve teacher sadece class student listeyebilir
 if ($_SESSION['role'] != 2 && $_SESSION['role'] != 3) {
     header("location: authorizationcontrol.php");
     die();
@@ -37,9 +38,7 @@ $get_class_name = $_GET['className'];
   </thead>
   <tbody>
   </div>
-
     <?php
-/* lessonName */
 require_once 'db.php';
 $SORGU = $DB->prepare("SELECT * FROM students WHERE classname LIKE '%$get_class_name%'");
 $SORGU->execute();
@@ -79,7 +78,6 @@ foreach ($classStudents as $classStudent) {
   ";
 }
 ?>
-
   </tbody>
 </table>
 </div>

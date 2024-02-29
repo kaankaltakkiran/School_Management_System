@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//! Rol idsi 2 olan kayıt birimi ders listesini görebilir
 if ($_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
     die();
@@ -37,11 +38,8 @@ if ($_SESSION['role'] != 2) {
   </thead>
   <tbody>
   </div>
-
     <?php
-
 require_once 'db.php';
-
 $SORGU = $DB->prepare("SELECT * FROM lessons LIMIT 16");
 $SORGU->execute();
 $lessons = $SORGU->fetchAll(PDO::FETCH_ASSOC);
@@ -49,12 +47,9 @@ $lessons = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 if (isset($_GET['removeLessonid'])) {
     require 'db.php';
     $remove_id = $_GET['removeLessonid'];
-
     $sql = "DELETE FROM lessons WHERE lessonid = :removeLessonid";
     $SORGU = $DB->prepare($sql);
-
     $SORGU->bindParam(':removeLessonid', $remove_id);
-
     $SORGU->execute();
     echo "<script>
 alert('Lesson has been deleted. You are redirected to the Lesson List page...!');
@@ -75,7 +70,6 @@ foreach ($lessons as $lesson) {
     }
 }
 ?>
-
   </tbody>
 </table>
 </div>

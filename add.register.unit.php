@@ -6,12 +6,14 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//! Rol idsi 1 olan admin kayıt birimi kullanıcı ekleyebilir
 if ($_SESSION['role'] != 1) {
     header("location: authorizationcontrol.php");
     die();
 }
 ?>
 <?php
+//! Veri tabanına register unit user ekleme
 if (isset($_POST['submit_form'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
@@ -81,7 +83,6 @@ if (isset($_POST['submit_form'])) {
                 $SORGU->bindParam(':form_birthdate', $birthDate);
                 $SORGU->bindParam(':adedid', $addedAdminid);
                 $SORGU->bindParam(':adedname', $addedAdminName);
-
                 $SORGU->execute();
                 $approves[] = "Register Unit User Added Successfully...";
             } else {
@@ -92,7 +93,6 @@ if (isset($_POST['submit_form'])) {
         /*     $errors[] = "unknown error occurred!"; */
         $errors[] = "Image Not Selected !";
     }
-
 }
 ?>
     <?php include 'navbar.php';?>
@@ -208,7 +208,6 @@ if (!empty($approves)) {
       Please Upload Your Image !
     </div>
 </div>
-
                   <button type="submit" name="submit_form" class="btn btn-primary mt-3 ">
                     Add Register Unit User
                     <i class="bi bi-send"></i>

@@ -18,6 +18,7 @@ print_r($registerunits);
 die(); */
 ?>
   <?php
+//! Rol idsi 1 olan admin register userları listeyebilir
 if ($_SESSION['role'] != 1 || $registerunits[0]['adedadminid'] != $_SESSION['id']) {
     header("location: authorizationcontrol.php");
     die();

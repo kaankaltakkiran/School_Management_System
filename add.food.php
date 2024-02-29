@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//!Rol idsi 2 olan register unit sadece yemek listesi ekleyebilir
 if ($_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
     die();
@@ -14,8 +15,7 @@ if ($_SESSION['role'] != 2) {
 <?php
 require 'navbar.php'?>
 <?php
-
-//!form submit edilmişse
+//! Veri tabanına yemek listesi ekleme
 if (isset($_POST['btn_add'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
@@ -99,10 +99,8 @@ if (isset($_POST['btn_add'])) {
         $SORGU->bindParam(':day5Menu', $day5Menu);
         $SORGU->bindParam(':day6Menu', $day6Menu);
         $SORGU->bindParam(':day7Menu', $day7Menu);
-
         $SORGU->bindParam(':unitid', $addedUnitid);
         $SORGU->bindParam(':unitname', $addedUnitName);
-
         $SORGU->execute();
         $approves[] = "Food Added Successfully...";
     }
@@ -221,7 +219,6 @@ if (!empty($approves)) {
       Please Write Day 7 Menu !
     </div>
 </div>
-
                   <button type="submit" name="btn_add" class="btn btn-primary mt-3 ">Add Food List
                   <i class="bi bi-send"></i>
                   </button>

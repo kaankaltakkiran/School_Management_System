@@ -34,7 +34,7 @@ $selectLesonsArray = explode(",", $selectLessons);
 /* echo "<pre>";
 print_r($teachers);
 die(); */
-
+//! Eğer kullanıcı id'si ile öğretmen id'si eşleşmiyorsa veya öğretmenin eklediği sınıf id'si ile öğretmenin id'si eşleşmiyorsa
 if ($_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
     die();

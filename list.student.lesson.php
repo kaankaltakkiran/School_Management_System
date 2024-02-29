@@ -22,6 +22,7 @@ if ($_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
     die();
 }
+//! Eğer dersi seçen öğrenci yoksa ders listesine yönlendirme yapılır.
 if (count($studentLessons) == 0) {
     header("location: list.lessons.php");
     die();
@@ -82,7 +83,6 @@ foreach ($studentLessons as $studentLesson) {
   ";
 }
 ?>
-
   </tbody>
 </table>
 </div>

@@ -6,12 +6,12 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
   <?php
+//! Rol idsi 3 olan teacher sadece exam listesini görebilir
 if ($_SESSION['role'] != 3) {
     header("location: authorizationcontrol.php");
     die();
 }
 ?>
-
 <?php require 'navbar.php'?>
     <div class="container">
       <div class="row mt-3">
@@ -61,7 +61,6 @@ alert('Exam has been deleted. You are redirected to the Exam List page...!');
 window.location.href = 'list.exam.php';
 </script>";
 }
-
 foreach ($exams as $exam) {
     echo "
     <tr>
@@ -82,7 +81,6 @@ foreach ($exams as $exam) {
   ";
 }
 ?>
-
   </tbody>
 </table>
 </div>

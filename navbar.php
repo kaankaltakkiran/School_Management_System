@@ -9,6 +9,7 @@
     </button>
     <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
     <ul class="navbar-nav">
+  <!--     Giriş yapmış ve rolü 1 olan admin kullanıcılar için -->
     <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 1) {?>
       <li class="nav-item">
           <a class="nav-link  <?=($activePage == 'index') ? 'active' : '';?>" href="index.php">Home</a>
@@ -36,6 +37,7 @@
           </ul>
         </li>
         <?php }?>
+  <!--     Giriş yapmış ve rolü 3 olan teacher kullanıcılar için -->
         <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 3) {?>
       <li class="nav-item">
           <a class="nav-link  <?=($activePage == 'index') ? 'active' : '';?>" href="index.php">Home</a>
@@ -57,6 +59,7 @@
           <a class="nav-link  <?=($activePage == 'food.list') ? 'active' : '';?>" href="list.food.php">Food Menu</a>
         </li>
         <?php }?>
+         <!--     Giriş yapmış ve rolü 4 olan student kullanıcılar için -->
         <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 4) {?>
       <li class="nav-item">
           <a class="nav-link  <?=($activePage == 'index') ? 'active' : '';?>" href="index.php">Home</a>
@@ -90,6 +93,7 @@ die(); */
           <a class="nav-link  <?=($activePage == 'food.list') ? 'active' : '';?>" href="list.food.php">Food Menu</a>
         </li>
         <?php }?>
+         <!--     Giriş yapmış ve rolü 2 olan register unit kullanıcılar için -->
     <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 2) {?>
       <li class="nav-item">
           <a class="nav-link  <?=($activePage == 'index') ? 'active' : '';?>" href="index.php">Home</a>
@@ -170,6 +174,7 @@ die(); */
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">
+          <!--   Giriş yapmış kullanıcılar için -->
       <?php if ($_SESSION['isLogin'] == 1) {?>
         <?php
 require 'db.php';
@@ -209,6 +214,7 @@ require 'db.php';
           </ul>
         </li>
         <?php }?>
+            <!--   Giriş yapmamış kullanıcılar için -->
         <?php if ($_SESSION['isLogin'] == 0) {?>
         <li class="nav-item">
           <a class="nav-link  <?=($activePage == 'login') ? 'active' : '';?>" href="login.php">Login</a>
@@ -218,6 +224,7 @@ require 'db.php';
     </div>
   </div>
 </nav>
+    <!--   Password değiştirme ekranı -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
   <div class="modal-dialog">
     <div class="modal-content">

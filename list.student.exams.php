@@ -6,12 +6,12 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
   <?php
+//! Rol idsi 4 olan student sadece exam listesini görebilir
 if ($_SESSION['role'] != 4) {
     header("location: authorizationcontrol.php");
     die();
 }
 ?>
-
 <?php require 'navbar.php'?>
     <div class="container">
       <div class="row mt-3">
@@ -38,10 +38,8 @@ if ($_SESSION['role'] != 4) {
   </div>
 
     <?php
-/* lessonName */
 require_once 'db.php';
 $studentid = $_SESSION['id'];
-/* SELECT *FROM exams JOIN students ON exams.classid= students.classid where userid=:studentid */
 $SORGU = $DB->prepare("SELECT *
 FROM exams
 JOIN students ON exams.classid = students.classid
@@ -55,7 +53,6 @@ $exams = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* echo '<pre>';
 print_r($exams);
 die(); */
-
 require_once 'db.php';
 $studentid = $_SESSION['id'];
 $SORGU = $DB->prepare("SELECT * FROM results WHERE userid=:studentid");
@@ -85,7 +82,6 @@ if (count($results) > 0) {
     }
 }
 ?>
-
   </tbody>
 </table>
 </div>

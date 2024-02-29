@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//! Rol idsi 2 olan register unit sadece sınıf ekleyebilir
 if ($_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
     die();
@@ -14,8 +15,7 @@ if ($_SESSION['role'] != 2) {
 <?php
 require 'navbar.php'?>
 <?php
-
-//!form submit edilmişse
+//! Veri tabanına sınıf ekleme
 if (isset($_POST['submit_form'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();

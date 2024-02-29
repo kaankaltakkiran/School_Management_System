@@ -15,6 +15,7 @@ $teacher = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* echo '<pre>';
 print_r($teacher);
 die(); */
+//! Rol idsi 2 ve 3 olan register unit ve teacher sadece student listeyebilir
 if ($_SESSION['role'] != 2 && $_SESSION['role'] != 3) {
     header("location: authorizationcontrol.php");
     die();
@@ -25,7 +26,6 @@ if ($teacher[0]['addedunitid'] != $_SESSION['id']) {
 }
 ?>
 <?php require 'navbar.php'?>
-
     <div class="container">
       <div class="row mt-3">
       <div class='row justify-content-center text-center'>
@@ -94,7 +94,6 @@ foreach ($teacher_students as $teacher_student) {
   ";
 }
 ?>
-
   </tbody>
 </table>
 </div>

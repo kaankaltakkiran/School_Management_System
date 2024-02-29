@@ -206,7 +206,6 @@ $users = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 print_r($users);
 die(); */
 ?>
-
 <div class="container">
   <div class="row justify-content-center ">
     <div class="col-10">

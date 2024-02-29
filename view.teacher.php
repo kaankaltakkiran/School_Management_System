@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
   <?php
+//! Rol idsi 2 ve 3 olan register unit ve teacher sadece student listesini görebilir
 if ($_SESSION['role'] != 2 && $_SESSION['role'] != 3) {
     header("location: authorizationcontrol.php");
     die();

@@ -165,7 +165,6 @@ if ($userid == $fullAnnouncements[0]['senderid']) {
       <?php }
 }
 ?>
-
     </div>
   </div>
 </div>
