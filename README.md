@@ -56,4 +56,4 @@ Rol idsi 4 olan **öğrenci** kullanıcısı, sınav listesinden sınava girebil
 
       
 ## Site Resimleri
-
+https://github.com/kaankaltakkiran/php-proje-resimleri/tree/main/school_management_resimler
