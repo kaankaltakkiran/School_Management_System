@@ -129,7 +129,7 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
   <div class="container">
   <div class="row justify-content-center mt-3">
   <div class="col-6">
-<form method="POST"enctype="multipart/form-data">
+<form method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
 <h1 class="alert alert-info text-center">Add Student User Form</h1>
 <?php
 //! Hata mesajlarını göster
@@ -172,18 +172,30 @@ if (!empty($approves)) {
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" id="floatingInput" placeholder="User Name" name="form_username" required>
   <label for="floatingInput">User Name</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Your Name !
+    </div>
 </div>
   <div class="form-floating mb-3">
   <input type="email" name="form_email"id="floatingInput" placeholder="Email"class="form-control"required>
   <label for="floatingInput">Email</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Email !
+    </div>
 </div>
 <div class="input-group mb-3  input-group-lg">
   <input type="password"  name="form_password" class="form-control" id="oldPassword" placeholder="Password"required>
   <span class="input-group-text bg-transparent"><i id="toggleOldPassword" class="bi bi-eye-slash"></i></span>
+  <div class="invalid-feedback fw-bold">
+      Please Write Password !
+    </div>
 </div>
 <div class="input-group mb-3  input-group-lg">
   <input type="password"  name="form_repassword" class="form-control" id="oldRePassword" placeholder="Please Enter Your Password Again"required>
   <span class="input-group-text bg-transparent"><i id="toggleOldRePassword" class="bi bi-eye-slash"></i></span>
+  <div class="invalid-feedback fw-bold">
+      Please Write Password Again !
+    </div>
 </div>
 <?php
 require_once 'db.php';
@@ -202,7 +214,7 @@ foreach ($classes as $class) {
 ?>
 <div class="form-floating mb-3">
 <select class="form-select" name="form_class"required>
-<option disabled selected>Select Class</option>
+<option disabled selected value="">Select Class</option>
       <?php echo $optionClasses; ?>
     </select>
 </div>
@@ -237,33 +249,51 @@ foreach ($lessons as $lesson) {
 <div class="form-floating mb-3">
   <input type="tel" id="floatingInput" placeholder="Phone Number"  class="form-control" maxlength="11" name="form_phonenumber" required>
   <label for="floatingInput">Phone Number</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Phone Number !
+    </div>
 </div>
 <div class="form-floating mb-3">
 <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">Birthdate</label>
   <input type="date" name="form_birthdate" class="form-control" id="exampleFormControlInput1" required/>
+  <div class="invalid-feedback fw-bold">
+      Please Select Birthdate !
+    </div>
 </div>
 </div>
 <div class="form-floating mb-3">
   <select class="form-select" id="floatingSelect" name="form_gender"  required aria-label="Floating label select example" >
-    <option selected disabled>Select Gender</option>
+    <option selected disabled value="">Select Gender</option>
     <option value="M">Male</option>
     <option value="F">Female</option>
   </select>
   <label for="floatingSelect">Gender</label>
+  <div class="invalid-feedback fw-bold">
+      Please Select Gender !
+    </div>
 </div>
 
 <div class="form-floating mb-3">
   <input type="text"  class="form-control" id="floatingInput" placeholder="Parent Name" name="form_parentname" required>
   <label for="floatingInput">Parent Name</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Parent Name !
+    </div>
 </div>
 <div class="form-floating mb-3">
   <input type="tel"  class="form-control" id="floatingInput" placeholder="Parent Phone Number" maxlength="11" name="form_parentnumber" required>
   <label for="floatingInput">Parent Phone Number</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Parent Phone Number !
+    </div>
 </div>
 <div class="input-group mb-3">
   <input type="file"  name='form_image' class="form-control" id="inputGroupFile02"required>
   <label class="input-group-text" for="inputGroupFile02">Upload Student Image &nbsp; <i class="bi bi-upload"></i></label>
+  <div class="invalid-feedback fw-bold">
+      Please Upload Student Image !
+    </div>
 </div>
                   <button type="submit" name="submit" class="btn btn-primary mt-3 ">Add Student User
                   <i class="bi bi-send"></i>
