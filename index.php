@@ -148,9 +148,14 @@ Exams Result
                        </div>
                        </div>
                        <div class="row justify-content-center">
+                        <div class="row justify-content-center">
+                          <div class="col-6">
+                        <h1 class=" alert alert-info text-center mt-3"> Welcome School Management System</h1>
+                        </div>
+                        </div>
                         <div class="d-grid col-4">
                        <?php if ($_SESSION['isLogin'] == 0) {?>
-                        <a href="login.php" class="btn btn-primary  m-2 py-3">
+                        <a href="login.php" class="btn btn-primary  m-5 py-3">
 <img width="48" height="48" src="./public/img/login.gif" alt="Login Gif"/>
 <br>
               Login

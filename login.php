@@ -127,13 +127,13 @@ if (!empty($errors)) {
 </div>
 <div class="form-floating mb-3">
   <select class="form-select" id="floatingSelect" name="form_selectrol"  required aria-label="Floating label select example" >
-    <option selected disabled>Select Login Type</option>
+    <option selected disabled>Select Login Rol Type</option>
     <option value="1">Admin</option>
     <option value="2">Register Unit</option>
     <option value="3">Teacher</option>
     <option value="4">Student</option>
   </select>
-  <label for="floatingSelect">Login Type</label>
+  <label for="floatingSelect">Rol Type</label>
 </div>
 
                   <button type="submit" name="submit" class="btn btn-primary">
