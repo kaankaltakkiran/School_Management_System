@@ -55,5 +55,5 @@ Rol idsi 4 olan **öğrenci** kullanıcısı, sınav listesinden sınava girebil
  - [X] Kayıt birimi okulda kaç öğrenci kaç öğretmen var gibi sayıları görebilmektedir.
 
       
-## Site Resimleri
+## Site Resimleri Ve Export Örnekleri
 https://github.com/kaankaltakkiran/php-proje-resimleri/tree/main/school_management_resimler
