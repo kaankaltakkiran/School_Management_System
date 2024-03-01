@@ -44,9 +44,9 @@ CREATE TABLE `announcements` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `announcements` (`announcementid`, `senderid`, `sendername`, `senderrole`, `receiverrole`, `createdate`, `announcementtitle`, `startdate`, `lastdate`, `ispublish`, `announcement`, `readcount`) VALUES
-(1,	1,	'Kaan Kaltakkıran',	2,	3,	'2024-02-29 20:46:00',	'Register Unit To Teachers',	'2024-02-29',	'2024-03-31',	'1',	'This Announcement Register Unit To Teachers      ',	31),
-(2,	1,	'Veli Yıldız',	3,	4,	'2024-02-29 20:09:39',	'Teacher To Students',	'2024-02-29',	'2024-05-01',	'1',	'This Annoucement Teacher To Students',	20),
-(3,	1,	'Kaan Kaltakkıran',	2,	4,	'2024-02-29 20:46:00',	'Register Unit To Students',	'2024-02-29',	'2024-04-01',	'0',	'This Annoucement Register Unit To Students',	20);
+(1,	1,	'Kaan Kaltakkıran',	2,	3,	'2024-03-01 11:03:32',	'Register Unit To Teachers',	'2024-02-29',	'2024-03-31',	'1',	'This Announcement Register Unit To Teachers      ',	32),
+(2,	1,	'Veli Yıldız',	3,	4,	'2024-03-01 11:07:56',	'Teacher To Students',	'2024-02-29',	'2024-05-01',	'1',	'This Annoucement Teacher To Students',	25),
+(3,	1,	'Kaan Kaltakkıran',	2,	4,	'2024-03-01 11:07:56',	'Register Unit To Students',	'2024-02-29',	'2024-04-01',	'0',	'This Annoucement Register Unit To Students',	23);
 
 DROP TABLE IF EXISTS `classes`;
 CREATE TABLE `classes` (
@@ -285,4 +285,4 @@ INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `user
 (4,	'English Teacher',	'englishteacher@gmail.com',	'$2y$10$RHkpNyJ4JHTQxMKfrcLn0.q8xni0akO9voQtVG0f/ZwlVzRL1QosK',	'F',	3,	'2024-02-29 19:10:39',	'1,2,9,11,16',	'9/A,9/B,11/A,11/C,12/D',	'Address 4',	'12312312312',	'1972-10-10',	'IMG-65e0ac7fbcfa54.07364665.jpg',	'4',	'English',	1,	'Kaan Kaltakkıran'),
 (5,	'Science Teacher',	'scienceteacher@gmail.com',	'$2y$10$7VWTS5FjJRZCxkuWQSN94uyYh8gjvHHSXvJx7jK6h4KjBvrmG76Su',	'M',	3,	'2024-02-29 19:12:09',	'1,6,10,13,15',	'9/A,10/B,11/B,12/A,12/C',	'Address 5',	'12312312312',	'1965-07-08',	'IMG-65e0acd98f8b82.08350264.jpg',	'5',	'Science',	1,	'Kaan Kaltakkıran');
 
--- 2024-02-29 17:52:11
+-- 2024-03-01 08:16:22
