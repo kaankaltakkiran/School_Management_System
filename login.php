@@ -176,7 +176,7 @@ if (!empty($errors)) {
   <tbody>
     <tr>
       <th scope="row">1</th>
-      <td>ahmet@gmail.com</td>
+      <td>kaan_fb_aslan@hotmail.com</td>
       <td>123</td>
     </tr>
   </tbody>
