@@ -5,31 +5,109 @@ $activePage = "index";
 require 'up.html.php';
 ?>
 <?php require 'navbar.php'?>
+<!-- Siteye son giriş zamanını göstermek ve güncellemek için giriş yapan kullanıcın rolüne göre o tabloyu çağırıyoruz. -->
+<?php if ($_SESSION['isLogin'] == 1) {?>
+<?php
+require_once 'db.php';
+    $rol = $_SESSION['role'];
+    $userid = $_SESSION['id'];
+    //!Welcome mesajındaki Kullanıcı tipini belirlemek için
+    $loginUserType = "";
+//! user rol 1 ise admins tablosundan sorgula
+    if ($rol == 1) {
+        $sql = "SELECT * FROM admins  WHERE userid = :iduser";
+        $loginUserType = "Admin";
+        //! user rol 2 ise registerunits tablosundan sorgula
+    } else if ($rol == 2) {
+        $sql = "SELECT * FROM registerunits WHERE userid = :iduser";
+        $loginUserType = "Register Unit";
+        //! user rol 3 ise teachers tablosundan sorgula
+    } else if ($rol == 3) {
+        $sql = "SELECT * FROM teachers WHERE userid = :iduser";
+        $loginUserType = "Teacher";
+        //! user rol 4 ise students tablosundan sorgula
+    } else if ($rol == 4) {
+        $sql = "SELECT * FROM students WHERE userid = :iduser";
+        $loginUserType = "Student";
+
+    }
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':iduser', $userid);
+    $SORGU->execute();
+    $users = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* echo '<pre>';
+print_r($users);
+die(); */
+//!Kullanıcı son login zamanı
+    $usersLastLoginTime = $users[0]['lastlogintime'];
+//!Kullanıcı id
+    $userId = $users[0]['userid'];
+    $loginUserType
+    ?>
+
 <div class="container">
-  <!-- Eğer adamin giriş yaparsa aşaığıdaki kısımlar görünür(role=2) -->
-<?php if ($_SESSION['role'] == 1 || $_SESSION['role'] == 2) {?>
-      <div class="container my-3 ">
-      <div class="row justify-content-center">
-          <div class="col-6">
-          <h1 class="text-center text-danger mt-3">Welcome</h1>
-          <h3 class="text-center text-muted"><?=($_SESSION['role'] == 1) ? 'Admin' : 'Register Unit';?>: <?php echo $_SESSION['userName']; ?></h3>
-          <h4 class="text-center text-danger fw-bold" id="clock">
-</h4>
-       </div>
+    <div class="container my-3 ">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <h1 class="text-center text-danger mt-3">Welcome</h1>
+                <h3 class="text-center text-muted"><?php echo $loginUserType ?>: <?php echo $_SESSION['userName']; ?></h3>
+                <h4 class="text-center text-danger fw-bold" id="clock">
+                    <?php
+//! Veritabanından alınan datetime değerini güncelle
+    //! user rol 1 ise admins tablosunu güncelle
+    if ($rol == 1) {
+        $DB->prepare("UPDATE admins SET lastlogintime = NOW() WHERE userid = :iduser")->execute(['iduser' => $userid]);
+        //! user rol 2 ise registerunits tablosunu güncelle
+    } else if ($rol == 2) {
+        $DB->prepare("UPDATE registerunits SET lastlogintime = NOW() WHERE userid = :iduser")->execute(['iduser' => $userid]);
+        //! user rol 3 ise teachers tablosunu güncelle
+    } else if ($rol == 3) {
+        $DB->prepare("UPDATE teachers SET lastlogintime = NOW() WHERE userid = :iduser")->execute(['iduser' => $userid]);
+        //! user rol 4 ise students tablosunu güncelle
+    } else if ($rol == 4) {
+        $DB->prepare("UPDATE students SET lastlogintime = NOW() WHERE userid = :iduser")->execute(['iduser' => $userid]);
+
+    }
+
+    // Sistem saat dilimini belirle
+    date_default_timezone_set('Europe/Istanbul');
+    // Veritabanından alınan datetime değeri
+    $veritabaniDatetime = $usersLastLoginTime;
+
+    // Şu anki datetime
+    $suAnkiDatetime = new DateTime();
+
+    // Veritabanından alınan datetime'ı DateTime nesnesine dönüştür
+    $veritabaniDatetimeObj = new DateTime($veritabaniDatetime);
+
+    // İki datetime arasındaki farkı hesapla
+    $zamanFarki = $suAnkiDatetime->diff($veritabaniDatetimeObj);
+
+    if ($_SESSION['id'] == $userId) {
+        echo "<h5 class='text-primary text-center fw-bold'>";
+        // Eğer zaman farkı 365 günü aşıyorsa yıl, gün ve saat olarak ekrana yazdır
+        if ($zamanFarki->i < 1) {
+            echo " Last Login Time: " . "was active just now";
+        } else {
+            if ($zamanFarki->days > 365) {
+                echo "Last Login Time: " . $zamanFarki->format('%y year, %d day, %h hour');
+            } elseif ($zamanFarki->days > 0 || $zamanFarki->h > 24) {
+                echo "Last Login Time: " . $zamanFarki->format('%d day, %h hour');
+            } else {
+                if ($zamanFarki->h >= 1) {
+                    echo "Last Login Time: " . $zamanFarki->format('%h hour, %i minute');
+                } else {
+                    echo "Last Login Time: " . $zamanFarki->format('%i minute');
+                }
+            }
+        }
+        echo "</h5>";
+    }
+    ?>
+                </h4>
+            </div>
         </div>
-       <?php }?>
-         <!-- Eğer adamin giriş yaparsa aşaığıdaki kısımlar görünür(role=2) -->
-<?php if ($_SESSION['role'] == 3 || $_SESSION['role'] == 4) {?>
-      <div class="container my-3 ">
-      <div class="row justify-content-center">
-          <div class="col-6">
-          <h1 class="text-center text-danger mt-3">Welcome</h1>
-          <h3 class="text-center text-muted"><?=($_SESSION['role'] == 3) ? 'Teacher' : 'Student';?>: <?php echo $_SESSION['userName']; ?></h3>
-          <h4 class="text-center text-danger fw-bold" id="clock">
-</h4>
-       </div>
-        </div>
-       <?php }?>
+    <?php }?>
 <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 2) {?>
   <?php
 require_once 'db.php';
