@@ -33,13 +33,12 @@ if ($_SESSION['role'] != 3) {
       <th>Exam Class Name</th>
       <th>Create Questions</th>
       <th>Manage</th>
+      <th>Status</th>
     </tr>
   </thead>
   <tbody>
   </div>
-
     <?php
-/* lessonName */
 require_once 'db.php';
 $addedid = $_SESSION['id'];
 $SORGU = $DB->prepare("SELECT * FROM exams WHERE addedid=:addedid");
@@ -62,6 +61,47 @@ window.location.href = 'list.exam.php';
 </script>";
 }
 foreach ($exams as $exam) {
+    //! Status belirleme
+    $dateControl = "";
+    $publishControl = "";
+    $status = "";
+    $statusCount = 0;
+    //! Veritabaında ki publish durumunu kontrol et
+    $published = $exam['ispublish'];
+
+    if ($published == 1) {
+        $publishControl = "Published";
+    } else {
+        $publishControl = "Not Published !";
+    }
+    //!Bugünün tarihini al
+    $today = date("Y-m-d");
+    //! Veritabanındaki tarihleri al
+    $startDate = $exam['examstartdate'];
+    $endDate = $exam['examenddate'];
+    //!Tarihler arasında olup olmadığını kontrol et
+    if ($today >= $startdate && $today <= $endDate) {
+        $dateControl = "Dates Available";
+    } else {
+        $dateControl = "Exam Date Is Not Within Today's Dates !";
+    }
+    //!Status belirleme
+    //? Eğer publish durumu published ve tarihler uygunsa
+    if ($publishControl == "Published" && $dateControl == "Dates Available") {
+        $status = "Active";
+        //? Eğer publish durumu not published ve tarihler uygunsa
+    } else if ($publishControl == "Not Published !" && $dateControl == "Dates Available") {
+        $status = "Deactive: Selectted Not Published !";
+        $statusCount = 1;
+        //? Eğer publish durumu published ve tarihler uygun değilse
+    } else if ($publishControl == "Published" && $dateControl == "Exam Date Is Not Within Today's Dates !") {
+        $status = "Deactive: Date Is Not Within Today's Dates !";
+        $statusCount = 1;
+        //? Eğer publish durumu not published ve tarihler uygun değilse
+    } else if ($publishControl == "Not Published !" && $dateControl == "Exam Date Is Not Within Today's Dates !") {
+        $status = "Deactive: Not Published and Date Is Not Within Today's Dates !";
+        $statusCount = 1;
+    }
     echo "
     <tr>
       <th>{$exam['examid']}</th>
@@ -77,6 +117,13 @@ foreach ($exams as $exam) {
       <a href='update.exam.php?idExam={$exam['examid']}' class='btn btn-success mb-3  btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a>
       <a href='list.exam.php?removeExamid={$exam['examid']}'onclick='return confirm(\"Are you sure you want to delete {$exam['examtitle']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a>
     </td>
+    <td";
+    if ($statusCount == 1) {
+        echo " class='bg-danger text-white '";
+    } else {
+        echo " class='bg-success text-white'";
+    }
+    echo ">$status</td>
    </tr>
   ";
 }
