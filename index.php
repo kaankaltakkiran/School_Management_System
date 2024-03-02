@@ -291,14 +291,14 @@ Exams Result
               <div class="card-body">
                 <h5 class="card-title">Add Admin User</h5>
                 <p class="card-text">Admin Adds Admin User</p>
-                      <div class="d-flex justify-content-between">
-          <a href="add.admin.php" class="btn me-2  btn-danger mt-5">Add Admin
+        <div class="d-grid gap-2">
+            <a href="add.admin.php" class="btn btn-danger"> Add Admin
             <i class="bi bi-send-fill"></i>
           </a>
-          <a href="list.admin.php" class="btn btn-warning  mt-5">List Admin User
+          <a href="list.admin.php" class="btn btn-warning">List Admin User
             <i class="bi bi-send-fill"></i>
-          </a>
-        </div>
+            </a>
+            </div>
               </div>
             </div>
         </div>
@@ -308,14 +308,14 @@ Exams Result
           <div class="card-body">
             <h5 class="card-title">Add Register Unit</h5>
             <p class="card-text">Register Unit Adds  Add Register Unit</p>
-            <div class="d-flex justify-content-between">
-          <a href="add.register.unit.php" class="btn me-2  btn-danger mt-5">Add Register Unit
+        <div class="d-grid gap-2">
+            <a href="add.register.unit.php" class="btn btn-danger"> Add Register Unit
             <i class="bi bi-send-fill"></i>
           </a>
-          <a href="list.register.unit.php" class="btn btn-warning  mt-5">List Register Unit
+          <a href="list.register.unit.php" class="btn btn-warning">List Register Unit
             <i class="bi bi-send-fill"></i>
-          </a>
-        </div>
+            </a>
+            </div>
           </div>
         </div>
     </div>
@@ -329,14 +329,14 @@ Exams Result
             <div class="card-body">
               <h5 class="card-title">Add Teacher User</h5>
               <p class="card-text">Register Unit Adds Teacher User</p>
-              <div class="d-flex justify-content-between">
-          <a href="add.teacher.php" class="btn me-2  btn-danger mt-5">Add Teacher User
+                  <div class="d-grid gap-2">
+            <a href="add.teacher.php" class="btn btn-danger"> Add Teacher User
             <i class="bi bi-send-fill"></i>
           </a>
-          <a href="list.teacher.php" class="btn btn-warning  mt-5">List Teacher User
+          <a href="list.teacher.php" class="btn btn-warning">List Teacher User
             <i class="bi bi-send-fill"></i>
-          </a>
-        </div>
+            </a>
+            </div>
             </div>
           </div>
       </div>
@@ -346,14 +346,14 @@ Exams Result
           <div class="card-body">
             <h5 class="card-title">Add Student User</h5>
             <p class="card-text">Register Unit Adds  Student User</p>
-            <div class="d-flex justify-content-between">
-          <a href="add.student.php" class="btn me-2  btn-danger mt-5">Add Student User
+            <div class="d-grid gap-2">
+            <a href="add.student.php" class="btn btn-danger"> Add Student User
             <i class="bi bi-send-fill"></i>
           </a>
-          <a href="list.student.php" class="btn btn-warning  mt-5">List Student User
+          <a href="list.student.php" class="btn btn-warning">List Student User
             <i class="bi bi-send-fill"></i>
-          </a>
-        </div>
+            </a>
+            </div>
           </div>
         </div>
     </div>
@@ -363,14 +363,14 @@ Exams Result
             <div class="card-body">
               <h5 class="card-title">Add Class</h5>
               <p class="card-text">Register Unit Adds Class</p>
-              <div class="d-flex justify-content-between">
-          <a href="add.class.php" class="btn  me-2 btn-danger mt-5">Add Class
+              <div class="d-grid gap-2">
+            <a href="add.class.php" class="btn btn-danger"> Add Class
             <i class="bi bi-send-fill"></i>
           </a>
-          <a href="list.class.php" class="btn btn-warning mt-5">List Class
+          <a href="list.class.php" class="btn btn-warning">List Class
             <i class="bi bi-send-fill"></i>
-          </a>
-        </div>
+            </a>
+            </div>
             </div>
           </div>
       </div>
@@ -380,14 +380,14 @@ Exams Result
             <div class="card-body">
               <h5 class="card-title">Add lesson</h5>
               <p class="card-text">Register Unit Adds lesson</p>
-              <div class="d-flex justify-content-between">
-          <a href="add.lesson.php" class="btn me-2  btn-danger mt-5">Add lesson
+        <div class="d-grid gap-2">
+            <a href="add.lesson.php" class="btn btn-danger"> Add lesson
             <i class="bi bi-send-fill"></i>
           </a>
-          <a href="list.lessons.php" class="btn btn-warning mt-5">List lesson
+          <a href="list.lessons.php" class="btn btn-warning">List lesson
             <i class="bi bi-send-fill"></i>
-          </a>
-        </div>
+            </a>
+            </div>
             </div>
           </div>
       </div>
@@ -399,14 +399,14 @@ Exams Result
             <div class="card-body">
               <h5 class="card-title">Send Announcement</h5>
               <p class="card-text">Register Unit Send Announcement</p>
-              <div class="d-flex justify-content-between">
-          <a href="add.announcement.php" class="btn btn-sm  me-2  btn-danger mt-5">Send Announcement
+        <div class="d-grid gap-2">
+            <a href="add.announcement.php" class="btn btn-danger"> Send Announcement
             <i class="bi bi-send-fill"></i>
           </a>
-          <a href="list.announcement.php" class="btn btn-sm btn-warning mt-5">List Announcement
+          <a href="list.announcement.php" class="btn btn-warning">List Announcement
             <i class="bi bi-send-fill"></i>
-          </a>
-        </div>
+            </a>
+            </div>
             </div>
           </div>
       </div>
@@ -416,14 +416,14 @@ Exams Result
             <div class="card-body">
               <h5 class="card-title">Add School İnformation</h5>
               <p class="card-text">Register Unit Add School İnformation</p>
-              <div class="d-flex justify-content-between">
-          <a href="add.information.php" class="btn btn-sm  me-2  btn-danger mt-5">Add School İnformation
+        <div class="d-grid gap-2">
+            <a href="add.information.php" class="btn btn-danger"> Add School İnformation
             <i class="bi bi-send-fill"></i>
           </a>
-          <a href="list.information.php" class="btn btn-sm  btn-warning mt-5">List School İnformation
+          <a href="list.information.php" class="btn btn-warning">List School İnformation
             <i class="bi bi-send-fill"></i>
-          </a>
-        </div>
+            </a>
+            </div>
             </div>
           </div>
       </div>
@@ -434,7 +434,7 @@ Exams Result
             <h5 class="card-title">Add Food List</h5>
             <p class="card-text">Register Unit Add Food List</p>
             <div class="d-grid gap-2">
-            <a href="add.food.php" class="btn me-2  btn-danger"> Add Food List
+            <a href="add.food.php" class="btn btn-danger"> Add Food List
             <i class="bi bi-send-fill"></i>
           </a>
           <a href="list.food.php" class="btn btn-warning">List Food List
@@ -447,7 +447,6 @@ Exams Result
         </div>
     </div>
 </div>
-
       </div>
       <?php }?>
 </div>
@@ -461,14 +460,14 @@ Exams Result
             <div class="card-body">
               <h5 class="card-title">Create Exam</h5>
               <p class="card-text">Teacher Create Exam</p>
-              <div class="d-flex justify-content-between">
-          <a href="add.exam.php" class="btn  me-2  btn-danger mt-5">Create Exam
+        <div class="d-grid gap-2">
+            <a href="add.exam.php" class="btn btn-danger"> Create Exam
             <i class="bi bi-send-fill"></i>
           </a>
-          <a href="list.exam.php" class="btn  btn-warning mt-5">List Exam
+          <a href="list.exam.php" class="btn btn-warning">List Exam
             <i class="bi bi-send-fill"></i>
-          </a>
-        </div>
+            </a>
+            </div>
             </div>
           </div>
       </div>
@@ -478,14 +477,14 @@ Exams Result
             <div class="card-body">
               <h5 class="card-title">Send Announcement</h5>
               <p class="card-text">Register Unit Send Announcement</p>
-              <div class="d-flex justify-content-between">
-          <a href="add.announcement.php" class="btn btn-sm  me-2  btn-danger mt-5">Send Announcement
+        <div class="d-grid gap-2">
+            <a href="add.announcement.php" class="btn btn-danger"> Send Announcement
             <i class="bi bi-send-fill"></i>
           </a>
-          <a href="list.announcement.php" class="btn btn-sm btn-warning mt-5">List Announcement
+          <a href="list.announcement.php" class="btn btn-warning">List Announcement
             <i class="bi bi-send-fill"></i>
-          </a>
-        </div>
+            </a>
+            </div>
             </div>
           </div>
       </div>
