@@ -41,8 +41,11 @@ Rol idsi 4 olan **öğrenci** kullanıcısı, sınav listesinden sınava girebil
  - [ ] Telefon rehberi.
  - [ ] Öğretmen kullanıcısı, öğrenci kullanıcısna ödev, proje gibi görev verebildiği bir sistem eklenmeli.
  - [ ] Kayıt biriminin gördüğü grafik daha da ayrıntılı hale getirebilir.(okuldaki erkek öğrenci sayısı, hangi sınıfta kaç öğrenci var vb...)
-  - [X] İndex page te kullanıcının son giriş tarihi gösterildi.
 
+   ## Yapılan İyileştirmeler
+  - [X] İndex page te kullanıcının son giriş tarihi gösterildi.
+  - [X] Teacherın gördüğü list exam sayfasında sınavın hangi nedenden dolayı yayınlanmadığı gösterildi.
+  
  ## Yapılan Temel Geliştirmeler
  - [X] Genel olarak web sitesini kullanabilmek için giriş yapmak zorunlu hale getirildi.
  - [X] Ekleme,güncelleme,silme ve listeleme işlemleri doğru ve güvenli hale getirildi.
