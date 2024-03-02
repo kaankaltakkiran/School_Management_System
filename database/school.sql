@@ -16,7 +16,7 @@ CREATE TABLE `admins` (
   `usergender` char(1) NOT NULL,
   `roleuser` int(11) NOT NULL DEFAULT 1,
   `createdate` datetime NOT NULL DEFAULT current_timestamp(),
-  `lastupdate` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `lastupdate` datetime NOT NULL DEFAULT current_timestamp(),
   `userimg` varchar(255) NOT NULL,
   `adedadminid` int(11) NOT NULL,
   `adedadminname` varchar(50) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE `admins` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `admins` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `roleuser`, `createdate`, `lastupdate`, `userimg`, `adedadminid`, `adedadminname`) VALUES
-(1,	'Admin',	'admin@gmail.com',	'$2y$10$KiJGRPAyVQpk5xjkMIXEgO61qgVxRZnNA5qc6hd7vOSMoliu96QqW',	'M',	1,	'2024-01-30 18:00:41',	'2024-03-02 11:34:02',	'IMG-65b90f199e75b6.61068605.jpg',	1,	'Admin'),
+(1,	'Admin',	'admin@gmail.com',	'$2y$10$KiJGRPAyVQpk5xjkMIXEgO61qgVxRZnNA5qc6hd7vOSMoliu96QqW',	'M',	1,	'2024-01-30 18:00:41',	'2024-03-02 12:28:13',	'IMG-65b90f199e75b6.61068605.jpg',	1,	'Admin'),
 (2,	'Admin 2',	'admin2@gmail.com',	'$2y$10$Vl/POjjK9Y5ZVF9b4.jQ5unloIpLDnVg7h77VQkWOkOF/sOA/4GCy',	'F',	1,	'2024-01-30 18:01:43',	'2024-03-02 11:34:02',	'IMG-65b90f57e40c18.69953318.png',	1,	'Admin');
 
 DROP TABLE IF EXISTS `announcements`;
@@ -34,7 +34,8 @@ CREATE TABLE `announcements` (
   `sendername` varchar(50) NOT NULL,
   `senderrole` int(11) NOT NULL,
   `receiverrole` int(11) NOT NULL,
-  `createdate` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `createdate` datetime NOT NULL DEFAULT current_timestamp(),
+  `lastupdate` datetime NOT NULL DEFAULT current_timestamp(),
   `announcementtitle` varchar(50) NOT NULL,
   `startdate` date NOT NULL,
   `lastdate` date NOT NULL,
@@ -44,10 +45,10 @@ CREATE TABLE `announcements` (
   PRIMARY KEY (`announcementid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
-INSERT INTO `announcements` (`announcementid`, `senderid`, `sendername`, `senderrole`, `receiverrole`, `createdate`, `announcementtitle`, `startdate`, `lastdate`, `ispublish`, `announcement`, `readcount`) VALUES
-(1,	1,	'Kaan Kaltakkıran',	2,	3,	'2024-02-29 20:46:00',	'Register Unit To Teachers',	'2024-02-29',	'2024-03-31',	'1',	'This Announcement Register Unit To Teachers      ',	31),
-(2,	1,	'Veli Yıldız',	3,	4,	'2024-02-29 20:09:39',	'Teacher To Students',	'2024-02-29',	'2024-05-01',	'1',	'This Annoucement Teacher To Students',	20),
-(3,	1,	'Kaan Kaltakkıran',	2,	4,	'2024-02-29 20:46:00',	'Register Unit To Students',	'2024-02-29',	'2024-04-01',	'0',	'This Annoucement Register Unit To Students',	20);
+INSERT INTO `announcements` (`announcementid`, `senderid`, `sendername`, `senderrole`, `receiverrole`, `createdate`, `lastupdate`, `announcementtitle`, `startdate`, `lastdate`, `ispublish`, `announcement`, `readcount`) VALUES
+(1,	1,	'Kaan Kaltakkıran',	2,	3,	'2024-03-02 12:37:20',	'2024-03-02 12:39:36',	'Register Unit To Teachers',	'2024-02-29',	'2024-03-31',	'1',	'This Announcement Register Unit To Teachers          ',	39),
+(2,	1,	'Veli Yıldız',	3,	4,	'2024-02-29 20:09:39',	'2024-03-02 12:37:52',	'Teacher To Students',	'2024-02-29',	'2024-05-01',	'1',	'This Annoucement Teacher To Students',	20),
+(3,	1,	'Kaan Kaltakkıran',	2,	4,	'2024-03-02 12:37:20',	'2024-03-02 12:37:52',	'Register Unit To Students',	'2024-02-29',	'2024-04-01',	'0',	'This Annoucement Register Unit To Students',	28);
 
 DROP TABLE IF EXISTS `classes`;
 CREATE TABLE `classes` (
@@ -56,7 +57,7 @@ CREATE TABLE `classes` (
   `classletter` char(1) NOT NULL,
   `classname` varchar(4) NOT NULL,
   `createdate` datetime NOT NULL DEFAULT current_timestamp(),
-  `lastupdate` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `lastupdate` datetime NOT NULL DEFAULT current_timestamp(),
   `addedunitid` int(11) NOT NULL,
   `addedunitname` varchar(50) NOT NULL,
   PRIMARY KEY (`classid`)
@@ -95,11 +96,11 @@ CREATE TABLE `exams` (
   `addedid` int(11) NOT NULL,
   `addedname` varchar(50) NOT NULL,
   `createdate` datetime NOT NULL DEFAULT current_timestamp(),
-  `updateddate` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `lastupdate` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`examid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
-INSERT INTO `exams` (`examid`, `examimg`, `examtitle`, `examdescription`, `examstartdate`, `examenddate`, `examtime`, `ispublish`, `classid`, `classname`, `addedid`, `addedname`, `createdate`, `updateddate`) VALUES
+INSERT INTO `exams` (`examid`, `examimg`, `examtitle`, `examdescription`, `examstartdate`, `examenddate`, `examtime`, `ispublish`, `classid`, `classname`, `addedid`, `addedname`, `createdate`, `lastupdate`) VALUES
 (1,	'IMG-65d9f46b758223.72202667.jpg',	'Exam 1',	'Exam 1 Description',	'2024-02-29',	'2024-04-01',	'10',	'1',	'6',	'10/B',	1,	'Veli Yıldız',	'2024-02-29 20:41:26',	'2024-02-24 16:51:39'),
 (2,	'IMG-65e0bccbe765d9.72184758.jpg',	'Exam 2',	'Exam 2 Description',	'2024-02-29',	'2024-04-29',	'45',	'1',	'1',	'9/A',	1,	'Veli Yıldız',	'2024-02-29 20:20:29',	'2024-02-24 16:53:34'),
 (3,	'IMG-65e0c24ce0c1a1.52900404.jpg',	'Exam 3',	'Exam 3 Description',	'2024-02-29',	'2024-04-30',	'60',	'1',	'10',	'11/B',	2,	'Ayse Yılmaz',	'2024-02-29 20:43:40',	'2024-02-24 16:54:14');
@@ -115,7 +116,7 @@ CREATE TABLE `foodlist` (
   `day6` text NOT NULL,
   `day7` text NOT NULL,
   `createdate` datetime NOT NULL DEFAULT current_timestamp(),
-  `lastupdate` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `lastupdate` datetime NOT NULL DEFAULT current_timestamp(),
   `addedunitid` int(11) NOT NULL,
   `addedunitname` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
@@ -136,7 +137,7 @@ CREATE TABLE `informations` (
   `addedunitid` int(11) NOT NULL,
   `addedunitname` varchar(50) NOT NULL,
   `createdate` datetime NOT NULL DEFAULT current_timestamp(),
-  `lastupdate` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `lastupdate` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`schoolid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
@@ -149,7 +150,7 @@ CREATE TABLE `lessons` (
   `lessonid` int(11) NOT NULL AUTO_INCREMENT,
   `lessonname` text NOT NULL,
   `createdate` datetime NOT NULL DEFAULT current_timestamp(),
-  `lastupdate` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `lastupdate` datetime NOT NULL DEFAULT current_timestamp(),
   `addedunitid` int(11) NOT NULL,
   `addedunitname` varchar(50) NOT NULL,
   PRIMARY KEY (`lessonid`)
@@ -175,11 +176,11 @@ CREATE TABLE `questions` (
   `addedid` int(11) NOT NULL,
   `addedname` varchar(50) NOT NULL,
   `createdate` datetime NOT NULL DEFAULT current_timestamp(),
-  `updateddate` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `lastupdate` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`questionid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
-INSERT INTO `questions` (`questionid`, `questiontitle`, `answera`, `answerb`, `answerc`, `answerd`, `trueanswer`, `examid`, `addedid`, `addedname`, `createdate`, `updateddate`) VALUES
+INSERT INTO `questions` (`questionid`, `questiontitle`, `answera`, `answerb`, `answerc`, `answerd`, `trueanswer`, `examid`, `addedid`, `addedname`, `createdate`, `lastupdate`) VALUES
 (1,	'PHP\'de &quot;echo&quot; ve &quot;print&quot; arasındaki fark nedir?',	'&quot;print&quot; değişkenleri çıktıya yazdırırken &quot;echo&quot; sadece metni çıktılar.',	'&quot;echo&quot; sadece bir değişkeni yazdırırken &quot;print&quot; birden fazla değişkeni yazdırabilir.',	'&quot;echo&quot; daha hızlıdır ve herhangi bir değer döndürmezken &quot;print&quot; bir değer döndürür.',	' &quot;print&quot; metni çift tırnak içinde yazdırırken &quot;echo&quot; tek tırnak içinde yazdırır.',	'&quot;echo&quot; daha hızlıdır ve herhangi bir değer döndürmezken &quot;print&quot; bir değer döndürür.',	1,	1,	'Veli Yıldız',	'2024-02-28 00:00:46',	'2024-03-02 11:40:00'),
 (2,	'PHP\'de &quot;include&quot; ve &quot;require&quot; arasındaki fark nedir?',	'&quot;include&quot; dosya bulunamazsa uyarı döndürürken, &quot;require&quot; hata üretir.',	'&quot;include&quot; ile dahil edilen dosya isteğe bağlıdır, &quot;require&quot; ise zorunludur.',	'&quot;include&quot; ile dahil edilen dosya sadece bir kez dahil edilirken, &quot;require&quot; birden fazla kez dahil edilebilir.',	'&quot;include&quot; ile dahil edilen dosyada bir hata oluşursa işlem devam ederken, &quot;require&quot; durumu kontrol eder ve devam etmez',	'&quot;include&quot; dosya bulunamazsa uyarı döndürürken, &quot;require&quot; hata üretir.',	1,	1,	'Veli Yıldız',	'2024-02-28 00:01:45',	'2024-02-28 00:01:45'),
 (3,	' PHP\'nin kullanımıyla ilgili hangisi doğrudur?',	'PHP, sadece sunucu taraflı bir betik dili olarak kullanılabilir.',	'PHP, yalnızca Linux işletim sistemi üzerinde çalışabilir.',	'PHP, HTML içine gömülerek web sayfalarının dinamik içeriğini oluşturmak için kullanılabilir.',	'PHP, sadece front-end web geliştirmesi için kullanılır.',	'PHP, HTML içine gömülerek web sayfalarının dinamik içeriğini oluşturmak için kullanılabilir.',	3,	2,	'Ayse Yılmaz',	'2024-02-28 13:02:35',	'2024-02-28 00:02:59'),
@@ -198,7 +199,7 @@ CREATE TABLE `registerunits` (
   `usergender` char(1) NOT NULL,
   `roleuser` int(11) NOT NULL DEFAULT 2,
   `createdate` datetime NOT NULL DEFAULT current_timestamp(),
-  `lastupdate` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `lastupdate` datetime NOT NULL DEFAULT current_timestamp(),
   `useraddress` varchar(100) NOT NULL,
   `phonenumber` char(11) NOT NULL,
   `birthdate` date NOT NULL,
@@ -222,7 +223,7 @@ CREATE TABLE `results` (
   `totalfalseanswer` text NOT NULL,
   `result` varchar(10) NOT NULL,
   `createdate` datetime NOT NULL DEFAULT current_timestamp(),
-  `lastupdate` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `lastupdate` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`resultid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
@@ -241,7 +242,7 @@ CREATE TABLE `students` (
   `phonenumber` varchar(50) NOT NULL,
   `roleuser` int(11) NOT NULL DEFAULT 4,
   `createdate` datetime NOT NULL DEFAULT current_timestamp(),
-  `lastupdate` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `lastupdate` datetime NOT NULL DEFAULT current_timestamp(),
   `classid` int(11) NOT NULL,
   `classname` varchar(4) NOT NULL,
   `birthdate` date NOT NULL,
@@ -272,7 +273,7 @@ CREATE TABLE `teachers` (
   `usergender` char(1) NOT NULL,
   `roleuser` int(11) NOT NULL DEFAULT 3,
   `createdate` datetime NOT NULL DEFAULT current_timestamp(),
-  `lastupdate` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `lastupdate` datetime NOT NULL DEFAULT current_timestamp(),
   `classid` text NOT NULL,
   `classname` text NOT NULL,
   `useraddress` varchar(100) NOT NULL,
@@ -287,10 +288,10 @@ CREATE TABLE `teachers` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `roleuser`, `createdate`, `lastupdate`, `classid`, `classname`, `useraddress`, `phonenumber`, `birthdate`, `userimg`, `lessonid`, `lessonname`, `addedunitid`, `addedunitname`) VALUES
-(1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$F8BOCVniVNOqHhjl7gWf8e5ptBp1wNP.KhGPA3GA9pEJx0hPGEZOm',	'M',	3,	'2024-02-10 12:43:06',	'2024-03-02 11:38:36',	'1,6,11,16',	'9/A,10/B,11/C,12/D',	'Address 1',	'23123112323',	'1975-08-20',	'IMG-65cf8e230c7946.47057921.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
+(1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$F8BOCVniVNOqHhjl7gWf8e5ptBp1wNP.KhGPA3GA9pEJx0hPGEZOm',	'M',	3,	'2024-02-10 12:43:06',	'2024-03-02 12:34:35',	'1,6,11,16',	'9/A,10/B,11/C,12/D',	'Address 1',	'23123112323',	'1975-08-20',	'IMG-65cf8e230c7946.47057921.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
 (2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$a7xTEd88iyzI43udPEmrSeTmxBBaj9nf.JXtJV8NadXoRV1/GGe7q',	'F',	3,	'2024-02-10 12:43:40',	'2024-03-02 11:38:36',	'1,10',	'9/A,11/B',	'Address 2',	'12331223123',	'1980-01-15',	'IMG-65c7454cee1627.24858158.png',	'3',	'Turkish',	1,	'Kaan Kaltakkıran'),
 (3,	'Spor Teacher',	'sporteacher@gmail.com',	'$2y$10$9drgD7QvkdJm9HMBMHzg.uDfJfWmGBpNnf5TchsIA2r5VT2x0Dkga',	'F',	3,	'2024-02-29 19:09:23',	'2024-03-02 11:38:36',	'4,7,10,13',	'9/D,10/C,11/B,12/A',	'Address 3',	'05076600889',	'1968-01-01',	'IMG-65e0ac33d8e721.72086549.jpg',	'2',	'Spor',	1,	'Kaan Kaltakkıran'),
 (4,	'English Teacher',	'englishteacher@gmail.com',	'$2y$10$RHkpNyJ4JHTQxMKfrcLn0.q8xni0akO9voQtVG0f/ZwlVzRL1QosK',	'F',	3,	'2024-02-29 19:10:39',	'2024-03-02 11:38:36',	'1,2,9,11,16',	'9/A,9/B,11/A,11/C,12/D',	'Address 4',	'12312312312',	'1972-10-10',	'IMG-65e0ac7fbcfa54.07364665.jpg',	'4',	'English',	1,	'Kaan Kaltakkıran'),
 (5,	'Science Teacher',	'scienceteacher@gmail.com',	'$2y$10$7VWTS5FjJRZCxkuWQSN94uyYh8gjvHHSXvJx7jK6h4KjBvrmG76Su',	'M',	3,	'2024-02-29 19:12:09',	'2024-03-02 11:38:36',	'1,6,10,13,15',	'9/A,10/B,11/B,12/A,12/C',	'Address 5',	'12312312312',	'1965-07-08',	'IMG-65e0acd98f8b82.08350264.jpg',	'5',	'Science',	1,	'Kaan Kaltakkıran');
 
--- 2024-03-02 08:41:36
+-- 2024-03-02 09:40:57

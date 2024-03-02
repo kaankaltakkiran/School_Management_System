@@ -54,7 +54,7 @@ if (isset($_POST['form_submit'])) {
     $isPublish = isset($_POST['form_ispublish']) ? 1 : 0;
     $announcementContent = htmlspecialchars($_POST['form_announcement']);
 
-    $sql = "UPDATE announcements SET announcementtitle = :form_title,receiverrole=:form_reciverrole, startdate = :form_startdate, lastdate=:form_lastdate,ispublish=:form_ispublish,announcement=:form_announcement WHERE announcementid = :idannouncement";
+    $sql = "UPDATE announcements SET announcementtitle = :form_title,receiverrole=:form_reciverrole, startdate = :form_startdate, lastdate=:form_lastdate,ispublish=:form_ispublish,announcement=:form_announcement,lastupdate = CURRENT_TIMESTAMP() WHERE announcementid = :idannouncement";
     $SORGU = $DB->prepare($sql);
     $SORGU->bindParam(':form_title', $announcementTitle);
     $SORGU->bindParam(':form_reciverrole', $announcementReciverRole);
