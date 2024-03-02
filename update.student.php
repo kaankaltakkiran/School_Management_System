@@ -116,7 +116,7 @@ if (isset($_POST['form_submit'])) {
                 //?unlink dosya silmek için kullanılır
                 unlink('teacher_images/' . $old_img_name);
                 //!Foto güncellediyse veritabanına yeni fotoğraf adını kaydet
-                $sql = "UPDATE students SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,userimg = '$new_img_name',parentname=:form_parentname,parentnumber=:form_parentnumber,classid=:classid,classname=:classname,lessonid = :lessonid, lessonname = :lessonname WHERE userid = :idStudent";
+                $sql = "UPDATE students SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,userimg = '$new_img_name',parentname=:form_parentname,parentnumber=:form_parentnumber,classid=:classid,classname=:classname,lessonid = :lessonid, lessonname = :lessonname,lastupdate = CURRENT_TIMESTAMP() WHERE userid = :idStudent";
 
             } else {
                 $errors[] = "You can't upload files of this type !";
@@ -124,7 +124,7 @@ if (isset($_POST['form_submit'])) {
         }
     } else {
         //!Foto güncellemediysen eski fotoğrafı kullan
-        $sql = "UPDATE students SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,parentname=:form_parentname,parentnumber=:form_parentnumber,classid=:classid,classname=:classname,lessonid = :lessonid, lessonname = :lessonname WHERE userid = :idStudent";
+        $sql = "UPDATE students SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,parentname=:form_parentname,parentnumber=:form_parentnumber,classid=:classid,classname=:classname,lessonid = :lessonid, lessonname = :lessonname,lastupdate = CURRENT_TIMESTAMP() WHERE userid = :idStudent";
     }
     //! Hata yoksa veritabanına kaydet
     if (empty($errors)) {

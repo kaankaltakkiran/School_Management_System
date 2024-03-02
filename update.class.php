@@ -42,7 +42,7 @@ if (isset($_POST['form_submit'])) {
     //!Sınıf Adı Birleştirme
     $className = strtoupper($classNumber . "/" . $classLetter);
 
-    $sql = "UPDATE classes SET classnumber = :form_classnumber,classletter = :form_classletter,classname = :classname WHERE classid = :idClass";
+    $sql = "UPDATE classes SET classnumber = :form_classnumber,classletter = :form_classletter,classname = :classname,lastupdate = CURRENT_TIMESTAMP() WHERE classid = :idClass";
     //! Aynı isimde class name var mı kontrol et
     //? Eğer aynı isimde class name varsa hata ver
     $checkClassQuery = $DB->prepare("SELECT * FROM classes WHERE classname = :classname AND classid != :idClass");

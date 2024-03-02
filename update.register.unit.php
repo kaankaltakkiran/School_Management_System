@@ -78,7 +78,7 @@ if (isset($_POST['form_submit'])) {
                 //?unlink dosya silmek için kullanılır
                 unlink('register_unit_images/' . $old_img_name);
                 //!Foto güncellediyse veritabanına yeni fotoğraf adını kaydet
-                $sql = "UPDATE registerunits SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,userimg = '$new_img_name' WHERE userid = :idRegisterUnit";
+                $sql = "UPDATE registerunits SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,userimg = '$new_img_name',lastupdate = CURRENT_TIMESTAMP() WHERE userid = :idRegisterUnit";
 
             } else {
                 $errors[] = "You can't upload files of this type !";
@@ -86,7 +86,7 @@ if (isset($_POST['form_submit'])) {
         }
     } else {
         //!Foto güncellemediysen eski fotoğrafı kullan
-        $sql = "UPDATE registerunits SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate WHERE userid = :idRegisterUnit";
+        $sql = "UPDATE registerunits SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,lastupdate = CURRENT_TIMESTAMP() WHERE userid = :idRegisterUnit";
     }
     //! Hata yoksa veritabanına kaydet
     if (empty($errors)) {

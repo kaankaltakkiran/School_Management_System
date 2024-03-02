@@ -99,7 +99,7 @@ if (isset($_POST['form_submit'])) {
                 //?unlink dosya silmek için kullanılır
                 unlink('exam_images/' . $old_img_name);
                 //!Foto güncellediyse veritabanına yeni fotoğraf adını kaydet
-                $sql = "UPDATE exams SET examtitle = :form_examtitle, examdescription = :form_examdescription, examstartdate = :form_examstartdate, examenddate = :form_examenddate, examtime = :form_examtime,ispublish=:form_ispublish, examimg = '$new_img_name', classid=:classid,classname=:classname WHERE examid = :idExam";
+                $sql = "UPDATE exams SET examtitle = :form_examtitle, examdescription = :form_examdescription, examstartdate = :form_examstartdate, examenddate = :form_examenddate, examtime = :form_examtime,ispublish=:form_ispublish, examimg = '$new_img_name', classid=:classid,classname=:classname,lastupdate = CURRENT_TIMESTAMP() WHERE examid = :idExam";
 
             } else {
                 $errors[] = "You can't upload files of this type !";
@@ -107,7 +107,7 @@ if (isset($_POST['form_submit'])) {
         }
     } else {
         //!Foto güncellemediysen eski fotoğrafı kullan
-        $sql = "UPDATE exams SET examtitle = :form_examtitle, examdescription = :form_examdescription, examstartdate = :form_examstartdate, examenddate = :form_examenddate, examtime = :form_examtime,ispublish=:form_ispublish, classid=:classid,classname=:classname WHERE examid = :idExam";
+        $sql = "UPDATE exams SET examtitle = :form_examtitle, examdescription = :form_examdescription, examstartdate = :form_examstartdate, examenddate = :form_examenddate, examtime = :form_examtime,ispublish=:form_ispublish, classid=:classid,classname=:classname,lastupdate = CURRENT_TIMESTAMP() WHERE examid = :idExam";
     }
     //! Hata yoksa veritabanına kaydet
     if (empty($errors)) {

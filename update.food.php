@@ -133,7 +133,7 @@ if (isset($_POST['form_submit'])) {
         $errors[] = "An attached record was found. You can only add a list !";
     } else {
 
-        $sql = "UPDATE foodlist SET day1 = :day1Menu, day2 = :day2Menu, day3 = :day3Menu, day4 = :day4Menu, day5 = :day5Menu, day6 = :day6Menu, day7 = :day7Menu WHERE addedunitid = :unitid";
+        $sql = "UPDATE foodlist SET day1 = :day1Menu, day2 = :day2Menu, day3 = :day3Menu, day4 = :day4Menu, day5 = :day5Menu, day6 = :day6Menu, day7 = :day7Menu,lastupdate = CURRENT_TIMESTAMP() WHERE addedunitid = :unitid";
 
         $SORGU = $DB->prepare($sql);
         $SORGU->bindParam(':day1Menu', $day1Menu);

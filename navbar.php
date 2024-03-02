@@ -312,13 +312,13 @@ if (isset($_POST['form_submit'])) {
                 $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
                 $id = $_SESSION['id'];
                 if ($_SESSION['role'] == 1) {
-                    $sql = "UPDATE admins SET userpassword	 = '$hashedNewPassword' WHERE userid = :id";
+                    $sql = "UPDATE admins SET userpassword	 = '$hashedNewPassword',lastupdate = CURRENT_TIMESTAMP() WHERE userid = :id";
                 } else if ($_SESSION['role'] == 2) {
-                    $sql = "UPDATE registerunits SET userpassword	 = '$hashedNewPassword' WHERE userid = :id";
+                    $sql = "UPDATE registerunits SET userpassword	 = '$hashedNewPassword',lastupdate = CURRENT_TIMESTAMP() WHERE userid = :id";
                 } else if ($_SESSION['role'] == 3) {
-                    $sql = "UPDATE teachers SET userpassword	 = '$hashedNewPassword' WHERE userid = :id";
+                    $sql = "UPDATE teachers SET userpassword	 = '$hashedNewPassword',lastupdate = CURRENT_TIMESTAMP() WHERE userid = :id";
                 } else if ($_SESSION['role'] == 4) {
-                    $sql = "UPDATE students SET userpassword	 = '$hashedNewPassword' WHERE userid = :id";
+                    $sql = "UPDATE students SET userpassword	 = '$hashedNewPassword',lastupdate = CURRENT_TIMESTAMP() WHERE userid = :id";
                 }
                 $SORGU = $DB->prepare($sql);
                 $SORGU->bindParam(':id', $id);

@@ -81,10 +81,10 @@ if (isset($_POST['submit_form'])) {
                 unlink($_SESSION['imageFolderName'] . '/' . $old_img_name);
                 if ($userrole == 3) {
                     //!Foto güncellediyse veritabanına yeni fotoğraf adını kaydet
-                    $sql = "UPDATE teachers SET username = :form_username, useremail	 = :form_email, useraddress=:form_adress,phonenumber=:form_phonenumber,userimg = '$new_img_name' WHERE userid = :userid";
+                    $sql = "UPDATE teachers SET username = :form_username, useremail	 = :form_email, useraddress=:form_adress,phonenumber=:form_phonenumber,userimg = '$new_img_name',lastupdate = CURRENT_TIMESTAMP() WHERE userid = :userid";
                 } else if ($userrole == 4) {
                     //!Foto güncellediyse veritabanına yeni fotoğraf adını kaydet
-                    $sql = "UPDATE students SET username = :form_username, useremail= :form_email,useraddress=:form_adress,phonenumber=:form_phonenumber,userimg = '$new_img_name',parentname=:form_parentname,parentnumber=:form_parentnumber WHERE userid = :userid";
+                    $sql = "UPDATE students SET username = :form_username, useremail= :form_email,useraddress=:form_adress,phonenumber=:form_phonenumber,userimg = '$new_img_name',parentname=:form_parentname,parentnumber=:form_parentnumber,lastupdate = CURRENT_TIMESTAMP() WHERE userid = :userid";
                 }
 
             } else {

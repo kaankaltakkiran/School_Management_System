@@ -41,7 +41,7 @@ if (isset($_POST['form_submit'])) {
     //!Onay mesajları
     $approves = array();
 
-    $sql = "UPDATE lessons SET lessonname = :from_lessonname WHERE lessonid = :lessonid";
+    $sql = "UPDATE lessons SET lessonname = :from_lessonname,lastupdate = CURRENT_TIMESTAMP() WHERE lessonid = :lessonid";
     //! Kullanıcı e-posta adresini değiştirdiyse, yeni e-posta adresi için veritabanında mevcut bir kullanıcı olup olmadığını kontrol et
     //? Eğer post edilen email update yapılan kişinin dışında bir kullanıcıda varsa hata mesajı göster
     $checkLessonQuery = $DB->prepare("SELECT * FROM lessons WHERE lessonname = :from_lessonname AND lessonid != :lessonid");

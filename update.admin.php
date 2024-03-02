@@ -73,14 +73,14 @@ if (isset($_POST['form_submit'])) {
                 //?unlink dosya silmek için kullanılır
                 unlink('admin_images/' . $old_img_name);
                 //!Foto güncellediyse veritabanına yeni fotoğraf adını kaydet
-                $sql = "UPDATE admins SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,userimg = '$new_img_name' WHERE userid = :idAdmin";
+                $sql = "UPDATE admins SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,userimg = '$new_img_name',lastupdate = CURRENT_TIMESTAMP() WHERE userid = :idAdmin";
             } else {
                 $errors[] = "You can't upload files of this type !";
             }
         }
     } else {
         //!Foto güncellemediysen eski fotoğrafı kullan
-        $sql = "UPDATE admins SET username = :form_username, useremail	 = :form_email, usergender=:form_gender WHERE userid = :idAdmin";
+        $sql = "UPDATE admins SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,lastupdate = CURRENT_TIMESTAMP() WHERE userid = :idAdmin";
     }
     //! Hata yoksa veritabanına kaydet
     if (empty($errors)) {

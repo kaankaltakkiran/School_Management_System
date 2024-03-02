@@ -65,7 +65,7 @@ if (isset($_POST['form_submit'])) {
     //!Onay mesajları
     $approves = array();
 
-    $sql = "UPDATE informations SET schoolname = :form_name,schoolyear=:form_year,schoolterm=:form_term,schoolabout=:form_about,schoolsummary=:form_summary,schooladdress=:form_address WHERE schoolid = :schoolid";
+    $sql = "UPDATE informations SET schoolname = :form_name,schoolyear=:form_year,schoolterm=:form_term,schoolabout=:form_about,schoolsummary=:form_summary,schooladdress=:form_address,lastupdate = CURRENT_TIMESTAMP() WHERE schoolid = :schoolid";
     //! Kullanıcı OKUL ismini değiştirdiyse, yeni okul  ismi için veritabanında mevcut bir kullanıcı olup olmadığını kontrol et
     //? Eğer post edilen ism update yapılan kişinin dışında bir ismi varsa hata mesajı göster
     $checkNameQuery = $DB->prepare("SELECT * FROM informations WHERE schoolname = :form_name AND schoolid != :schoolid");
