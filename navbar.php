@@ -44,7 +44,7 @@
           <a class="nav-link  <?=($activePage == 'teacher.class.list') ? 'active' : '';?>" href="list.teacher.class.php">Student's Class</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <?=($activePage == 'add.exam' || $activePage == 'list.exam' || $activePage == 'teacher.exam.result') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'add.exam' || $activePage == 'list.exam' || $activePage == 'update.exam' || $activePage == 'teacher.exam.result') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Exams
           </a>
           <ul class="dropdown-menu">
