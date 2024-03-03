@@ -151,6 +151,11 @@ die(); */
                  <br>
                   Class
                </a>
+               <a href="add.exam.php" class="col btn btn-primary m-2 py-3">
+               <img width="48" height="48" src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-vitaly-gorbachev/48/external-exam-online-learning-vitaliy-gorbachev-lineal-vitaly-gorbachev.png" alt="external-exam-online-learning-vitaliy-gorbachev-lineal-vitaly-gorbachev"/>
+ <br>
+Add Exam
+</a>
                <a href="list.exam.php" class="col btn btn-success m-2 py-3">
  <img width="48" height="48" src="https://img.icons8.com/ios/48/exam.png" alt="exam"/>
  <br>
