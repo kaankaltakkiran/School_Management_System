@@ -6,6 +6,18 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+if (isset($_GET['removeAdminid'])) {
+    $approves = array();
+    require 'db.php';
+    $remove_id = $_GET['removeAdminid'];
+    $sql = "DELETE FROM admins WHERE userid = :removeAdminid";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':removeAdminid', $remove_id);
+    $SORGU->execute();
+    $approves[] = "Admin Deleted Successfully...";
+}
+?>
+<?php
 //! Rol idsi 1 olan admin kullanıcılar listeyebilir
 if ($_SESSION['role'] != 1) {
     header("location: authorizationcontrol.php");
@@ -14,6 +26,24 @@ if ($_SESSION['role'] != 1) {
 ?>
 <?php require 'navbar.php'?>
     <div class="container">
+    <?php
+//! Başarılı mesajlarını göster
+if (!empty($approves)) {
+    foreach ($approves as $approve) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+        <div class='toast align-items-center text-white bg-success border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+            <div class='d-flex'>
+                <div class='toast-body'>
+                $approve
+                </div>
+                <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+            </div>
+        </div>
+    </div>";
+
+    }
+}
+?>
       <div class="row mt-3">
       <div class='row justify-content-center text-center'>
         <div class="col-sm-4 col-md-6 col-lg-8">
@@ -56,22 +86,15 @@ $SORGU->execute();
 $admins = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //echo '<pre>'; print_r($admins);
 
-if (isset($_GET['removeAdminid'])) {
-    require 'db.php';
-    $remove_id = $_GET['removeAdminid'];
-    $sql = "DELETE FROM admins WHERE userid = :removeAdminid";
-    $SORGU = $DB->prepare($sql);
-    $SORGU->bindParam(':removeAdminid', $remove_id);
-    $SORGU->execute();
-    echo "<script>
-alert('The Admin User has been deleted. You are redirected to the Admin List page...!');
-window.location.href = 'list.admin.php';
-</script>";
-}
-
 foreach ($admins as $admin) {
     $gender = $admin['usergender'];
     $gender = ($gender == 'M') ? 'Male' : 'Famale';
+    //! Kendi kullanıcısını silemez
+    if ($admin['userid'] == $_SESSION['id']) {
+        $deleteButton = "<span class='badge text-bg-danger fw-bold'>You Can't Delete Yourself !</span>";
+    } else {
+        $deleteButton = "<a href='list.admin.php?removeAdminid={$admin['userid']}' onclick='return confirm(\"Are you sure you want to delete {$admin['username']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a>";
+    }
     echo "
     <tr>
       <th>{$admin['userid']}</th>
@@ -81,7 +104,7 @@ foreach ($admins as $admin) {
       <td>$gender</td>
       <td>{$admin['createdate']}</td>
       <td><a href='update.admin.php?idAdmin={$admin['userid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a></td>
-      <td><a href='list.admin.php?removeAdminid={$admin['userid']}' onclick='return confirm(\"Are you sure you want to delete {$admin['username']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a></td>
+      <td>{$deleteButton}</td>
    </tr>
   ";
 }
