@@ -45,6 +45,7 @@ Rol idsi 4 olan **öğrenci** kullanıcısı, sınav listesinden sınava girebil
    ## Yapılan İyileştirmeler
   - [X] İndex page te kullanıcının son giriş tarihi gösterildi.
   - [X] Teacherın gördüğü list exam sayfasında sınavın hangi nedenden dolayı yayınlanmadığı gösterildi.
+   - [X] Password ekranlarında eğer capslock açıksa uyarı verildi.
   
  ## Yapılan Temel Geliştirmeler
  - [X] Genel olarak web sitesini kullanabilmek için giriş yapmak zorunlu hale getirildi.

@@ -129,5 +129,6 @@ if (exampleModal) {
   })
 }
 </script>
+<script src="./public/js/caps.lock.js"></script>
   </body>
 </html>
