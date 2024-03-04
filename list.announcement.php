@@ -71,6 +71,48 @@ $SORGU->bindParam(':roleid', $roleid);
 $SORGU->execute();
 if ($userid == $fullAnnouncements[0]['senderid']) {
     foreach ($fullAnnouncements as $fullAnnouncement) {
+        //! Status belirleme
+        $dateControl = "";
+        $publishControl = "";
+        $status = "";
+        $statusCount = 0;
+        //! Veritabaında ki publish durumunu kontrol et
+        $published = $fullAnnouncement['ispublish'];
+
+        if ($published == 1) {
+            $publishControl = "Published";
+        } else {
+            $publishControl = "Not Published !";
+        }
+        //!Bugünün tarihini al
+        $today = date("Y-m-d");
+        //! Veritabanındaki tarihleri al
+        $startDate = $fullAnnouncement['startdate'];
+        $endDate = $fullAnnouncement['lastdate'];
+        //!Tarihler arasında olup olmadığını kontrol et
+        if ($today >= $startdate && $today <= $endDate) {
+            $dateControl = "Dates Available";
+        } else {
+            $dateControl = "Announcement Date Is Not Within Today's Dates !";
+        }
+        //!Status belirleme
+        //? Eğer publish durumu published ve tarihler uygunsa
+        if ($publishControl == "Published" && $dateControl == "Dates Available") {
+            $status = "<span class='badge rounded-pill text-bg-success float-end'>Active</span> ";
+            //? Eğer publish durumu not published ve tarihler uygunsa
+        } else if ($publishControl == "Not Published !" && $dateControl == "Dates Available") {
+            $status = "<span class='badge rounded-pill text-bg-danger float-end'>Deactive: Selectted Not Published !</span>";
+            $statusCount = 1;
+            //? Eğer publish durumu published ve tarihler uygun değilse
+        } else if ($publishControl == "Published" && $dateControl == "Announcement Date Is Not Within Today's Dates !") {
+            $status = "<span class='badge rounded-pill text-bg-danger float-end'>Deactive: Date Is Not Within Today's Dates !</span>";
+            $statusCount = 1;
+            //? Eğer publish durumu not published ve tarihler uygun değilse
+        } else if ($publishControl == "Not Published !" && $dateControl == "Announcement Date Is Not Within Today's Dates !") {
+            $status = "<span class='badge rounded-pill text-bg-danger float-end'>Deactive: Not Published and Date Is Not Within Today's Dates !</span>";
+            $statusCount = 1;
+        }
+
         //!Kullanıcı role id sine göre role adını belirleme
         $senderRole = "";
         if ($fullAnnouncement['senderrole'] == 1) {
@@ -87,12 +129,6 @@ if ($userid == $fullAnnouncements[0]['senderid']) {
             $senderRole = "Other";
         }
 
-        $dateControl = strtotime($fullAnnouncement['startdate']) <= time() && strtotime($fullAnnouncement['lastdate']) >= time();
-        $publishAlert = ''; // Her döngü adımında publishAlert sıfırlanıyor.
-        //? Eğer ispublish 0 ise veya tarih kontrolü false ise
-        if ($fullAnnouncement['ispublish'] == 0 || $dateControl == false) {
-            $publishAlert = "<span style='float: right;' class='badge bg-danger fw-bolder fs-6 '>Not Published !!!</span>";
-        }
         $update_button = '<a href="update.announcement.php?idannouncement=' . $fullAnnouncement['announcementid'] . '" class="btn btn-success me-2">Update <i class="bi bi-arrow-clockwise"></i></a>';
 
         $delete_button = '<a href="list.announcement.php?removeannouncementid=' . $fullAnnouncement['announcementid'] . '" onclick="return confirm(\'Are you sure you want to delete ' . $fullAnnouncement['announcementtitle'] . '?\')" class="btn btn-danger">Delete <i class="bi bi-trash"></i></a>';
@@ -123,7 +159,7 @@ if ($userid == $fullAnnouncements[0]['senderid']) {
               <?php echo $delete_button; ?>
             </div>
           </div>
-          <?php echo $publishAlert; ?>
+          <?php echo $status; ?>
           <span class="badge bg-primary float-end me-2  "><?php echo $fullAnnouncement['createdate'] ?> / Read <?php echo $fullAnnouncement['readcount'] ?> times. </span>
         </div>
       </div>
