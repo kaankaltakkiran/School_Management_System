@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//!Tekil Exam silme
 if (isset($_GET['removeExamid'])) {
     $approves = array();
     require 'db.php';
@@ -15,6 +16,19 @@ if (isset($_GET['removeExamid'])) {
     $SORGU->bindParam(':removeExamid', $remove_id);
     $SORGU->execute();
     $approves[] = "Exam Deleted Successfully...";
+}
+?>
+<?php
+//!Tüm Examleri  silme
+if (isset($_POST['removeAllExams'])) {
+    $approves = array();
+    require 'db.php';
+    $addedid = $_SESSION['id'];
+    $sql = "DELETE FROM exams WHERE addedid =:id";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':id', $addedid);
+    $SORGU->execute();
+    $approves[] = "All Exams Deleted Successfully...";
 }
 ?>
   <?php
@@ -78,6 +92,17 @@ $exams = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* echo '<pre>';
 print_r($exams);
 die(); */
+?>
+<div class="row justify-content-end ">
+  <div class="col-2">
+    <form method="post">
+    <?php if (count($exams) > 0) {?>
+    <button type="sumbit" name="removeAllExams" onclick="return confirm('Are you sure you want to delete all exams ?')" class="btn btn-danger float-end">Delete All Exams <i class="bi bi-trash"></i> </button>
+    <?php }?>
+    </form>
+    </div>
+</div>
+<?php
 foreach ($exams as $exam) {
     //! Status belirleme
     $dateControl = "";

@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//!Tekil Student silme
 if (isset($_GET['removestudentid'])) {
     $approves = array();
     require 'db.php';
@@ -15,6 +16,19 @@ if (isset($_GET['removestudentid'])) {
     $SORGU->bindParam(':removestudentid', $remove_id);
     $SORGU->execute();
     $approves[] = "Student Deleted Successfully...";
+}
+?>
+<?php
+//!Tüm Studentları  silme
+if (isset($_POST['removeAllStudents'])) {
+    $approves = array();
+    require 'db.php';
+    $registerUnitid = $_SESSION['id'];
+    $sql = "DELETE FROM students WHERE addedunitid =:id";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':id', $registerUnitid);
+    $SORGU->execute();
+    $approves[] = "All students Deleted Successfully...";
 }
 ?>
 <?php
@@ -87,6 +101,17 @@ $students = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* echo '<pre>';
 print_r($students);
 die(); */
+?>
+<div class="row justify-content-end ">
+  <div class="col-2">
+    <form method="post">
+    <?php if (count($students) > 0) {?>
+    <button type="sumbit" name="removeAllStudents" onclick="return confirm('Are you sure you want to delete all students ?')" class="btn btn-danger float-end">Delete All Students <i class="bi bi-trash"></i> </button>
+    <?php }?>
+    </form>
+    </div>
+</div>
+<?php
 foreach ($students as $student) {
     $gender = $student['usergender'];
     $gender = ($gender == 'M') ? 'Male' : 'Famale';

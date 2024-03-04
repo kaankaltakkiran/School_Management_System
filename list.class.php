@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//!Tekil Class silme
 if (isset($_GET['removeClassid'])) {
     $approves = array();
     require 'db.php';
@@ -15,6 +16,19 @@ if (isset($_GET['removeClassid'])) {
     $SORGU->bindParam(':removeClassid', $remove_id);
     $SORGU->execute();
     $approves[] = "Class Deleted Successfully...";
+}
+?>
+<?php
+//!Tüm Classları  silme
+if (isset($_POST['removeAllClasses'])) {
+    $approves = array();
+    require 'db.php';
+    $registerUnitid = $_SESSION['id'];
+    $sql = "DELETE FROM classes WHERE addedunitid =:id";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':id', $registerUnitid);
+    $SORGU->execute();
+    $approves[] = "All Classes Deleted Successfully...";
 }
 ?>
 <?php
@@ -71,10 +85,23 @@ if (!empty($approves)) {
 
     <?php
 require_once 'db.php';
-$SORGU = $DB->prepare("SELECT * FROM classes LIMIT 16");
+$registerUnitid = $_SESSION['id'];
+$SORGU = $DB->prepare("SELECT * FROM classes WHERE addedunitid =:id");
+$SORGU->bindParam(':id', $registerUnitid);
 $SORGU->execute();
 $classes = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //echo '<pre>'; print_r($classes);
+?>
+<div class="row justify-content-end ">
+  <div class="col-2">
+    <form method="post">
+    <?php if (count($classes) > 0) {?>
+    <button type="sumbit" name="removeAllClasses" onclick="return confirm('Are you sure you want to delete all classes ?')" class="btn btn-danger float-end">Delete All Classes <i class="bi bi-trash"></i> </button>
+    <?php }?>
+    </form>
+    </div>
+</div>
+<?php
 foreach ($classes as $class) {
     echo "
     <tr>

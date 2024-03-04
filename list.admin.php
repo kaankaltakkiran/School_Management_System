@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//!Tekil admin silme
 if (isset($_GET['removeAdminid'])) {
     $approves = array();
     require 'db.php';
@@ -15,6 +16,17 @@ if (isset($_GET['removeAdminid'])) {
     $SORGU->bindParam(':removeAdminid', $remove_id);
     $SORGU->execute();
     $approves[] = "Admin Deleted Successfully...";
+}
+?>
+<?php
+//!Tüm Adminleri silme
+if (isset($_POST['removeAllAdmins'])) {
+    $approves = array();
+    require 'db.php';
+    $sql = "DELETE FROM admins WHERE userid != 1";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->execute();
+    $approves[] = "All Admins Deleted Successfully...";
 }
 ?>
 <?php
@@ -72,7 +84,6 @@ if (!empty($approves)) {
   </thead>
   <tbody>
   </div>
-
     <?php
 $id = $_SESSION['id'];
 require_once 'db.php';
@@ -85,7 +96,17 @@ if ($_SESSION['id'] == 1) {
 $SORGU->execute();
 $admins = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //echo '<pre>'; print_r($admins);
-
+?>
+<div class="row justify-content-end ">
+  <div class="col-2">
+    <form method="post">
+    <?php if (count($admins) > 0) {?>
+    <button type="sumbit" name="removeAllAdmins" onclick="return confirm('Are you sure you want to delete all admins ?')" class="btn btn-danger float-end">Delete All Admins <i class="bi bi-trash"></i> </button>
+    <?php }?>
+    </form>
+    </div>
+</div>
+<?php
 foreach ($admins as $admin) {
     $gender = $admin['usergender'];
     $gender = ($gender == 'M') ? 'Male' : 'Famale';

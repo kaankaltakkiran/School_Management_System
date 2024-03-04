@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//!Tekil Register Unit silme
 if (isset($_GET['removeRegisterUnitid'])) {
     $approves = array();
     require 'db.php';
@@ -15,6 +16,19 @@ if (isset($_GET['removeRegisterUnitid'])) {
     $SORGU->bindParam(':removeRegisterUnitid', $remove_id);
     $SORGU->execute();
     $approves[] = "Register Unit Deleted Successfully...";
+}
+?>
+<?php
+//!Tüm Register Unit silme
+if (isset($_POST['removeAllRegisterUnits'])) {
+    $approves = array();
+    require 'db.php';
+    $adminid = $_SESSION['id'];
+    $sql = "DELETE FROM registerunits WHERE adedadminid =:id";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':id', $adminid);
+    $SORGU->execute();
+    $approves[] = "All Register Units Deleted Successfully...";
 }
 ?>
 <?php
@@ -77,10 +91,23 @@ if (!empty($approves)) {
   </div>
     <?php
 require_once 'db.php';
-$SORGU = $DB->prepare("SELECT * FROM registerunits");
+$adminid = $_SESSION['id'];
+$SORGU = $DB->prepare("SELECT * FROM registerunits WHERE adedadminid =:id");
+$SORGU->bindParam(':id', $adminid);
 $SORGU->execute();
 $registerunits = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //echo '<pre>'; print_r($registerunits);
+?>
+<div class="row justify-content-end ">
+  <div class="col-2">
+    <form method="post">
+    <?php if (count($registerunits) > 0) {?>
+    <button type="sumbit" name="removeAllRegisterUnits" onclick="return confirm('Are you sure you want to delete all Register Units ?')" class="btn btn-danger float-end">Delete All Register Units <i class="bi bi-trash"></i> </button>
+    <?php }?>
+    </form>
+    </div>
+</div>
+    <?php
 foreach ($registerunits as $registerunit) {
     if ($_SESSION['id'] == $registerunit['adedadminid']) {
         $gender = $registerunit['usergender'];

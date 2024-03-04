@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//!Tekil Lesson silme
 if (isset($_GET['removeLessonid'])) {
     $approves = array();
     require 'db.php';
@@ -15,6 +16,19 @@ if (isset($_GET['removeLessonid'])) {
     $SORGU->bindParam(':removeLessonid', $remove_id);
     $SORGU->execute();
     $approves[] = "Lesson Deleted Successfully...";
+}
+?>
+<?php
+//!Tüm Dersleri  silme
+if (isset($_POST['removeAllLessons'])) {
+    $approves = array();
+    require 'db.php';
+    $registerUnitid = $_SESSION['id'];
+    $sql = "DELETE FROM lessons WHERE addedunitid =:id";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':id', $registerUnitid);
+    $SORGU->execute();
+    $approves[] = "All Lessons Deleted Successfully...";
 }
 ?>
 <?php
@@ -70,10 +84,23 @@ if (!empty($approves)) {
   </div>
     <?php
 require_once 'db.php';
-$SORGU = $DB->prepare("SELECT * FROM lessons LIMIT 16");
+$registerUnitid = $_SESSION['id'];
+$SORGU = $DB->prepare("SELECT * FROM lessons WHERE addedunitid = :id");
+$SORGU->bindParam(':id', $registerUnitid);
 $SORGU->execute();
 $lessons = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //echo '<pre>'; print_r($lessons);
+?>
+<div class="row justify-content-end ">
+  <div class="col-2">
+    <form method="post">
+    <?php if (count($lessons) > 0) {?>
+    <button type="sumbit" name="removeAllLessons" onclick="return confirm('Are you sure you want to delete all lessons ?')" class="btn btn-danger float-end">Delete All Lessons <i class="bi bi-trash"></i> </button>
+    <?php }?>
+    </form>
+    </div>
+</div>
+<?php
 foreach ($lessons as $lesson) {
     if ($lesson['addedunitid'] == $_SESSION['id']) {
         echo "
