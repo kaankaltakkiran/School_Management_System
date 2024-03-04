@@ -57,7 +57,7 @@ if (!empty($approves)) {
 </div>
 </div>
    <!-- tablo ile admin listeleme -->
-<table class="table table-bordered table-striped">
+<table id="example" class="table table-bordered table-striped " style="width:100%">
   <thead>
     <tr>
       <th>User Id</th>
