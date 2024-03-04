@@ -47,9 +47,11 @@ CREATE TABLE `announcements` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `announcements` (`announcementid`, `senderid`, `sendername`, `senderrole`, `receiverrole`, `createdate`, `lastupdate`, `announcementtitle`, `startdate`, `lastdate`, `ispublish`, `announcement`, `readcount`) VALUES
-(1,	1,	'Kaan Kaltakkıran',	2,	3,	'2024-03-02 12:37:20',	'2024-03-02 12:39:36',	'Register Unit To Teachers',	'2024-02-29',	'2024-03-31',	'1',	'This Announcement Register Unit To Teachers          ',	40),
-(2,	1,	'Veli Yıldız',	3,	4,	'2024-02-29 20:09:39',	'2024-03-02 12:37:52',	'Teacher To Students',	'2024-02-29',	'2024-05-01',	'1',	'This Annoucement Teacher To Students',	21),
-(3,	1,	'Kaan Kaltakkıran',	2,	4,	'2024-03-02 12:37:20',	'2024-03-02 12:37:52',	'Register Unit To Students',	'2024-02-29',	'2024-04-01',	'0',	'This Annoucement Register Unit To Students',	29);
+(1,	1,	'Kaan Kaltakkıran',	2,	3,	'2024-03-02 12:37:20',	'2024-03-02 12:39:36',	'Register Unit To Teachers',	'2024-02-29',	'2024-03-31',	'1',	'This Announcement Register Unit To Teachers          ',	73),
+(2,	1,	'Veli Yıldız',	3,	4,	'2024-02-29 20:09:39',	'2024-03-02 12:37:52',	'Teacher To Students',	'2024-02-29',	'2024-05-01',	'1',	'This Annoucement Teacher To Students',	24),
+(3,	1,	'Kaan Kaltakkıran',	2,	4,	'2024-03-02 12:37:20',	'2024-03-04 20:33:47',	'Register Unit To Students',	'2024-02-29',	'2024-04-01',	'0',	'    This Annoucement Register Unit To Students    ',	63),
+(4,	1,	'Kaan Kaltakkıran',	2,	3,	'2024-03-04 20:34:40',	'2024-03-04 20:34:40',	'Date Problem Announcement',	'2024-01-20',	'2024-02-10',	'1',	'Date Problem Announcement Description',	27),
+(5,	1,	'Kaan Kaltakkıran',	2,	2,	'2024-03-04 20:54:29',	'2024-03-04 20:54:29',	'Date Problem And Not Published Announcement',	'2024-02-04',	'0000-00-00',	'0',	'Date Problem And Not Published Announcement Description',	8);
 
 DROP TABLE IF EXISTS `classes`;
 CREATE TABLE `classes` (
@@ -216,8 +218,8 @@ CREATE TABLE `registerunits` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `registerunits` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `roleuser`, `createdate`, `lastupdate`, `lastlogintime`, `useraddress`, `phonenumber`, `birthdate`, `userimg`, `adedadminid`, `adedadminname`) VALUES
-(1,	'Kaan Kaltakkıran',	'kaan_fb_aslan@hotmail.com',	'$2y$10$8Lt16VFU4ZHyRGOfW7FA3O2s9G2rJ51.Ih/dnHqSZiJOckffwEQb.',	'M',	2,	'2024-01-30 18:06:22',	'2024-03-02 11:37:41',	'2024-03-02 14:48:38',	'Adress 1',	'05076600884',	'2000-01-01',	'IMG-65b9106edde915.94476959.jpg',	1,	'Admin'),
-(2,	'Ahmet Yıldız',	'ahmet@gmail.com',	'$2y$10$gUuy9WL.muHiht7i0Oyh4e/fisBgNIJORR5.bybkKWaeZoPbHavCG',	'M',	2,	'2024-01-30 18:07:09',	'2024-03-02 11:37:41',	'2024-03-02 11:01:40',	'Address 2',	'23123112323',	'1987-01-01',	'IMG-65b9109d6e3128.04596518.png',	1,	'Admin');
+(1,	'Kaan Kaltakkıran',	'kaan_fb_aslan@hotmail.com',	'$2y$10$8Lt16VFU4ZHyRGOfW7FA3O2s9G2rJ51.Ih/dnHqSZiJOckffwEQb.',	'M',	2,	'2024-01-30 18:06:22',	'2024-03-02 11:37:41',	'2024-03-04 17:58:51',	'Adress 1',	'05076600884',	'2000-01-01',	'IMG-65b9106edde915.94476959.jpg',	1,	'Admin'),
+(2,	'Ahmet Yıldız',	'ahmet@gmail.com',	'$2y$10$gUuy9WL.muHiht7i0Oyh4e/fisBgNIJORR5.bybkKWaeZoPbHavCG',	'M',	2,	'2024-01-30 18:07:09',	'2024-03-02 11:37:41',	'2024-03-04 17:56:08',	'Address 2',	'23123112323',	'1987-01-01',	'IMG-65b9109d6e3128.04596518.png',	1,	'Admin');
 
 DROP TABLE IF EXISTS `results`;
 CREATE TABLE `results` (
@@ -264,7 +266,7 @@ CREATE TABLE `students` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `students` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `useraddress`, `phonenumber`, `roleuser`, `createdate`, `lastupdate`, `lastlogintime`, `classid`, `classname`, `birthdate`, `userimg`, `parentname`, `parentnumber`, `lessonid`, `lessonname`, `addedunitid`, `addedunitname`) VALUES
-(1,	'Ali Yılmaz',	'ali@gmail.com',	'$2y$10$UFHeEWCOJioUY.qdE.71o.egEaETLBqjiYquIYv450X3/PJl7F9fC',	'M',	'Adress 1',	'12331223123',	4,	'2024-01-30 18:13:53',	'2024-03-02 11:38:16',	'2024-03-02 12:11:36',	6,	'10/B',	'2000-01-01',	'IMG-65cf8d6b14ec89.64266568.png',	'Ali Father',	'12331223123',	'1,3',	'Math,Turkish',	1,	'Kaan Kaltakkıran'),
+(1,	'Ali Yılmaz',	'ali@gmail.com',	'$2y$10$UFHeEWCOJioUY.qdE.71o.egEaETLBqjiYquIYv450X3/PJl7F9fC',	'M',	'Adress 1',	'12331223123',	4,	'2024-01-30 18:13:53',	'2024-03-02 11:38:16',	'2024-03-04 17:53:21',	6,	'10/B',	'2000-01-01',	'IMG-65cf8d6b14ec89.64266568.png',	'Ali Father',	'12331223123',	'1,3',	'Math,Turkish',	1,	'Kaan Kaltakkıran'),
 (2,	'Selin Yıldız',	'selin@gmail.com',	'$2y$10$QKjJT6hdDZidt0PE5w0puOJGBpG.AT4HzuXxtnlYIKnLbzsBjHhLO',	'F',	'Address 2',	'31232312132',	4,	'2024-01-30 18:14:25',	'2024-03-02 11:38:16',	'2024-03-02 11:02:05',	10,	'11/B',	'1996-01-01',	'IMG-65b91251666283.15293271.jpg',	'Selin Mother',	'31232312132',	'3',	'Turkish',	1,	'Kaan Kaltakkıran'),
 (3,	'Student 1',	'student1@gmail.com',	'$2y$10$Mnmitc7xaYt/4Yv.N1/4wOQeG7HFcW2CwFbLjnV2K8eFFniHSOlmy',	'M',	'Address 3',	'12331223123',	4,	'2024-02-29 19:21:10',	'2024-03-02 11:38:16',	'2024-03-02 11:02:05',	1,	'9/A',	'2000-01-01',	'IMG-65e0aef60f1b43.07278008.jpg',	'Student 1 Father',	'12331223123',	'1,3,5',	'Math,Turkish,Science',	1,	'Kaan Kaltakkıran'),
 (4,	'Student 2',	'student2@gmail.com',	'$2y$10$XRl2j6Xul5TMt2s5B.NLEuCkpWAD0Jyu6JRdkKNOFIvoJ648wpBIG',	'F',	'Address 4',	'12312312312',	4,	'2024-02-29 19:32:50',	'2024-03-02 11:38:16',	'2024-03-02 14:54:09',	2,	'9/B',	'2000-10-01',	'IMG-65e0b1b21084d4.16246724.jpg',	'Studnet 2 Mother',	'76546554464',	'1,2,3,4,5',	'Math,Spor,Turkish,English,Science',	1,	'Kaan Kaltakkıran'),
@@ -296,10 +298,10 @@ CREATE TABLE `teachers` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `roleuser`, `createdate`, `lastupdate`, `lastlogintime`, `classid`, `classname`, `useraddress`, `phonenumber`, `birthdate`, `userimg`, `lessonid`, `lessonname`, `addedunitid`, `addedunitname`) VALUES
-(1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$F8BOCVniVNOqHhjl7gWf8e5ptBp1wNP.KhGPA3GA9pEJx0hPGEZOm',	'M',	3,	'2024-02-10 12:43:06',	'2024-03-02 12:34:35',	'2024-03-02 16:53:12',	'1,6,11,16',	'9/A,10/B,11/C,12/D',	'Address 1',	'23123112323',	'1975-08-20',	'IMG-65cf8e230c7946.47057921.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
+(1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$F8BOCVniVNOqHhjl7gWf8e5ptBp1wNP.KhGPA3GA9pEJx0hPGEZOm',	'M',	3,	'2024-02-10 12:43:06',	'2024-03-02 12:34:35',	'2024-03-04 17:53:35',	'1,6,11,16',	'9/A,10/B,11/C,12/D',	'Address 1',	'23123112323',	'1975-08-20',	'IMG-65cf8e230c7946.47057921.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
 (2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$a7xTEd88iyzI43udPEmrSeTmxBBaj9nf.JXtJV8NadXoRV1/GGe7q',	'F',	3,	'2024-02-10 12:43:40',	'2024-03-02 11:38:36',	'2024-03-02 11:02:25',	'1,10',	'9/A,11/B',	'Address 2',	'12331223123',	'1980-01-15',	'IMG-65c7454cee1627.24858158.png',	'3',	'Turkish',	1,	'Kaan Kaltakkıran'),
 (3,	'Spor Teacher',	'sporteacher@gmail.com',	'$2y$10$9drgD7QvkdJm9HMBMHzg.uDfJfWmGBpNnf5TchsIA2r5VT2x0Dkga',	'F',	3,	'2024-02-29 19:09:23',	'2024-03-02 17:45:31',	'2024-03-02 16:54:14',	'2,4,7,10,13',	'9/B,9/D,10/C,11/B,12/A',	'Address 3',	'05076600889',	'1968-01-01',	'IMG-65e0ac33d8e721.72086549.jpg',	'2',	'Spor',	1,	'Kaan Kaltakkıran'),
 (4,	'English Teacher',	'englishteacher@gmail.com',	'$2y$10$RHkpNyJ4JHTQxMKfrcLn0.q8xni0akO9voQtVG0f/ZwlVzRL1QosK',	'F',	3,	'2024-02-29 19:10:39',	'2024-03-02 11:38:36',	'2024-03-02 11:02:25',	'1,2,9,11,16',	'9/A,9/B,11/A,11/C,12/D',	'Address 4',	'12312312312',	'1972-10-10',	'IMG-65e0ac7fbcfa54.07364665.jpg',	'4',	'English',	1,	'Kaan Kaltakkıran'),
 (5,	'Science Teacher',	'scienceteacher@gmail.com',	'$2y$10$7VWTS5FjJRZCxkuWQSN94uyYh8gjvHHSXvJx7jK6h4KjBvrmG76Su',	'M',	3,	'2024-02-29 19:12:09',	'2024-03-02 11:38:36',	'2024-03-02 11:02:25',	'1,6,10,13,15',	'9/A,10/B,11/B,12/A,12/C',	'Address 5',	'12312312312',	'1965-07-08',	'IMG-65e0acd98f8b82.08350264.jpg',	'5',	'Science',	1,	'Kaan Kaltakkıran');
 
--- 2024-03-02 16:56:13
+-- 2024-03-04 18:00:47
