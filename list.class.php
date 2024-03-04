@@ -6,6 +6,18 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+if (isset($_GET['removeClassid'])) {
+    $approves = array();
+    require 'db.php';
+    $remove_id = $_GET['removeClassid'];
+    $sql = "DELETE FROM classes WHERE classid = :removeClassid";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':removeClassid', $remove_id);
+    $SORGU->execute();
+    $approves[] = "Class Deleted Successfully...";
+}
+?>
+<?php
 //! Rol idsi 2 olan kayıt birimi sınıf listesini görebilir
 if ($_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
@@ -14,6 +26,24 @@ if ($_SESSION['role'] != 2) {
 ?>
 <?php require 'navbar.php'?>
     <div class="container">
+    <?php
+//! Başarılı mesajlarını göster
+if (!empty($approves)) {
+    foreach ($approves as $approve) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+        <div class='toast align-items-center text-white bg-success border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+            <div class='d-flex'>
+                <div class='toast-body'>
+                $approve
+                </div>
+                <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+            </div>
+        </div>
+    </div>";
+
+    }
+}
+?>
       <div class="row mt-3">
       <div class='row justify-content-center text-center'>
         <div class="col-sm-4 col-md-6 col-lg-8">
@@ -45,19 +75,6 @@ $SORGU = $DB->prepare("SELECT * FROM classes LIMIT 16");
 $SORGU->execute();
 $classes = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //echo '<pre>'; print_r($classes);
-if (isset($_GET['removeClassid'])) {
-    require 'db.php';
-    $remove_id = $_GET['removeClassid'];
-    $sql = "DELETE FROM classes WHERE classid = :removeClassid";
-    $SORGU = $DB->prepare($sql);
-    $SORGU->bindParam(':removeClassid', $remove_id);
-    $SORGU->execute();
-    echo "<script>
-alert('Class has been deleted. You are redirected to the Class List page...!');
-window.location.href = 'list.class.php';
-</script>";
-}
-
 foreach ($classes as $class) {
     echo "
     <tr>

@@ -6,6 +6,18 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+if (isset($_GET['removeLessonid'])) {
+    $approves = array();
+    require 'db.php';
+    $remove_id = $_GET['removeLessonid'];
+    $sql = "DELETE FROM lessons WHERE lessonid = :removeLessonid";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':removeLessonid', $remove_id);
+    $SORGU->execute();
+    $approves[] = "Lesson Deleted Successfully...";
+}
+?>
+<?php
 //! Rol idsi 2 olan kayıt birimi ders listesini görebilir
 if ($_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
@@ -14,6 +26,24 @@ if ($_SESSION['role'] != 2) {
 ?>
 <?php require 'navbar.php'?>
     <div class="container">
+    <?php
+//! Başarılı mesajlarını göster
+if (!empty($approves)) {
+    foreach ($approves as $approve) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+        <div class='toast align-items-center text-white bg-success border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+            <div class='d-flex'>
+                <div class='toast-body'>
+                $approve
+                </div>
+                <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+            </div>
+        </div>
+    </div>";
+
+    }
+}
+?>
       <div class="row mt-3">
       <div class='row justify-content-center text-center'>
         <div class="col-sm-4 col-md-6 col-lg-8">
@@ -44,19 +74,6 @@ $SORGU = $DB->prepare("SELECT * FROM lessons LIMIT 16");
 $SORGU->execute();
 $lessons = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //echo '<pre>'; print_r($lessons);
-if (isset($_GET['removeLessonid'])) {
-    require 'db.php';
-    $remove_id = $_GET['removeLessonid'];
-    $sql = "DELETE FROM lessons WHERE lessonid = :removeLessonid";
-    $SORGU = $DB->prepare($sql);
-    $SORGU->bindParam(':removeLessonid', $remove_id);
-    $SORGU->execute();
-    echo "<script>
-alert('Lesson has been deleted. You are redirected to the Lesson List page...!');
-window.location.href = 'list.lessons.php';
-</script>";
-}
-
 foreach ($lessons as $lesson) {
     if ($lesson['addedunitid'] == $_SESSION['id']) {
         echo "

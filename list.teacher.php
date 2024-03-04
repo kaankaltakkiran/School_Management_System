@@ -6,6 +6,18 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+if (isset($_GET['removeTeacherid'])) {
+    $approves = array();
+    require 'db.php';
+    $remove_id = $_GET['removeTeacherid'];
+    $sql = "DELETE FROM teachers WHERE userid = :removeTeacherid";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':removeTeacherid', $remove_id);
+    $SORGU->execute();
+    $approves[] = "Teacher Deleted Successfully...";
+}
+?>
+<?php
 //! Rol idsi 3 olan teacher sadece teacher listeyebilir
 if ($_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
@@ -13,8 +25,25 @@ if ($_SESSION['role'] != 2) {
 }
 ?>
 <?php require 'navbar.php'?>
-
     <div class="container">
+    <?php
+//! Başarılı mesajlarını göster
+if (!empty($approves)) {
+    foreach ($approves as $approve) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+        <div class='toast align-items-center text-white bg-success border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+            <div class='d-flex'>
+                <div class='toast-body'>
+                $approve
+                </div>
+                <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+            </div>
+        </div>
+    </div>";
+
+    }
+}
+?>
       <div class="row mt-3">
       <div class='row justify-content-center text-center'>
         <div class="col-sm-4 col-md-6 col-lg-8">
@@ -55,19 +84,6 @@ $SORGU = $DB->prepare("SELECT * FROM teachers");
 $SORGU->execute();
 $teachers = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //echo '<pre>'; print_r($teachers);
-if (isset($_GET['removeTeacherid'])) {
-    require 'db.php';
-    $remove_id = $_GET['removeTeacherid'];
-    $sql = "DELETE FROM teachers WHERE userid = :removeTeacherid";
-    $SORGU = $DB->prepare($sql);
-    $SORGU->bindParam(':removeTeacherid', $remove_id);
-    $SORGU->execute();
-    echo "<script>
-alert('The Teacher User has been deleted. You are redirected to the Teacher User List page...!');
-window.location.href = 'list.teacher.php';
-</script>";
-}
-
 foreach ($teachers as $teacher) {
     if ($teacher['addedunitid'] == $_SESSION['id']) {
 

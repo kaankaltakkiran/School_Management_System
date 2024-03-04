@@ -6,6 +6,18 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+if (isset($_GET['removestudentid'])) {
+    $approves = array();
+    require 'db.php';
+    $remove_id = $_GET['removestudentid'];
+    $sql = "DELETE FROM students WHERE userid = :removestudentid";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':removestudentid', $remove_id);
+    $SORGU->execute();
+    $approves[] = "Student Deleted Successfully...";
+}
+?>
+<?php
 //! Rol idsi 2 ve 3 olan register unit ve teacher sadece student listeyebilir
 if ($_SESSION['role'] != 2 && $_SESSION['role'] != 3) {
     header("location: authorizationcontrol.php");
@@ -14,6 +26,24 @@ if ($_SESSION['role'] != 2 && $_SESSION['role'] != 3) {
 ?>
 <?php require 'navbar.php'?>
     <div class="container">
+    <?php
+//! Başarılı mesajlarını göster
+if (!empty($approves)) {
+    foreach ($approves as $approve) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+        <div class='toast align-items-center text-white bg-success border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+            <div class='d-flex'>
+                <div class='toast-body'>
+                $approve
+                </div>
+                <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+            </div>
+        </div>
+    </div>";
+
+    }
+}
+?>
       <div class="row mt-3">
       <div class='row justify-content-center text-center'>
         <div class="col-sm-4 col-md-6 col-lg-8">
@@ -57,19 +87,6 @@ $students = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* echo '<pre>';
 print_r($students);
 die(); */
-if (isset($_GET['removestudentid'])) {
-    require 'db.php';
-    $remove_id = $_GET['removestudentid'];
-    $sql = "DELETE FROM students WHERE userid = :removestudentid";
-    $SORGU = $DB->prepare($sql);
-    $SORGU->bindParam(':removestudentid', $remove_id);
-    $SORGU->execute();
-    echo "<script>
-alert('Student User has been deleted. You are redirected to the Student List page...!');
-window.location.href = 'list.student.php';
-</script>";
-}
-
 foreach ($students as $student) {
     $gender = $student['usergender'];
     $gender = ($gender == 'M') ? 'Male' : 'Famale';

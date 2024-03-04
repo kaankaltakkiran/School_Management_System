@@ -5,8 +5,38 @@ $activePage = "list.announcement";
 require 'up.html.php';
 require 'login.control.php';
 ?>
+<?php
+if (isset($_GET['removeannouncementid'])) {
+    $approves = array();
+    require 'db.php';
+    $remove_id = $_GET['removeannouncementid'];
+    $sql = "DELETE FROM announcements WHERE announcementid = :removeannouncementid";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':removeannouncementid', $remove_id);
+    $SORGU->execute();
+    $approves[] = "Announcement Deleted Successfully...";
+}
+?>
 <?php require 'navbar.php'?>
 <div class="container">
+<?php
+//! Başarılı mesajlarını göster
+if (!empty($approves)) {
+    foreach ($approves as $approve) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+        <div class='toast align-items-center text-white bg-success border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+            <div class='d-flex'>
+                <div class='toast-body'>
+                $approve
+                </div>
+                <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+            </div>
+        </div>
+    </div>";
+
+    }
+}
+?>
     <div class="row justify-content-center ">
     <div class="col-sm-4 col-md-6 col-lg-8">
     <!--   Mesaj başlığı -->
@@ -24,21 +54,7 @@ $announcements = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* echo '<pre>';
 print_r($announcements);
 die(); */
-if (isset($_GET['removeannouncementid'])) {
-    require 'db.php';
-    $remove_id = $_GET['removeannouncementid'];
 
-    $sql = "DELETE FROM announcements WHERE announcementid = :removeannouncementid";
-    $SORGU = $DB->prepare($sql);
-
-    $SORGU->bindParam(':removeannouncementid', $remove_id);
-
-    $SORGU->execute();
-    echo "<script>
-alert('Announcement has been deleted. You are redirected to the Announcements List page...!');
-window.location.href = 'list.announcement.php';
-</script>";
-}
 require_once 'db.php';
 $SORGU = $DB->prepare("SELECT * FROM announcements WHERE senderid=:userid AND senderrole=:roleid");
 $SORGU->bindParam(':userid', $userid);
@@ -48,8 +64,6 @@ $fullAnnouncements = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* echo '<pre>';
 print_r($fullAnnouncements);
 die(); */
-/* $fullAnnouncement['ispublish'] == 0 || $kaan == 0 */
-
 $sql = "UPDATE announcements SET readcount =readcount + 1 WHERE senderid=:userid AND senderrole=:roleid";
 $SORGU = $DB->prepare($sql);
 $SORGU->bindParam(':userid', $userid);

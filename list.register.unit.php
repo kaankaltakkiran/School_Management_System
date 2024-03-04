@@ -6,6 +6,18 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+if (isset($_GET['removeRegisterUnitid'])) {
+    $approves = array();
+    require 'db.php';
+    $remove_id = $_GET['removeRegisterUnitid'];
+    $sql = "DELETE FROM registerunits WHERE userid = :removeRegisterUnitid";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':removeRegisterUnitid', $remove_id);
+    $SORGU->execute();
+    $approves[] = "Register Unit Deleted Successfully...";
+}
+?>
+<?php
 //! Rol idsi 1 olan admin register userları listeyebilir
 if ($_SESSION['role'] != 1) {
     header("location: authorizationcontrol.php");
@@ -14,6 +26,24 @@ if ($_SESSION['role'] != 1) {
 ?>
 <?php require 'navbar.php'?>
     <div class="container">
+    <?php
+//! Başarılı mesajlarını göster
+if (!empty($approves)) {
+    foreach ($approves as $approve) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+        <div class='toast align-items-center text-white bg-success border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+            <div class='d-flex'>
+                <div class='toast-body'>
+                $approve
+                </div>
+                <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+            </div>
+        </div>
+    </div>";
+
+    }
+}
+?>
       <div class="row mt-3">
       <div class='row justify-content-center text-center'>
         <div class="col-sm-4 col-md-6 col-lg-8">
@@ -51,18 +81,6 @@ $SORGU = $DB->prepare("SELECT * FROM registerunits");
 $SORGU->execute();
 $registerunits = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 //echo '<pre>'; print_r($registerunits);
-if (isset($_GET['removeRegisterUnitid'])) {
-    require 'db.php';
-    $remove_id = $_GET['removeRegisterUnitid'];
-    $sql = "DELETE FROM registerunits WHERE userid = :removeRegisterUnitid";
-    $SORGU = $DB->prepare($sql);
-    $SORGU->bindParam(':removeRegisterUnitid', $remove_id);
-    $SORGU->execute();
-    echo "<script>
-alert('The Register Unit User has been deleted. You are redirected to the Register Unit List page...!');
-window.location.href = 'list.register.unit.php';
-</script>";
-}
 foreach ($registerunits as $registerunit) {
     if ($_SESSION['id'] == $registerunit['adedadminid']) {
         $gender = $registerunit['usergender'];
