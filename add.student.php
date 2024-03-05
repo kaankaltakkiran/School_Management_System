@@ -114,6 +114,12 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 $SORGU->bindParam(':unitname', $addedUnitName);
                 $SORGU->execute();
                 $approves[] = "Student User Added Successfully...";
+                echo '<script>';
+                echo 'document.addEventListener("DOMContentLoaded", function() {';
+                echo 'var myModal = new bootstrap.Modal(document.getElementById("parentModal"));';
+                echo 'myModal.show();';
+                echo '});';
+                echo '</script>';
             } else {
                 $errors[] = "You can't upload files of this type !";
             }
@@ -125,6 +131,7 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
 
 }
 ?>
+<?php require 'add.parent.php';?>
     <?php include 'navbar.php';?>
   <div class="container">
   <div class="row justify-content-center mt-3">
@@ -301,6 +308,95 @@ foreach ($lessons as $lesson) {
      </form>
      </div>
 </div>
+</div>
+<!-- Parent Ekleme Modal -->
+<div class="modal fade" id="parentModal" tabindex="-1" aria-labelledby="parentModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="parentModalLabel">Add Student Parent's</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
+        <div class="form-floating mb-3">
+  <input type="text"  class="form-control" value="<?php echo $_SESSION['userName'] ?>"disabled readonly>
+  <label>Added By Register Unit Name</label>
+</div>
+<div class="form-floating mb-3">
+  <input type="text"  class="form-control" id="floatingInput" placeholder="Parent's Name" name="form_parentName" required>
+  <label for="floatingInput">Parent's Name</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Student Parent's Name !
+    </div>
+</div>
+  <div class="form-floating mb-3">
+  <input type="email" name="form_parentEmail"id="floatingInput" placeholder="Email"class="form-control"required>
+  <label for="floatingInput">Parent's Email</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Parent's Email !
+    </div>
+</div>
+<div class="input-group mb-3  input-group-lg">
+  <input type="password"  name="form_parentPassword" class="form-control" id="oldPassword" placeholder="Password"required>
+  <span class="input-group-text bg-transparent"><i id="toggleOldPassword" class="bi bi-eye-slash"></i></span>
+  <div class="invalid-feedback fw-bold">
+      Please Write Parent's Password !
+    </div>
+</div>
+<div class="input-group mb-3  input-group-lg">
+  <input type="password"  name="form_parentRepassword" class="form-control" id="oldRePassword" placeholder="Please Enter Your Password Again"required>
+  <span class="input-group-text bg-transparent"><i id="toggleOldRePassword" class="bi bi-eye-slash"></i></span>
+  <div class="invalid-feedback fw-bold">
+      Please Write Parent's Password Again !
+    </div>
+</div>
+<div class="form-floating mb-3">
+  <textarea class="form-control text-break" style="height: 100px" placeholder="Parent's Adress" id="floatingTextarea"name="form_parentAdress"  required></textarea>
+  <label for="floatingTextarea">Parent's Address</label>
+</div>
+<div class="form-floating mb-3">
+  <input type="tel" id="floatingInput" placeholder="Parent's Phone Number"  class="form-control" maxlength="11" name="form_parentPhonenumber" required>
+  <label for="floatingInput">Parent's Phone Number</label>
+  <div class="invalid-feedback fw-bold">
+      Please Write Parent's Phone Number !
+    </div>
+</div>
+<div class="form-floating mb-3">
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Parent's Birthdate</label>
+  <input type="date" name="form_parentBirthdate" class="form-control" id="exampleFormControlInput1" required/>
+  <div class="invalid-feedback fw-bold">
+      Please Select Parent's Birthdate !
+    </div>
+</div>
+</div>
+<div class="form-floating mb-3">
+  <select class="form-select" id="floatingSelect" name="form_parentGender"  required aria-label="Floating label select example" >
+    <option selected disabled value="">Select Parent's Gender</option>
+    <option value="M">Male</option>
+    <option value="F">Female</option>
+  </select>
+  <label for="floatingSelect">Gender</label>
+  <div class="invalid-feedback fw-bold">
+      Please Select Parent's Gender !
+    </div>
+</div>
+<div class="input-group mb-3">
+  <input type="file"  name='form_parentImage' class="form-control" id="inputGroupFile02"required>
+  <label class="input-group-text" for="inputGroupFile02">Upload Parent's Image &nbsp; <i class="bi bi-upload"></i></label>
+  <div class="invalid-feedback fw-bold">
+      Please Upload Parent's Image !
+    </div>
+</div>
+      </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close <i class="bi bi-x-circle"></i></button>
+        <button type="submit" name="add_parent" class="btn btn-outline-success">Add Student Parent's  <i class="bi bi-send"></i> </button>
+      </div>
+      </form>
+    </div>
+  </div>
 </div>
 <?php require 'footer.php'?>
 <?php require 'down.html.php';?>
