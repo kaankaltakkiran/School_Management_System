@@ -122,7 +122,7 @@ if (!empty($errors)) {
   <label for="floatingInput">Email</label>
 </div>
 <div class="input-group mb-3  input-group-lg">
-  <input type="password"  name="form_password" class="form-control" id="oldPassword" placeholder="Password" onkeydown="checkCapsLock(event)">
+  <input type="password"  name="form_password" class="form-control" id="oldPassword" placeholder="Password" onkeydown="checkCapsLock(event)" required>
   <span class="input-group-text bg-transparent"><i id="toggleOldPassword" class="bi bi-eye-slash"></i></span>
 </div>
 <div id="capsLockWarning"  style="display: none;" class="alert alert-warning mb-3 text-center">WARNING! Caps lock is ON.</div>
