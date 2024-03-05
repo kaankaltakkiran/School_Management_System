@@ -6,6 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
+//! Tekil duyuru silme
 if (isset($_GET['removeannouncementid'])) {
     $approves = array();
     require 'db.php';
@@ -15,6 +16,21 @@ if (isset($_GET['removeannouncementid'])) {
     $SORGU->bindParam(':removeannouncementid', $remove_id);
     $SORGU->execute();
     $approves[] = "Announcement Deleted Successfully...";
+}
+?>
+<?php
+//! Tüm duyuruları silme
+if (isset($_POST['removeAllAnnouncements'])) {
+    $approves = array();
+    $userid = $_SESSION['id'];
+    $userRole = $_SESSION['role'];
+    require 'db.php';
+    $sql = "DELETE FROM announcements WHERE senderid=:userid AND senderrole=:userRole";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':userid', $userid);
+    $SORGU->bindParam(':userRole', $userRole);
+    $SORGU->execute();
+    $approves[] = "All Announcements Deleted Successfully...";
 }
 ?>
 <?php require 'navbar.php'?>
@@ -42,7 +58,7 @@ if (!empty($approves)) {
     <!--   Mesaj başlığı -->
     <h1 class='alert alert-primary mt-2 text-center'>Announcement</h1>
 <!--     Mesaj bölümü -->
-<div class="accordion accordion-flush" id="accordionFlushExample">
+<div class="accordion accordion-flush mb-5 " id="accordionFlushExample">
       <?php
 require_once 'db.php';
 $roleid = $_SESSION['role'];
@@ -69,6 +85,17 @@ $SORGU = $DB->prepare($sql);
 $SORGU->bindParam(':userid', $userid);
 $SORGU->bindParam(':roleid', $roleid);
 $SORGU->execute();
+?>
+<div class="row justify-content-end ">
+  <div class="col-6">
+    <form method="post">
+    <?php if (count($fullAnnouncements) > 0) {?>
+    <button type="sumbit" name="removeAllAnnouncements" onclick="return confirm('Are you sure you want to delete all announcements ?')" class="btn btn-danger float-end">Delete All Announcements <i class="bi bi-trash"></i> </button>
+    <?php }?>
+    </form>
+    </div>
+</div>
+<?php
 if ($userid == $fullAnnouncements[0]['senderid']) {
     foreach ($fullAnnouncements as $fullAnnouncement) {
         //! Status belirleme
