@@ -319,15 +319,15 @@ foreach ($lessons as $lesson) {
     </div>
 </div>
 <div class="input-group mb-3  input-group-lg">
-  <input type="password"  name="form_parentPassword" class="form-control" id="oldPassword" placeholder="Password"required>
-  <span class="input-group-text bg-transparent"><i id="toggleOldPassword" class="bi bi-eye-slash"></i></span>
+  <input type="password"  name="form_parentPassword" class="form-control" id="parentOldPasswordBtn" placeholder="Password"required>
+  <span class="input-group-text bg-transparent"><i id="parentOldPassword" class="bi bi-eye-slash"></i></span>
   <div class="invalid-feedback fw-bold">
       Please Write Parent's Password !
     </div>
 </div>
 <div class="input-group mb-3  input-group-lg">
-  <input type="password"  name="form_parentRepassword" class="form-control" id="oldRePassword" placeholder="Please Enter Your Password Again"required>
-  <span class="input-group-text bg-transparent"><i id="toggleOldRePassword" class="bi bi-eye-slash"></i></span>
+  <input type="password"  name="form_parentRepassword" class="form-control" id="reparentOldPasswordBtn" placeholder="Please Enter Your Password Again"required>
+  <span class="input-group-text bg-transparent"><i id="reParentOldPassword" class="bi bi-eye-slash"></i></span>
   <div class="invalid-feedback fw-bold">
       Please Write Parent's Password Again !
     </div>

@@ -3,6 +3,7 @@
 <script src="./public/js/oldHideShow.js"></script>
 <script src="./public/js/autoCloseAlert.js"></script>
 <script src="./public/js/change.pass.hide.show.js"></script>
+<script src="./public/js/parent.pass.hide.show.js"></script>
 <!-- Chatgpt ile anlık olarak saat ve gün bilgisi gösterimi -->
 <script>
         function updateClock() {
