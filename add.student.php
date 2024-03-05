@@ -28,8 +28,6 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
     $selectedClassId = $selectClass[0];
     $selectedClassName = $selectClass[1];
 
-    $parentName = htmlspecialchars($_POST['form_parentname']);
-    $parentNumber = htmlspecialchars($_POST['form_parentnumber']);
     $gender = $_POST['form_gender'];
     $address = htmlspecialchars($_POST['form_adress']);
     $phoneNumber = htmlspecialchars($_POST['form_phonenumber']);
@@ -96,7 +94,7 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 move_uploaded_file($tmp_name, $img_upload_path);
 
                 // Insert into Database
-                $sql = "INSERT INTO students(username,useremail,usergender,useraddress,phonenumber,birthdate,userpassword,userimg,classid,classname,parentname,parentnumber,lessonid,lessonname,addedunitid,addedunitname) VALUES (:form_username,:form_email,:form_gender,:form_adress,:form_phonenumber,:form_birthdate,'$password','$new_img_name',:classid,:classname,:form_parentname,:form_parentnumber,:lessonid,:lessonname,:unitid,:unitname)";
+                $sql = "INSERT INTO students(username,useremail,usergender,useraddress,phonenumber,birthdate,userpassword,userimg,classid,classname,lessonid,lessonname,addedunitid,addedunitname) VALUES (:form_username,:form_email,:form_gender,:form_adress,:form_phonenumber,:form_birthdate,'$password','$new_img_name',:classid,:classname,:lessonid,:lessonname,:unitid,:unitname)";
                 $SORGU = $DB->prepare($sql);
                 $SORGU->bindParam(':form_username', $name);
                 $SORGU->bindParam(':form_email', $email);
@@ -106,8 +104,6 @@ if (isset($_POST['submit']) && isset($_FILES['form_image'])) {
                 $SORGU->bindParam(':form_birthdate', $birthDate);
                 $SORGU->bindParam(':classid', $selectedClassId);
                 $SORGU->bindParam(':classname', $selectedClassName);
-                $SORGU->bindParam(':form_parentname', $parentName);
-                $SORGU->bindParam(':form_parentnumber', $parentNumber);
                 $SORGU->bindParam(':lessonid', $studentLessonid);
                 $SORGU->bindParam(':lessonname', $studentLessonName);
                 $SORGU->bindParam(':unitid', $addedUnitid);
@@ -278,21 +274,6 @@ foreach ($lessons as $lesson) {
   <label for="floatingSelect">Gender</label>
   <div class="invalid-feedback fw-bold">
       Please Select Gender !
-    </div>
-</div>
-
-<div class="form-floating mb-3">
-  <input type="text"  class="form-control" id="floatingInput" placeholder="Parent Name" name="form_parentname" required>
-  <label for="floatingInput">Parent Name</label>
-  <div class="invalid-feedback fw-bold">
-      Please Write Parent Name !
-    </div>
-</div>
-<div class="form-floating mb-3">
-  <input type="tel"  class="form-control" id="floatingInput" placeholder="Parent Phone Number" maxlength="11" name="form_parentnumber" required>
-  <label for="floatingInput">Parent Phone Number</label>
-  <div class="invalid-feedback fw-bold">
-      Please Write Parent Phone Number !
     </div>
 </div>
 <div class="input-group mb-3">

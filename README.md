@@ -49,6 +49,7 @@ Rol idsi 4 olan **öğrenci** kullanıcısı, sınav listesinden sınava girebil
    - [X] alertler gözden geçirildi.
    - [X] Tek kayıt silme işlemi gözden geçirldi ve toplu kayıt silme işlemi eklendi.Eğer kayıt yok ise toplu kayıt silme butonu gözükmeyecek şekilde ayarlandı. Ek olarak eğer table da kayıt yoksa uyarı mesajı verildi.
    - [X] List Announcements sayfasında, duyuru sahibine duyurunun yayınlanıp yayınlanmadığı gösterildi.
+    - [X] Add student sayfasında öğrenci veli eklme kısmı ayrıld. Veli ekleme kısmı modal ile sağlandı.
   
  ## Yapılan Temel Geliştirmeler
  - [X] Genel olarak web sitesini kullanabilmek için giriş yapmak zorunlu hale getirildi.
