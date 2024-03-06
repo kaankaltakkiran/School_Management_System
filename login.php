@@ -219,6 +219,25 @@ if (!empty($errors)) {
 </table>
 </div>
 </div>
+<div class="col-6 ">
+  <h3 class="text-center text-info">Parent User İnformation</h3>
+<table class="table  table-striped">
+  <thead>
+    <tr>
+    <th scope="col">#</th>
+      <th scope="col">Email</th>
+      <th scope="col">Password</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>alifather@gmail.com</td>
+      <td>123</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 </div>
 <?php require 'footer.php'?>
 <?php require 'down.html.php';?>

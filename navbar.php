@@ -214,7 +214,7 @@ require 'db.php';
           <img src='<?php echo "$imageFolder/{$users['userimg']}"; ?>' class='rounded-circle' height="30" width='30'>
           </a>
           <ul class="dropdown-menu  dropdown-menu-end">
-          <?php if ($_SESSION['role'] == 3 || $_SESSION['role'] == 4) {?>
+          <?php if ($_SESSION['role'] == 3 || $_SESSION['role'] == 4 || $_SESSION['role'] == 5) {?>
             <li><a class="dropdown-item <?=($activePage == 'user.profile') ? 'active' : '';?> " href="show.user.profile.php">Profile <i class="bi bi-person-circle"></i></a></li>
             <?php }?>
             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Change Password <i class="bi bi-arrow-repeat"></i></a></li>

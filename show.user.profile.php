@@ -6,7 +6,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
-if ($_SESSION['role'] != 3 && $_SESSION['role'] != 4) {
+if ($_SESSION['role'] != 3 && $_SESSION['role'] != 4 && $_SESSION['role'] != 5) {
     header("location: authorizationcontrol.php");
     die();
 }
@@ -27,6 +27,9 @@ if ($userrole == 1) {
     //! user rol 4 ise students tablosundan sorgula
 } else if ($userrole == 4) {
     $sql = "SELECT * FROM students  WHERE userid = :userid";
+
+} else if ($userrole == 5) {
+    $sql = "SELECT * FROM parents  WHERE userid = :userid";
 
 }
 $SORGU = $DB->prepare($sql);
@@ -95,6 +98,9 @@ if (isset($_POST['submit_form'])) {
         } else if ($userrole == 4) {
             //!Foto güncellemediysen eski fotoğrafı kullan
             $sql = "UPDATE students SET username = :form_username, useremail	 = :form_email,useraddress=:form_adress,phonenumber=:form_phonenumber WHERE userid = :userid";
+        } else if ($userrole == 5) {
+            //!Foto güncellemediysen eski fotoğrafı kullan
+            $sql = "UPDATE parents SET username = :form_username, useremail	 = :form_email,useraddress=:form_adress,phonenumber=:form_phonenumber WHERE userid = :userid";
         }
     }
     //! Hata yoksa veritabanına kaydet
@@ -105,6 +111,8 @@ if (isset($_POST['submit_form'])) {
             $checkEmailQuery = $DB->prepare("SELECT * FROM teachers WHERE useremail = :email AND userid != :userid");
         } else if ($userrole == 4) {
             $checkEmailQuery = $DB->prepare("SELECT * FROM students WHERE useremail = :email AND userid != :userid");
+        } else if ($userrole == 5) {
+            $checkEmailQuery = $DB->prepare("SELECT * FROM parents WHERE useremail = :email AND userid != :userid");
         }
         $checkEmailQuery->bindParam(':email', $email);
         $checkEmailQuery->bindParam(':userid', $userid);
@@ -124,6 +132,17 @@ if (isset($_POST['submit_form'])) {
                 $SORGU->execute();
                 $approves[] = "User Updated Successfully...";
             } else if ($userrole == 4) {
+                //!Eğer hata yoksa veritabanına kaydet
+                $SORGU = $DB->prepare($sql);
+                $SORGU->bindParam(':form_username', $name);
+                $SORGU->bindParam(':form_email', $email);
+                $SORGU->bindParam(':form_adress', $address);
+                $SORGU->bindParam(':form_phonenumber', $phoneNumber);
+                $SORGU->bindParam(':userid', $userid);
+                $SORGU->execute();
+                $approves[] = "User Updated Successfully...";
+
+            } else if ($userrole == 5) {
                 //!Eğer hata yoksa veritabanına kaydet
                 $SORGU = $DB->prepare($sql);
                 $SORGU->bindParam(':form_username', $name);
@@ -191,6 +210,9 @@ if ($userrole == 1) {
     //! user rol 4 ise students tablosundan sorgula
 } else if ($userrole == 4) {
     $sql = "SELECT * FROM students  WHERE userid = :userid";
+
+} else if ($userrole == 5) {
+    $sql = "SELECT * FROM parents  WHERE userid = :userid";
 
 }
 $SORGU = $DB->prepare($sql);
