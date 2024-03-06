@@ -153,8 +153,7 @@ foreach ($students as $student) {
     <a href='list.student.php?removestudentid={$student['userid']}'onclick='return confirm(\"Are you sure you want to delete {$student['username']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a>
   </td>
     <td>
-    <a href='list.parent.php?idStudent={$student['userid']}' class='btn btn-primary mb-3 btn-sm '>List <i class='bi bi-send'></i></a>
-    <a href='update.parent.php?removestudentid={$student['userid']}' class='btn btn-success btn-sm'>Update  <i class='bi bi-arrow-clockwise'></i></a>
+    <a href='list.parent.php?idStudent={$student['userid']}' class='btn btn-primary'>List Parent <i class='bi bi-send'></i></a>
     </td>
  </tr>
     ";
