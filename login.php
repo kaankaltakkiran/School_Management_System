@@ -20,13 +20,10 @@ if (isset($_POST['form_email'])) {
     // 1.DB'na bağlan
     // 2.SQL hazırla ve çalıştır
     // 3.Gelen sonuç 1 satırsa GİRİŞ BAŞARILI değilse, BAŞARISIZ
-
     //!Form dan gelen login tipi
     $rol = $_POST['form_selectrol'];
-
     // Hata kontrolü
     $errors = array();
-
     //! Eğer boş alan varsa uyarı mesajı
     if (empty($_POST["form_email"]) || empty($_POST["form_password"])) {
 
@@ -53,14 +50,13 @@ if (isset($_POST['form_email'])) {
         } else if ($rol == 4) {
             $sql = "SELECT * FROM students  WHERE useremail = :form_email";
 
+        } else if ($rol == 5) {
+            $sql = "SELECT * FROM parents  WHERE useremail = :form_email";
+
         }
-
         $SORGU = $DB->prepare($sql);
-
         $SORGU->bindParam(':form_email', $useremail);
-
         $SORGU->execute();
-
         $CEVAP = $SORGU->fetchAll(PDO::FETCH_ASSOC);
         /* var_dump($CEVAP);
         echo "Gelen cevap " .  count($CEVAP) . " adet satırdan oluşuyor";
@@ -97,7 +93,6 @@ if (isset($_POST['form_email'])) {
     <div class="container">
   <div class="row justify-content-center mt-3">
   <div class="col-6">
-
 <form method="POST">
 <h1 class="alert alert-info text-center">Login Page</h1>
 <?php
@@ -133,10 +128,10 @@ if (!empty($errors)) {
     <option value="2">Register Unit</option>
     <option value="3">Teacher</option>
     <option value="4">Student</option>
+    <option value="5">Parent</option>
   </select>
   <label for="floatingSelect">Rol Type</label>
 </div>
-
                   <button type="submit" name="submit" class="btn btn-primary">
                     Login
                     <i class="bi bi-box-arrow-in-left"></i>

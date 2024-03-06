@@ -30,6 +30,10 @@ require_once 'db.php';
         $sql = "SELECT * FROM students WHERE userid = :iduser";
         $loginUserType = "Student";
 
+    } else if ($rol == 5) {
+        $sql = "SELECT * FROM parents WHERE userid = :iduser";
+        $loginUserType = "Parent";
+
     }
     $SORGU = $DB->prepare($sql);
     $SORGU->bindParam(':iduser', $userid);
