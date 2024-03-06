@@ -84,9 +84,8 @@ if (!empty($approves)) {
       <th>Address</th>
       <th>Phone Number</th>
       <th>Birth date</th>
-      <th>Parent Name</th>
-      <th>Parent Number</th>
         <th>Manage</th>
+        <th>Parent</th>
     </tr>
   </thead>
   <tbody>
@@ -149,12 +148,14 @@ foreach ($students as $student) {
     <td>{$student['useraddress']}</td>
     <td>{$student['phonenumber']}</td>
     <td>$formattedDate</td>
-    <td>{$student['parentname']}</td>
-    <td>{$student['parentnumber']}</td>
     <td>
     <a href='update.student.php?idStudent={$student['userid']}' class='btn btn-success mb-3  btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a>
     <a href='list.student.php?removestudentid={$student['userid']}'onclick='return confirm(\"Are you sure you want to delete {$student['username']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a>
   </td>
+    <td>
+    <a href='list.parent.php?idStudent={$student['userid']}' class='btn btn-primary mb-3 btn-sm '>List <i class='bi bi-send'></i></a>
+    <a href='update.parent.php?removestudentid={$student['userid']}' class='btn btn-success btn-sm'>Update  <i class='bi bi-arrow-clockwise'></i></a>
+    </td>
  </tr>
     ";
 }
