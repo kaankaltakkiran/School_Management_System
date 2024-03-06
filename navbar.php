@@ -43,6 +43,9 @@
         <li class="nav-item">
           <a class="nav-link  <?=($activePage == 'teacher.class.list') ? 'active' : '';?>" href="list.teacher.class.php">Student's Class</a>
         </li>
+        <li class="nav-item">
+        <a class="nav-link  <?=($activePage == 'parent.list' || $activePage == 'update.parent' || $activePage == 'show.parent') ? 'active' : '';?>" href="list.parent.php">Parent</a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle <?=($activePage == 'add.exam' || $activePage == 'list.exam' || $activePage == 'update.exam' || $activePage == 'teacher.exam.result') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Exams
@@ -124,6 +127,9 @@ die(); */
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item <?=($activePage == 'student.list') ? 'active' : '';?>" href="list.student.php">List Student User</a></li>
           </ul>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link  <?=($activePage == 'parent.list' || $activePage == 'update.parent' || $activePage == 'show.parent') ? 'active' : '';?>" href="list.parent.php">Parent</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle <?=($activePage == 'add.class' || $activePage == 'class.list' || $activePage == 'class.update') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

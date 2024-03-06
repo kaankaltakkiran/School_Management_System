@@ -1,13 +1,12 @@
 <?php
 @session_start();
-$activeTitle = "List Parent";
-$activePage = "list.parent";
+$activeTitle = "Parent List";
+$activePage = "parent.list";
 require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
-//!Tekil Lesson silme
-//? Mesajtan sonra 3 saniye sonra list.student.php sayfasına yönlendirme yapar.
+//!Tekil Student silme
 if (isset($_GET['removeparentid'])) {
     $approves = array();
     require 'db.php';
@@ -16,28 +15,25 @@ if (isset($_GET['removeparentid'])) {
     $SORGU = $DB->prepare($sql);
     $SORGU->bindParam(':removeparentid', $remove_id);
     $SORGU->execute();
-    $approves[] = "Student Parent's Deleted Successfully...";
-    echo "<script>
-    setTimeout(function() {
-        window.location.href = 'list.student.php';
-    }, 3000);
-  </script>";
+    $approves[] = "Parent Deleted Successfully...";
 }
 ?>
 <?php
-//! Student id
-$get_student_id = $_GET['idStudent'];
-require_once 'db.php';
-$SORGU = $DB->prepare("SELECT * FROM parents WHERE studentid=:idStudent");
-$SORGU->bindParam(':idStudent', $get_student_id);
-$SORGU->execute();
-$parents = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-/* echo '<pre>';
-print_r($parents);
-die(); */
-$gender = $parents[0]['usergender'];
-$gender = ($gender == 'M') ? 'Male' : 'Famale';
-if ($_SESSION['role'] != 2) {
+//!Tüm Studentları  silme
+if (isset($_POST['removeAllParents'])) {
+    $approves = array();
+    require 'db.php';
+    $registerUnitid = $_SESSION['id'];
+    $sql = "DELETE FROM parents WHERE addedunitid =:id";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':id', $registerUnitid);
+    $SORGU->execute();
+    $approves[] = "All Parent Deleted Successfully...";
+}
+?>
+<?php
+//! Rol idsi 2 ve 3 olan register unit ve teacher sadece student listeyebilir
+if ($_SESSION['role'] != 2 && $_SESSION['role'] != 3) {
     header("location: authorizationcontrol.php");
     die();
 }
@@ -65,39 +61,51 @@ if (!empty($approves)) {
       <div class="row mt-3">
       <div class='row justify-content-center text-center'>
         <div class="col-sm-4 col-md-6 col-lg-8">
-        <?php
-//! Student id
-$get_student_id = $_GET['idStudent'];
-require_once 'db.php';
-$SORGU = $DB->prepare("SELECT * FROM students WHERE userid=:idStudent");
-$SORGU->bindParam(':idStudent', $get_student_id);
-$SORGU->execute();
-$students = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-/* echo '<pre>';
-print_r($students);
-die(); */
-?>
-  <h1 class='alert alert-primary mt-2'><?php echo $students[0]['username'] ?> Parent's</h1>
+  <h1 class='alert alert-primary mt-2'>Parent's List</h1>
   </div>
 </div>
+   <!-- tablo ile Parent listeleme -->
    <table id="example" class="table table-bordered table-striped " style="width:100%">
   <thead>
     <tr>
-      <th>Parent Id</th>
-      <th>Parent Image</th>
+      <th>Id</th>
+      <th>Img</th>
       <th>Parent Name</th>
+      <th>Parent Email</th>
       <th>Parent Gender</th>
       <th>Parent Address</th>
       <th>Parent Phone Number</th>
-      <th>Parent Birthdate</th>
-      <th>Update</th>
-      <th>Delete</th>
+      <th>Parent Birth date</th>
+        <th>Manage</th>
     </tr>
   </thead>
   <tbody>
   </div>
     <?php
+require_once 'db.php';
+$id = $_SESSION['id'];
+$SORGU = $DB->prepare("SELECT * FROM parents WHERE addedunitid = :id");
+$SORGU->bindParam(':id', $id);
+$SORGU->execute();
+$parents = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* echo '<pre>';
+print_r($parents);
+die(); */
+?>
+<div class="row justify-content-end ">
+  <div class="col-2">
+    <form method="post">
+    <?php if (count($parents) > 0) {?>
+    <button type="sumbit" name="removeAllParents" onclick="return confirm('Are you sure you want to delete all students ?')" class="btn btn-danger float-end">Delete All Parent's <i class="bi bi-trash"></i> </button>
+    <?php }?>
+    </form>
+    </div>
+</div>
+<?php
 foreach ($parents as $parent) {
+    $gender = $parent['usergender'];
+    $gender = ($gender == 'M') ? 'Male' : 'Famale';
+    //!Kullanıcının doğum tarihini alma
     $userBirthdate = $parent['birthdate'];
     //!Tarihi parçalara ayırma
     /* explode() fonksiyonu: Bu fonksiyon, bir metni belirli bir ayraç karakterine göre böler ve bir diziye dönüştürür.  */
@@ -111,25 +119,32 @@ foreach ($parents as $parent) {
 //?Ay ismini bulmak için date() ve strtotime() fonksiyonlarını kullanıyoruz
     //!F tam ay ismini alıyor.
     $monthName = date("F", strtotime($userBirthdate));
+    if ($isRegisterUnit) {
 
+    }
 // Sonucu ekrana yazdırma
     $formattedDate = "$day $monthName $year";
+
     echo "
     <tr>
-      <th>{$parent['userid']}</th>
-      <td><img src='parent_images/{$parent['userimg']}' class='rounded-circle' width='100' height='100'></td>
-      <td>{$parent['username']}</td>
-      <td>$gender</td>
-      <td>{$parent['useraddress']}</td>
-      <td>{$parent['phonenumber']}</td>
-      <td>$formattedDate</td>
-      <td><a href='update.parent.php?parentid={$parent['userid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a></td>
-      <td><a href='list.parent.php?removeparentid={$parent['userid']}'onclick='return confirm(\"Are you sure you want to delete {$parent['username']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a></td>
-   </tr>
-  ";
+    <th>{$parent['userid']}</th>
+    <td><img src='parent_images/{$parent['userimg']}' class='rounded-circle' width='100' height='100'></td>
+    <td><a href='view.parent.php?idparent={$parent['userid']}' class='link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'>{$parent['username']}</a></td>
+    <td>{$parent['useremail']}</td>
+    <td>$gender</td>
+    <td>{$parent['useraddress']}</td>
+    <td>{$parent['phonenumber']}</td>
+    <td>$formattedDate</td>
+    <td>
+    <a href='update.parent.php?parentid={$parent['userid']}' class='btn btn-success mb-3  btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a>
+    <a href='list.parent.php?removeparentid={$parent['userid']}'onclick='return confirm(\"Are you sure you want to delete {$parent['username']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a>
+  </td>
+ </tr>
+    ";
 }
 ?>
   </tbody>
 </table>
 </div>
+<?php require 'footer.php';?>
 <?php require 'down.html.php';?>

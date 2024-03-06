@@ -170,6 +170,11 @@ Exams List
  <br>
 Exams Result
 </a>
+<a href="list.parent.php" class="col btn btn-dark m-2 py-3">
+<img width="48" height="48" src="https://img.icons8.com/color/48/family.png" alt="family"/>
+                 <br>
+                 Parent
+               </a>
                <a href="list.announcement.php" class="col btn btn-warning m-2 py-3">
                <img width="48" height="48" src="https://img.icons8.com/color/48/commercial.png" alt="commercial"/>
                  <br>
@@ -215,6 +220,11 @@ Exams Result
                </a>
                </div>
                <div class="row row-cols-1 row-cols-md-5 g-4 mt-4">
+               <a href="list.parent.php" class="col btn btn-dark m-2 py-3">
+<img width="48" height="48" src="https://img.icons8.com/color/48/family.png" alt="family"/>
+                 <br>
+                 Parent
+               </a>
                <a href="list.announcement.php" class="col btn btn-warning m-2 py-3">
                <img width="48" height="48" src="https://img.icons8.com/color/48/commercial.png" alt="commercial"/>
                  <br>

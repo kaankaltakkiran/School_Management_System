@@ -23,10 +23,6 @@ if ($_SESSION['role'] != 2) {
     header("location: authorizationcontrol.php");
     die();
 }
-if ($parents[0]['addedunitid'] != $_SESSION['id']) {
-    header("location: authorizationcontrol.php");
-    die();
-}
 ?>
     <?php include 'navbar.php';?>
   <div class="container">
