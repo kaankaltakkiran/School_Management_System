@@ -48,9 +48,6 @@ if (isset($_POST['submit_form'])) {
     $address = htmlspecialchars($_POST['form_adress']);
     $phoneNumber = htmlspecialchars($_POST['form_phonenumber']);
 
-    $parentName = htmlspecialchars($_POST['form_parentname']);
-    $parentNumber = htmlspecialchars($_POST['form_parentnumber']);
-
     //!İmage elemanları
     $img_name = $_FILES['form_image']['name'];
     $img_size = $_FILES['form_image']['size'];
@@ -84,7 +81,7 @@ if (isset($_POST['submit_form'])) {
                     $sql = "UPDATE teachers SET username = :form_username, useremail	 = :form_email, useraddress=:form_adress,phonenumber=:form_phonenumber,userimg = '$new_img_name',lastupdate = CURRENT_TIMESTAMP() WHERE userid = :userid";
                 } else if ($userrole == 4) {
                     //!Foto güncellediyse veritabanına yeni fotoğraf adını kaydet
-                    $sql = "UPDATE students SET username = :form_username, useremail= :form_email,useraddress=:form_adress,phonenumber=:form_phonenumber,userimg = '$new_img_name',parentname=:form_parentname,parentnumber=:form_parentnumber,lastupdate = CURRENT_TIMESTAMP() WHERE userid = :userid";
+                    $sql = "UPDATE students SET username = :form_username, useremail= :form_email,useraddress=:form_adress,phonenumber=:form_phonenumber,userimg = '$new_img_name',lastupdate = CURRENT_TIMESTAMP() WHERE userid = :userid";
                 }
 
             } else {
@@ -97,7 +94,7 @@ if (isset($_POST['submit_form'])) {
             $sql = "UPDATE teachers SET username = :form_username, useremail	 = :form_email, useraddress=:form_adress,phonenumber=:form_phonenumber WHERE userid = :userid";
         } else if ($userrole == 4) {
             //!Foto güncellemediysen eski fotoğrafı kullan
-            $sql = "UPDATE students SET username = :form_username, useremail	 = :form_email,useraddress=:form_adress,phonenumber=:form_phonenumber,parentname=:form_parentname,parentnumber=:form_parentnumber WHERE userid = :userid";
+            $sql = "UPDATE students SET username = :form_username, useremail	 = :form_email,useraddress=:form_adress,phonenumber=:form_phonenumber WHERE userid = :userid";
         }
     }
     //! Hata yoksa veritabanına kaydet
@@ -133,8 +130,6 @@ if (isset($_POST['submit_form'])) {
                 $SORGU->bindParam(':form_email', $email);
                 $SORGU->bindParam(':form_adress', $address);
                 $SORGU->bindParam(':form_phonenumber', $phoneNumber);
-                $SORGU->bindParam(':form_parentname', $parentName);
-                $SORGU->bindParam(':form_parentnumber', $parentNumber);
                 $SORGU->bindParam(':userid', $userid);
                 $SORGU->execute();
                 $approves[] = "User Updated Successfully...";
@@ -240,16 +235,6 @@ die(); */
   <input type="tel"  class="form-control" value="<?php echo $users[0]['phonenumber'] ?>" maxlength="11" name="form_phonenumber" >
   <label>Phone Number</label>
 </div>
-<?php if ($userrole == 4) {?>
-<div class="form-floating mb-3">
-  <input type="text"  class="form-control" value="<?php echo $users[0]['parentname'] ?>" name="form_parentname" >
-  <label>Parent Name</label>
-</div>
-<div class="form-floating mb-3">
-  <input type="tel"  class="form-control" value="<?php echo $users[0]['phonenumber'] ?>" maxlength="11" name="form_parentnumber" >
-  <label>Parent Phone Number</label>
-</div>
-<?php }?>
 <div class="row">
                   <button type="submit" name="submit_form" class="btn btn-primary m-3 ">Update User
                   <i class="bi bi-send"></i>

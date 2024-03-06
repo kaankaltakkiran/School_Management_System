@@ -55,8 +55,6 @@ if (isset($_POST['form_submit'])) {
     $address = htmlspecialchars($_POST['form_adress']);
     $phoneNumber = htmlspecialchars($_POST['form_phonenumber']);
     $birthDate = $_POST['form_birthdate'];
-    $parentName = htmlspecialchars($_POST['form_parentname']);
-    $parentNumber = htmlspecialchars($_POST['form_parentnumber']);
     //!Chatgpt çözümü
 
     $classIds = array(); // Classid'leri tutacak dizi
@@ -116,7 +114,7 @@ if (isset($_POST['form_submit'])) {
                 //?unlink dosya silmek için kullanılır
                 unlink('teacher_images/' . $old_img_name);
                 //!Foto güncellediyse veritabanına yeni fotoğraf adını kaydet
-                $sql = "UPDATE students SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,userimg = '$new_img_name',parentname=:form_parentname,parentnumber=:form_parentnumber,classid=:classid,classname=:classname,lessonid = :lessonid, lessonname = :lessonname,lastupdate = CURRENT_TIMESTAMP() WHERE userid = :idStudent";
+                $sql = "UPDATE students SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,userimg = '$new_img_name',classid=:classid,classname=:classname,lessonid = :lessonid, lessonname = :lessonname,lastupdate = CURRENT_TIMESTAMP() WHERE userid = :idStudent";
 
             } else {
                 $errors[] = "You can't upload files of this type !";
@@ -124,7 +122,7 @@ if (isset($_POST['form_submit'])) {
         }
     } else {
         //!Foto güncellemediysen eski fotoğrafı kullan
-        $sql = "UPDATE students SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,parentname=:form_parentname,parentnumber=:form_parentnumber,classid=:classid,classname=:classname,lessonid = :lessonid, lessonname = :lessonname,lastupdate = CURRENT_TIMESTAMP() WHERE userid = :idStudent";
+        $sql = "UPDATE students SET username = :form_username, useremail	 = :form_email, usergender=:form_gender,useraddress=:form_adress,phonenumber=:form_phonenumber,birthdate=:form_birthdate,classid=:classid,classname=:classname,lessonid = :lessonid, lessonname = :lessonname,lastupdate = CURRENT_TIMESTAMP() WHERE userid = :idStudent";
     }
     //! Hata yoksa veritabanına kaydet
     if (empty($errors)) {
@@ -145,8 +143,6 @@ if (isset($_POST['form_submit'])) {
             $SORGU->bindParam(':form_adress', $address);
             $SORGU->bindParam(':form_phonenumber', $phoneNumber);
             $SORGU->bindParam(':form_birthdate', $birthDate);
-            $SORGU->bindParam(':form_parentname', $parentName);
-            $SORGU->bindParam(':form_parentnumber', $parentNumber);
             $SORGU->bindParam(':classid', $studentClassid);
             $SORGU->bindParam(':classname', $studentClassName);
             $SORGU->bindParam(':lessonid', $studentLessonid);
@@ -326,15 +322,6 @@ foreach ($lessons as $lesson) {
 }
 ?>
 </div>
-</div>
-
-<div class="form-floating mb-3">
-  <input type="text"  class="form-control" value="<?php echo $students[0]['parentname'] ?>" name="form_parentname" >
-  <label>Parent Name</label>
-</div>
-<div class="form-floating mb-3">
-  <input type="tel"  class="form-control" value="<?php echo $students[0]['phonenumber'] ?>" maxlength="11" name="form_parentnumber" >
-  <label>Parent Phone Number</label>
 </div>
 <div class="row">
     <div class="col-6">
