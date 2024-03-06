@@ -170,7 +170,7 @@ Exams List
  <br>
 Exams Result
 </a>
-<a href="list.parent.php" class="col btn btn-dark m-2 py-3">
+<a href="list.teacher.parent.php" class="col btn btn-dark m-2 py-3">
 <img width="48" height="48" src="https://img.icons8.com/color/48/family.png" alt="family"/>
                  <br>
                  Parent
