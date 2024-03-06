@@ -123,7 +123,7 @@ foreach ($parents as $parent) {
       <td>{$parent['useraddress']}</td>
       <td>{$parent['phonenumber']}</td>
       <td>$formattedDate</td>
-      <td><a href='update.parent.php?updateparentid={$parent['userid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a></td>
+      <td><a href='update.parent.php?parentid={$parent['userid']}' class='btn btn-success btn-sm'>Update <i class='bi bi-arrow-clockwise'></i></a></td>
       <td><a href='list.parent.php?removeparentid={$parent['userid']}'onclick='return confirm(\"Are you sure you want to delete {$parent['username']}?\")' class='btn btn-danger btn-sm'>Delete <i class='bi bi-trash'></i></a></td>
    </tr>
   ";
