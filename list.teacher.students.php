@@ -61,9 +61,9 @@ $teacher_students = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* echo '<pre>';
 print_r($teacher_students);
 die(); */
-$gender = $teacher_students[0]['usergender'];
-$gender = ($gender == 'M') ? 'Male' : 'Famale';
 foreach ($teacher_students as $teacher_student) {
+    $gender = $teacher_student['usergender'];
+    $gender = ($gender == 'M') ? 'Male' : 'Famale';
     $userBirthdate = $teacher_student['birthdate'];
     //!Tarihi parçalara ayırma
     /* explode() fonksiyonu: Bu fonksiyon, bir metni belirli bir ayraç karakterine göre böler ve bir diziye dönüştürür.  */
