@@ -16,7 +16,7 @@ if ($_SESSION['role'] != 3) {
       <div class="row mt-3">
       <div class='row justify-content-center text-center'>
         <div class="col-sm-4 col-md-6 col-lg-8">
-  <h1 class='alert alert-primary mt-2'>Teacher Exam Result</h1>
+  <h1 class='alert alert-primary mt-2'><?php echo $_SESSION['userName'] ?> Students Exam Result</h1>
   </div>
 </div>
    <!-- tablo ile Exam Result listeleme -->

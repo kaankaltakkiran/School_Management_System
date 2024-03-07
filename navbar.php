@@ -93,10 +93,13 @@ die(); */
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item <?=($activePage == 'list.student.exams') ? 'active' : '';?>" href="list.student.exams.php">Exam List</a></li>
+            <?php if (count($results) > 0) {?>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item <?=($activePage == 'show.exam.result') ? 'active' : '';?>" href="show.exam.result.php?userid=<?php echo $results[0]['userid'] ?>">Exam Result</a></li>
+            <?php }?>
           </ul>
         </li>
+
         <li class="nav-item">
           <a class="nav-link  <?=($activePage == 'list.announcement') ? 'active' : '';?>" href="list.announcement.php">Annoucement</a>
         </li>

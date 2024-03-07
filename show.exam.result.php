@@ -63,7 +63,7 @@ die(); */
     <p class="card-text">Total Question: <?php echo $exams[0]['totalquestions'] ?></p>
   </div>
     </div>
-    <a href="index.php" class="btn btn-primary">Go To İndex Page</a>
+    <a href="index.php" class="btn btn-primary">Go To İndex Page <i class="bi bi-backspace"></i></a>
     <?php } else {?>
       <div class="card text-bg-danger mb-3" style="max-width: 500rem;">
   <div class="card-header"><?php echo $exams[0]['examdescription'] ?></div>
