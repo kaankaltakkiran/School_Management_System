@@ -1,7 +1,7 @@
 <?php
 @session_start();
 $activeTitle = "School Management System";
-$activePage = "view.student";
+$activePage = "view.parent";
 require 'up.html.php';
 require 'login.control.php';
 ?>
@@ -12,24 +12,34 @@ if ($_SESSION['role'] != 2 && $_SESSION['role'] != 3) {
     die();
 }
 ?>
-<?php require 'navbar.php'?>
 <?php
+//!Velinin öğrencisi
 require_once 'db.php';
-$id = $_GET['idStudent'];
-$sql = "SELECT students.username AS student_name,students.useraddress,students.useremail,students.usergender,students.classname,students.lessonname,students.birthdate,students.userimg,parents.username AS parent_name,parents.phonenumber AS parent_number
-FROM students
-JOIN parents ON students.userid= parents.studentid where students.userid=:idStudent
-";
+$id = $_GET['idparent'];
+$sql = "SELECT * FROM students WHERE userid=:idparent";
 $SORGU = $DB->prepare($sql);
-$SORGU->bindParam(':idStudent', $id);
+$SORGU->bindParam(':idparent', $id);
 $SORGU->execute();
 $students = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* printf("<pre>%s</pre>", var_export($students, true)); */
-$gender = $students[0]['usergender'];
+$studentName = $students[0]['username'];
+$studentClassNames = $students[0]['classname'];
+?>
+<?php require 'navbar.php'?>
+<?php
+require_once 'db.php';
+$id = $_GET['idparent'];
+$sql = "SELECT * FROM parents WHERE studentid=:idparent";
+$SORGU = $DB->prepare($sql);
+$SORGU->bindParam(':idparent', $id);
+$SORGU->execute();
+$parents = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* printf("<pre>%s</pre>", var_export($parents, true)); */
+$gender = $parents[0]['usergender'];
 $gender = ($gender == 'M') ? 'Male' : 'Famale';
 
 //!Kullanıcının doğum tarihini alma
-$userBirthdate = $students[0]['birthdate'];
+$userBirthdate = $parents[0]['birthdate'];
 //!Tarihi parçalara ayırma
 /* explode() fonksiyonu: Bu fonksiyon, bir metni belirli bir ayraç karakterine göre böler ve bir diziye dönüştürür.  */
 $dateParts = explode('-', $userBirthdate);
@@ -50,56 +60,57 @@ $formattedDate = "$day $monthName $year";
   <div class="row justify-content-center mt-3 ">
  <div class="col-6">
  <div class="card" style="width: 18rem;">
-  <img src="student_images/<?php echo $students[0]['userimg'] ?>" class='card-img-top'  alt="Student İmage">
+  <img src="parent_images/<?php echo $parents[0]['userimg'] ?>" class='card-img-top'  alt="Parent İmage">
   <div class="card-body">
-    <h5 class="card-title"><?php echo $students[0]['student_name'] ?></h5>
-    <p class="card-text"><?php echo $students[0]['classname'] ?> is located</p>
+    <h5 class="card-title"><?php echo $parents[0]['username'] ?></h5>
+    <p class="card-text">Parent</p>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
       <span class="text-danger fw-bolder">User Name:</span>
-      <?php echo $students[0]['student_name'] ?>
+      <?php echo $parents[0]['username'] ?>
     </li>
     <li class="list-group-item">
       <span class="text-danger fw-bolder">Address:</span>
-      <?php echo $students[0]['useraddress'] ?>
+      <?php echo $parents[0]['useraddress'] ?>
     </li>
     <li class="list-group-item">
       <span class="text-danger fw-bolder">Email:</span>
-      <?php echo $students[0]['useremail'] ?>
+      <?php echo $parents[0]['useremail'] ?>
+    </li>
+    <li class="list-group-item">
+      <span class="text-danger fw-bolder">Phone Number:</span>
+      <?php echo $parents[0]['phonenumber'] ?>
     </li>
     <li class="list-group-item">
       <span class="text-danger fw-bolder">Gender:</span>
       <?php echo $gender ?>
     </li>
     <li class="list-group-item">
-      <span class="text-danger fw-bolder">Class:</span>
-      <?php echo $students[0]['classname'] ?>
+      <span class="text-danger fw-bolder">Student Name:</span>
+      <?php echo $studentName ?>
     </li>
     <li class="list-group-item">
-      <span class="text-danger fw-bolder">Lessons:</span>
-      <?php echo $students[0]['lessonname'] ?>
+      <span class="text-danger fw-bolder">Student Classname:</span>
+      <?php echo $studentClassNames ?>
     </li>
     <li class="list-group-item">
       <span class="text-danger fw-bolder">Birthdate:</span>
       <?php echo $formattedDate ?>
     </li>
-    <li class="list-group-item">
-      <span class="text-danger fw-bolder">Parent Name:</span>
-      <?php echo $students[0]['parent_name'] ?>
-    </li>
-    <li class="list-group-item">
-      <span class="text-danger fw-bolder">Parent Number:</span>
-      <?php echo $students[0]['parent_number'] ?>
-    </li>
   </ul>
   <div class="card-body">
-    <a href="list.student.php" class="btn btn-warning">Go To List
+  <?php if ($_SESSION['role'] == 2) {?>
+    <a href="list.parent.php" class="btn btn-warning">Go To List
     <i class="bi bi-backspace"></i></a>
+    <?php }?>
+    <?php if ($_SESSION['role'] == 3) {?>
+    <a href="list.teacher.parent.php" class="btn btn-warning">Go To List
+    <i class="bi bi-backspace"></i></a>
+    <?php }?>
   </div>
 </div>
  </div>
 </div>
 </div>
-
 <?php require 'down.html.php';?>

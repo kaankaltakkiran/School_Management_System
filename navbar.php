@@ -41,7 +41,8 @@
           <a class="nav-link  <?=($activePage == 'index') ? 'active' : '';?>" href="index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  <?=($activePage == 'teacher.class.list') ? 'active' : '';?>" href="list.teacher.class.php">Student's Class</a>
+
+          <a class="nav-link  <?=($activePage == 'teacher.class.list' || $activePage == 'class.student.list') ? 'active' : '';?>" href="list.teacher.class.php">Student's Class</a>
         </li>
         <li class="nav-item">
         <a class="nav-link  <?=($activePage == 'parent.list' || $activePage == 'update.parent' || $activePage == 'show.parent' || $activePage == 'class.parent.list') ? 'active' : '';?>" href="list.teacher.parent.php">Parent</a>

@@ -73,7 +73,7 @@ foreach ($parents as $parent) {
     <tr>
       <th>{$parent['parent_id']}</th>
       <td><img src='parent_images/{$parent['parent_img']}' class='rounded-circle' width='100' height='100'></td>
-      <td>{$parent['parent_name']}</td>
+      <td><a href='view.parent.php?idparent={$parent['parent_id']}' class='link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'>{$parent['parent_name']}</a></td>
       <td>$gender</td>
       <td>{$parent['parent_number']}</td>
       <td>$formattedDate</td>

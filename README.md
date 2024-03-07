@@ -11,6 +11,7 @@ Rol idsi 3 olan **öğretmen** kullanıcısı,sınav ekleyip düzenleme yetkisin
 Rol idsi 4 olan **öğrenci** kullanıcısı, sınav listesinden sınava girebiliyor ve duyru,yemek listesi gibi bilgilendirici içerikleri görebilmektedir.
 
 
+
  ## Proje nasıl kullanılır?
 - [ ] Proje clone edilir.
 - [ ] Database klasöründe ki sql dosyası database import edilir.
@@ -49,7 +50,9 @@ Rol idsi 4 olan **öğrenci** kullanıcısı, sınav listesinden sınava girebil
    - [X] alertler gözden geçirildi.
    - [X] Tek kayıt silme işlemi gözden geçirldi ve toplu kayıt silme işlemi eklendi.Eğer kayıt yok ise toplu kayıt silme butonu gözükmeyecek şekilde ayarlandı. Ek olarak eğer table da kayıt yoksa uyarı mesajı verildi.
    - [X] List Announcements sayfasında, duyuru sahibine duyurunun yayınlanıp yayınlanmadığı gösterildi.
-    - [X] Add student sayfasında öğrenci veli eklme kısmı ayrıld. Veli ekleme kısmı modal ile sağlandı.
+    - [X] Add student sayfasında öğrenci veli eklme kısmı ayrıldı. Veli ekleme kısmı modal ile sağlandı.
+    - [X] Teacher, girdiği sınıfları gördüğü bir liste görebilmektedir.Ek olarak bu sınıf listine tıklayarak sınıfın velileri ile ilgili bilgiye ulaşabilmektedir.
+    - [X] Veli ismine tıklayarak tekil bilgiler listelenmektedir.
   
  ## Yapılan Temel Geliştirmeler
  - [X] Genel olarak web sitesini kullanabilmek için giriş yapmak zorunlu hale getirildi.
