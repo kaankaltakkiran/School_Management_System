@@ -495,12 +495,29 @@ Exams Result
             <img src="./public/img/announcement.jpg" class="card-img-top" alt="announcement img">
             <div class="card-body">
               <h5 class="card-title">Send Announcement</h5>
-              <p class="card-text">Register Unit Send Announcement</p>
+              <p class="card-text">Teacher Send Announcement</p>
         <div class="d-grid gap-2">
             <a href="add.announcement.php" class="btn btn-danger"> Send Announcement
             <i class="bi bi-send-fill"></i>
           </a>
           <a href="list.announcement.php" class="btn btn-warning">List Announcement
+            <i class="bi bi-send-fill"></i>
+            </a>
+            </div>
+            </div>
+          </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card h-100 " style="width: 18rem;">
+            <img src="./public/img/attendance.jpg" class="card-img-top" alt="Attendance img">
+            <div class="card-body">
+              <h5 class="card-title">Teacher Attendance</h5>
+              <p class="card-text">Teacher Take Attendance </p>
+        <div class="d-grid gap-2">
+            <a href="take.student.attendance.php" class="btn btn-danger"> Take Attendance
+            <i class="bi bi-send-fill"></i>
+          </a>
+          <a href="list.student.attendance.php" class="btn btn-warning">List Attendance
             <i class="bi bi-send-fill"></i>
             </a>
             </div>
