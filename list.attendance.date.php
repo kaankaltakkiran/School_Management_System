@@ -64,7 +64,7 @@ if (isset($_POST['form_attendance_date'])) {
     $SORGU->bindParam(':id', $teacherid);
     $SORGU->execute();
     $students = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-    /*  echo '<pre>';
+    /*    echo '<pre>';
 print_r($students);
 die(); */
 
@@ -140,7 +140,7 @@ foreach ($students as $student) {
     echo "
     <tr>
       <th>{$student['studentid']}</th>
-      <td><img src='student_images/{$student['userimg']}' class='rounded-circle' width='100' height='100'></td>
+      <td><img src='student_images/{$student['studentimg']}' class='rounded-circle' width='100' height='100'></td>
       <td>{$student['studentname']}</td>
       <td>{$student['studentclassname']}</td>
       <td>{$student['createdate']}</td>
