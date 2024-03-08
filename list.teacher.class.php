@@ -28,6 +28,7 @@ if ($_SESSION['role'] != 3) {
       <th>Class Id</th>
       <th>Class Name</th>
       <th>Attendance By Date</th>
+      <th>Attendance By Student Name</th>
     </tr>
   </thead>
   <tbody>
@@ -56,11 +57,11 @@ foreach ($haveClassIdArray as $index => $classId) {
     <tr>
         <th>{$classId}</th>
         <td><a href='list.student.class.php?className={$className}' class='link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'>{$className}</a></td>
-        <td><a href='list.attendance.date.php?className={$className}' class='btn btn-success'>list Attendance By Date</a></td>
+        <td><a href='list.attendance.date.php?className={$className}' class='btn btn-warning'>list Attendance By Date  <i class='bi bi-send'></i></a></td>
+        <td><a href='list.attendance.name.php?className={$className}' class='btn btn-info'>list Attendance By Student Name  <i class='bi bi-send'></i></a></td>
     </tr>
     ";
 }
-
 ?>
   </tbody>
 </table>
