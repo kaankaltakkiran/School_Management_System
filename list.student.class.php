@@ -21,6 +21,10 @@ $get_class_name = $_GET['className'];
 require_once 'db.php';
 
 if (isset($_POST['attendance_btn'])) {
+    //!Hata kontrolü
+    $errors = array();
+    //!Onay mesajları
+    $approves = array();
     //! Checkbox işaretlenmişse, durumu 1 olarak ayarla dizi olarak alıyoruz.
     //?checkobx içinde studentid de var
     $attendance_values = $_POST['isHere'];
@@ -30,17 +34,18 @@ if (isset($_POST['attendance_btn'])) {
     $SORGU->bindParam(':teacherid', $teacher_id);
     $SORGU->execute();
     $teacher_students = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-
     /*    printf("<pre>%s</pre>", var_export($teacher_students, true));
     die(); */
+
     foreach ($teacher_students as $teacher_student) {
-        //!Her öğrenci için varsayılan olarak 0 atanır
+        // Her öğrenci için varsayılan olarak 0 atanır
         $attendance_status = 0;
 
         // Eğer öğrenci işaretlenmişse, durumu 1 olarak ayarla
         if (isset($_POST['isHere'][$teacher_student['userid']])) {
             $attendance_status = 1;
         }
+
         // Öğrenci adını al
         $student_name = $teacher_student['username'];
         $student_classid = $teacher_student['classid'];
@@ -50,24 +55,56 @@ if (isset($_POST['attendance_btn'])) {
         $added_teacherid = $teacher_student['teacher_userid'];
         $added_teachername = $teacher_student['teacher_username'];
 
-        // Insert into Database
-        $sql = "INSERT INTO attendances (studentid,ishere,studentname,studentclassid,studentclassname,studentlessonid,studentlessonname,addedteacherid,addedteachername) VALUES (:form_studentid,:isHere,:studentname,:studentclassid,:studentclassname,:studentlessonid,:studentlessonname,:addedteacherid,:addedteachername)";
-        $SORGU = $DB->prepare($sql);
-        $SORGU->bindParam(':form_studentid', $teacher_student['userid']);
-        $SORGU->bindParam(':isHere', $attendance_status);
-        $SORGU->bindParam(':studentname', $student_name);
-        $SORGU->bindParam(':studentclassid', $student_classid);
-        $SORGU->bindParam(':studentclassname', $student_classname);
-        $SORGU->bindParam(':studentlessonid', $student_lessonid);
-        $SORGU->bindParam(':studentlessonname', $student_lessonname);
-        $SORGU->bindParam(':addedteacherid', $added_teacherid);
-        $SORGU->bindParam(':addedteachername', $added_teachername);
+        // Bugünün tarihini al
+        $today = date("Y-m-d");
+
+        // Veritabanında bugün için öğrenci kaydı kontrolü yap
+        // Aynı gün için aynı öğrenciye ait kayıt varsa hata mesajı göster
+        $SORGU = $DB->prepare("SELECT COUNT(*) as count FROM attendances WHERE studentid = :student_id AND studentclassid = :class_id AND DATE(createdate) = :today");
+        $SORGU->bindParam(':today', $today);
+        $SORGU->bindParam(':student_id', $teacher_student['userid']);
+        $SORGU->bindParam(':class_id', $teacher_student['classid']);
         $SORGU->execute();
-        $approves[] = "Attendance Added Successfully...";
+        $record = $SORGU->fetch(PDO::FETCH_ASSOC);
+
+        if ($record['count'] > 0) {
+            $errors[] = "Attendance already added for today...";
+        } else {
+            // Insert into Database
+            $sql = "INSERT INTO attendances (studentid, ishere, studentname, studentclassid, studentclassname, studentlessonid, studentlessonname, addedteacherid, addedteachername) VALUES (:form_studentid, :isHere, :studentname, :studentclassid, :studentclassname, :studentlessonid, :studentlessonname, :addedteacherid, :addedteachername)";
+            $SORGU = $DB->prepare($sql);
+            $SORGU->bindParam(':form_studentid', $teacher_student['userid']);
+            $SORGU->bindParam(':isHere', $attendance_status);
+            $SORGU->bindParam(':studentname', $student_name);
+            $SORGU->bindParam(':studentclassid', $student_classid);
+            $SORGU->bindParam(':studentclassname', $student_classname);
+            $SORGU->bindParam(':studentlessonid', $student_lessonid);
+            $SORGU->bindParam(':studentlessonname', $student_lessonname);
+            $SORGU->bindParam(':addedteacherid', $added_teacherid);
+            $SORGU->bindParam(':addedteachername', $added_teachername);
+            $SORGU->execute();
+            $approves[] = "Attendance Added Successfully...";
+        }
     }
 }
 ?>
     <div class="container">
+    <?php
+if (!empty($errors)) {
+    foreach ($errors as $error) {
+        echo "<div class='position-fixed top-0 end-0 p-3' style='z-index: 5'>
+      <div class='toast align-items-center text-white bg-danger border-0' role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='5000'>
+          <div class='d-flex'>
+              <div class='toast-body'>
+              $error
+              </div>
+              <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+          </div>
+      </div>
+  </div>";
+    }
+}
+?>
     <?php
 //! Başarılı mesajlarını göster
 if (!empty($approves)) {
