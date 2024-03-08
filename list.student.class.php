@@ -15,6 +15,7 @@ if ($_SESSION['role'] != 2 && $_SESSION['role'] != 3) {
 <?php
 //!GET ile gelen sınıf adını alıyoruz.
 $get_class_name = $_GET['className'];
+$today = date("Y-m-d");
 ?>
 <?php require 'navbar.php'?>
 <?php
@@ -127,6 +128,8 @@ if (!empty($approves)) {
         <div class="col-sm-4 col-md-6 col-lg-8">
   <h1 class='alert alert-primary mt-2'> <?php echo $get_class_name ?> Class Students</h1>
   </div>
+  <h4 class="text-danger">Today Date: <?php echo $today ?></h4>
+  <p class="text-danger text-end fw-bold ">Note: You can take attendance by clicking on the checkbox.</p>
 </div>
 <form method="post">
    <table id="example" class="table table-bordered table-striped " style="width:100%">
