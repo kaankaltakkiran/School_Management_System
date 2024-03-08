@@ -53,6 +53,7 @@ if (isset($_POST['attendance_btn'])) {
         $student_classname = $teacher_student['classname'];
         $student_lessonid = $teacher_student['teacher_lessonid'];
         $student_lessonname = $teacher_student['teacher_lessonname'];
+        $student_img = $teacher_student['userimg'];
         $added_teacherid = $teacher_student['teacher_userid'];
         $added_teachername = $teacher_student['teacher_username'];
 
@@ -72,7 +73,7 @@ if (isset($_POST['attendance_btn'])) {
             $errors[] = "Attendance already added for today...";
         } else {
             // Insert into Database
-            $sql = "INSERT INTO attendances (studentid, ishere, studentname, studentclassid, studentclassname, studentlessonid, studentlessonname, addedteacherid, addedteachername) VALUES (:form_studentid, :isHere, :studentname, :studentclassid, :studentclassname, :studentlessonid, :studentlessonname, :addedteacherid, :addedteachername)";
+            $sql = "INSERT INTO attendances (studentid, ishere, studentname, studentclassid, studentclassname, studentlessonid, studentlessonname,studentimg, addedteacherid, addedteachername) VALUES (:form_studentid, :isHere, :studentname, :studentclassid, :studentclassname, :studentlessonid, :studentlessonname,:studentimg, :addedteacherid, :addedteachername)";
             $SORGU = $DB->prepare($sql);
             $SORGU->bindParam(':form_studentid', $teacher_student['userid']);
             $SORGU->bindParam(':isHere', $attendance_status);
@@ -81,6 +82,7 @@ if (isset($_POST['attendance_btn'])) {
             $SORGU->bindParam(':studentclassname', $student_classname);
             $SORGU->bindParam(':studentlessonid', $student_lessonid);
             $SORGU->bindParam(':studentlessonname', $student_lessonname);
+            $SORGU->bindParam(':studentimg', $student_img);
             $SORGU->bindParam(':addedteacherid', $added_teacherid);
             $SORGU->bindParam(':addedteachername', $added_teachername);
             $SORGU->execute();
