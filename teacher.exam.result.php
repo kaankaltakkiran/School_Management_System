@@ -32,6 +32,7 @@ if ($_SESSION['role'] != 3) {
       <th>Total True Answer</th>
       <th>Total False Answer</th>
       <th>Total Questions</th>
+      <th>Total Score(%)</th>
       <th>Result</th>
     </tr>
   </thead>
@@ -64,7 +65,8 @@ foreach ($results as $result) {
       <td>{$result['totaltrueanswer']}</td>
       <td>{$result['totalfalseanswer']}</td>
       <td>{$result['totalquestions']}</td>
-      <td class='" . ($examResult == 'Passed' ? 'bg-success text-white ' : 'bg-danger text-white') . "'>{$result['result']}</td>
+      <td>{$result['totalscore']}</td>
+      <td>{$result['result']}</td>
    </tr>
   ";
 }

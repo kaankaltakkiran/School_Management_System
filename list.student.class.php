@@ -43,6 +43,7 @@ if (isset($_POST['attendance_btn'])) {
         $attendance_status = 0;
 
         // Eğer öğrenci işaretlenmişse, durumu 1 olarak ayarla
+        // chatgpt çözümü ile student id yi herela alıyor
         if (isset($_POST['isHere'][$teacher_student['userid']])) {
             $attendance_status = 1;
         }

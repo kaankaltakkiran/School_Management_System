@@ -96,6 +96,7 @@ $questionNumber = 1;
 $totalTrue = 0; // Doğru cevap sayısını tutmak için
 $totalFalse = 0; // Yanlış cevap sayısını tutmak için
 $totalquestions = count($questions); // Toplam soru sayısını al
+$successRate = 0; // Başarı oranını tutmak için
 
 // Form gönderildiğinde işlenecek kod
 if (isset($_POST['form_result'])) {
@@ -114,21 +115,23 @@ if (isset($_POST['form_result'])) {
         } else {
             $totalFalse++;
         }
-        if ($totalTrue > $totalFalse) {
-            $result = "Passed";
-        } else {
-            $result = "Failed";
-        }
+
+        $successRate = ($totalTrue / $totalquestions) * 100;
+
+        // Başarı oranına göre sonucu belirle
+        // Yuvarlanmış başarı oranını değişkene atama
+        $totalScore = round($successRate, 0);
+
     }
 // Insert into Database
-    $sql = "INSERT INTO results (examid,userid,totalquestions,totaltrueanswer,totalfalseanswer,result) VALUES (:examid,:userid,:totalquestions,:totaltrue,:totalfalse,:result)";
+    $sql = "INSERT INTO results (examid,userid,totalquestions,totaltrueanswer,totalfalseanswer,result) VALUES (:examid,:userid,:totalquestions,:totaltrue,:totalfalse,:score)";
     $SORGU = $DB->prepare($sql);
     $SORGU->bindParam(':examid', $examid);
     $SORGU->bindParam(':userid', $userid);
     $SORGU->bindParam(':totalquestions', $totalquestions);
     $SORGU->bindParam(':totaltrue', $totalTrue);
     $SORGU->bindParam(':totalfalse', $totalFalse);
-    $SORGU->bindParam(':result', $result);
+    $SORGU->bindParam(':score', $totalScore);
     $SORGU->execute();
     echo '<script>';
     echo 'alert("The Exam Ended Successfully...");';
