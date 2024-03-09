@@ -524,6 +524,23 @@ Exams Result
             </div>
           </div>
       </div>
+      <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card h-100 " style="width: 18rem;">
+            <img src="./public/img/note.jpg" class="card-img-top" alt="Note img">
+            <div class="card-body">
+              <h5 class="card-title">Teacher Note System</h5>
+              <p class="card-text">Teacher Give Note </p>
+        <div class="d-grid gap-2">
+            <a href="give.note.php" class="btn btn-danger">Give Note
+            <i class="bi bi-send-fill"></i>
+          </a>
+          <a href="list.note.php" class="btn btn-warning">List Note Result
+            <i class="bi bi-send-fill"></i>
+            </a>
+            </div>
+            </div>
+          </div>
+      </div>
       <?php }?>
   </div>
 </div>
