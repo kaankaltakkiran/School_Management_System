@@ -534,7 +534,7 @@ Exams Result
             <a href="list.give.note.php" class="btn btn-danger">Give Note
             <i class="bi bi-send-fill"></i>
           </a>
-          <a href="list.note.php" class="btn btn-warning">List Note Result
+          <a href="list.note.class.php" class="btn btn-warning">List Note Result
             <i class="bi bi-send-fill"></i>
             </a>
             </div>
