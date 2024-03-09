@@ -52,6 +52,7 @@ die(); */
   </div>
   <div class="row justify-content-center ">
     <div class="col-6">
+    <?php if ($results[0]['examresult'] == '') {?>
     <div class="card text-bg-primary text-white fw-bold   mb-3" style="max-width: 500rem;">
   <div class="card-header"><?php echo $exams[0]['examdescription'] ?></div>
   <div class="card-body">
@@ -65,6 +66,39 @@ die(); */
     </div>
     <a href="index.php" class="btn btn-primary">Go To İndex Page <i class="bi bi-backspace"></i></a>
     </div>
+    <?php }?>
+    <?php if ($results[0]['examresult'] == 'Passed') {?>
+      <div class="card text-bg-success text-white fw-bold   mb-3" style="max-width: 500rem;">
+  <div class="card-header"><?php echo $exams[0]['examdescription'] ?></div>
+  <div class="card-body">
+    <h5 class="card-title"><?php echo $exams[0]['examtitle'] ?></h5>
+    <h1 class="card-text"><?php echo $exams[0]['result'] ?></h1>
+    <p class="card-text">Total True Answer: <?php echo $exams[0]['totaltrueanswer'] ?></p>
+    <p class="card-text">Total False Answer: <?php echo $exams[0]['totalfalseanswer'] ?></p>
+    <p class="card-text">Total Question: <?php echo $exams[0]['totalquestions'] ?></p>
+    <p class="card-text">Total Score: <?php echo $exams[0]['totalscore'] ?></p>
+    <p class="card-text">Exam Status: <?php echo $exams[0]['examresult'] ?></p>
+  </div>
+    </div>
+    <a href="index.php" class="btn btn-primary">Go To İndex Page <i class="bi bi-backspace"></i></a>
+    </div>
+      <?php }?>
+      <?php if ($results[0]['examresult'] == 'Failed') {?>
+      <div class="card text-bg-danger text-white fw-bold   mb-3" style="max-width: 500rem;">
+  <div class="card-header"><?php echo $exams[0]['examdescription'] ?></div>
+  <div class="card-body">
+    <h5 class="card-title"><?php echo $exams[0]['examtitle'] ?></h5>
+    <h1 class="card-text"><?php echo $exams[0]['result'] ?></h1>
+    <p class="card-text">Total True Answer: <?php echo $exams[0]['totaltrueanswer'] ?></p>
+    <p class="card-text">Total False Answer: <?php echo $exams[0]['totalfalseanswer'] ?></p>
+    <p class="card-text">Total Question: <?php echo $exams[0]['totalquestions'] ?></p>
+    <p class="card-text">Total Score: <?php echo $exams[0]['totalscore'] ?></p>
+    <p class="card-text">Exam Status: <?php echo $exams[0]['examresult'] ?></p>
+  </div>
+    </div>
+    <a href="index.php" class="btn btn-primary">Go To İndex Page <i class="bi bi-backspace"></i></a>
+    </div>
+      <?php }?>
   </div>
 </div>
 <?php require 'down.html.php';?>

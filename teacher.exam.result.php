@@ -50,10 +50,10 @@ $SORGU->execute();
 $results = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* echo '<pre>';
 print_r($results);
-die();
- */
+die(); */
+
 foreach ($results as $result) {
-    $examResult = $result['result'];
+    $examResult = $result['examresult'];
     echo "
     <tr>
       <th>{$result['classid']}</th>
@@ -66,7 +66,9 @@ foreach ($results as $result) {
       <td>{$result['totalfalseanswer']}</td>
       <td>{$result['totalquestions']}</td>
       <td>{$result['totalscore']}</td>
-      <td>{$result['result']}</td>
+      <td " . (!empty($examResult) ? "class='" . ($examResult == 'Passed' ? 'bg-success text-white' : 'bg-danger text-white') . "'" : '') . ">
+      " . (!empty($examResult) ? $result['examresult'] : '') . "
+  </td>
    </tr>
   ";
 }
