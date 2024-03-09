@@ -124,7 +124,7 @@ if (isset($_POST['form_result'])) {
 
     }
 // Insert into Database
-    $sql = "INSERT INTO results (examid,userid,totalquestions,totaltrueanswer,totalfalseanswer,result) VALUES (:examid,:userid,:totalquestions,:totaltrue,:totalfalse,:score)";
+    $sql = "INSERT INTO results (examid,userid,totalquestions,totaltrueanswer,totalfalseanswer,totalscore) VALUES (:examid,:userid,:totalquestions,:totaltrue,:totalfalse,:score)";
     $SORGU = $DB->prepare($sql);
     $SORGU->bindParam(':examid', $examid);
     $SORGU->bindParam(':userid', $userid);

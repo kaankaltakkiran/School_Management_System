@@ -60,7 +60,7 @@ die(); */
     <p class="card-text">Total True Answer: <?php echo $exams[0]['totaltrueanswer'] ?></p>
     <p class="card-text">Total False Answer: <?php echo $exams[0]['totalfalseanswer'] ?></p>
     <p class="card-text">Total Question: <?php echo $exams[0]['totalquestions'] ?></p>
-    <p class="card-text">Total Question: <?php echo $exams[0]['totalscore'] ?></p>
+    <p class="card-text">Total Score: <?php echo $exams[0]['totalscore'] ?></p>
   </div>
     </div>
     <a href="index.php" class="btn btn-primary">Go To İndex Page <i class="bi bi-backspace"></i></a>
