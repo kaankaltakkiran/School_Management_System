@@ -531,7 +531,7 @@ Exams Result
               <h5 class="card-title">Teacher Note System</h5>
               <p class="card-text">Teacher Give Note </p>
         <div class="d-grid gap-2">
-            <a href="give.note.php" class="btn btn-danger">Give Note
+            <a href="list.give.note.php" class="btn btn-danger">Give Note
             <i class="bi bi-send-fill"></i>
           </a>
           <a href="list.note.php" class="btn btn-warning">List Note Result

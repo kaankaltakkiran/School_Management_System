@@ -230,7 +230,7 @@ foreach ($classArrayName as $key => $value) {
 <div class="form-floating mb-3">
 <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">Start Exam Date</label>
-  <input type="date"name="form_examstartdate" class="form-control" id="exampleFormControlInput1" value="<?php echo $exams[0]['examstartdate'] ?>"  min="<?php echo date('Y-m-d'); ?>" />
+  <input type="date"name="form_examstartdate" class="form-control" id="exampleFormControlInput1" value="<?php echo $exams[0]['examstartdate'] ?>"/>
 </div>
 </div>
 <div class="form-floating mb-3">

@@ -69,6 +69,7 @@ if (!empty($approves)) {
     <tr>
       <th>Exam Id</th>
       <th>Exam Image</th>
+      <th>Lesson Name</th>
       <th>Exam Title</th>
       <th>Exam Description</th>
       <th>Exam Start Date</th>
@@ -149,6 +150,7 @@ foreach ($exams as $exam) {
     <tr>
       <th>{$exam['examid']}</th>
       <td><img src='exam_images/{$exam['examimg']}' class='rounded-circle' width='100' height='100'></td>
+      <td>{$exam['lessonname']}</td>
       <td>{$exam['examtitle']}</td>
       <td>{$exam['examdescription']}</td>
       <td>{$exam['examstartdate']}</td>

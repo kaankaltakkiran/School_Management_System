@@ -15,6 +15,7 @@ if ($_SESSION['role'] != 3) {
 <?php
 //!GET ile gelen sınıf adını alıyoruz.
 $get_class_name = $_GET['className'];
+$today = date("Y-m-d");
 ?>
     <?php include 'navbar.php';?>
   <div class="container">
@@ -32,9 +33,8 @@ $get_class_name = $_GET['className'];
   <button type="submit" class="btn btn-outline-primary m-3 ">List Attendance <i class="bi bi-send"></i> </button>
   </div>
 </div>
-<?php
-
-?>
+<h4 class="text-danger">Today Date: <?php echo $today ?></h4>
+  <p class="text-danger text-end fw-bold ">Note: You can update the attendance by clicking on the checkbox.</p>
 <?php
 if (isset($_POST['form_submit'])) {
     //!Hata kontrolü

@@ -27,6 +27,7 @@ if (isset($_POST['submit_form'])) {
     $examtime = $_POST['form_examtime'];
     $addedid = $_SESSION['id'];
     $addedName = $_SESSION['userName'];
+    $teacherLessonName = $_POST['form_lessonname'];
 
     //!Chatgpt çözümü
     $classIds = array(); // lessonid'leri tutacak dizi
@@ -82,10 +83,11 @@ if (isset($_POST['submit_form'])) {
                 move_uploaded_file($tmp_name, $img_upload_path);
 
                 // Insert into Database
-                $sql = "INSERT INTO exams (examtitle,examdescription,examstartdate,examenddate,examtime,ispublish,classid,classname,addedid,addedname,examimg) VALUES (:form_examtitle,:form_examdescription,:form_examstartdate,:form_examenddate,:form_examtime,:form_ispublish,:classid,:classname,:addedid,:addedname,'$new_img_name')";
+                $sql = "INSERT INTO exams (examtitle,examdescription,lessonname,examstartdate,examenddate,examtime,ispublish,classid,classname,addedid,addedname,examimg) VALUES (:form_examtitle,:form_examdescription,:form_lessonname,:form_examstartdate,:form_examenddate,:form_examtime,:form_ispublish,:classid,:classname,:addedid,:addedname,'$new_img_name')";
                 $SORGU = $DB->prepare($sql);
                 $SORGU->bindParam(':form_examtitle', $examtitle);
                 $SORGU->bindParam(':form_examdescription', $examdescription);
+                $SORGU->bindParam(':form_lessonname', $teacherLessonName);
                 $SORGU->bindParam(':form_examstartdate', $examstartdate);
                 $SORGU->bindParam(':form_examenddate', $examenddate);
                 $SORGU->bindParam(':form_examtime', $examtime);
@@ -163,7 +165,7 @@ $teachers = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 die(); */
 ?>
 <div class="form-floating mb-3">
-  <input type="text"  class="form-control" value="<?php echo $teachers[0]['lessonname']; ?>"disabled readonly>
+  <input type="text" name="form_lessonname"  class="form-control" value="<?php echo $teachers[0]['lessonname']; ?>"readonly  >
   <label>Lesson Name</label>
 </div>
 <div class="form-floating mb-3">
