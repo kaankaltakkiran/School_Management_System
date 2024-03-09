@@ -286,14 +286,15 @@ CREATE TABLE `results` (
   `totaltrueanswer` text NOT NULL,
   `totalfalseanswer` text NOT NULL,
   `totalscore` varchar(3) NOT NULL,
+  `examresult` varchar(6) NOT NULL,
   `createdate` datetime NOT NULL DEFAULT current_timestamp(),
   `lastupdate` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`resultid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
-INSERT INTO `results` (`resultid`, `examid`, `userid`, `totalquestions`, `totaltrueanswer`, `totalfalseanswer`, `totalscore`, `createdate`, `lastupdate`) VALUES
-(1,	2,	3,	'2',	'2',	'0',	'100',	'2024-03-09 17:07:12',	'2024-03-09 17:07:12'),
-(2,	3,	2,	'2',	'1',	'1',	'50',	'2024-03-09 17:08:29',	'2024-03-09 17:08:29');
+INSERT INTO `results` (`resultid`, `examid`, `userid`, `totalquestions`, `totaltrueanswer`, `totalfalseanswer`, `totalscore`, `examresult`, `createdate`, `lastupdate`) VALUES
+(1,	2,	3,	'2',	'2',	'0',	'100',	'Passed',	'2024-03-09 17:07:12',	'2024-03-09 17:47:14'),
+(2,	3,	2,	'2',	'1',	'1',	'50',	'Failed',	'2024-03-09 17:08:29',	'2024-03-09 18:00:22');
 
 DROP TABLE IF EXISTS `students`;
 CREATE TABLE `students` (
@@ -321,8 +322,8 @@ CREATE TABLE `students` (
 
 INSERT INTO `students` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `useraddress`, `phonenumber`, `roleuser`, `createdate`, `lastupdate`, `lastlogintime`, `classid`, `classname`, `birthdate`, `userimg`, `lessonid`, `lessonname`, `addedunitid`, `addedunitname`) VALUES
 (1,	'Ali Yılmaz',	'ali@gmail.com',	'$2y$10$8frvU6dpcIi/F4KPMSNrVO5aOXgm2GqyyKL7ew2aGJJ67YJHJ5tj2',	'M',	'Address 1',	'05076600884',	4,	'2024-03-05 20:49:58',	'2024-03-07 18:24:26',	'2024-03-09 14:00:05',	6,	'10/B',	'1999-12-23',	'IMG-65e75b469b0850.36446039.png',	'1,3',	'Math,Turkish',	1,	'Kaan Kaltakkıran'),
-(2,	'Selin Yıldız',	'selin@gmail.com',	'$2y$10$YUG495d471iU52Reygnmku1Wb5ohFBKgP6BwKJnCqmKUg.tKiyW6W',	'F',	'Address 2',	'12312312312',	4,	'2024-03-05 20:53:49',	'2024-03-05 20:53:49',	'2024-03-09 14:09:51',	10,	'11/B',	'1998-01-01',	'IMG-65e75c2d14ad39.37956423.jpg',	'3',	'Turkish',	1,	'Kaan Kaltakkıran'),
-(3,	'Student 1',	'student1@gmail.com',	'$2y$10$GKNyGHgaALdilNtPEOVIBuCjCKg1PU.oft0Fr0M2hRPO7tZZI3TKO',	'M',	'Address 3',	'23123112323',	4,	'2024-03-05 20:56:14',	'2024-03-05 20:56:14',	'2024-03-09 14:07:51',	1,	'9/A',	'1999-10-01',	'IMG-65e75cbea3cb65.35268383.jpg',	'1,3,5',	'Math,Turkish,Science',	1,	'Kaan Kaltakkıran'),
+(2,	'Selin Yıldız',	'selin@gmail.com',	'$2y$10$YUG495d471iU52Reygnmku1Wb5ohFBKgP6BwKJnCqmKUg.tKiyW6W',	'F',	'Address 2',	'12312312312',	4,	'2024-03-05 20:53:49',	'2024-03-05 20:53:49',	'2024-03-09 15:01:07',	10,	'11/B',	'1998-01-01',	'IMG-65e75c2d14ad39.37956423.jpg',	'3',	'Turkish',	1,	'Kaan Kaltakkıran'),
+(3,	'Student 1',	'student1@gmail.com',	'$2y$10$GKNyGHgaALdilNtPEOVIBuCjCKg1PU.oft0Fr0M2hRPO7tZZI3TKO',	'M',	'Address 3',	'23123112323',	4,	'2024-03-05 20:56:14',	'2024-03-05 20:56:14',	'2024-03-09 14:58:18',	1,	'9/A',	'1999-10-01',	'IMG-65e75cbea3cb65.35268383.jpg',	'1,3,5',	'Math,Turkish,Science',	1,	'Kaan Kaltakkıran'),
 (4,	'Student 2',	'student2@gmail.com',	'$2y$10$ACTIViIKnMD1VrfQ.KX79OYY2DnxU.L6C8pSO3hOIJUFvGHK92bSy',	'F',	'Address 4',	'05058429441',	4,	'2024-03-05 20:59:19',	'2024-03-05 20:59:19',	'2024-03-05 17:59:19',	2,	'9/B',	'1999-04-09',	'IMG-65e75d772c4684.82295265.jpg',	'1,2,3,4,5',	'Math,Spor,Turkish,English,Science',	1,	'Kaan Kaltakkıran'),
 (5,	'Student 3',	'student3@gmail.com',	'$2y$10$EXkRoFHvq7t7mgU0w/Nr8ORcZf7vrioFA8F/5UqAEKKmxhw1DzygC',	'M',	'Address 5',	'05054344498',	4,	'2024-03-05 21:02:19',	'2024-03-05 21:02:19',	'2024-03-05 18:02:19',	7,	'10/C',	'1997-06-01',	'IMG-65e75e2b41b5e5.77661806.jpg',	'1,2,3,5',	'Math,Spor,Turkish,Science',	1,	'Kaan Kaltakkıran'),
 (6,	'Student 4',	'student4@gmail.com',	'$2y$10$30aN..wMqZH.2y87cHLCies3LGXlOa0FmFsL2xoeCwIUXMzxXvkJm',	'F',	'Address 6',	'05056787676',	4,	'2024-03-05 21:04:49',	'2024-03-05 21:04:49',	'2024-03-05 18:04:49',	9,	'11/A',	'1999-06-02',	'IMG-65e75ec1c00929.50490604.jpg',	'1,3,4',	'Math,Turkish,English',	1,	'Kaan Kaltakkıran'),
@@ -353,10 +354,10 @@ CREATE TABLE `teachers` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 INSERT INTO `teachers` (`userid`, `username`, `useremail`, `userpassword`, `usergender`, `roleuser`, `createdate`, `lastupdate`, `lastlogintime`, `classid`, `classname`, `useraddress`, `phonenumber`, `birthdate`, `userimg`, `lessonid`, `lessonname`, `addedunitid`, `addedunitname`) VALUES
-(1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$F8BOCVniVNOqHhjl7gWf8e5ptBp1wNP.KhGPA3GA9pEJx0hPGEZOm',	'M',	3,	'2024-02-10 12:43:06',	'2024-03-02 12:34:35',	'2024-03-09 13:59:02',	'1,6,11,16',	'9/A,10/B,11/C,12/D',	'Address 1',	'23123112323',	'1975-08-20',	'IMG-65cf8e230c7946.47057921.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
-(2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$a7xTEd88iyzI43udPEmrSeTmxBBaj9nf.JXtJV8NadXoRV1/GGe7q',	'F',	3,	'2024-02-10 12:43:40',	'2024-03-02 11:38:36',	'2024-03-02 11:02:25',	'1,10',	'9/A,11/B',	'Address 2',	'12331223123',	'1980-01-15',	'IMG-65c7454cee1627.24858158.png',	'3',	'Turkish',	1,	'Kaan Kaltakkıran'),
+(1,	'Veli Yıldız',	'veli@gmail.com',	'$2y$10$F8BOCVniVNOqHhjl7gWf8e5ptBp1wNP.KhGPA3GA9pEJx0hPGEZOm',	'M',	3,	'2024-02-10 12:43:06',	'2024-03-02 12:34:35',	'2024-03-09 15:02:08',	'1,6,11,16',	'9/A,10/B,11/C,12/D',	'Address 1',	'23123112323',	'1975-08-20',	'IMG-65cf8e230c7946.47057921.png',	'1',	'Math',	1,	'Kaan Kaltakkıran'),
+(2,	'Ayse Yılmaz',	'ayse@gmail.com',	'$2y$10$a7xTEd88iyzI43udPEmrSeTmxBBaj9nf.JXtJV8NadXoRV1/GGe7q',	'F',	3,	'2024-02-10 12:43:40',	'2024-03-02 11:38:36',	'2024-03-09 15:00:05',	'1,10',	'9/A,11/B',	'Address 2',	'12331223123',	'1980-01-15',	'IMG-65c7454cee1627.24858158.png',	'3',	'Turkish',	1,	'Kaan Kaltakkıran'),
 (3,	'Spor Teacher',	'sporteacher@gmail.com',	'$2y$10$9drgD7QvkdJm9HMBMHzg.uDfJfWmGBpNnf5TchsIA2r5VT2x0Dkga',	'F',	3,	'2024-02-29 19:09:23',	'2024-03-02 17:45:31',	'2024-03-09 11:01:28',	'2,4,7,10,13',	'9/B,9/D,10/C,11/B,12/A',	'Address 3',	'05076600889',	'1968-01-01',	'IMG-65e0ac33d8e721.72086549.jpg',	'2',	'Spor',	1,	'Kaan Kaltakkıran'),
 (4,	'English Teacher',	'englishteacher@gmail.com',	'$2y$10$F1qye9/3AUWDCT4hzW2Bt.4ZavJlq4PFAc4OtMSMBhbRIrws3vWji',	'F',	3,	'2024-02-29 19:10:39',	'2024-03-05 16:00:37',	'2024-03-06 16:58:42',	'1,2,9,11,16',	'9/A,9/B,11/A,11/C,12/D',	'Address 4',	'12312312312',	'1972-10-10',	'IMG-65e0ac7fbcfa54.07364665.jpg',	'4',	'English',	1,	'Kaan Kaltakkıran'),
 (5,	'Science Teacher',	'scienceteacher@gmail.com',	'$2y$10$7VWTS5FjJRZCxkuWQSN94uyYh8gjvHHSXvJx7jK6h4KjBvrmG76Su',	'M',	3,	'2024-02-29 19:12:09',	'2024-03-02 11:38:36',	'2024-03-07 09:52:19',	'1,6,10,13,15',	'9/A,10/B,11/B,12/A,12/C',	'Address 5',	'12312312312',	'1965-07-08',	'IMG-65e0acd98f8b82.08350264.jpg',	'5',	'Science',	1,	'Kaan Kaltakkıran');
 
--- 2024-03-09 14:10:12
+-- 2024-03-09 15:05:36
