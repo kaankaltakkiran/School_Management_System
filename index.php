@@ -311,7 +311,58 @@ Exams Result
    <?php }?>
    </div>
    </div>
-
+   <div class="row justify-content-center">
+<div class="row row-cols-1 row-cols-md-5 g-4 mt-4 ">
+  <?php
+require 'db.php';
+$id = $_SESSION['id'];
+$sql = "SELECT * FROM results JOIN students ON results.userid= students.userid
+JOIN parents ON students .userid= parents.userid  WHERE  parents.userid=:id";
+$SORGU = $DB->prepare($sql);
+$SORGU->bindParam(':id', $id);
+$SORGU->execute();
+$results = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* echo '<pre>';
+print_r($results);
+die(); */
+?>
+ <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 5) {?>
+ <a href="list.student.exams.php" class="col btn btn-success m-2 py-3">
+ <img width="48" height="48" src="https://img.icons8.com/ios/48/exam.png" alt="exam"/>
+ <br>
+Exams List
+</a>
+<?php if (count($results) > 0) {
+    echo '<a href="show.exam.result.php?userid=' . $results[0]['userid'] . '" class="col btn btn-info m-2 py-3">
+<img width="50" height="50" src="https://img.icons8.com/ios/50/report-card.png" alt="report-card"/>
+ <br>
+Exams Result
+</a>';
+}
+    ?>
+    <a href="list.student.note.php" class="col btn btn-secondary m-2 py-3">
+<img width="48" height="48" src="https://img.icons8.com/ios/48/ingredients-list.png" alt="ingredients-list"/>
+ <br>
+ List Note Result
+</a>
+<a href="list.student.attendance.php" class="col btn btn-primary m-2 py-3">
+<img width="48" height="48" src="https://img.icons8.com/ios/48/ingredients-list.png" alt="ingredients-list"/>
+ <br>
+ List Attendance
+</a>
+      <a href="list.announcement.php" class="col btn btn-warning m-2 py-3">
+               <img width="48" height="48" src="https://img.icons8.com/color/48/commercial.png" alt="commercial"/>
+                 <br>
+                 Announcement
+               </a>
+               <a href="list.food.php" class="col btn btn-danger m-2 py-3">
+               <img width="48" height="48" src="https://img.icons8.com/external-vectorslab-flat-vectorslab/48/external-Food-Menu-food-and-drink-vectorslab-flat-vectorslab.png" alt="external-Food-Menu-food-and-drink-vectorslab-flat-vectorslab"/>
+                 <br>
+                 Food Menu
+               </a>
+   <?php }?>
+   </div>
+   </div>
        <?php if ($_SESSION['role'] == 1) {?>
         <div class="row justify-content-center">
           <div class="col-sm-6 col-md-4 col-lg-3 me-md-5">

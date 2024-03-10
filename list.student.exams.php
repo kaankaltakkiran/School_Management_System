@@ -7,7 +7,7 @@ require 'login.control.php';
 ?>
   <?php
 //! Rol idsi 4 olan student sadece exam listesini görebilir
-if ($_SESSION['role'] != 4) {
+if ($_SESSION['role'] != 4 && $_SESSION['role'] != 5) {
     header("location: authorizationcontrol.php");
     die();
 }
@@ -31,7 +31,9 @@ if ($_SESSION['role'] != 4) {
       <th>Exam End Date</th>
       <th>Exam Time</th>
       <th>Exam Class Name</th>
-      <th>Start Exam</th>
+      <?php if ($_SESSION['role'] == 4) {?>
+        <th>Start Exam</th>
+    <?php }?>
     </tr>
   </thead>
   <tbody>
@@ -66,7 +68,22 @@ if (count($results) > 0) {
     $error = "You have already taken the exam";
 } else {
     foreach ($exams as $exam) {
-        echo "
+        if ($_SESSION['role'] == 4) {
+            echo "
+          <tr>
+            <th>{$exam['examid']}</th>
+            <td><img src='exam_images/{$exam['examimg']}' class='rounded-circle' width='100' height='100'></td>
+            <td>{$exam['examtitle']}</td>
+            <td>{$exam['examdescription']}</td>
+            <td>{$exam['examstartdate']}</td>
+            <td>{$exam['examenddate']}</td>
+            <td>{$exam['examtime']} minutes</td>
+            <td>{$exam['classname']}</td>
+            <td><a href='show.exam.php?idExam={$exam['examid']}' class='btn btn-success'>Start Exam <i class='bi bi-skip-start'></i></a></td>
+         </tr>
+        ";
+        } else {
+            echo "
     <tr>
       <th>{$exam['examid']}</th>
       <td><img src='exam_images/{$exam['examimg']}' class='rounded-circle' width='100' height='100'></td>
@@ -76,10 +93,12 @@ if (count($results) > 0) {
       <td>{$exam['examenddate']}</td>
       <td>{$exam['examtime']} minutes</td>
       <td>{$exam['classname']}</td>
-      <td><a href='show.exam.php?idExam={$exam['examid']}' class='btn btn-success'>Start Exam <i class='bi bi-skip-start'></i></a></td>
    </tr>
   ";
+        }
+
     }
+
 }
 ?>
   </tbody>

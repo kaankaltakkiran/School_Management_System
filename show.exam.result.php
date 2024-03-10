@@ -7,7 +7,7 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
-if ($_SESSION['role'] != 4) {
+if ($_SESSION['role'] != 4 && $_SESSION['role'] != 5) {
     header("location: authorizationcontrol.php");
     die();
 }
@@ -15,7 +15,7 @@ if ($_SESSION['role'] != 4) {
 <?php
 require 'db.php';
 $id = $_GET['userid'];
-$sql = "SELECT * FROM results WHERE  userid=:userid";
+$sql = "SELECT * FROM results JOIN students ON results.userid = students.userid WHERE  students.userid=:userid";
 $SORGU = $DB->prepare($sql);
 $SORGU->bindParam(':userid', $id);
 $SORGU->execute();
@@ -33,10 +33,24 @@ if ($results[0]['userid'] != $_SESSION['id']) {
 ?>
 <?php
 require 'db.php';
-$sql = "SELECT DISTINCT * FROM results
-JOIN exams ON results.examid= exams.examid WHERE results.examid=:idexam ";
-$SORGU = $DB->prepare($sql);
-$SORGU->bindParam(':idexam', $examid);
+if ($_SESSION['role'] == 4) {
+    $studentid = $_SESSION['id'];
+    $sql = "SELECT results.*,parents.*,exams.*, students.username as student_name, parents.* FROM results
+JOIN students ON results.userid= students.userid
+JOIN parents ON students.userid= parents.userid
+JOIN exams ON results.examid= exams.examid  WHERE students.userid=:id ";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':id', $studentid);
+
+} else if ($_SESSION['role'] == 5) {
+    $parentid = $_SESSION['id'];
+    $sql = "SELECT results.*,parents.*,exams.*, students.username as student_name, parents.* FROM results
+  JOIN students ON results.userid= students.userid
+  JOIN parents ON students.userid= parents.userid
+  JOIN exams ON results.examid= exams.examid  WHERE parents.userid=:id ";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':id', $parentid);
+}
 $SORGU->execute();
 $exams = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* echo '<pre>';
@@ -47,7 +61,7 @@ die(); */
 <div class="container">
   <div class="row justify-content-center ">
     <div class="col-6">
-  <h1 class="alert alert-primary mt-2 text-center ">Exam Result</h1>
+  <h1 class="alert alert-primary mt-2 text-center "><?php echo $exams[0]['student_name'] ?> <?php echo $exams[0]['lessonname'] ?> Exam Result</h1>
   </div>
   </div>
   <div class="row justify-content-center ">

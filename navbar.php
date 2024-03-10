@@ -82,6 +82,45 @@
           <a class="nav-link  <?=($activePage == 'food.list') ? 'active' : '';?>" href="list.food.php">Food Menu</a>
         </li>
         <?php }?>
+        <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 5) {?>
+      <li class="nav-item">
+          <a class="nav-link  <?=($activePage == 'index') ? 'active' : '';?>" href="index.php">Home</a>
+        </li>
+        <li class="nav-item">
+        <li class="nav-item">
+          <a class="nav-link  <?=($activePage == 'list.student.exams') ? 'active' : '';?>" href="list.student.exams.php">Exams List</a>
+        </li>
+        </li>
+        <?php
+require 'db.php';
+    $id = $_SESSION['id'];
+    $sql = "SELECT * FROM results WHERE  userid=:id";
+    $SORGU = $DB->prepare($sql);
+    $SORGU->bindParam(':id', $id);
+    $SORGU->execute();
+    $results = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* echo '<pre>';
+print_r($results);
+die(); */
+    ?>
+            <?php if (count($results) > 0) {?>
+        <li class="nav-item">
+          <a class="nav-link  <?=($activePage == 'show.exam.result') ? 'active' : '';?>" href="show.exam.result.php?userid=<?php echo $results[0]['userid'] ?>">Exam Result</a>
+        </li>
+        <?php }?>
+        <li class="nav-item">
+          <a class="nav-link  <?=($activePage == 'list.student.note') ? 'active' : '';?>" href="list.student.note.php">Note Result</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link  <?=($activePage == 'attendance.student.name.list') ? 'active' : '';?>" href="list.student.attendance.php">Attendance Result</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link  <?=($activePage == 'list.announcement') ? 'active' : '';?>" href="list.announcement.php">Announcement</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link  <?=($activePage == 'food.list') ? 'active' : '';?>" href="list.food.php">Food Menu</a>
+        </li>
+        <?php }?>
         <?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] == 4) {?>
       <li class="nav-item">
           <a class="nav-link  <?=($activePage == 'index') ? 'active' : '';?>" href="index.php">Home</a>
