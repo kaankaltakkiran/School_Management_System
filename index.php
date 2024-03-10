@@ -170,6 +170,16 @@ Exams List
  <br>
 Exams Result
 </a>
+<a href="list.give.note.php" class="col btn btn-success m-2 py-3">
+<img width="48" height="48" src="https://img.icons8.com/ios/48/give.png" alt="give"/>
+ <br>
+ List Give Note
+</a>
+<a href="list.note.class.php" class="col btn btn-secondary m-2 py-3">
+<img width="48" height="48" src="https://img.icons8.com/ios/48/ingredients-list.png" alt="ingredients-list"/>
+ <br>
+ List Note Result
+</a>
 <a href="list.teacher.parent.php" class="col btn btn-dark m-2 py-3">
 <img width="48" height="48" src="https://img.icons8.com/color/48/family.png" alt="family"/>
                  <br>

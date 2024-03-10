@@ -59,6 +59,16 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle <?=($activePage == 'give.note' || $activePage == 'teacher.give.note.class.list' || $activePage == 'teacher.list.class.list' || $activePage == 'teacher.list.note.class.list') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+         Note
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item <?=($activePage == 'teacher.give.note.class.list') ? 'active' : '';?>" href="list.give.note.php">List Give Note</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item <?=($activePage == 'teacher.list.class.list') ? 'active' : '';?>" href="list.note.class.php">List Note Result</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle <?=($activePage == 'send.announcement' || $activePage == 'list.announcement' || $activePage == 'announcement.update') ? 'active' : '';?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Announcement
           </a>
