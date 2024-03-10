@@ -11,6 +11,29 @@ $get_class_name = $_GET['className'];
 $today = date("Y-m-d");
 ?>
 <?php
+//! Rol idsi 3 olan teacher sadece kendi derslerine ait öğrenci listesini görebilir
+if ($_SESSION['role'] != 3) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
+<?php
+require_once 'db.php';
+$teacherid = $_SESSION['id'];
+$SORGU = $DB->prepare("SELECT * FROM teachers WHERE userid=:id AND classname LIKE '%$get_class_name%'");
+$SORGU->bindParam(':id', $teacherid);
+$SORGU->execute();
+$teachers = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* echo '<pre>';
+print_r($teachers);
+die(); */
+//! Rol idsi 3 olan teacher sadece kendi derslerine ait öğrenci listesini görebilir
+if (count($teachers) == 0) {
+    header("location: authorizationcontrol.php");
+    die();
+}
+?>
+<?php
 //!Tüm Attendance  silme
 if (isset($_POST['removeAllAttendance'])) {
     $approves = array();
@@ -64,7 +87,7 @@ if (isset($_POST['form_attendance_date'])) {
     $SORGU->bindParam(':id', $teacherid);
     $SORGU->execute();
     $students = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-    /*    echo '<pre>';
+    /*  echo '<pre>';
 print_r($students);
 die(); */
 
@@ -107,6 +130,7 @@ die(); */
       <th>Student Img</th>
       <th>Student Name</th>
       <th>Student Class Name</th>
+      <th>Student Lesson Name</th>
       <th>Selected Date</th>
      <th>Student Attendance Status</th>
     </tr>
@@ -143,6 +167,7 @@ foreach ($students as $student) {
       <td><img src='student_images/{$student['studentimg']}' class='rounded-circle' width='100' height='100'></td>
       <td>{$student['studentname']}</td>
       <td>{$student['studentclassname']}</td>
+      <td>{$student['studentlessonname']}</td>
       <td>{$student['createdate']}</td>
       <td";
     if ($statusCount == 0) {

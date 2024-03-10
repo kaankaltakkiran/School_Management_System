@@ -6,16 +6,32 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
-//! Rol idsi 3 olan kayıt birimi class update yapabilir
+//!GET ile gelen sınıf adını alıyoruz.
+$get_class_name = $_GET['className'];
+$today = date("Y-m-d");
+?>
+<?php
+//! Rol idsi 3 olan teacher sadece kendi derslerine ait öğrenci listesini görebilir
 if ($_SESSION['role'] != 3) {
     header("location: authorizationcontrol.php");
     die();
 }
 ?>
 <?php
-//!GET ile gelen sınıf adını alıyoruz.
-$get_class_name = $_GET['className'];
-$today = date("Y-m-d");
+require_once 'db.php';
+$teacherid = $_SESSION['id'];
+$SORGU = $DB->prepare("SELECT * FROM teachers WHERE userid=:id AND classname LIKE '%$get_class_name%'");
+$SORGU->bindParam(':id', $teacherid);
+$SORGU->execute();
+$teachers = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* echo '<pre>';
+print_r($teachers);
+die(); */
+//! Rol idsi 3 olan teacher sadece kendi derslerine ait öğrenci listesini görebilir
+if (count($teachers) == 0) {
+    header("location: authorizationcontrol.php");
+    die();
+}
 ?>
     <?php include 'navbar.php';?>
   <div class="container">
@@ -27,7 +43,7 @@ $today = date("Y-m-d");
         <div class="form-floating mb-3">
 <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">Select Attendance Date</label>
-  <input type="date" name="form_attendance_date" value="<?php echo $_POST['form_attendance_date'] ?>" class="form-control" id="exampleFormControlInput1" />
+  <input type="date" name="form_attendance_date" value="<?php echo $_POST['form_attendance_date'] ?>" class="form-control" id="exampleFormControlInput1" required />
 </div>
 </div>
   <button type="submit" class="btn btn-outline-primary m-3 ">List Attendance <i class="bi bi-send"></i> </button>
@@ -124,10 +140,8 @@ if (!empty($approves)) {
       <th>Student Id</th>
       <th>Student Image</th>
       <th>Student Name</th>
-      <th>Student Gender</th>
-      <th>Student Phone Number</th>
       <th>Student Class Name</th>
-      <th>Student Birthdate</th>
+      <th>Student Lesson Name</th>
       <th>Selected Date</th>
       <th>Attendance</th>
     </tr>
@@ -143,37 +157,18 @@ $SORGU->bindParam(':form_attendance_date', $formDate);
 $SORGU->bindParam(':teacherid', $teacherid);
 $SORGU->execute();
 $studentss = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* printf("<pre>%s</pre>", var_export($studentss, true));
+die(); */
 
 foreach ($studentss as $student) {
     $checked = ($student['ishere'] == 1) ? 'checked' : '';
-
-    $gender = $student['usergender'];
-    $gender = ($gender == 'M') ? 'Male' : 'Famale';
-    $userBirthdate = $student['birthdate'];
-    //!Tarihi parçalara ayırma
-    /* explode() fonksiyonu: Bu fonksiyon, bir metni belirli bir ayraç karakterine göre böler ve bir diziye dönüştürür.  */
-    $dateParts = explode('-', $userBirthdate);
-
-//? Yıl, ay ve gün bilgilerini alıyoruz
-    $year = $dateParts[0];
-    $month = $dateParts[1];
-    $day = $dateParts[2];
-
-//?Ay ismini bulmak için date() ve strtotime() fonksiyonlarını kullanıyoruz
-    //!F tam ay ismini alıyor.
-    $monthName = date("F", strtotime($userBirthdate));
-
-// Sonucu ekrana yazdırma
-    $formattedDate = "$day $monthName $year";
     echo "
     <tr>
       <th>{$student['userid']}</th>
       <td><img src='student_images/{$student['userimg']}' class='rounded-circle' width='100' height='100'></td>
       <td>{$student['username']}</td>
-      <td>$gender</td>
-      <td>{$student['phonenumber']}</td>
       <td>{$student['classname']}</td>
-      <td>$formattedDate</td>
+      <td>{$student['studentlessonname']}</td>
       <td>{$student['attendance_date']}</td>
       <td>
       <input class='form-check-input' $checked name='isHere[{$student['userid']}]' value='1' type='checkbox' id='flexCheckDefault{$student['userid']}'>

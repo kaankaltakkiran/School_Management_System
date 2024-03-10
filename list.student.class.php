@@ -63,10 +63,11 @@ if (isset($_POST['attendance_btn'])) {
 
         // Veritabanında bugün için öğrenci kaydı kontrolü yap
         // Aynı gün için aynı öğrenciye ait kayıt varsa hata mesajı göster
-        $SORGU = $DB->prepare("SELECT COUNT(*) as count FROM attendances WHERE studentid = :student_id AND studentclassid = :class_id AND DATE(createdate) = :today");
+        $SORGU = $DB->prepare("SELECT COUNT(*) as count FROM attendances WHERE studentid = :student_id AND studentclassid = :class_id AND DATE(createdate) = :today AND addedteacherid = :teacher_id");
         $SORGU->bindParam(':today', $today);
         $SORGU->bindParam(':student_id', $teacher_student['userid']);
         $SORGU->bindParam(':class_id', $teacher_student['classid']);
+        $SORGU->bindParam(':teacher_id', $teacher_student['teacher_userid']);
         $SORGU->execute();
         $record = $SORGU->fetch(PDO::FETCH_ASSOC);
 
@@ -131,9 +132,11 @@ if (!empty($approves)) {
         <div class="col-sm-4 col-md-6 col-lg-8">
   <h1 class='alert alert-primary mt-2'> <?php echo $get_class_name ?> Class Students</h1>
   </div>
+  <?php if ($_SESSION['role'] == 3) {?>
   <h4 class="text-danger">Today Date: <?php echo $today ?></h4>
   <p class="text-danger text-end fw-bold ">Note: You can take attendance by clicking on the checkbox.</p>
 </div>
+<?php }?>
 <form method="post">
    <table id="example" class="table table-bordered table-striped " style="width:100%">
   <thead>
@@ -145,19 +148,24 @@ if (!empty($approves)) {
       <th>Student Phone Number</th>
       <th>Student Class Name</th>
       <th>Student Birthdate</th>
-      <th>Attendance</th>
+      <?php if ($_SESSION['role'] == 3) {?>
+        <th>Attendance</th>
+    <?php }?>
     </tr>
   </thead>
   <tbody>
   </div>
     <?php
 require_once 'db.php';
-$SORGU = $DB->prepare("SELECT * FROM students WHERE classname LIKE '%$get_class_name%'");
+$teacher_idd = $_SESSION['id'];
+
+$SORGU = $DB->prepare("SELECT t.*, t.userid as teacher_userid,t.username as teacher_username,t.lessonid as teacher_lessonid,t.lessonname as teacher_lessonname, s.* FROM teachers t INNER JOIN students s ON  FIND_IN_SET(t.lessonid, s.lessonid) WHERE t.userid=:teacherid AND s.classname LIKE '%$get_class_name%' AND t.classname LIKE '%$get_class_name%' ");
+$SORGU->bindParam(':teacherid', $teacher_idd);
 $SORGU->execute();
 $classStudents = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* echo '<pre>';
 print_r($classStudents);
-die(); */
+die() */;
 //? checkbox name ve id uniqe olsun olsun student id ile eklendi
 foreach ($classStudents as $classStudent) {
     $gender = $classStudent['usergender'];
@@ -178,28 +186,43 @@ foreach ($classStudents as $classStudent) {
 
 // Sonucu ekrana yazdırma
     $formattedDate = "$day $monthName $year";
-    echo "
-    <tr>
-      <th>{$classStudent['userid']}</th>
-      <td><img src='student_images/{$classStudent['userimg']}' class='rounded-circle' width='100' height='100'></td>
-      <td>{$classStudent['username']}</td>
-      <td>$gender</td>
-      <td>{$classStudent['phonenumber']}</td>
-      <td>{$classStudent['classname']}</td>
-      <td>$formattedDate</td>
-      <td>
-      <input class='form-check-input' name='isHere[{$classStudent['userid']}]' value='1' type='checkbox' id='flexCheckDefault{$classStudent['userid']}'>
-      <label class='form-check-label' for='flexCheckDefault{$classStudent['userid']}'>
-          Here
-      </label>
-  </td>
-   </tr>
-  ";
+
+    // Eğer oturumda giriş yapan kullanıcının id'si 3 ise checkboxları gösterme
+    if ($_SESSION['role'] == 2) {
+        echo "
+        <tr>
+            <th>{$classStudent['userid']}</th>
+            <td><img src='student_images/{$classStudent['userimg']}' class='rounded-circle' width='100' height='100'></td>
+            <td>{$classStudent['username']}</td>
+            <td>$gender</td>
+            <td>{$classStudent['phonenumber']}</td>
+            <td>{$classStudent['classname']}</td>
+            <td>$formattedDate</td>
+        </tr>";
+    } else {
+        // Kullanıcı id'si 3 değilse, checkboxları göster
+        echo "
+        <tr>
+            <th>{$classStudent['userid']}</th>
+            <td><img src='student_images/{$classStudent['userimg']}' class='rounded-circle' width='100' height='100'></td>
+            <td>{$classStudent['username']}</td>
+            <td>$gender</td>
+            <td>{$classStudent['phonenumber']}</td>
+            <td>{$classStudent['classname']}</td>
+            <td>$formattedDate</td>
+            <td>
+                <input class='form-check-input' name='isHere[{$classStudent['userid']}]' value='1' type='checkbox' id='flexCheckDefault{$classStudent['userid']}'>
+                <label class='form-check-label' for='flexCheckDefault{$classStudent['userid']}'>
+                    Here
+                </label>
+            </td>
+        </tr>";
+    }
 }
 ?>
   </tbody>
 </table>
-<?php if (count($classStudents) > 0) {?>
+<?php if (count($classStudents) > 0 && $_SESSION['role'] == 3) {?>
     <button type="submit" name="attendance_btn" class="btn btn-outline-success mb-3 ">Add Attendance   <i class="bi bi-send"></i></button>
     <?php }?>
     </form>
