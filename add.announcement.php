@@ -7,7 +7,7 @@ require 'login.control.php';
 ?>
   <?php
 //! Student role id 4 dir ve studentlerin duyuru ekleme yetkisi yoktur
-if ($_SESSION['role'] == 4) {
+if ($_SESSION['role'] == 4 || $_SESSION['role'] == 5) {
     header("location: authorizationcontrol.php");
     die();
 }
@@ -108,6 +108,7 @@ if (!empty($approves)) {
     <option value="2">Register Unit</option>
     <option value="3">Teacher</option>
     <option value="4">Student</option>
+    <option value="5">Parent</option>
   </select>
   <label for="floatingSelect">Receiver</label>
   <div class="invalid-feedback fw-bold">

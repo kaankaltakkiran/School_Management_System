@@ -71,6 +71,9 @@ die(); */
     } else if ($rol == 4) {
         $DB->prepare("UPDATE students SET lastlogintime = NOW() WHERE userid = :iduser")->execute(['iduser' => $userid]);
 
+    } else if ($rol == 5) {
+        $DB->prepare("UPDATE parents SET lastlogintime = NOW() WHERE userid = :iduser")->execute(['iduser' => $userid]);
+
     }
 
     // Sistem saat dilimini belirle
