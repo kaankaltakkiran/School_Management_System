@@ -6,11 +6,6 @@ require 'up.html.php';
 require 'login.control.php';
 ?>
 <?php
-//!GET ile gelen sınıf adını alıyoruz.
-$get_class_name = $_GET['className'];
-$today = date("Y-m-d");
-?>
-<?php
 //! Rol idsi 3 olan teacher sadece kendi derslerine ait öğrenci listesini görebilir
 if ($_SESSION['role'] != 4 && $_SESSION['role'] != 5) {
     header("location: authorizationcontrol.php");

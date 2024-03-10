@@ -149,7 +149,12 @@ die(); */
             <?php }?>
           </ul>
         </li>
-
+        <li class="nav-item">
+          <a class="nav-link  <?=($activePage == 'list.student.note') ? 'active' : '';?>" href="list.student.note.php">Note Result</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link  <?=($activePage == 'attendance.student.name.list') ? 'active' : '';?>" href="list.student.attendance.php">List Attendance</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link  <?=($activePage == 'list.announcement') ? 'active' : '';?>" href="list.announcement.php">Annoucement</a>
         </li>

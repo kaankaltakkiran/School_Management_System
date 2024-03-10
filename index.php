@@ -301,6 +301,16 @@ Exams Result
 </a>';
 }
     ?>
+        <a href="list.student.note.php" class="col btn btn-secondary m-2 py-3">
+        <img width="48" height="48" src="https://img.icons8.com/ios/48/ingredients-list.png" alt="ingredients-list"/>
+                 <br>
+                 Note Result
+               </a>
+               <a href="list.student.attendance.php" class="col btn btn-primary m-2 py-3">
+               <img width="48" height="48" src="https://img.icons8.com/ios/48/attendance-mark.png" alt="attendance-mark"/>
+                 <br>
+                 List Attendance
+               </a>
       <a href="list.announcement.php" class="col btn btn-warning m-2 py-3">
                <img width="48" height="48" src="https://img.icons8.com/color/48/commercial.png" alt="commercial"/>
                  <br>
@@ -346,12 +356,12 @@ Exams Result
     <a href="list.student.note.php" class="col btn btn-secondary m-2 py-3">
 <img width="48" height="48" src="https://img.icons8.com/ios/48/ingredients-list.png" alt="ingredients-list"/>
  <br>
- List Note Result
+ Note Result
 </a>
 <a href="list.student.attendance.php" class="col btn btn-primary m-2 py-3">
-<img width="48" height="48" src="https://img.icons8.com/ios/48/ingredients-list.png" alt="ingredients-list"/>
+<img width="48" height="48" src="https://img.icons8.com/ios/48/attendance-mark.png" alt="attendance-mark"/>
  <br>
- List Attendance
+  Attendance Result
 </a>
       <a href="list.announcement.php" class="col btn btn-warning m-2 py-3">
                <img width="48" height="48" src="https://img.icons8.com/color/48/commercial.png" alt="commercial"/>
@@ -608,7 +618,7 @@ Exams Result
       <?php }?>
   </div>
 </div>
-<?php if ($_SESSION['isLogin'] == 1 && $_SESSION['role'] != 4) {?>
+<?php if ($_SESSION['isLogin'] == 1) {?>
 <footer class="bg-body-tertiary text-center text-lg-start mt-3">
   <!-- Copyright -->
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
