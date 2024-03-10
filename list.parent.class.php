@@ -41,7 +41,7 @@ $get_class_name = $_GET['className'];
   </div>
     <?php
 require_once 'db.php';
-$SORGU = $DB->prepare("SELECT students.username AS student_name,students.classname AS student_classname,parents.userid AS parent_id,parents.username AS parent_name,parents.userimg AS parent_img,parents.phonenumber AS parent_number,parents.birthdate AS parent_birthdate
+$SORGU = $DB->prepare("SELECT students.username AS student_name,students.classname AS student_classname,parents.userid AS parent_id,parents.username AS parent_name,parents.userimg AS parent_img,parents.phonenumber AS parent_number,parents.usergender AS parent_gender,parents.birthdate AS parent_birthdate
 FROM students
 JOIN parents ON students.userid= parents.studentid WHERE students.classname LIKE '%$get_class_name%'");
 
@@ -50,10 +50,10 @@ $parents = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* echo '<pre>';
 print_r($parents);
 die(); */
-$gender = $parents[0]['usergender'];
-$gender = ($gender == 'M') ? 'Male' : 'Famale';
 foreach ($parents as $parent) {
-    $userBirthdate = $parent['birthdate'];
+    $gender = $parent['parent_gender'];
+    $gender = ($gender == 'M') ? 'Male' : 'Famale';
+    $userBirthdate = $parent['parent_birthdate'];
     //!Tarihi parçalara ayırma
     /* explode() fonksiyonu: Bu fonksiyon, bir metni belirli bir ayraç karakterine göre böler ve bir diziye dönüştürür.  */
     $dateParts = explode('-', $userBirthdate);

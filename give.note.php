@@ -5,17 +5,33 @@ $activePage = "give.note";
 require 'up.html.php';
 require 'login.control.php';
 ?>
-  <?php
-//! Rol idsi 2 ve 3 olan register unit ve teacher sadece class student listeyebilir
+<?php
+//!GET ile gelen sınıf adını alıyoruz.
+$get_class_name = $_GET['className'];
+$today = date("Y-m-d");
+?>
+<?php
+//! Rol idsi 3 olan teacher sadece kendi  ait öğrenci listesini görebilir
 if ($_SESSION['role'] != 3) {
     header("location: authorizationcontrol.php");
     die();
 }
 ?>
 <?php
-//!GET ile gelen sınıf adını alıyoruz.
-$get_class_name = $_GET['className'];
-$today = date("Y-m-d");
+require_once 'db.php';
+$teacherid = $_SESSION['id'];
+$SORGU = $DB->prepare("SELECT * FROM teachers WHERE userid=:id AND classname LIKE '%$get_class_name%'");
+$SORGU->bindParam(':id', $teacherid);
+$SORGU->execute();
+$teachers = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* echo '<pre>';
+print_r($teachers);
+die(); */
+//! Rol idsi 3 olan teacher sadece kendi derslerine ait öğrenci listesini görebilir
+if (count($teachers) == 0) {
+    header("location: authorizationcontrol.php");
+    die();
+}
 ?>
 <?php require 'navbar.php'?>
 <?php
