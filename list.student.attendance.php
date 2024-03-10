@@ -20,32 +20,64 @@ if ($_SESSION['role'] != 4 && $_SESSION['role'] != 5) {
 if (isset($_POST['list_attendance_student'])) {
     $errors = array();
     require_once 'db.php';
-//!Eğer tarih seçilmişse
+
     $formDate = isset($_POST['form_attendance_date']) ? $_POST['form_attendance_date'] : null;
+    $formLesson = isset($_POST['form_selected_lesson']) ? $_POST['form_selected_lesson'] : null;
     $formStudentid = $_POST['form_selected_student'];
-//!Eğer tarih seçilmişse
-    if (!empty($formDate)) {
-        // Hem tarih hem öğrenci seçilmişse
+    // Hem tarih hem ders seçilmişse
+    if (!empty($formDate) && !empty($formLesson)) {
         $SORGU = $DB->prepare("SELECT *
-        FROM students
-        JOIN attendances ON students.userid= attendances.studentid WHERE attendances.createdate=:form_attendance_date AND attendances.studentid=:form_selected_student");
+      FROM students
+      JOIN attendances ON students.userid = attendances.studentid
+      WHERE attendances.createdate = :form_attendance_date
+      AND attendances.studentid = :form_selected_student
+      AND attendances.studentlessonid = :form_selected_lesson");
+
         $SORGU->bindParam(':form_attendance_date', $formDate);
-        //!Eğer tarih seçilmediyse öğrenci ismine göre sorgu yapılıyor
-    } else {
-        // Sadece öğrenci seçilmişse
+        $SORGU->bindParam(':form_selected_student', $formStudentid);
+        $SORGU->bindParam(':form_selected_lesson', $formLesson);
+        // Sadece tarih seçilmişse
+    } else if (!empty($formDate)) {
         $SORGU = $DB->prepare("SELECT *
-        FROM students
-        JOIN attendances ON students.userid= attendances.studentid WHERE attendances.studentid=:form_selected_student");
+      FROM students
+      JOIN attendances ON students.userid = attendances.studentid
+      WHERE attendances.createdate = :form_attendance_date
+      AND attendances.studentid = :form_selected_student");
+        $SORGU->bindParam(':form_attendance_date', $formDate);
+        $SORGU->bindParam(':form_selected_student', $formStudentid);
+        // Sadece ders seçilmişse
+    } else if (!empty($formLesson)) {
+        $SORGU = $DB->prepare("SELECT *
+      FROM students
+      JOIN attendances ON students.userid = attendances.studentid
+      WHERE attendances.studentlessonid = :form_selected_lesson
+      AND attendances.studentid = :form_selected_student");
+        $SORGU->bindParam(':form_selected_lesson', $formLesson);
+        $SORGU->bindParam(':form_selected_student', $formStudentid);
+        // Ne tarih ne de ders seçilmişse
+    } else {
+        $SORGU = $DB->prepare("SELECT *
+      FROM students
+      JOIN attendances ON students.userid = attendances.studentid
+      WHERE attendances.studentid = :form_selected_student");
+
+        $SORGU->bindParam(':form_selected_student', $formStudentid);
     }
 
-    $SORGU->bindParam(':form_selected_student', $formStudentid);
     $SORGU->execute();
     $students = $SORGU->fetchAll(PDO::FETCH_ASSOC);
     /*   echo '<pre>';
 print_r($students);
 die(); */
+}
+if (isset($_POST['clear_selection'])) {
+    // Seçili değerleri temizle
+    unset($_POST['form_attendance_date']);
+    unset($_POST['form_selected_lesson']);
+    unset($_POST['form_selected_student']);
 
 }
+
 ?>
       <div class="row mt-3">
       <div class='row justify-content-center text-center'>
@@ -62,6 +94,7 @@ die(); */
   <input type="date" name="form_attendance_date" value="<?php echo $_POST['form_attendance_date'] ?>" class="form-control" id="exampleFormControlInput1" />
 </div>
 </div>
+
 <?php
 //!Hata mesajlarını göstermek için boş bir dizi
 $errors = array();
@@ -84,8 +117,37 @@ $SORGU->execute();
 $optionStudents = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 /* echo '<pre>';
 print_r($optionStudents);
-die() */
+die(); */
+$selectLessons = $optionStudents[0]['lessonid'];
+//!Virgülle ayrılmış dersleri diziye çevir
+$selectLesonsArray = explode(",", $selectLessons);
 ?>
+<?php
+$SORGU = $DB->prepare("SELECT * FROM lessons");
+$SORGU->execute();
+$lessons = $SORGU->fetchAll(PDO::FETCH_ASSOC);
+/* echo '<pre>';
+print_r($lessons);
+die(); */
+?>
+<div class="form-floating mb-3">
+  <select class="form-select" id="floatingSelect" name="form_selected_lesson"   aria-label="Floating label select example" >
+  <option disabled selected value="">Select lesson</option>
+  <?php
+$selectedLessonIds = explode(",", $selectLessons);
+foreach ($selectedLessonIds as $lessonId) {
+    foreach ($lessons as $lesson) {
+        $selected = ($lesson['lessonid'] == $_POST['form_selected_lesson']) ? 'selected' : '';
+        if ($lesson['lessonid'] == $lessonId) {
+            echo '<option value="' . $lesson['lessonid'] . '" ' . $selected . '>' . $lesson['lessonname'] . '</option>';
+        }
+
+    }
+}
+?>
+  </select>
+  <label for="floatingSelect">Select lesson</label>
+</div>
 <div class="form-floating mb-3">
   <select class="form-select" id="floatingSelect" name="form_selected_student"  required aria-label="Floating label select example" >
   <option disabled selected value="">Select Student</option>
@@ -102,6 +164,7 @@ foreach ($optionStudents as $student) {
     </div>
 </div>
   <button type="submit" name="list_attendance_student" class="btn btn-outline-primary m-3 ">List Attendance <i class="bi bi-send"></i> </button>
+  <button type="submit" class="btn btn-outline-danger m-3 " name="clear_selection">Clear Selections</button>
 </form>
   </div>
 </div>
