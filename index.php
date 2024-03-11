@@ -168,7 +168,7 @@ Add Exam
  <br>
 Exams List
 </a>
-<a href="teacher.exam.result.php" class="col btn btn-info m-2 py-3">
+<a href="teacher.list.exam.class.php" class="col btn btn-info m-2 py-3">
 <img width="48" height="48" src="https://img.icons8.com/external-dashed-line-kawalan-studio/48/external-exam-result-education-dashed-line-kawalan-studio.png" alt="external-exam-result-education-dashed-line-kawalan-studio"/>
  <br>
 Exams Result
