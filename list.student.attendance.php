@@ -164,7 +164,7 @@ foreach ($optionStudents as $student) {
     </div>
 </div>
   <button type="submit" name="list_attendance_student" class="btn btn-outline-primary m-3 ">List Attendance <i class="bi bi-send"></i> </button>
-  <button type="submit" class="btn btn-outline-danger m-3 " name="clear_selection">Clear Selections</button>
+  <button type="submit" class="btn btn-outline-danger m-3 " name="clear_selection">Clear Selections <i class="bi bi-x-circle"></i></button>
 </form>
   </div>
 </div>

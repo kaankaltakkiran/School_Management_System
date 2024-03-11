@@ -88,9 +88,13 @@ if (isset($_POST['form_attendance_date'])) {
     $SORGU->execute();
     $students = $SORGU->fetchAll(PDO::FETCH_ASSOC);
     /*  echo '<pre>';
-print_r($students);
-die(); */
+    print_r($students);
+    die(); */
 
+    if (isset($_POST['clear_selection'])) {
+        // Seçili değerleri temizle
+        unset($_POST['form_attendance_date']);
+    }
 }
 ?>
       <div class="row mt-3">
@@ -119,6 +123,7 @@ die(); */
     </div>
 </div>
   <button type="submit" class="btn btn-outline-primary m-3 ">List Attendance <i class="bi bi-send"></i> </button>
+  <button type="submit" class="btn btn-outline-danger m-3 " name="clear_selection">Clear Selections <i class="bi bi-x-circle"></i></button>
 </form>
   </div>
 </div>

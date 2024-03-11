@@ -37,7 +37,6 @@ $get_class_name = $_GET['className'];
       <th>Total False Answer</th>
       <th>Total Questions</th>
       <th>Total Score(%)</th>
-      <th>Result</th>
     </tr>
   </thead>
   <tbody>
@@ -70,9 +69,6 @@ foreach ($classStudents as $classStudent) {
             <td>{$classStudent['totalfalseanswer']}</td>
             <td>{$classStudent['totalquestions']}</td>
             <td>{$classStudent['totalscore']}</td>
-            <td " . (!empty($examResult) ? "class='" . ($examResult == 'Passed' ? 'bg-success text-white' : 'bg-danger text-white') . "'" : '') . ">
-            " . (!empty($examResult) ? $classStudent['examresult'] : '') . "
-        </td>
         </tr>";
 }
 ?>
