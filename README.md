@@ -54,6 +54,7 @@ Projenin genelinde hem verileri listelediğim **tabloları** hem de bu tablolar�
  - [X] Ekleme,güncelleme,silme ve listeleme işlemleri doğru ve güvenli hale getirildi.
  - [X] Navbarda en sağ kısımında kullanıcının profil resmi bulunduğu kısımda dropdown menu bulunmakadır. Bu menu kısmında Password değiştirme ekranı, profil ekranı(Öğretmen, öğrenci ve veli için), ve çıkış yapma butonu bulunmaktadır.
  - [X] Öğretmen kullanıcısı için not giriş işlemi ve devamsızlık ekle sistemi ekleni.
+ - [X] Duyuru,sınav gibi listelerde kullanıcıya neden yayınlanmadığını sebebiyle bildirildi.
  - [X] Öğretmen, öğrenci ve veli kullanıcısı için not listeleme ve devamsızlık listeleme eklendi.Devamsızlık listeleme sisteminde öğrenci ismine göre, tarihe göre ve ders ismine göre filtre eklendi. Ek olarak bu işlemlerin güvenliği ve mantığı doğru bir şekilde sağlandı.
  - [X] Eğer geçersiz bir sayfa ismi veya geçerli olamyan bir urlye gidilirse diye 404 hatası sağlandı.
  - [X] Ekleme işlemlerinde validation eklendi. Kullanıcı bir inputu boş geçerse uyarı yazısı çıkıyor.
