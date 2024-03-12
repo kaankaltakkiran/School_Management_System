@@ -96,7 +96,7 @@ die(); */
   <div class="col-2">
     <form method="post">
     <?php if (count($parents) > 0) {?>
-    <button type="sumbit" name="removeAllParents" onclick="return confirm('Are you sure you want to delete all students ?')" class="btn btn-danger float-end">Delete All Parent's <i class="bi bi-trash"></i> </button>
+    <button type="sumbit" name="removeAllParents" onclick="return confirm('Are you sure you want to delete all parents ?')" class="btn btn-danger float-end">Delete All Parent's <i class="bi bi-trash"></i> </button>
     <?php }?>
     </form>
     </div>
