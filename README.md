@@ -68,3 +68,5 @@ Projenin genelinde hem verileri listelediğim **tabloları** hem de bu tablolar�
       
 ## Site Resimleri Ve Export Örnekleri
 https://github.com/kaankaltakkiran/php-proje-resimleri/tree/main/school_management_resimler
+## Video Link
+https://www.youtube.com/playlist?list=PL9Q-b9EF1JqQ9G6fg7dePuOzWcNzqZqBU
