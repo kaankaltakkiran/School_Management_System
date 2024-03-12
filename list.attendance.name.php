@@ -112,8 +112,32 @@ if (isset($_POST['list_attendance_student'])) {
     $SORGU->execute();
     $students = $SORGU->fetchAll(PDO::FETCH_ASSOC);
     /*   echo '<pre>';
-print_r($students);
-die(); */
+    print_r($students);
+    die(); */
+
+    // Sorguyu başlatıyoruz
+    if (!empty($formDate)) {
+        // Hem tarih hem öğrenci seçilmişse
+        $SORGU = $DB->prepare("SELECT COUNT(*) as total_records, SUM(ishere = 1) as here_count, SUM(ishere = 0) as not_here_count FROM attendances WHERE createdate=:form_attendance_date AND studentid=:form_selected_student AND studentclassname LIKE '%$get_class_name%' AND addedteacherid =:id");
+        $SORGU->bindParam(':form_attendance_date', $formDate);
+    } else {
+        // Sadece öğrenci seçilmişse
+        $SORGU = $DB->prepare("SELECT COUNT(*) as total_records, SUM(ishere = 1) as here_count, SUM(ishere = 0) as not_here_count FROM attendances WHERE studentid=:form_selected_student AND studentclassname LIKE '%$get_class_name%' AND addedteacherid =:id");
+    }
+
+    $SORGU->bindParam(':form_selected_student', $formStudentid);
+    $SORGU->bindParam(':id', $teacherid);
+    $SORGU->execute();
+    $attendanceCounts = $SORGU->fetch(PDO::FETCH_ASSOC);
+
+// Toplam kayıt sayısı
+    $totalAttendance = $attendanceCounts['total_records'];
+
+// Burada 'ishere' değeri 1 olan kayıtların sayısı
+    $hereCount = $attendanceCounts['here_count'];
+
+// Burada 'ishere' değeri 0 olan kayıtların sayısı
+    $notHereCount = $attendanceCounts['not_here_count'];
 }
 if (isset($_POST['clear_selection'])) {
     // Seçili değerleri temizle
@@ -176,6 +200,19 @@ foreach ($optionStudents as $student) {
 </form>
   </div>
 </div>
+<?php if (count($students) > 0) {?>
+<div class='row justify-content-center text-center'>
+        <div class="col-sm-4 col-md-6">
+  <div class="alert alert-primary mt-2" role="alert">
+   <p></p>Total Attendance : <?php echo $totalAttendance ?></p>
+    <p></p>Here : <?php echo $hereCount ?></p>
+    <p></p>Not Here : <?php echo $notHereCount ?></p>
+    <p></p></p>Attendance Continuity Rate : <?php echo round(($hereCount / $totalAttendance) * 100, 2) ?>%</p>
+    <p>More detailed attendance information is listed in the table below !</p>
+  </div>
+  </div>
+</div>
+<?php }?>
    <!-- tablo ile Attendance listeleme -->
    <table id="example" class="table table-bordered table-striped " style="width:100%">
   <thead>

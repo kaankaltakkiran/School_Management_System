@@ -80,7 +80,8 @@ if (isset($_POST['form_attendance_date'])) {
     //!Hata mesajlarını göstermek için boş bir dizi
     $errors = array();
     require_once 'db.php';
-    $formDate = $_POST['form_attendance_date'];
+//!Eğer tarih seçilmişse
+    $formDate = isset($_POST['form_attendance_date']) ? $_POST['form_attendance_date'] : null;
     $teacherid = $_SESSION['id'];
     $SORGU = $DB->prepare("SELECT * FROM attendances WHERE createdate=:form_attendance_date AND studentclassname LIKE '%$get_class_name%' AND addedteacherid =:id");
     $SORGU->bindParam(':form_attendance_date', $formDate);
@@ -91,11 +92,34 @@ if (isset($_POST['form_attendance_date'])) {
     print_r($students);
     die(); */
 
-    if (isset($_POST['clear_selection'])) {
-        // Seçili değerleri temizle
-        unset($_POST['form_attendance_date']);
-    }
+    // Sorgu oluşturuluyor
+    $SORGU = $DB->prepare("SELECT COUNT(*) as total_records, SUM(ishere = 1) as here_count, SUM(ishere = 0) as not_here_count FROM attendances WHERE createdate=:form_attendance_date AND studentclassname LIKE '%$get_class_name%' AND addedteacherid =:id");
+
+    // Parametreler bağlanıyor
+    $SORGU->bindParam(':form_attendance_date', $formDate);
+    $SORGU->bindParam(':id', $teacherid);
+
+    // Sorgu çalıştırılıyor
+    $SORGU->execute();
+
+    // Sonuçlar alınıyor
+    $attendanceCounts = $SORGU->fetch(PDO::FETCH_ASSOC);
+
+    // Toplam kayıt sayısı
+    $totalAttendance = $attendanceCounts['total_records'];
+
+    // Burada 'ishere' değeri 1 olan kayıtların sayısı
+    $hereCount = $attendanceCounts['here_count'];
+
+    // Burada 'ishere' değeri 0 olan kayıtların sayısı
+    $notHereCount = $attendanceCounts['not_here_count'];
 }
+if (isset($_POST['clear_selection'])) {
+    // Seçili değerleri temizle
+    unset($_POST['form_attendance_date']);
+    unset($students);
+}
+
 ?>
       <div class="row mt-3">
       <div class='row justify-content-center text-center'>
@@ -127,6 +151,20 @@ if (isset($_POST['form_attendance_date'])) {
 </form>
   </div>
 </div>
+<?php if (count($students) > 0) {?>
+<div class='row justify-content-center text-center'>
+        <div class="col-sm-4 col-md-6">
+  <div class="alert alert-primary mt-2" role="alert">
+   <h3></h3>Attendance Date : <?php echo $_POST['form_attendance_date'] ?></h3>
+   <p></p>Total Attendance : <?php echo $totalAttendance ?></p>
+    <p></p>Here : <?php echo $hereCount ?></p>
+    <p></p>Not Here : <?php echo $notHereCount ?></p>
+    <p></p></p>Attendance Continuity Rate : <?php echo round(($hereCount / $totalAttendance) * 100, 2) ?>%</p>
+    <p>More detailed attendance information is listed in the table below !</p>
+  </div>
+  </div>
+</div>
+<?php }?>
    <!-- tablo ile Attendance listeleme -->
    <table id="example" class="table table-bordered table-striped " style="width:100%">
   <thead>

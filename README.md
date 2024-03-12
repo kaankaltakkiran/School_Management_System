@@ -48,6 +48,8 @@ Projenin genelinde hem verileri listelediğim **tabloları** hem de bu tablolar�
 
  ## Proje eksikleri
  - [X] Sınav sistemi eklendi fakat daha sistemli ve güzel hale gelebilir(kullanışlık ve mantık olarak.)
+  - [X] Öğretmen sınav oluşturur sonra öğrenci sınavı görür ve sınava girer. Sonra öğrenci sınav notunu görür. Sonra öğretmen sınav notuna göre geçti geçmedi diye belirler. Daha sonra bu notu öğrenci ve veli görür.Sınav notu gördüğü yer güncellenir ve  geçtiyse yeşil, geçemediyse kırmızı renkte gözükür.
+  - [X] Devamsızlık sistemi eklendi fakat daha sistemli ve güzel hale gelebilir. Toptalam kaç devamsızlık kaç devamsızlık yaptı, kaç devamsızlık hakkı kaldı gibi bilgiler eklenebilir.(Özet tablo eklendi buna yakın)
 
 
  ## Yapılan Temel Geliştirmeler
