@@ -29,7 +29,7 @@
 
  ### Tahsilat  Bilgileri
  
-| tahsilat_id  |student_id  |hizmet_id   |ücret  |aktif_abone    |
-|------|-----------------|--------|-------------|-----------------------------|
-|1     |         `1 `      |`1`   |`500`          |1
+| tahsilat_id  |student_id |hizmet_id| görevli_id  |ücret  |aktif_abone    |
+|------|-----------------|--------|---|---------|-----------------------------|
+|1     |         `1 `      |`1`            |`1`   |`500`      |1
 
