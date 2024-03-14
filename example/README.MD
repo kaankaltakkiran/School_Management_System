@@ -29,7 +29,7 @@
 
  ### Tahsilat  Bilgileri
  
-| tahsilat_id  |student_id |hizmet_id| görevli_id  |ücret |tahislat_günü |aktif_abone    |
+| tahsilat_id  |student_id |hizmet_id| görevli_id  |ücret |tahislat_günü |abone_durum    |
 |------|-----------------|--------|---|---------|----------|------------------|
 |1     |         `1 `      |`1`            |`1`   |`500`  |`01.01.2024`    |1
 |2     |         `2 `      |`1`            |`2`   |`500` |`02.03.2024`     |1
