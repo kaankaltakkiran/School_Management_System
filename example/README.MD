@@ -14,7 +14,7 @@
  ### Görevli  Bilgileri
  
 | görevli_id  |görevli_adı      |görevli_email         |görevli_parola      |
-|----------------|-------------------------------|-----------------------------|
+|-------|----------------------|--------------------|------------------------|
 |1     |         `Ahmet  `      |`ahmet@gmail.com`   |`123`          |
 |2     |         `Murat  `      |`murat@gmail.com`   |`123`          |
 |3     |         `Serkan  `      |`serkan@gmail.com`   |`123`          |
@@ -22,14 +22,14 @@
 
  ### Hizmet   Bilgileri
  
-| hizmet_id    |hizmet_adı     |ücret  |bitiş_tarihi |  hakkında   |
-|----------------|-------------------------------|-----------------------------|
-|1     |  `Spor Salonu `     |`500   `|`10.05.2024`   |`Spor salonu 500 kişiliktir.` |
-|2     |  `Kütüphane `     |`400  ` |`28.09.2024`   |`Kütüphanede 5.000 kitap bulunmaktadır.` |
+| hizmet_id    |hizmet_adı   |bitiş_tarihi |  hakkında   |
+|-------|-------------------|---------------|--------------------------------|
+|1     |  `Spor Salonu `    |`10.05.2024`   |`Spor salonu 500 kişiliktir.` |
+|2     |  `Kütüphane `     |`28.09.2024`   |`Kütüphanede 5.000 kitap bulunmaktadır.` |
 
  ### Tahsilat  Bilgileri
  
 | tahsilat_id  |student_id  |hizmet_id   |ücret  |aktif_abone    |
-|----------------|-------------------------------|-----------------------------|
+|------|-----------------|--------|-------------|-----------------------------|
 |1     |         `1 `      |`1`   |`500`          |1
 
