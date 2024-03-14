@@ -4,11 +4,11 @@
  ### Öğrenci  Bilgileri
  
 | öğrenci_id   |öğrenci_adı  |öğrenci_email     |öğrenci_parola       |
-|----------------|-------------------------------|-----------------------------|
+|------|---------------------|-------------------|-----------------|
 |1     |         `Kaan `      |`kaan@gmail.com`   |`123`          |
 |2     |         `Veli `      |`veli@gmail.com`   |`123`          |
 |3     |         `Selin `      |`selin@gmail.com`   |`123`          |
-|3     |         `Fatma `      |`fatma@gmail.com`   |`123`          |
+|4     |         `Fatma `      |`fatma@gmail.com`   |`123`          |
 
 
  ### Görevli  Bilgileri
